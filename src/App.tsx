@@ -89,12 +89,13 @@ export default function App() {
   const loadPublicData = useCallback(async () => {
     try {
       const res = await fetch('/api/public/data');
-      if (res.ok) {
+      const contentType = res.headers.get('content-type') || '';
+      if (res.ok && contentType.includes('application/json')) {
         const data = await res.json();
-        if (data.products && Array.isArray(data.products)) {
+        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
           setProducts(data.products);
         }
-        if (data.downloads && Array.isArray(data.downloads)) {
+        if (data.downloads && Array.isArray(data.downloads) && data.downloads.length > 0) {
           setDownloads(data.downloads);
         }
         if (data.companyInfo) {

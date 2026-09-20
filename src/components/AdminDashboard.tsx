@@ -37,6 +37,7 @@ import {
 } from 'lucide-react';
 import { STSLogo } from './STSLogo';
 import { Product, DownloadItem, CompanyInfo, SiteContent, SavedOrder, ProductCategory, UploadedFileRecord, CustomerRecord } from '../types';
+import { INITIAL_PRODUCTS, COMPANY_INFO, DEFAULT_SITE_CONTENT, SOFTWARE_DOWNLOADS } from '../data/companyData';
 
 interface AdminDashboardProps {
   token: string;
@@ -144,17 +145,36 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         onLogout();
         return;
       }
-      const data = await res.json();
-      if (data.success) {
-        setProducts(data.products || []);
-        setDownloads(data.downloads || []);
-        setCompanyInfo(data.companyInfo);
-        setSiteContent(data.siteContent);
-        setOrders(data.orders || []);
+      const contentType = res.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = await res.json();
+        if (data.success) {
+          const loadedProducts = (data.products && data.products.length > 0) 
+            ? data.products 
+            : (() => {
+                const stored = localStorage.getItem('sts_custom_products');
+                return stored ? JSON.parse(stored) : INITIAL_PRODUCTS;
+              })();
+          setProducts(loadedProducts);
+          setDownloads(data.downloads && data.downloads.length > 0 ? data.downloads : SOFTWARE_DOWNLOADS);
+          setCompanyInfo(data.companyInfo || COMPANY_INFO);
+          setSiteContent(data.siteContent || DEFAULT_SITE_CONTENT);
+          setOrders(data.orders || []);
+          return;
+        }
       }
+      throw new Error('Fallback to local data');
     } catch (err) {
-      console.error('Failed to load admin data:', err);
-      showNotification('error', 'Failed to connect to backend server');
+      console.warn('Backend admin data note: using local persistent data.', err);
+      const stored = localStorage.getItem('sts_custom_products');
+      setProducts(stored ? JSON.parse(stored) : INITIAL_PRODUCTS);
+      setDownloads(SOFTWARE_DOWNLOADS);
+      setCompanyInfo(COMPANY_INFO);
+      setSiteContent(DEFAULT_SITE_CONTENT);
+      const storedOrders = localStorage.getItem('sts_custom_orders');
+      if (storedOrders) {
+        try { setOrders(JSON.parse(storedOrders)); } catch {}
+      }
     } finally {
       setLoading(false);
     }
