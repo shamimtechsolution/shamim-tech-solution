@@ -1,0 +1,123 @@
+<svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="stsBgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a1936" />
+      <stop offset="70%" stop-color="#040a18" />
+      <stop offset="100%" stop-color="#02050e" />
+    </radialGradient>
+    <linearGradient id="stsCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="50%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </linearGradient>
+    <linearGradient id="stsBlueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+    <linearGradient id="stsGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+    <filter id="stsGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Ring -->
+  <circle cx="200" cy="200" r="190" fill="url(#stsBgGrad)" stroke="#06b6d4" stroke-width="4" />
+  <circle cx="200" cy="200" r="182" stroke="#0369a1" stroke-width="2" stroke-dasharray="6 4" opacity="0.8" />
+  <circle cx="200" cy="200" r="172" stroke="url(#stsCyanGrad)" stroke-width="3" opacity="0.9" />
+
+  <!-- Top Security Camera Dome & Bracket -->
+  <g transform="translate(140, 28) scale(0.6)">
+    <rect x="70" y="10" width="60" height="15" rx="4" fill="#06b6d4" />
+    <path d="M100 25 L100 50" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" />
+    <ellipse cx="100" cy="80" rx="65" ry="35" fill="#0f172a" stroke="#22d3ee" stroke-width="4" />
+    <ellipse cx="100" cy="80" rx="35" ry="20" fill="#0369a1" stroke="#38bdf8" stroke-width="3" />
+    <circle cx="100" cy="80" r="12" fill="#020617" stroke="#22d3ee" stroke-width="2" />
+    <circle cx="96" cy="76" r="4" fill="#e0f2fe" />
+    <circle cx="135" cy="75" r="4" fill="#ef4444" filter="url(#stsGlow)" />
+  </g>
+
+  <!-- Center Shield Graphic -->
+  <path
+    d="M200 95 L285 130 C285 240 200 295 200 295 C200 295 115 240 115 130 Z"
+    fill="#08142c"
+    stroke="url(#stsCyanGrad)"
+    stroke-width="5"
+    filter="url(#stsGlow)"
+  />
+  <path
+    d="M200 112 L268 142 C268 230 200 275 200 275 C200 275 132 230 132 142 Z"
+    fill="none"
+    stroke="#0284c7"
+    stroke-width="2"
+    opacity="0.7"
+  />
+
+  <!-- STS Acronym Ribbon / Pill -->
+  <rect x="150" y="132" width="100" height="34" rx="17" fill="#0284c7" stroke="#38bdf8" stroke-width="2" />
+  <text
+    x="200"
+    y="156"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-size="22"
+    font-weight="900"
+    font-family="system-ui, -apple-system, sans-serif"
+    letter-spacing="3"
+  >
+    STS
+  </text>
+
+  <!-- SHAMIM Text -->
+  <text
+    x="200"
+    y="205"
+    text-anchor="middle"
+    fill="#ffffff"
+    font-size="36"
+    font-weight="900"
+    font-family="system-ui, -apple-system, sans-serif"
+    letter-spacing="2"
+  >
+    SHAMIM
+  </text>
+
+  <!-- TECH SOLUTION Subtitle -->
+  <text
+    x="200"
+    y="232"
+    text-anchor="middle"
+    fill="#38bdf8"
+    font-size="16"
+    font-weight="800"
+    font-family="system-ui, -apple-system, sans-serif"
+    letter-spacing="3"
+  >
+    TECH SOLUTION
+  </text>
+
+  <!-- Stars -->
+  <g fill="#facc15">
+    <polygon points="200,248 203,254 210,255 205,260 206,267 200,263 194,267 195,260 190,255 197,254" />
+    <polygon points="175,252 178,258 184,259 179,263 180,270 175,266 170,270 171,263 166,259 172,258" />
+    <polygon points="225,252 228,258 234,259 229,263 230,270 225,266 220,270 221,263 216,259 222,258" />
+  </g>
+
+  <!-- Bottom Location Banner -->
+  <path d="M110 325 Q200 360 290 325" stroke="url(#stsCyanGrad)" stroke-width="2" fill="none" opacity="0.6" />
+  <text
+    x="200"
+    y="348"
+    text-anchor="middle"
+    fill="#94a3b8"
+    font-size="14"
+    font-weight="700"
+    font-family="system-ui, -apple-system, sans-serif"
+    letter-spacing="4"
+  >
+    HARAGACH • RANGPUR
+  </text>
+</svg>
