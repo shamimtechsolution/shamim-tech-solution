@@ -47,7 +47,7 @@ export const STSLogo: React.FC<STSLogoProps> = ({
             </span>
           </div>
           <span className="text-[11px] tracking-wider text-cyan-400/90 font-semibold font-tech mt-0.5 flex items-center gap-1">
-            <span>Technician & Electrician Services</span>
+            <span>CCTV SALES & SERVICE, Technician & Electrician</span>
           </span>
         </div>
       )}
