@@ -1,3 +1,11 @@
 User-agent: *
 Allow: /
-Sitemap: https://ais-pre-uvgio6vn5jcf5kkdl5tmqc-591586143096.asia-southeast1.run.app/sitemap.xml
+
+# Googlebot-Image specific
+User-agent: Googlebot-Image
+Allow: /favicon.ico
+Allow: /favicon.png
+Allow: /logo.png
+Allow: /apple-touch-icon.png
+
+Sitemap: https://www.shamimtechsolution.com/sitemap.xml
