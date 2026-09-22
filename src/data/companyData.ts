@@ -455,7 +455,7 @@ export const SERVICES_LIST: ServiceItem[] = [
   },
   {
     id: "srv-12",
-    name: "Professional Electrician & Wiring",
+    name: "Professional Technician, Electrician & Wiring Services",
     iconName: "Zap",
     description: "Complete residential, commercial and industrial electrical wiring, main switchboard installation, circuit breaker (MCB/MCCB) setup, power load distribution, and electrical fault fixing.",
     keyFeatures: ["House & Commercial Concealed Wiring", "Main DB & Circuit Breaker Setup", "Short Circuit & Power Troubleshooting"],
