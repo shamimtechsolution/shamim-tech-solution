@@ -54,45 +54,47 @@ export const CustomerReviews: React.FC = () => {
   const current = reviews[currentIndex] || reviews[0];
 
   return (
-    <section className="py-14 bg-[#050b18] border-b border-cyan-950/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 bg-gradient-to-b from-sky-50/90 via-blue-100/60 to-sky-100/70 border-b border-sky-300/80 overflow-hidden">
+      {/* Decorative ambient lighting */}
+      <div className="absolute top-1/2 left-1/3 w-[500px] h-[300px] bg-gradient-to-r from-cyan-400/20 via-sky-400/20 to-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header with Title and Add Review button */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
-            <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold font-tech uppercase tracking-wider">
-              <Star className="w-3.5 h-3.5 fill-cyan-400 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               <span>Customer Satisfaction</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white font-tech mt-1">
-              Customer Feedback & Reviews
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech">
+              Customer Reviews
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-              Real feedback from local clients across Haragach, Rangpur and neighboring districts.
+            <p className="text-slate-600 text-sm mt-1">
+              Verified feedback from homeowners, retail shops, and corporate clients in Rangpur.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-bold transition-all cursor-pointer"
+              className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold transition-all shadow-md shadow-cyan-500/25 cursor-pointer transform hover:-translate-y-0.5"
             >
-              <PlusCircle className="w-3.5 h-3.5" />
+              <PlusCircle className="w-4 h-4" />
               <span>Add Customer Review</span>
             </button>
 
             {/* Next/Prev Navigation Buttons */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               <button
                 onClick={prevReview}
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 cursor-pointer"
+                className="p-2.5 rounded-xl bg-white border-2 border-sky-200 text-slate-700 hover:text-cyan-700 hover:border-cyan-500 transition-colors cursor-pointer shadow-sm"
                 aria-label="Previous Review"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={nextReview}
-                className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 cursor-pointer"
+                className="p-2.5 rounded-xl bg-white border-2 border-sky-200 text-slate-700 hover:text-cyan-700 hover:border-cyan-500 transition-colors cursor-pointer shadow-sm"
                 aria-label="Next Review"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -103,11 +105,12 @@ export const CustomerReviews: React.FC = () => {
 
         {/* Featured Testimonial Card */}
         {current && (
-          <div className="relative rounded-2xl bg-gradient-to-r from-slate-900/90 via-[#071126] to-slate-900/90 border border-cyan-500/40 p-6 sm:p-8 shadow-xl max-w-4xl mx-auto">
+          <div className="relative rounded-2xl bg-gradient-to-br from-[#0c1a30] via-[#09152b] to-[#040c1a] border-2 border-cyan-400/50 p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500" />
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
               
               {/* Avatar */}
-              <div className="w-16 h-16 rounded-full bg-cyan-950 border-2 border-cyan-500/60 text-cyan-400 flex items-center justify-center font-tech font-bold text-xl shrink-0 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center font-tech font-bold text-xl shrink-0 shadow-lg shadow-cyan-500/30">
                 {current.name.slice(0, 2).toUpperCase()}
               </div>
 
@@ -121,7 +124,7 @@ export const CustomerReviews: React.FC = () => {
                       className={`w-4 h-4 ${
                         i < current.rating 
                           ? 'fill-amber-400 text-amber-400' 
-                          : 'text-slate-700'
+                          : 'text-slate-600'
                       }`}
                     />
                   ))}
@@ -132,14 +135,14 @@ export const CustomerReviews: React.FC = () => {
                   "{current.comment}"
                 </blockquote>
 
-                <div className="pt-2 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-1">
+                <div className="pt-3 border-t border-cyan-950/80 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-1">
                   <div>
                     <strong className="text-white font-tech text-sm">{current.name}</strong>
                     <span className="mx-2">•</span>
                     <span>{current.role}</span>
                   </div>
-                  <div className="flex items-center justify-center gap-1 text-cyan-400 font-semibold">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                  <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>Verified Installation Client ({current.date})</span>
                   </div>
                 </div>
@@ -155,7 +158,7 @@ export const CustomerReviews: React.FC = () => {
                   onClick={() => setCurrentIndex(idx)}
                   className={`h-2 rounded-full transition-all cursor-pointer ${
                     currentIndex === idx 
-                      ? 'w-6 bg-cyan-400' 
+                      ? 'w-6 bg-cyan-500' 
                       : 'w-2 bg-slate-700 hover:bg-slate-600'
                   }`}
                   aria-label={`Go to review ${idx + 1}`}
@@ -167,14 +170,14 @@ export const CustomerReviews: React.FC = () => {
 
         {/* Add Review Modal */}
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
             <div 
-              className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-slate-900 to-[#040815] border border-cyan-500/40 p-6 shadow-2xl text-slate-100"
+              className="relative w-full max-w-md rounded-2xl bg-[#081226] border border-cyan-500/40 p-6 shadow-2xl text-slate-200"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 text-slate-400 hover:text-white"
+                className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -195,7 +198,7 @@ export const CustomerReviews: React.FC = () => {
                     value={newReview.name}
                     onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
                     placeholder="e.g. Md. Shahidul Islam"
-                    className="w-full bg-slate-900 rounded-xl px-3 py-2 border border-slate-700 text-white focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
 
@@ -206,7 +209,7 @@ export const CustomerReviews: React.FC = () => {
                     value={newReview.role}
                     onChange={(e) => setNewReview({ ...newReview, role: e.target.value })}
                     placeholder="e.g. Shop Owner, Haragach"
-                    className="w-full bg-slate-900 rounded-xl px-3 py-2 border border-slate-700 text-white focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
 
@@ -215,7 +218,7 @@ export const CustomerReviews: React.FC = () => {
                   <select
                     value={newReview.rating}
                     onChange={(e) => setNewReview({ ...newReview, rating: Number(e.target.value) })}
-                    className="w-full bg-slate-900 rounded-xl px-3 py-2 border border-slate-700 text-white focus:border-cyan-400 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none cursor-pointer"
                   >
                     <option value={5}>⭐⭐⭐⭐⭐ (5 - Outstanding)</option>
                     <option value={4}>⭐⭐⭐⭐ (4 - Very Good)</option>
@@ -231,14 +234,14 @@ export const CustomerReviews: React.FC = () => {
                     value={newReview.comment}
                     onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
                     placeholder="Describe how the installation went, video clarity, remote view, cable fitting..."
-                    className="w-full bg-slate-900 rounded-xl px-3 py-2 border border-slate-700 text-white focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
 
                 <div className="pt-2 flex gap-2">
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold cursor-pointer"
+                    className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold cursor-pointer shadow-lg shadow-cyan-500/25"
                   >
                     Save Review
                   </button>

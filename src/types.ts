@@ -90,6 +90,9 @@ export interface CompanyInfo {
   serviceArea: string;
   phone: string;
   phoneFormatted: string;
+  secondaryPhone?: string;
+  secondaryPhoneFormatted?: string;
+  allPhonesFormatted?: string;
   whatsapp: string;
   whatsappInternational: string;
   facebook: string;

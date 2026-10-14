@@ -454,10 +454,13 @@
     "businessType": "CCTV Technician & Security System Service Provider",
     "location": "Haragach, Rangpur, Bangladesh",
     "serviceArea": "Haragach, Rangpur and nearby areas (Sadar, Haragach, Sarai Bazar, Satmata, Saidpur, Dosmail & nearby regions)",
-    "phone": "01865321530",
-    "phoneFormatted": "01865-321530",
-    "whatsapp": "01865321530",
-    "whatsappInternational": "8801865321530",
+    "phone": "01790139333",
+    "phoneFormatted": "01790-139333",
+    "secondaryPhone": "01865321530",
+    "secondaryPhoneFormatted": "01865-321530",
+    "allPhonesFormatted": "01790-139333, 01865-321530",
+    "whatsapp": "01790139333",
+    "whatsappInternational": "8801790139333",
     "facebook": "https://www.facebook.com/profile.php?id=100014153359472",
     "emailPlaceholder": "Email coming soon",
     "mapQuery": "Haragach, Rangpur, Bangladesh",
@@ -466,9 +469,9 @@
   "siteContent": {
     "heroHeadline": "Professional CCTV & Security System Solutions",
     "heroSubheadline": "Sales, installation, repair, and remote mobile viewing setup in Haragach, Rangpur and nearby areas. High-quality security cameras, DVR, NVR, access control, and biometric solutions with dedicated after-sales support.",
-    "noticeTicker": "Special Offer: Complete 4-Camera Hikvision Full HD CCTV Package with DVR, 500GB HDD, Power Supply & Installation at affordable rates in Haragach, Rangpur! Call 01865-321530",
+    "noticeTicker": "",
     "bannerBadge": "Official CCTV & Security Service Provider • Haragach, Rangpur",
-    "emergencySupportText": "Need immediate CCTV or DVR troubleshooting in Haragach or Rangpur? Call technician Shamim at 01865321530 for on-site visit."
+    "emergencySupportText": "Need immediate CCTV or DVR troubleshooting in Haragach or Rangpur? Call technician Shamim at 01790139333 / 01865321530 for on-site visit."
   },
   "orders": [],
   "company": {

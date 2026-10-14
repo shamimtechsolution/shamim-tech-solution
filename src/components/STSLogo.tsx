@@ -4,12 +4,14 @@ interface STSLogoProps {
   className?: string;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'custom';
   showText?: boolean;
+  theme?: 'light' | 'dark';
 }
 
 export const STSLogo: React.FC<STSLogoProps> = ({
   className = '',
   size = 'md',
   showText = true,
+  theme = 'light',
 }) => {
   const sizeMap = {
     sm: { box: 'w-10 h-10', text: 'text-sm' },
@@ -20,11 +22,12 @@ export const STSLogo: React.FC<STSLogoProps> = ({
   };
 
   const selectedSize = sizeMap[size];
+  const isDark = theme === 'dark';
 
   return (
     <div className={`inline-flex items-center gap-3 ${className}`}>
       {/* Official STS Circular Badge Logo */}
-      <div className={`relative shrink-0 ${selectedSize.box} flex items-center justify-center rounded-full overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.6)] border-2 border-cyan-400/60 bg-black`}>
+      <div className={`relative shrink-0 ${selectedSize.box} flex items-center justify-center rounded-full overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.4)] border-2 border-cyan-500/60 bg-white`}>
         <img
           src="/logo.png"
           alt="SHAMIM TECH SOLUTION (STS) Official Logo"
@@ -39,14 +42,18 @@ export const STSLogo: React.FC<STSLogoProps> = ({
       {showText && (
         <div className="flex flex-col text-left">
           <div className="flex items-center gap-1.5">
-            <span className="font-extrabold tracking-wider text-white text-base sm:text-lg font-tech leading-none">
-              SHAMIM <span className="text-cyan-400">TECH</span> SOLUTION
+            <span className={`font-extrabold tracking-wider ${isDark ? 'text-white' : 'text-slate-900'} text-base sm:text-lg font-tech leading-none`}>
+              SHAMIM <span className="text-cyan-600">TECH</span> SOLUTION
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded bg-cyan-950/80 border border-cyan-500/40 text-cyan-300 font-tech">
+            <span className={`text-[10px] uppercase font-bold tracking-widest px-1.5 py-0.5 rounded ${
+              isDark 
+                ? 'bg-cyan-950/80 border border-cyan-500/40 text-cyan-300' 
+                : 'bg-sky-100 border border-sky-300 text-cyan-800'
+            } font-tech`}>
               STS
             </span>
           </div>
-          <span className="text-[11px] tracking-wider text-cyan-400/90 font-semibold font-tech mt-0.5 flex items-center gap-1">
+          <span className={`text-[11px] tracking-wider ${isDark ? 'text-cyan-400' : 'text-cyan-700'} font-semibold font-tech mt-0.5 flex items-center gap-1`}>
             <span>CCTV SALES & SERVICE, Technician & Electrician</span>
           </span>
         </div>

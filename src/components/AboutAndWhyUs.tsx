@@ -59,45 +59,47 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
   ];
 
   return (
-    <div id="about" className="py-16 bg-[#060c1e] border-b border-cyan-950/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+    <div id="about" className="relative py-16 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-50/80 border-b border-sky-300/80 overflow-hidden">
+      {/* Decorative ambient lighting */}
+      <div className="absolute top-1/2 right-10 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 relative z-10">
         
         {/* About Section */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           
           {/* Left Visual Badge Card */}
           <div className="lg:col-span-5 relative">
-            <div className="rounded-2xl bg-gradient-to-br from-slate-900 to-[#040a18] border-2 border-cyan-500/40 p-8 shadow-2xl text-center relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-36 h-36 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="rounded-2xl bg-sky-50/70 border-2 border-sky-300 p-8 shadow-xl text-center relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-36 h-36 bg-cyan-400/10 rounded-full blur-2xl pointer-events-none" />
               
               <div className="flex justify-center mb-6">
-                <div className="p-3 rounded-full bg-slate-950/90 border border-cyan-500/40 shadow-[0_0_25px_rgba(6,182,212,0.3)]">
+                <div className="p-3 rounded-full bg-white border border-sky-300 shadow-md">
                   <STSLogo size="lg" showText={false} />
                 </div>
               </div>
 
-              <h3 className="text-xl font-black text-white font-tech">
+              <h3 className="text-xl font-black text-slate-900 font-tech">
                 {COMPANY_INFO.name}
               </h3>
-              <p className="text-xs text-cyan-400 font-semibold font-tech uppercase tracking-widest mt-0.5">
+              <p className="text-xs text-cyan-700 font-bold font-tech uppercase tracking-widest mt-0.5">
                 {COMPANY_INFO.tagline}
               </p>
-              <p className="text-xs text-slate-400 italic mt-1 font-bangla text-cyan-200/90">
+              <p className="text-xs text-slate-600 italic mt-1 font-bangla font-medium">
                 "{COMPANY_INFO.bengaliSlogan}"
               </p>
 
-              <div className="mt-6 pt-5 border-t border-slate-800 grid grid-cols-2 gap-3 text-left">
-                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
-                  <span className="text-[10px] text-slate-400 block font-tech uppercase">Base Location</span>
-                  <span className="text-xs font-bold text-white flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="mt-6 pt-5 border-t border-sky-200 grid grid-cols-2 gap-3 text-left">
+                <div className="p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
+                  <span className="text-[10px] text-slate-500 block font-tech uppercase font-bold">Base Location</span>
+                  <span className="text-xs font-bold text-slate-800 flex items-center gap-1 mt-0.5">
+                    <MapPin className="w-3.5 h-3.5 text-cyan-600" />
                     Haragach, Rangpur
                   </span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
-                  <span className="text-[10px] text-slate-400 block font-tech uppercase">Direct Helpline</span>
-                  <span className="text-xs font-bold text-cyan-400 flex items-center gap-1 mt-0.5">
-                    <Phone className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
+                  <span className="text-[10px] text-slate-500 block font-tech uppercase font-bold">Direct Helpline</span>
+                  <span className="text-xs font-bold text-cyan-700 flex items-center gap-1 mt-0.5">
+                    <Phone className="w-3.5 h-3.5 text-cyan-600" />
                     {COMPANY_INFO.phone}
                   </span>
                 </div>
@@ -108,35 +110,35 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
           {/* Right Editorial Information */}
           <div className="lg:col-span-7 space-y-6 text-left">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-400 text-xs font-bold font-tech uppercase tracking-wider mb-2">
-                <ShieldCheck className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+                <ShieldCheck className="w-4 h-4 text-cyan-600" />
                 <span>About Our Business</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-tech leading-tight">
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech leading-tight">
                 Dedicated Security & Surveillance Partner in Rangpur
               </h2>
             </div>
 
             {/* Exact Required Text */}
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-normal bg-slate-900/40 p-5 rounded-2xl border border-cyan-950">
-              <strong className="text-white">SHAMIM TECH SOLUTION (STS)</strong> provides professional CCTV and security system solutions in Haragach, Rangpur and nearby areas. We provide CCTV camera installation, DVR/NVR configuration, IP camera setup, remote/online viewing setup, access control, fingerprint attendance, networking and CCTV troubleshooting services.
+            <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal bg-sky-50/50 p-5 rounded-2xl border border-sky-200 shadow-sm">
+              <strong className="text-slate-900 font-bold">SHAMIM TECH SOLUTION (STS)</strong> provides professional CCTV and security system solutions in Haragach, Rangpur and nearby areas. We provide CCTV camera installation, DVR/NVR configuration, IP camera setup, remote/online viewing setup, access control, fingerprint attendance, networking and CCTV troubleshooting services.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
-              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
+                <CheckCircle className="w-4 h-4 text-cyan-600 shrink-0" />
                 <span>Haragach, Rangpur Sadar, Sarai, Satmata Coverage</span>
               </div>
-              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
+                <CheckCircle className="w-4 h-4 text-cyan-600 shrink-0" />
                 <span>100% Genuine Hikvision, Dahua, ZKTeco Stock</span>
               </div>
-              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
+                <CheckCircle className="w-4 h-4 text-cyan-600 shrink-0" />
                 <span>Mobile Live View on Android & iPhone Included</span>
               </div>
-              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
-                <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
+                <CheckCircle className="w-4 h-4 text-cyan-600 shrink-0" />
                 <span>Personal Warranty Support From Technician Shamim</span>
               </div>
             </div>
@@ -144,14 +146,14 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
             <div className="flex flex-wrap items-center gap-3 pt-2">
               <button
                 onClick={onContactClick}
-                className="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-sm transition-all shadow-[0_0_20px_rgba(6,182,212,0.35)] cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-sm transition-all shadow-md shadow-cyan-600/20 cursor-pointer"
               >
                 Contact Us
               </button>
 
               <button
                 onClick={onRequestQuote}
-                className="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700 text-sm font-semibold transition-all cursor-pointer"
+                className="px-6 py-3 rounded-xl bg-white hover:bg-sky-50 text-slate-700 hover:text-cyan-800 border border-sky-300 text-sm font-semibold transition-all shadow-sm cursor-pointer"
               >
                 Request Technician Consultation
               </button>
@@ -161,15 +163,15 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
         </div>
 
         {/* Why Choose Us Section */}
-        <div className="pt-8 border-t border-slate-800">
+        <div className="pt-8 border-t border-sky-200">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs uppercase font-bold tracking-widest text-cyan-400 font-tech">
+            <span className="text-xs uppercase font-bold tracking-widest text-cyan-700 font-tech">
               Quality That Matters
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white font-tech mt-1">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-tech mt-1">
               Why Choose Us?
             </h2>
-            <p className="text-slate-400 text-sm mt-1">
+            <p className="text-slate-600 text-sm mt-1">
               Here is why homeowners, retailers, and corporate offices trust Shamim Tech Solution.
             </p>
           </div>
@@ -180,15 +182,16 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
               return (
                 <div
                   key={idx}
-                  className="p-5 rounded-2xl bg-gradient-to-b from-slate-900/80 to-[#040915] border border-cyan-950 hover:border-cyan-500/50 transition-all hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] group"
+                  className="p-6 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-sky-200/90 hover:border-cyan-500 transition-all hover:shadow-xl hover:shadow-cyan-500/10 group relative overflow-hidden transform hover:-translate-y-0.5"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mb-4 group-hover:bg-cyan-500 group-hover:text-slate-950 transition-all">
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 group-hover:h-1.5 transition-all" />
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center mb-4 transition-transform group-hover:scale-110 shadow-md shadow-cyan-500/25">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-base font-bold text-white font-tech mb-1.5 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="text-base font-bold text-slate-900 font-tech mb-1.5 group-hover:text-cyan-700 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

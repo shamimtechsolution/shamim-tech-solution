@@ -34,14 +34,14 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
 
       {/* Floating Call Button */}
       <a
-        href={`tel:${activeCompany.phone}`}
+        href={`tel:${activeCompany.phone || '01790139333'}`}
         className="group relative flex items-center justify-center w-12 h-12 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-[0_0_20px_rgba(6,182,212,0.5)] transition-all transform hover:scale-110 active:scale-95"
-        title={`Call ${activeCompany.phone}`}
+        title={`Call ${activeCompany.phone || '01790139333'} / ${activeCompany.secondaryPhone || '01865321530'}`}
       >
         <Phone className="w-5 h-5 fill-current" />
         {/* Tooltip on hover */}
         <span className="absolute right-14 bg-slate-950 text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">
-          Call: {activeCompany.phone}
+          Call: {activeCompany.phone || '01790139333'} / {activeCompany.secondaryPhone || '01865321530'}
         </span>
       </a>
 
@@ -56,7 +56,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
         <MessageSquare className="w-6 h-6 fill-current" />
         {/* Tooltip on hover */}
         <span className="absolute right-16 bg-slate-950 text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-emerald-500/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">
-          Chat on WhatsApp ({activeCompany.phone})
+          Chat on WhatsApp ({activeCompany.phoneFormatted || activeCompany.whatsapp || '01790-139333'})
         </span>
       </a>
 

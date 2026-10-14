@@ -65,19 +65,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="py-16 bg-[#040815] border-b border-cyan-950/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative py-16 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-100/80 border-b border-sky-300/80 overflow-hidden">
+      {/* Decorative ambient lighting */}
+      <div className="absolute top-1/4 right-0 w-[550px] h-[350px] bg-gradient-to-l from-cyan-400/25 to-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-400 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
             <Phone className="w-3.5 h-3.5" />
             <span>Haragach & Rangpur Headquarters</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-tech">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech">
             Contact Technician Shamim
           </h2>
-          <p className="text-slate-300 text-sm mt-2">
+          <p className="text-slate-600 text-sm mt-2">
             Call or send a message on WhatsApp for instant pricing, CCTV site visits, and hardware inquiries.
           </p>
         </div>
@@ -88,100 +90,134 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div className="lg:col-span-5 space-y-6">
             
             {/* Primary Details Card */}
-            <div className="p-6 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#060c1d] border border-cyan-900/60 shadow-xl space-y-5">
-              <h3 className="text-lg font-bold text-white font-tech border-b border-slate-800 pb-3">
+            <div className="p-6 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-sky-200/90 shadow-xl space-y-5 relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
+              <h3 className="text-lg font-bold text-slate-900 font-tech border-b border-sky-200/80 pb-3">
                 Direct Contact Information
               </h3>
 
-              {/* Phone */}
+              {/* Primary Phone (01790139333 - In front of 530) */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
-                  <Phone className="w-5 h-5 fill-current" />
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <Phone className="w-5 h-5 fill-current animate-pulse text-cyan-200" />
                 </div>
                 <div>
-                  <span className="text-[11px] text-slate-400 font-tech uppercase block">Direct Call</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Primary Helpline</span>
+                    <span className="text-[10px] bg-cyan-100 text-cyan-800 font-bold px-1.5 py-0.2 rounded border border-cyan-300">Main</span>
+                  </div>
                   <a
-                    href={`tel:${activeCompany.phone}`}
-                    className="text-base font-bold text-cyan-400 hover:text-cyan-300 font-tech"
+                    href={`tel:${activeCompany.phone || '01790139333'}`}
+                    className="text-base font-bold text-cyan-700 hover:text-cyan-800 font-tech"
                   >
-                    {activeCompany.phone}
+                    {activeCompany.phone || '01790139333'}
                   </a>
-                  <p className="text-[11px] text-slate-400">Available daily for urgent support</p>
+                  <p className="text-[11px] text-slate-500">Available daily for urgent support & orders</p>
+                </div>
+              </div>
+
+              {/* Secondary Phone (01865321530) */}
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center shrink-0 shadow-sm">
+                  <Phone className="w-5 h-5 fill-current text-blue-200" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Technician Direct</span>
+                    <span className="text-[10px] bg-blue-100 text-blue-800 font-bold px-1.5 py-0.2 rounded border border-blue-300">Direct</span>
+                  </div>
+                  <a
+                    href={`tel:${activeCompany.secondaryPhone || '01865321530'}`}
+                    className="text-base font-bold text-blue-700 hover:text-blue-800 font-tech"
+                  >
+                    {activeCompany.secondaryPhone || '01865321530'}
+                  </a>
+                  <p className="text-[11px] text-slate-500">On-field technician contact & backup</p>
                 </div>
               </div>
 
               {/* WhatsApp */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-green-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                   <MessageSquare className="w-5 h-5 fill-current" />
                 </div>
                 <div>
-                  <span className="text-[11px] text-slate-400 font-tech uppercase block">Official WhatsApp</span>
+                  <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Official WhatsApp</span>
                   <a
                     href={`https://wa.me/${activeCompany.whatsappInternational}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base font-bold text-emerald-400 hover:text-emerald-300 font-tech"
+                    className="text-base font-bold text-emerald-600 hover:text-emerald-700 font-tech"
                   >
-                    {activeCompany.whatsapp}
+                    +{activeCompany.whatsappInternational}
                   </a>
-                  <p className="text-[11px] text-slate-400">Send camera photos / video loss clips</p>
+                  <p className="text-[11px] text-slate-500">Fast response via chat & location sharing</p>
                 </div>
               </div>
 
-              {/* Service Location */}
+              {/* Service Base Location */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] text-slate-400 font-tech uppercase block">Service Location</span>
-                  <p className="text-sm font-bold text-white">
+                  <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Service Base</span>
+                  <p className="text-sm font-semibold text-slate-800">
                     {activeCompany.location}
                   </p>
-                  <p className="text-xs text-cyan-300 font-semibold mt-0.5">
-                    Coverage: {activeCompany.serviceArea}
+                  <p className="text-xs text-slate-500">
+                    Serving: {activeCompany.serviceArea}
                   </p>
                 </div>
               </div>
 
-              {/* Facebook Page (Official User Link) */}
+              {/* Facebook */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-blue-950/80 border border-blue-500/30 text-blue-400 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-blue-800 text-white flex items-center justify-center shrink-0 shadow-sm">
                   <Facebook className="w-5 h-5 fill-current" />
                 </div>
                 <div>
-                  <span className="text-[11px] text-slate-400 font-tech uppercase block">Facebook Page</span>
+                  <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Official Facebook</span>
                   <a
                     href={activeCompany.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-bold text-blue-400 hover:text-blue-300 flex items-center gap-1 mt-0.5"
+                    className="text-base font-bold text-blue-600 hover:text-blue-700 font-tech truncate block max-w-[200px]"
                   >
-                    <span>Visit STS Facebook Profile</span>
-                    <ExternalLink className="w-3 h-3" />
+                    Shamim Tech Solution
                   </a>
-                  <p className="text-[11px] text-slate-400">Official project updates and announcements</p>
+                  <p className="text-[11px] text-slate-500">Facebook page for project updates</p>
                 </div>
               </div>
 
               {/* Quick Action Buttons */}
-              <div className="pt-2 grid grid-cols-2 gap-3 border-t border-slate-800">
+              <div className="pt-2 grid grid-cols-3 gap-2 border-t border-sky-200/80">
                 <a
-                  href={`tel:${activeCompany.phone}`}
-                  className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shadow-md transition-all"
+                  href={`tel:${activeCompany.phone || '01790139333'}`}
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[11px] shadow-md shadow-cyan-600/20 transition-all transform hover:-translate-y-0.5"
+                  title="Call Primary: 01790139333"
                 >
-                  <Phone className="w-3.5 h-3.5 fill-current" />
-                  <span>Call Now</span>
+                  <Phone className="w-3.5 h-3.5 fill-current shrink-0" />
+                  <span className="truncate">01790...</span>
+                </a>
+
+                <a
+                  href={`tel:${activeCompany.secondaryPhone || '01865321530'}`}
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white font-bold text-[11px] shadow-md shadow-blue-700/20 transition-all transform hover:-translate-y-0.5"
+                  title="Call Secondary: 01865321530"
+                >
+                  <Phone className="w-3.5 h-3.5 fill-current shrink-0" />
+                  <span className="truncate">01865...</span>
                 </a>
 
                 <a
                   href={`https://wa.me/${activeCompany.whatsappInternational}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs shadow-md transition-all"
+                  className="flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-[11px] shadow-md shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5"
+                  title="WhatsApp"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 fill-current" />
+                  <MessageSquare className="w-3.5 h-3.5 fill-current shrink-0" />
                   <span>WhatsApp</span>
                 </a>
               </div>
@@ -189,21 +225,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </div>
 
             {/* Embedded Google Map for Haragach, Rangpur */}
-            <div className="rounded-2xl overflow-hidden border border-cyan-900/60 shadow-xl bg-slate-900">
-              <div className="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between text-xs text-slate-300">
-                <div className="flex items-center gap-1.5 text-cyan-400 font-bold font-tech">
-                  <MapPin className="w-3.5 h-3.5" />
+            <div className="rounded-2xl overflow-hidden border-2 border-sky-200/90 shadow-xl bg-white">
+              <div className="p-3 bg-sky-50 border-b border-sky-200 flex items-center justify-between text-xs text-slate-600">
+                <div className="flex items-center gap-1.5 text-cyan-800 font-bold font-tech">
+                  <MapPin className="w-3.5 h-3.5 text-cyan-600" />
                   <span>Haragach, Rangpur Base Location</span>
                 </div>
-                <span className="text-[11px] text-slate-400">Bangladesh</span>
+                <span className="text-[11px] text-slate-500 font-medium">Bangladesh</span>
               </div>
-              <div className="w-full h-56 relative bg-slate-950">
+              <div className="w-full h-56 relative bg-slate-100">
                 <iframe
                   title="Haragach Rangpur Map"
                   src="https://maps.google.com/maps?q=Haragach,%20Rangpur,%20Bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
-                  style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) brightness(85%) contrast(120%)' }}
+                  style={{ border: 0 }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
@@ -214,29 +250,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Right: Contact / Service Booking Form (lg:col-span-7) */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#050c1e] border border-cyan-500/40 shadow-2xl">
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-sky-200/90 shadow-xl relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
               
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-white font-tech">
+                <h3 className="text-xl font-bold text-slate-900 font-tech">
                   Book CCTV Service / Request Quotation
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                <p className="text-xs sm:text-sm text-slate-600 mt-1">
                   Fill out the form below. Technician Shamim will get back to you immediately with transparent rates.
                 </p>
               </div>
 
               {submitted ? (
-                <div className="p-6 rounded-xl bg-emerald-950/60 border border-emerald-500/40 text-center space-y-3">
-                  <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                  <h4 className="text-lg font-bold text-white font-tech">
+                <div className="p-6 rounded-xl bg-emerald-50 border-2 border-emerald-300 text-center space-y-3">
+                  <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
+                  <h4 className="text-lg font-bold text-slate-900 font-tech">
                     Inquiry Forwarded to Technician Shamim!
                   </h4>
-                  <p className="text-xs sm:text-sm text-slate-300 max-w-sm mx-auto">
-                    Your details have been pre-filled for WhatsApp. You can also call us directly at <span className="font-mono text-cyan-300 font-bold">01865321530</span>.
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-sm mx-auto">
+                    Your details have been pre-filled for WhatsApp. You can also call us directly at <span className="font-mono text-cyan-700 font-bold">01865321530</span>.
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold cursor-pointer"
+                    className="mt-2 px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-700 text-white text-xs font-semibold cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -246,7 +283,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   
                   {/* Name */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                       Your Name *
                     </label>
                     <input
@@ -255,14 +292,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Md. Shamim Hossain"
-                      className="w-full bg-slate-900 text-sm text-white rounded-xl px-4 py-2.5 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl px-4 py-2.5 border-2 border-sky-200 focus:border-cyan-500 focus:outline-none placeholder-slate-400 shadow-sm"
                     />
                   </div>
 
                   {/* Phone & Location */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Mobile / WhatsApp Number *
                       </label>
                       <input
@@ -271,12 +308,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="018XXXXXXXX"
-                        className="w-full bg-slate-900 text-sm text-white rounded-xl px-4 py-2.5 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                        className="w-full bg-white text-sm text-slate-900 rounded-xl px-4 py-2.5 border-2 border-sky-200 focus:border-cyan-500 focus:outline-none placeholder-slate-400 shadow-sm"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                      <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                         Your Location (Area / Union) *
                       </label>
                       <input
@@ -285,27 +322,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                         placeholder="e.g. Haragach Bazar / Rangpur Sadar"
-                        className="w-full bg-slate-900 text-sm text-white rounded-xl px-4 py-2.5 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                        className="w-full bg-white text-sm text-slate-900 rounded-xl px-4 py-2.5 border-2 border-sky-200 focus:border-cyan-500 focus:outline-none placeholder-slate-400 shadow-sm"
                       />
                     </div>
                   </div>
 
                   {/* Service Needed */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                       Service Required *
                     </label>
                     <select
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full bg-slate-900 text-sm text-white rounded-xl px-4 py-2.5 border border-slate-700 focus:border-cyan-400 focus:outline-none cursor-pointer"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl px-4 py-2.5 border-2 border-sky-200 focus:border-cyan-500 focus:outline-none cursor-pointer shadow-sm"
                     >
                       {SERVICES_LIST.map((serv) => (
-                        <option key={serv.id} value={serv.name} className="bg-slate-900 text-white">
+                        <option key={serv.id} value={serv.name}>
                           {serv.name}
                         </option>
                       ))}
-                      <option value="Complete Security Package Consultation" className="bg-slate-900 text-white">
+                      <option value="Complete Security Package Consultation">
                         Complete Security Package Consultation
                       </option>
                     </select>
@@ -313,7 +350,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                   {/* Message */}
                   <div>
-                    <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                       Message / Project Details
                     </label>
                     <textarea
@@ -321,7 +358,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="e.g. How many cameras do I need for a 2-story shop? What will be the total cost including DVR and wiring?"
-                      className="w-full bg-slate-900 text-sm text-white rounded-xl px-4 py-2.5 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl px-4 py-2.5 border-2 border-sky-200 focus:border-cyan-500 focus:outline-none placeholder-slate-400 shadow-sm"
                     />
                   </div>
 
@@ -330,14 +367,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <button
                       type="submit"
                       id="contact-form-submit-btn"
-                      className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm tracking-wide shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-sm tracking-wide shadow-md shadow-cyan-600/25 transition-all cursor-pointer transform hover:-translate-y-0.5"
                     >
                       <Send className="w-4 h-4" />
                       <span>Send Inquiry to Technician Shamim (via WhatsApp)</span>
                     </button>
                   </div>
 
-                  <p className="text-[11px] text-slate-400 text-center">
+                  <p className="text-[11px] text-slate-500 text-center">
                     🔒 No spam. Your phone number is strictly kept confidential for your security quotation.
                   </p>
                 </form>

@@ -399,7 +399,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#030712] text-slate-100 flex flex-col selection:bg-cyan-500 selection:text-slate-950 font-sans antialiased">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-gradient-to-b from-sky-100/90 via-blue-50/70 to-sky-100/80 text-slate-800 flex flex-col selection:bg-cyan-500 selection:text-white font-sans antialiased">
       
       {/* Sticky Navigation Bar */}
       <Navbar

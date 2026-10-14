@@ -101,19 +101,21 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
   };
 
   return (
-    <section id="downloads" className="py-16 bg-[#050b18] border-b border-cyan-950/60">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="downloads" className="relative py-16 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-50/80 border-b border-sky-300/80 overflow-hidden">
+      {/* Decorative ambient lighting */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-r from-sky-400/25 to-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-400 text-xs font-bold font-tech uppercase tracking-wider mb-2">
-            <Download className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+            <Download className="w-3.5 h-3.5 text-cyan-600" />
             <span>Tools, Utilities & Documents</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-white font-tech">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech">
             Software & Downloads
           </h2>
-          <p className="text-slate-300 text-sm mt-2">
+          <p className="text-slate-600 text-sm mt-2">
             Get the necessary software, device configuration tools, and official STS documentation for your CCTV cameras, DVR/NVR, and attendance machines.
           </p>
         </div>
@@ -122,18 +124,19 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           {/* Column 1: Software Downloads List (lg:col-span-5) */}
-          <div className="lg:col-span-5 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#060c1d] border border-cyan-900/50 p-5 sm:p-6 shadow-xl space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="lg:col-span-5 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-sky-200/90 p-5 sm:p-6 shadow-md space-y-4 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
+            <div className="flex items-center justify-between border-b border-sky-200/80 pb-3">
               <div>
-                <h3 className="text-lg font-bold text-white font-tech flex items-center gap-2">
-                  <Download className="w-5 h-5 text-cyan-400" />
+                <h3 className="text-lg font-bold text-slate-900 font-tech flex items-center gap-2">
+                  <Download className="w-5 h-5 text-cyan-600" />
                   Software & Downloads
                 </h3>
-                <p className="text-xs text-slate-400 mt-0.5">
+                <p className="text-xs text-slate-500 mt-0.5">
                   Essential tools for PC/Laptop configuration
                 </p>
               </div>
-              <span className="text-xs font-bold px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+              <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-sm">
                 {activeDownloads.length} Files
               </span>
             </div>
@@ -143,10 +146,10 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
               {activeDownloads.map((soft) => (
                 <div
                   key={soft.id}
-                  className="flex items-center justify-between gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-cyan-500/50 transition-all group"
+                  className="flex items-center justify-between gap-3 p-3 rounded-xl bg-white border-2 border-sky-200/80 hover:border-cyan-500 transition-all shadow-sm hover:shadow-md hover:shadow-cyan-500/10 group transform hover:-translate-y-0.5"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-sm">
                       {soft.fileType.includes('PDF') ? (
                         <FileText className="w-5 h-5" />
                       ) : (
@@ -155,24 +158,24 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors font-tech line-clamp-1">
+                        <h4 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-cyan-700 transition-colors font-tech line-clamp-1">
                           {soft.title}
                         </h4>
                       </div>
-                      <div className="text-[11px] text-slate-400 flex items-center gap-2 flex-wrap">
-                        <span className="font-mono text-cyan-400 font-semibold">{soft.version || 'v1.0'}</span>
+                      <div className="text-[11px] text-slate-500 flex items-center gap-2 flex-wrap">
+                        <span className="font-mono text-cyan-700 font-bold">{soft.version || 'v1.0'}</span>
                         <span>•</span>
                         <span>{soft.fileSize || 'Software'}</span>
                         {soft.originalFileName && (
                           <>
                             <span>•</span>
-                            <span className="font-mono text-slate-300 truncate max-w-[140px]">{soft.originalFileName}</span>
+                            <span className="font-mono text-slate-600 truncate max-w-[140px]">{soft.originalFileName}</span>
                           </>
                         )}
                         {soft.category && (
                           <>
                             <span>•</span>
-                            <span className="text-cyan-400 font-semibold">{soft.category}</span>
+                            <span className="text-cyan-700 font-semibold">{soft.category}</span>
                           </>
                         )}
                       </div>
@@ -181,7 +184,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
 
                   <button
                     onClick={() => handleDownloadClick(soft)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-950/80 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/40 text-xs font-bold transition-all cursor-pointer shrink-0"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-bold transition-all cursor-pointer shrink-0 shadow-md shadow-emerald-500/20 transform hover:-translate-y-0.5"
                     title={`Download ${soft.title}`}
                   >
                     <Download className="w-3.5 h-3.5" />
@@ -192,10 +195,10 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
             </div>
 
             {/* Need Help Center Card */}
-            <div className="p-4 rounded-xl bg-cyan-950/30 border border-cyan-500/30 flex items-center justify-between gap-3">
+            <div className="p-4 rounded-xl bg-white border-2 border-sky-200/80 flex items-center justify-between gap-3 shadow-sm">
               <div>
-                <div className="text-xs font-bold text-white font-tech">Need Help Setting Up Software?</div>
-                <div className="text-[11px] text-slate-400">
+                <div className="text-xs font-bold text-slate-900 font-tech">Need Help Setting Up Software?</div>
+                <div className="text-[11px] text-slate-500">
                   Technician Shamim provides TeamViewer / AnyDesk remote setup.
                 </div>
               </div>
@@ -203,7 +206,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
                 href={`https://wa.me/${activeCompany.whatsappInternational}?text=${encodeURIComponent('Hello Shamim Tech Solution, I need help downloading/installing CCTV software.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs shrink-0"
+                className="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shrink-0 shadow-md shadow-cyan-600/20"
               >
                 Ask on WhatsApp
               </a>
@@ -211,33 +214,34 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
           </div>
 
           {/* Column 2: Profile Download Card (lg:col-span-4) */}
-          <div className="lg:col-span-4 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#060c1d] border border-cyan-900/50 p-6 shadow-xl flex flex-col justify-between text-center relative overflow-hidden">
-            <div className="absolute -top-12 -right-12 w-40 h-40 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="lg:col-span-4 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-sky-200/90 p-6 shadow-md flex flex-col justify-between text-center relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
+            <div className="absolute -top-12 -right-12 w-40 h-40 bg-cyan-400/10 rounded-full blur-2xl pointer-events-none" />
 
             <div>
-              <div className="flex items-center justify-center gap-2 text-cyan-400 text-xs font-bold font-tech uppercase tracking-wider mb-2">
-                <FileCheck className="w-4 h-4" />
+              <div className="flex items-center justify-center gap-2 text-cyan-700 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+                <FileCheck className="w-4 h-4 text-cyan-600" />
                 <span>Official Identity & Branding</span>
               </div>
-              <h3 className="text-xl font-bold text-white font-tech">
+              <h3 className="text-xl font-bold text-slate-900 font-tech">
                 Download Our Profile
               </h3>
-              <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">
+              <p className="text-xs text-slate-500 mt-1 max-w-xs mx-auto">
                 Download official STS Shamim Tech Solution logo and company credentials for your records or verification.
               </p>
 
               {/* Centered Large Emblem Logo */}
               <div className="my-8 flex justify-center">
-                <div className="relative p-3 rounded-full bg-slate-950/80 border-2 border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.3)] group hover:scale-105 transition-transform">
+                <div className="relative p-3 rounded-full bg-sky-50 border-2 border-sky-200 shadow-md group hover:scale-105 transition-transform">
                   <STSLogo size="xl" showText={false} />
                   <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-pulse pointer-events-none" />
                 </div>
               </div>
 
-              <div className="space-y-1 text-xs text-slate-300">
-                <div className="font-bold text-white font-tech text-sm">{COMPANY_INFO.name}</div>
-                <div className="text-cyan-400 font-semibold">{COMPANY_INFO.tagline}</div>
-                <div className="text-[11px] text-slate-400 italic">"{COMPANY_INFO.slogan}"</div>
+              <div className="space-y-1 text-xs text-slate-600">
+                <div className="font-bold text-slate-900 font-tech text-sm">{COMPANY_INFO.name}</div>
+                <div className="text-cyan-700 font-semibold">{COMPANY_INFO.tagline}</div>
+                <div className="text-[11px] text-slate-500 italic">"{COMPANY_INFO.slogan}"</div>
               </div>
             </div>
 
@@ -245,14 +249,14 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
               <button
                 onClick={handleDownloadProfilePicture}
                 id="download-profile-picture-btn"
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs sm:text-sm shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs sm:text-sm shadow-md shadow-cyan-600/20 transition-all cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 <span>Download Profile Picture / Official Logo</span>
               </button>
 
               {downloadNotice && (
-                <div className="p-2 rounded-lg bg-emerald-950/80 border border-emerald-500/50 text-emerald-300 text-xs font-semibold animate-fadeIn">
+                <div className="p-2 rounded-lg bg-emerald-50 border border-emerald-400 text-emerald-800 text-xs font-semibold animate-fadeIn">
                   {downloadNotice}
                 </div>
               )}
@@ -260,13 +264,14 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
           </div>
 
           {/* Column 3: How to Order (lg:col-span-3) */}
-          <div className="lg:col-span-3 rounded-2xl bg-gradient-to-b from-slate-900/90 to-[#060c1d] border border-cyan-900/50 p-6 shadow-xl flex flex-col justify-between">
+          <div className="lg:col-span-3 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-sky-200/90 p-6 shadow-md flex flex-col justify-between relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
             <div>
-              <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold font-tech uppercase tracking-wider mb-2">
-                <ShieldCheck className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-cyan-700 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+                <ShieldCheck className="w-4 h-4 text-cyan-600" />
                 <span>Simple 4-Step Process</span>
               </div>
-              <h3 className="text-xl font-bold text-white font-tech mb-5">
+              <h3 className="text-xl font-bold text-slate-900 font-tech mb-5">
                 How to Order?
               </h3>
 
@@ -295,14 +300,14 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
                   }
                 ].map((st) => (
                   <div key={st.step} className="flex gap-3">
-                    <div className="w-7 h-7 rounded-full bg-cyan-500 text-slate-950 font-black text-xs flex items-center justify-center shrink-0 font-mono shadow-[0_0_10px_rgba(6,182,212,0.4)]">
+                    <div className="w-7 h-7 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-black text-xs flex items-center justify-center shrink-0 font-mono shadow-sm">
                       {st.step}
                     </div>
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-white font-tech">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-900 font-tech">
                         {st.title}
                       </h4>
-                      <p className="text-[11px] text-slate-400 leading-tight mt-0.5">
+                      <p className="text-[11px] text-slate-500 leading-tight mt-0.5">
                         {st.desc}
                       </p>
                     </div>
@@ -314,7 +319,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
             <div className="pt-6">
               <button
                 onClick={onOrderNow}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-cyan-600/20 hover:bg-cyan-500 border border-cyan-500/50 text-cyan-300 hover:text-slate-950 font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-md"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-sky-50 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 text-cyan-900 hover:text-white border border-sky-200 hover:border-transparent font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-sm"
               >
                 <span>Order Now</span>
                 <ArrowRight className="w-4 h-4" />

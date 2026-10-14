@@ -1698,7 +1698,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-5 rounded-2xl bg-slate-950/80 border border-slate-800">
                     <div>
                       <label className="block text-xs font-bold text-slate-300 mb-1">
-                        Primary Phone Number (মোবাইল নম্বর)
+                        Primary Phone Number (মূল মোবাইল নম্বর - 01790139333)
                       </label>
                       <input
                         type="text"
@@ -1719,6 +1719,32 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         onChange={(e) => setCompanyInfo({ ...companyInfo, phoneFormatted: e.target.value })}
                         className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none font-mono"
                         required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-1">
+                        Secondary Phone Number (২য় মোবাইল নম্বর - 01865321530)
+                      </label>
+                      <input
+                        type="text"
+                        value={companyInfo.secondaryPhone || ''}
+                        onChange={(e) => setCompanyInfo({ ...companyInfo, secondaryPhone: e.target.value })}
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none font-mono"
+                        placeholder="01865321530"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-1">
+                        Secondary Formatted Display (২য় ফরম্যাটেড নম্বর)
+                      </label>
+                      <input
+                        type="text"
+                        value={companyInfo.secondaryPhoneFormatted || ''}
+                        onChange={(e) => setCompanyInfo({ ...companyInfo, secondaryPhoneFormatted: e.target.value })}
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none font-mono"
+                        placeholder="01865-321530"
                       />
                     </div>
 

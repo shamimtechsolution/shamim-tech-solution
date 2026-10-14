@@ -220,22 +220,30 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             </div>
 
             {/* WhatsApp Resend or Direct Call */}
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
               <a
-                href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${buildWhatsAppOrderMessage(confirmedOrder.orderId)}`}
+                href={`https://wa.me/${activeCompany.whatsappInternational}?text=${buildWhatsAppOrderMessage(confirmedOrder.orderId)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs sm:text-sm shadow-md"
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs sm:text-sm shadow-md"
               >
                 <MessageSquare className="w-4 h-4 fill-current" />
-                <span>Send to WhatsApp (01865321530)</span>
+                <span>Send to WhatsApp ({activeCompany.phoneFormatted || activeCompany.whatsapp || '01790-139333'})</span>
+              </a>
+
+              <a
+                href={`tel:${activeCompany.phone || '01790139333'}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs sm:text-sm shadow-md"
+              >
+                <Phone className="w-4 h-4 fill-current" />
+                <span>Call: {activeCompany.phone || '01790-139333'}</span>
               </a>
 
               <button
                 onClick={onClose}
-                className="flex-1 py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm cursor-pointer"
+                className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm cursor-pointer"
               >
-                Done / Back to Shop
+                Close
               </button>
             </div>
           </div>

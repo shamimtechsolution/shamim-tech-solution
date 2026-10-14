@@ -123,37 +123,49 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#050b18]/95 backdrop-blur-md border-b border-cyan-950/80 shadow-lg shadow-black/40 overflow-x-clip">
+    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-slate-950 via-[#0a192f] to-slate-950 border-b border-cyan-500/40 shadow-xl shadow-slate-950/20 backdrop-blur-md overflow-x-clip">
       {/* Top micro contact bar */}
-      <div className="bg-[#030712] border-b border-cyan-950/40 text-[12px] py-1.5 px-3 sm:px-6 hidden md:block text-slate-300">
+      <div className="bg-[#050e1f] border-b border-cyan-900/40 text-[12px] py-1.5 px-3 sm:px-6 hidden md:block text-slate-300">
         <div className="max-w-[1536px] mx-auto flex justify-between items-center">
           <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5 text-cyan-400 font-medium">
+            <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
               <MapPin className="w-3.5 h-3.5 text-cyan-400" />
               {activeCompany.location}
             </span>
-            <span className="text-slate-500">•</span>
-            <span className="text-slate-400 flex items-center gap-1">
+            <span className="text-slate-600">•</span>
+            <span className="text-slate-300 flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
               Service Area: {activeCompany.serviceArea}
             </span>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="text-slate-400 font-bangla italic text-xs text-cyan-300/90">
+            <span className="text-cyan-300 font-bangla italic text-xs font-medium">
               {activeCompany.bengaliSlogan}
             </span>
-            <span className="text-slate-500">•</span>
-            <a 
-              href={`tel:${activeCompany.phone}`} 
-              className="flex items-center gap-1 text-slate-200 hover:text-cyan-400 transition-colors font-semibold"
-            >
-              <Phone className="w-3.5 h-3.5 text-cyan-400" />
-              Call: {activeCompany.phone}
-            </a>
+            <span className="text-slate-600">•</span>
+            <div className="flex items-center gap-1.5 text-slate-200 font-bold">
+              <Phone className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <span className="text-xs text-slate-400">Call:</span>
+              <a 
+                href={`tel:${activeCompany.phone || '01790139333'}`} 
+                className="text-white hover:text-cyan-300 transition-colors font-mono tracking-tight"
+                title="Call Primary Number"
+              >
+                {activeCompany.phone || '01790139333'}
+              </a>
+              <span className="text-slate-600">/</span>
+              <a 
+                href={`tel:${activeCompany.secondaryPhone || '01865321530'}`} 
+                className="text-slate-300 hover:text-cyan-300 transition-colors font-mono tracking-tight"
+                title="Call Secondary Number"
+              >
+                {activeCompany.secondaryPhone || '01865321530'}
+              </a>
+            </div>
             {isAdminLoggedIn && onOpenAdmin && (
               <>
-                <span className="text-slate-500">•</span>
+                <span className="text-slate-600">•</span>
                 <button
                   id="top-admin-trigger"
                   onClick={onOpenAdmin}
@@ -180,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             className="flex items-center text-left focus:outline-none group cursor-pointer shrink-0"
             title={activeCompany.name}
           >
-            <STSLogo size="md" />
+            <STSLogo size="md" theme="dark" />
           </button>
 
           {/* Desktop Navigation Links */}
@@ -192,10 +204,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-lg text-xs 2xl:text-sm font-medium transition-all flex items-center gap-1 2xl:gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all flex items-center gap-1 2xl:gap-1.5 cursor-pointer whitespace-nowrap ${
                     isActive 
-                      ? 'bg-cyan-500/15 text-cyan-400 border border-cyan-500/40 shadow-[0_0_12px_rgba(6,182,212,0.25)]'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-400/60 shadow-[0_0_12px_rgba(6,182,212,0.3)]'
+                      : 'text-slate-200 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <Icon className={`w-3.5 h-3.5 hidden 2xl:inline-block ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
@@ -220,7 +232,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }
                 }}
                 placeholder="Search products..."
-                className="w-full bg-slate-900/90 text-xs sm:text-sm text-slate-100 placeholder-slate-400 rounded-full pl-8 pr-3 py-1.5 border border-cyan-900/60 focus:border-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all"
+                className="w-full bg-slate-900/90 text-xs sm:text-sm text-white placeholder-slate-400 rounded-full pl-8 pr-3 py-1.5 border border-cyan-800/60 focus:border-cyan-400 focus:bg-slate-950 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all shadow-inner"
               />
               <Search className="w-3.5 h-3.5 text-cyan-400 absolute left-2.5 top-2.5 pointer-events-none" />
             </div>
@@ -228,7 +240,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Search Button */}
             <button
               onClick={handleSearchClick}
-              className="lg:hidden p-2 rounded-lg bg-slate-900/80 border border-slate-700/60 text-slate-300 hover:text-cyan-400 cursor-pointer shrink-0"
+              className="lg:hidden p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0"
               aria-label="Search"
             >
               <Search className="w-5 h-5" />
@@ -239,7 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 id="header-admin-btn"
                 onClick={onOpenAdmin}
-                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold cursor-pointer transition-all bg-emerald-950/80 border-emerald-500/60 text-emerald-300 hover:bg-emerald-900/60 shadow-[0_0_12px_rgba(16,185,129,0.25)] shrink-0 whitespace-nowrap"
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border text-xs font-semibold cursor-pointer transition-all bg-emerald-500/20 border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30 shadow-sm shrink-0 whitespace-nowrap"
                 title="Open Admin Control Panel"
               >
                 <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-400" />
@@ -253,13 +265,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 id="header-customer-account-btn"
                 onClick={() => handleAuthClick()}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-cyan-950/60 border border-cyan-500/50 text-cyan-300 hover:bg-cyan-900/60 hover:border-cyan-400 text-xs font-semibold cursor-pointer transition-all shadow-[0_0_12px_rgba(6,182,212,0.2)] shrink-0 whitespace-nowrap"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-blue-950/80 border border-cyan-500/40 text-cyan-200 hover:bg-blue-900 text-xs font-semibold cursor-pointer transition-all shadow-sm shrink-0 whitespace-nowrap"
                 title="View My Account & Orders"
               >
                 <div className="w-5 h-5 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-[10px] shrink-0">
                   {customer.fullName.charAt(0).toUpperCase()}
                 </div>
-                <span className="max-w-[75px] sm:max-w-[110px] truncate">{customer.fullName}</span>
+                <span className="max-w-[75px] sm:max-w-[110px] truncate text-white">{customer.fullName}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
               </button>
             ) : (
@@ -267,7 +279,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   id="header-register-btn"
                   onClick={() => handleAuthClick('register')}
-                  className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-500/30 text-xs font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
+                  className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/30 text-xs font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
                   title="Create Customer Account"
                 >
                   <User className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
@@ -277,7 +289,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   id="header-login-btn"
                   onClick={() => handleAuthClick('login')}
-                  className="px-2 sm:px-2.5 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-slate-200 hover:text-white hover:border-cyan-400 text-xs font-semibold cursor-pointer transition-colors whitespace-nowrap shrink-0"
+                  className="px-2 sm:px-2.5 py-1.5 rounded-lg bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-white hover:border-cyan-400 text-xs font-semibold cursor-pointer transition-colors whitespace-nowrap shrink-0 shadow-sm"
                   title="Customer Login"
                 >
                   <span>Login</span>
@@ -289,12 +301,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-cart-btn"
               onClick={handleCartClick}
-              className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-cyan-600/25 hover:bg-cyan-600/35 border border-cyan-500/60 text-cyan-300 transition-all cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.25)] shrink-0 whitespace-nowrap"
+              className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all cursor-pointer shadow-md shadow-cyan-600/30 shrink-0 whitespace-nowrap"
               title="Shopping Cart"
             >
-              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
+              <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               <span className="hidden md:inline text-xs font-bold font-tech uppercase tracking-wider">Cart</span>
-              <span className="flex items-center justify-center min-w-[18px] sm:min-w-[20px] h-4.5 sm:h-5 px-1 sm:px-1.5 text-[11px] sm:text-xs font-black bg-cyan-500 text-slate-950 rounded-full shadow">
+              <span className="flex items-center justify-center min-w-[18px] sm:min-w-[20px] h-4.5 sm:h-5 px-1 sm:px-1.5 text-[11px] sm:text-xs font-black bg-white text-cyan-700 rounded-full shadow">
                 {displayCartCount}
               </span>
             </button>
@@ -302,7 +314,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg bg-slate-900/80 border border-slate-700/60 text-slate-200 hover:text-cyan-400 cursor-pointer shrink-0"
+              className="xl:hidden p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0"
               aria-label="Toggle Navigation"
             >
               {mobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6" />}
@@ -313,7 +325,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-[#070e20] border-b border-cyan-900/80 px-4 pt-3 pb-5 space-y-2 shadow-2xl">
+        <div className="xl:hidden bg-slate-950/98 backdrop-blur-md border-b border-cyan-500/30 px-4 pt-3 pb-5 space-y-2 shadow-2xl">
           <div className="mb-3">
             <div className="relative">
               <input
@@ -321,7 +333,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search cameras, DVR, cables..."
-                className="w-full bg-slate-900 text-sm text-slate-100 placeholder-slate-400 rounded-lg pl-9 pr-3 py-2 border border-cyan-900/80 focus:border-cyan-400 focus:outline-none"
+                className="w-full bg-slate-900 text-sm text-white placeholder-slate-400 rounded-lg pl-9 pr-3 py-2 border border-cyan-800 focus:border-cyan-400 focus:bg-slate-900 focus:outline-none"
               />
               <Search className="w-4 h-4 text-cyan-400 absolute left-3 top-3 pointer-events-none" />
             </div>
@@ -335,10 +347,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors text-left cursor-pointer ${
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-colors text-left cursor-pointer ${
                     isActive 
-                      ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/50'
-                      : 'text-slate-300 hover:bg-slate-800/80 hover:text-white'
+                      ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-400/50' 
+                      : 'text-slate-200 hover:bg-white/10 hover:text-white'
                   }`}
                 >
                   <Icon className={`w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
@@ -355,7 +367,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   onOpenAdmin();
                 }}
-                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold cursor-pointer transition-colors bg-emerald-950/80 border border-emerald-500/50 text-emerald-300"
+                className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-semibold cursor-pointer transition-colors bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-500/30"
               >
                 <Lock className="w-4 h-4 text-emerald-400" />
                 <span>STS Admin Control Panel (Online)</span>
@@ -368,7 +380,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   setMobileMenuOpen(false);
                   if (onOpenCustomerProfile) onOpenCustomerProfile();
                 }}
-                className="flex items-center justify-between w-full p-3 rounded-xl bg-cyan-950/60 border border-cyan-500/50 text-cyan-300 text-sm font-semibold cursor-pointer"
+                className="flex items-center justify-between w-full p-3 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-200 text-sm font-semibold cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-xs">
@@ -390,7 +402,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setMobileMenuOpen(false);
                     if (onOpenCustomerAuth) onOpenCustomerAuth('register');
                   }}
-                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/50 text-xs font-semibold text-cyan-300 hover:bg-cyan-500/30"
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-cyan-500/20 border border-cyan-400/50 text-xs font-semibold text-cyan-300 hover:bg-cyan-500/30"
                 >
                   <User className="w-3.5 h-3.5" />
                   <span>Create Account</span>
@@ -400,15 +412,29 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setMobileMenuOpen(false);
                     if (onOpenCustomerAuth) onOpenCustomerAuth('login');
                   }}
-                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-slate-800 text-xs font-semibold text-slate-200 hover:bg-slate-700"
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-200 hover:bg-slate-800 hover:text-white"
                 >
                   <span>Login</span>
                 </button>
               </div>
             )}
-            <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
-              <span>Contact: {activeCompany.phone}</span>
-              <span className="text-cyan-400">{activeCompany.location}</span>
+            <div className="flex flex-col gap-1 text-xs text-slate-400 pt-2 border-t border-slate-800">
+              <div className="flex items-center justify-between font-mono font-bold">
+                <span className="text-slate-400 font-sans font-medium">Helpline:</span>
+                <div className="flex items-center gap-2">
+                  <a href={`tel:${activeCompany.phone || '01790139333'}`} className="text-cyan-400 hover:underline">
+                    {activeCompany.phone || '01790139333'}
+                  </a>
+                  <span className="text-slate-600">|</span>
+                  <a href={`tel:${activeCompany.secondaryPhone || '01865321530'}`} className="text-slate-300 hover:underline">
+                    {activeCompany.secondaryPhone || '01865321530'}
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center justify-between text-[11px] text-slate-400">
+                <span>Location:</span>
+                <span className="text-cyan-400 font-semibold">{activeCompany.location}</span>
+              </div>
             </div>
           </div>
         </div>
