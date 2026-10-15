@@ -7,7 +7,6 @@ import {
   Menu, 
   X, 
   MapPin, 
-  ShieldCheck,
   Download,
   Image as GalleryIcon,
   Wrench,
@@ -123,64 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-slate-950 via-[#0a192f] to-slate-950 border-b border-cyan-500/40 shadow-xl shadow-slate-950/20 backdrop-blur-md overflow-x-clip">
-      {/* Top micro contact bar */}
-      <div className="bg-[#050e1f] border-b border-cyan-900/40 text-[12px] py-1.5 px-3 sm:px-6 hidden md:block text-slate-300">
-        <div className="max-w-[1536px] mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-5">
-            <span className="flex items-center gap-1.5 text-cyan-400 font-semibold">
-              <MapPin className="w-3.5 h-3.5 text-cyan-400" />
-              {activeCompany.location}
-            </span>
-            <span className="text-slate-600">•</span>
-            <span className="text-slate-300 flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-              Service Area: {activeCompany.serviceArea}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <span className="text-cyan-300 font-bangla italic text-xs font-medium">
-              {activeCompany.bengaliSlogan}
-            </span>
-            <span className="text-slate-600">•</span>
-            <div className="flex items-center gap-1.5 text-slate-200 font-bold">
-              <Phone className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-              <span className="text-xs text-slate-400">Call:</span>
-              <a 
-                href={`tel:${activeCompany.phone || '01790139333'}`} 
-                className="text-white hover:text-cyan-300 transition-colors font-mono tracking-tight"
-                title="Call Primary Number"
-              >
-                {activeCompany.phone || '01790139333'}
-              </a>
-              <span className="text-slate-600">/</span>
-              <a 
-                href={`tel:${activeCompany.secondaryPhone || '01865321530'}`} 
-                className="text-slate-300 hover:text-cyan-300 transition-colors font-mono tracking-tight"
-                title="Call Secondary Number"
-              >
-                {activeCompany.secondaryPhone || '01865321530'}
-              </a>
-            </div>
-            {isAdminLoggedIn && onOpenAdmin && (
-              <>
-                <span className="text-slate-600">•</span>
-                <button
-                  id="top-admin-trigger"
-                  onClick={onOpenAdmin}
-                  className="flex items-center gap-1.5 text-xs font-mono font-bold px-2.5 py-1 rounded transition-all cursor-pointer bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/30"
-                  title="STS Admin Control System (/admin)"
-                >
-                  <Lock className="w-3 h-3 text-emerald-400" />
-                  <span>Admin Panel</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
+    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-[#00234f] via-[#0b3c78] to-[#00234f] border-b-2 border-cyan-400/60 shadow-xl shadow-blue-950/40 backdrop-blur-md overflow-x-clip">
 
       {/* Main navigation bar */}
       <div className="max-w-[1536px] w-full mx-auto px-3 sm:px-5 lg:px-8">
@@ -204,13 +146,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-2 2xl:px-3 py-1.5 2xl:py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all flex items-center gap-1 2xl:gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`px-2.5 2xl:px-3 py-1.5 2xl:py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all flex items-center gap-1 2xl:gap-1.5 cursor-pointer whitespace-nowrap ${
                     isActive 
-                      ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-400/60 shadow-[0_0_12px_rgba(6,182,212,0.3)]'
-                      : 'text-slate-200 hover:text-white hover:bg-white/10'
+                      ? 'bg-cyan-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.5)]'
+                      : 'text-sky-100 hover:text-white hover:bg-white/15'
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 hidden 2xl:inline-block ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />
+                  <Icon className={`w-3.5 h-3.5 hidden 2xl:inline-block ${isActive ? 'text-slate-950' : 'text-cyan-300'}`} />
                   <span>{item.label}</span>
                 </button>
               );
