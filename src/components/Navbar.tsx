@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { 
   Phone, 
   ShoppingCart, 
@@ -13,13 +13,14 @@ import {
   Package,
   Home as HomeIcon,
   Info,
-  ShieldAlert,
   SlidersHorizontal,
-  Lock
+  Lock,
+  ChevronRight,
+  Sparkles
 } from 'lucide-react';
 import { STSLogo } from './STSLogo';
 import { COMPANY_INFO } from '../data/companyData';
-import { CompanyInfo, CustomerUser } from '../types';
+import { CompanyInfo, CustomerUser, Product } from '../types';
 
 interface NavbarProps {
   activeSection?: string;
@@ -38,6 +39,8 @@ interface NavbarProps {
   onOpenAdmin?: () => void;
   isAdminLoggedIn?: boolean;
   companyInfo?: CompanyInfo;
+  products?: Product[];
+  onViewProduct?: (product: Product) => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -57,12 +60,26 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenAdmin,
   isAdminLoggedIn = false,
   companyInfo: passedCompany,
+  products = [],
+  onViewProduct,
 }) => {
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const activeCompany = passedCompany || COMPANY_INFO;
 
   const displayCartCount = cartCount ?? cartItemCount ?? 0;
+
+  // Star Tech Style Live Instant Search Results
+  const liveSearchResults = useMemo(() => {
+    if (!searchTerm.trim() || !products || products.length === 0) return [];
+    const query = searchTerm.toLowerCase().trim();
+    return products.filter((item) => 
+      item.name.toLowerCase().includes(query) ||
+      item.specs.toLowerCase().includes(query) ||
+      item.brand.toLowerCase().includes(query) ||
+      item.category.toLowerCase().includes(query)
+    ).slice(0, 6);
+  }, [searchTerm, products]);
 
   const navItems = [
     { id: 'home', label: 'Home', icon: HomeIcon },
@@ -83,6 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       }
     }
     setMobileMenuOpen(false);
+    setMobileSearchOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -97,13 +115,12 @@ export const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
-  const handleSearchClick = () => {
-    if (typeof openSearch === 'function') {
-      openSearch();
-    } else {
-      setMobileMenuOpen(true);
+  const handleSearchToggle = () => {
+    setMobileSearchOpen(!mobileSearchOpen);
+    if (!mobileSearchOpen) {
+      // Bring store in view if not already
       const element = document.getElementById('products');
-      if (element) {
+      if (element && activeSection !== 'products') {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
@@ -138,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden xl:flex items-center gap-0.5 2xl:gap-1 shrink-0">
+          <nav className="hidden xl:flex items-center gap-1.5 2xl:gap-2">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
@@ -146,7 +163,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => handleNavClick(item.id)}
-                  className={`px-2.5 2xl:px-3 py-1.5 2xl:py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all flex items-center gap-1 2xl:gap-1.5 cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs 2xl:text-sm font-semibold transition-all duration-200 cursor-pointer ${
                     isActive 
                       ? 'bg-cyan-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.5)]'
                       : 'text-sky-100 hover:text-white hover:bg-white/15'
@@ -162,8 +179,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Search Bar & Action Buttons (Pinned right, will never wrap or overflow) */}
           <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             
-            {/* Quick Search Input (Responsive & Expandable) */}
-            <div className="relative hidden lg:block w-32 xl:w-40 2xl:w-52 transition-all duration-300 focus-within:w-48 2xl:focus-within:w-60">
+            {/* Quick Search Input (Desktop - Star Tech Style with Live Results) */}
+            <div className="relative hidden lg:block w-36 xl:w-48 2xl:w-64 transition-all duration-300">
               <input
                 type="text"
                 value={searchTerm}
@@ -173,17 +190,64 @@ export const Navbar: React.FC<NavbarProps> = ({
                     handleNavClick('products');
                   }
                 }}
-                placeholder="Search products..."
-                className="w-full bg-slate-900/90 text-xs sm:text-sm text-white placeholder-slate-400 rounded-full pl-8 pr-3 py-1.5 border border-cyan-800/60 focus:border-cyan-400 focus:bg-slate-950 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all shadow-inner"
+                placeholder="Search camera, DVR..."
+                className="w-full bg-slate-900/90 text-xs sm:text-sm text-white placeholder-slate-400 rounded-full pl-8 pr-7 py-1.5 border border-cyan-800/60 focus:border-cyan-400 focus:bg-slate-950 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all shadow-inner"
               />
               <Search className="w-3.5 h-3.5 text-cyan-400 absolute left-2.5 top-2.5 pointer-events-none" />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute right-2.5 top-2 text-xs text-slate-400 hover:text-white px-1"
+                >
+                  ✕
+                </button>
+              )}
+
+              {/* Desktop Live Search Dropdown (Star Tech Style) */}
+              {searchTerm.trim().length > 0 && liveSearchResults.length > 0 && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn min-w-[280px]">
+                  <div className="px-3 py-1.5 bg-slate-900/90 flex items-center justify-between text-[11px] font-bold text-cyan-300">
+                    <span>Cameras & Products ({liveSearchResults.length})</span>
+                    <button 
+                      onClick={() => handleNavClick('products')}
+                      className="text-cyan-400 hover:underline cursor-pointer"
+                    >
+                      View All →
+                    </button>
+                  </div>
+                  {liveSearchResults.map((prod) => (
+                    <div
+                      key={prod.id}
+                      onClick={() => {
+                        if (onViewProduct) onViewProduct(prod);
+                        handleNavClick('products');
+                      }}
+                      className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/60 cursor-pointer transition-colors"
+                    >
+                      <div className="w-9 h-9 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
+                        <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-[9px] text-cyan-400 font-bold uppercase">{prod.brand}</div>
+                        <div className="text-xs font-semibold text-white truncate">{prod.name}</div>
+                        <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {/* Mobile Search Button */}
+            {/* Mobile Search Button (Star Tech Style toggle) */}
             <button
-              onClick={handleSearchClick}
-              className="lg:hidden p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0"
-              aria-label="Search"
+              onClick={handleSearchToggle}
+              className={`lg:hidden p-2 rounded-lg border text-slate-200 cursor-pointer shrink-0 transition-colors ${
+                mobileSearchOpen 
+                  ? 'bg-cyan-500 text-slate-950 border-cyan-400 font-bold' 
+                  : 'bg-slate-900/80 border-cyan-800/60 hover:text-cyan-300'
+              }`}
+              aria-label="Search Cameras"
+              title="Search Cameras & Hardware"
             >
               <Search className="w-5 h-5" />
             </button>
@@ -239,7 +303,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
 
-            {/* Cart Button with Counter - Always Visible, Never Cut Off */}
+            {/* Cart Button with Counter */}
             <button
               id="header-cart-btn"
               onClick={handleCartClick}
@@ -259,11 +323,88 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="xl:hidden p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0"
               aria-label="Toggle Navigation"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-white" />}
             </button>
           </div>
         </div>
       </div>
+
+      {/* Mobile Search Bar Drawer (Star Tech Style) */}
+      {mobileSearchOpen && (
+        <div className="lg:hidden bg-slate-950/98 border-t border-cyan-500/40 px-3 py-2.5 shadow-2xl animate-fadeIn">
+          <div className="relative flex items-center">
+            <Search className="w-4 h-4 text-cyan-400 absolute left-3 pointer-events-none" />
+            <input
+              type="text"
+              autoFocus
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                if (activeSection !== 'products') {
+                  const el = document.getElementById('products');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              placeholder="Search cameras, Jovision, EZVIZ, DVR..."
+              className="w-full bg-slate-900 text-xs sm:text-sm text-white placeholder-slate-400 rounded-lg pl-9 pr-8 py-2 border border-cyan-400/80 focus:border-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-400"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-2.5 text-xs text-slate-400 hover:text-white p-1 font-bold"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          {/* Star Tech Instant Live Results with Camera Photos (Mobile View) */}
+          {searchTerm.trim().length > 0 && (
+            <div className="mt-2 bg-slate-900 rounded-lg border border-cyan-500/30 overflow-hidden divide-y divide-slate-800">
+              <div className="p-2 bg-slate-850 flex items-center justify-between text-[11px] font-bold text-cyan-300">
+                <span>Matching cameras ({liveSearchResults.length})</span>
+                <button
+                  onClick={() => {
+                    handleNavClick('products');
+                    setMobileSearchOpen(false);
+                  }}
+                  className="text-cyan-400 hover:underline flex items-center gap-0.5"
+                >
+                  <span>2-Column Store View</span>
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
+
+              {liveSearchResults.length > 0 ? (
+                liveSearchResults.map((prod) => (
+                  <div
+                    key={prod.id}
+                    onClick={() => {
+                      if (onViewProduct) onViewProduct(prod);
+                      handleNavClick('products');
+                      setMobileSearchOpen(false);
+                    }}
+                    className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/50 cursor-pointer active:bg-cyan-950/70"
+                  >
+                    <div className="w-11 h-11 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
+                      <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[10px] text-cyan-400 font-bold uppercase">{prod.brand} • {prod.category}</div>
+                      <div className="text-xs font-bold text-white truncate">{prod.name}</div>
+                      <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="p-3 text-center text-xs text-slate-400">
+                  No camera or hardware found for "{searchTerm}"
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (

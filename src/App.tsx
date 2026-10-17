@@ -429,6 +429,8 @@ export default function App() {
         onOpenAdmin={handleOpenAdmin}
         isAdminLoggedIn={isAdminLoggedIn}
         companyInfo={companyInfo}
+        products={products}
+        onViewProduct={(product) => setSelectedProduct(product)}
       />
 
       {/* Floating Action Buttons (WhatsApp & Direct Call) */}
