@@ -19,7 +19,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { STSLogo } from './STSLogo';
-import { COMPANY_INFO } from '../data/companyData';
+import { COMPANY_INFO, SERVICES_LIST, DIVISION_DISTRICTS } from '../data/companyData';
 import { CompanyInfo, CustomerUser, Product } from '../types';
 
 interface NavbarProps {
@@ -69,16 +69,63 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const displayCartCount = cartCount ?? cartItemCount ?? 0;
 
-  // Star Tech Style Live Instant Search Results
-  const liveSearchResults = useMemo(() => {
-    if (!searchTerm.trim() || !products || products.length === 0) return [];
+  // Star Tech Style Live Instant Search Results (Products, Services & 8 Districts)
+  const searchResults = useMemo(() => {
+    if (!searchTerm.trim()) {
+      return { products: [], services: [], districts: [], totalMatches: 0 };
+    }
     const query = searchTerm.toLowerCase().trim();
-    return products.filter((item) => 
-      item.name.toLowerCase().includes(query) ||
-      item.specs.toLowerCase().includes(query) ||
-      item.brand.toLowerCase().includes(query) ||
-      item.category.toLowerCase().includes(query)
-    ).slice(0, 6);
+    const tokens = query.split(/\s+/).filter(Boolean);
+
+    const locationBrandTokens = new Set([
+      'rangpur', 'dinajpur', 'lalmonirhat', 'kurigram', 'nilphamari', 'gaibandha', 'thakurgaon', 'panchagarh',
+      'রংপুর', 'দিনাজপুর', 'লালমনিরহাট', 'কুড়িগ্রাম', 'নীলফামারী', 'গাইবান্ধা', 'ঠাকুরগাঁও', 'পঞ্চগড়',
+      'shamim', 'sts', 'bd', 'bangladesh', 'tech', 'solution', 'technology', 'শামীম'
+    ]);
+
+    const stopWords = new Set(['and', 'in', 'of', 'for', 'the', 'to', 'ও', 'এবং']);
+
+    // Non-location tokens (e.g. if query is "rangpur cctv", productTokens is ["cctv"])
+    const productTokens = tokens.filter(t => !locationBrandTokens.has(t) && !stopWords.has(t));
+
+    // Products matching
+    const matchedProducts = (products || []).filter((item) => {
+      const text = `${item.name} ${item.specs} ${item.brand} ${item.category}`.toLowerCase();
+      // Direct whole-query match
+      if (text.includes(query)) return true;
+      // If query is only location/brand (e.g. "rangpur", "shamim bd", "shamim technology")
+      if (productTokens.length === 0) return true;
+      // Otherwise, every non-location token must match product text
+      return productTokens.every(t => text.includes(t));
+    }).slice(0, 6);
+
+    // Services matching
+    const matchedServices = SERVICES_LIST.filter((srv) => {
+      const srvKw = (srv.popularKeywords || []).map(k => k.toLowerCase()).join(' ');
+      const text = `${srv.name} ${srv.description} ${srv.serviceType} ${srvKw}`.toLowerCase();
+      if (text.includes(query)) return true;
+      return tokens.some(t => !stopWords.has(t) && text.includes(t));
+    }).slice(0, 4);
+
+    // Districts matching
+    const matchedDistricts = DIVISION_DISTRICTS.filter((dist) => {
+      const distKw = dist.popularKeywords.map(k => k.toLowerCase()).join(' ');
+      const distSrv = dist.services.map(s => s.toLowerCase()).join(' ');
+      const text = `${dist.enName} ${dist.bnName} ${distKw} ${distSrv}`.toLowerCase();
+      if (text.includes(query)) return true;
+      return tokens.some(t => !stopWords.has(t) && (
+        dist.enName.toLowerCase().includes(t) ||
+        dist.bnName.toLowerCase().includes(t) ||
+        distKw.includes(t)
+      ));
+    }).slice(0, 4);
+
+    return {
+      products: matchedProducts,
+      services: matchedServices,
+      districts: matchedDistricts,
+      totalMatches: matchedProducts.length + matchedServices.length + matchedDistricts.length
+    };
   }, [searchTerm, products]);
 
   const navItems = [
@@ -203,50 +250,127 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </button>
               )}
 
-              {/* Desktop Live Search Dropdown (Star Tech Style) */}
+              {/* Desktop Live Search Dropdown (Products, Services & Districts) */}
               {searchTerm.trim().length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn min-w-[280px]">
-                  {liveSearchResults.length > 0 ? (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn min-w-[320px] max-h-[460px] overflow-y-auto">
+                  {searchResults.totalMatches > 0 ? (
                     <>
-                      <div className="px-3 py-1.5 bg-slate-900/90 flex items-center justify-between text-[11px] font-bold text-cyan-300">
-                        <span>Cameras & Products ({liveSearchResults.length})</span>
-                        <button 
-                          onClick={() => handleNavClick('products')}
-                          className="text-cyan-400 hover:underline cursor-pointer"
-                        >
-                          View All →
-                        </button>
-                      </div>
-                      {liveSearchResults.map((prod) => (
-                        <div
-                          key={prod.id}
-                          onClick={() => {
-                            if (onViewProduct) onViewProduct(prod);
-                            handleNavClick('products');
-                          }}
-                          className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/60 cursor-pointer transition-colors"
-                        >
-                          <div className="w-9 h-9 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
-                            <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                      {/* 1. Products Matches */}
+                      {searchResults.products.length > 0 && (
+                        <div>
+                          <div className="px-3 py-1.5 bg-slate-900/90 flex items-center justify-between text-[11px] font-bold text-cyan-300">
+                            <span>Cameras & Hardware ({searchResults.products.length})</span>
+                            <button 
+                              onClick={() => handleNavClick('products')}
+                              className="text-cyan-400 hover:underline cursor-pointer"
+                            >
+                              View All →
+                            </button>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="text-[9px] text-cyan-400 font-bold uppercase">{prod.brand}</div>
-                            <div className="text-xs font-semibold text-white truncate">{prod.name}</div>
-                            <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
-                          </div>
+                          {searchResults.products.map((prod) => (
+                            <div
+                              key={prod.id}
+                              onClick={() => {
+                                if (onViewProduct) onViewProduct(prod);
+                                handleNavClick('products');
+                              }}
+                              className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/60 cursor-pointer transition-colors"
+                            >
+                              <div className="w-9 h-9 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
+                                <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="text-[9px] text-cyan-400 font-bold uppercase">{prod.brand}</div>
+                                <div className="text-xs font-semibold text-white truncate">{prod.name}</div>
+                                <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      )}
+
+                      {/* 2. Services Matches (PABX, Intercom, Electrician, CCTV Technician, IT Service) */}
+                      {searchResults.services.length > 0 && (
+                        <div>
+                          <div className="px-3 py-1.5 bg-sky-950/90 flex items-center justify-between text-[11px] font-bold text-sky-300">
+                            <span>Services & Technicians ({searchResults.services.length})</span>
+                            <button 
+                              onClick={() => handleNavClick('services')}
+                              className="text-sky-300 hover:underline cursor-pointer"
+                            >
+                              All Services →
+                            </button>
+                          </div>
+                          {searchResults.services.map((srv) => (
+                            <div
+                              key={srv.id}
+                              onClick={() => handleNavClick('services')}
+                              className="p-2.5 hover:bg-cyan-950/50 cursor-pointer transition-colors border-b border-slate-800/60 last:border-0"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-bold text-cyan-300">{srv.name}</span>
+                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold">{srv.serviceType}</span>
+                              </div>
+                              <p className="text-[11px] text-slate-300 line-clamp-1 mt-0.5">{srv.description}</p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* 3. District Matches (Rangpur, Dinajpur, Kurigram, etc.) */}
+                      {searchResults.districts.length > 0 && (
+                        <div>
+                          <div className="px-3 py-1.5 bg-cyan-950/90 flex items-center justify-between text-[11px] font-bold text-emerald-300">
+                            <span>8 Districts Service Coverage ({searchResults.districts.length})</span>
+                            <button 
+                              onClick={() => handleNavClick('services')}
+                              className="text-emerald-400 hover:underline cursor-pointer"
+                            >
+                              View Coverage →
+                            </button>
+                          </div>
+                          {searchResults.districts.map((dist) => (
+                            <div
+                              key={dist.id}
+                              onClick={() => handleNavClick('services')}
+                              className="p-2 hover:bg-emerald-950/40 cursor-pointer transition-colors"
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                                  <MapPin className="w-3 h-3 text-cyan-400 shrink-0" />
+                                  <span>{dist.bnName} ({dist.enName})</span>
+                                </span>
+                                <span className="text-[10px] text-emerald-300 font-medium">On-site Support</span>
+                              </div>
+                              <div className="flex flex-wrap gap-1 mt-1">
+                                {dist.services.slice(0, 3).map((s, idx) => (
+                                  <span key={idx} className="text-[9px] px-1.5 py-0.5 bg-slate-800 text-slate-300 rounded">
+                                    {s}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </>
                   ) : (
-                    <div className="p-3 text-center text-xs text-slate-300 space-y-1.5">
-                      <p className="text-[11px] text-slate-400 font-bangla">"{searchTerm}" এর জন্য সরাসরি প্রোডাক্ট পাওয়া যায়নি</p>
-                      <a
-                        href="#district-coverage"
-                        onClick={() => handleNavClick('services')}
-                        className="inline-block text-cyan-400 hover:underline font-bold text-xs"
-                      >
-                        রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →
-                      </a>
+                    <div className="p-3 text-center text-xs text-slate-300 space-y-2">
+                      <p className="text-[11px] text-slate-400 font-bangla">"{searchTerm}" এর সাথে প্রোডাক্ট বা সার্ভিস খুঁজছেন?</p>
+                      <div className="flex flex-col gap-1.5">
+                        <button
+                          onClick={() => handleNavClick('services')}
+                          className="w-full py-1.5 px-2 rounded-lg bg-cyan-600/30 text-cyan-300 hover:bg-cyan-600/50 font-bold text-[11px] border border-cyan-500/30 text-center cursor-pointer"
+                        >
+                          রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →
+                        </button>
+                        <a
+                          href={`tel:${COMPANY_INFO.phone}`}
+                          className="w-full py-1.5 px-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-[11px] font-medium text-center"
+                        >
+                          সরাসরি টেকনিশিয়ান শামিমকে কল করুন: {COMPANY_INFO.phone}
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -373,57 +497,129 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
           </div>
 
-          {/* Star Tech Instant Live Results with Camera Photos (Mobile View) */}
+          {/* Instant Live Results (Mobile View: Products, Services, Districts) */}
           {searchTerm.trim().length > 0 && (
-            <div className="mt-2 bg-slate-900 rounded-lg border border-cyan-500/30 overflow-hidden divide-y divide-slate-800">
-              <div className="p-2 bg-slate-850 flex items-center justify-between text-[11px] font-bold text-cyan-300">
-                <span>Matching cameras ({liveSearchResults.length})</span>
-                <button
-                  onClick={() => {
-                    handleNavClick('products');
-                    setMobileSearchOpen(false);
-                  }}
-                  className="text-cyan-400 hover:underline flex items-center gap-0.5"
-                >
-                  <span>2-Column Store View</span>
-                  <ChevronRight className="w-3 h-3" />
-                </button>
-              </div>
+            <div className="mt-2 bg-slate-900 rounded-lg border border-cyan-500/30 overflow-hidden divide-y divide-slate-800 max-h-[380px] overflow-y-auto">
+              {searchResults.totalMatches > 0 ? (
+                <>
+                  {/* Products */}
+                  {searchResults.products.length > 0 && (
+                    <div>
+                      <div className="p-2 bg-slate-850 flex items-center justify-between text-[11px] font-bold text-cyan-300">
+                        <span>Cameras & Hardware ({searchResults.products.length})</span>
+                        <button
+                          onClick={() => {
+                            handleNavClick('products');
+                            setMobileSearchOpen(false);
+                          }}
+                          className="text-cyan-400 hover:underline flex items-center gap-0.5"
+                        >
+                          <span>Store View</span>
+                          <ChevronRight className="w-3 h-3" />
+                        </button>
+                      </div>
+                      {searchResults.products.map((prod) => (
+                        <div
+                          key={prod.id}
+                          onClick={() => {
+                            if (onViewProduct) onViewProduct(prod);
+                            handleNavClick('products');
+                            setMobileSearchOpen(false);
+                          }}
+                          className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/50 cursor-pointer active:bg-cyan-950/70"
+                        >
+                          <div className="w-10 h-10 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
+                            <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[10px] text-cyan-400 font-bold uppercase">{prod.brand} • {prod.category}</div>
+                            <div className="text-xs font-bold text-white truncate">{prod.name}</div>
+                            <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
-              {liveSearchResults.length > 0 ? (
-                liveSearchResults.map((prod) => (
-                  <div
-                    key={prod.id}
-                    onClick={() => {
-                      if (onViewProduct) onViewProduct(prod);
-                      handleNavClick('products');
-                      setMobileSearchOpen(false);
-                    }}
-                    className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/50 cursor-pointer active:bg-cyan-950/70"
-                  >
-                    <div className="w-11 h-11 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
-                      <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                  {/* Services */}
+                  {searchResults.services.length > 0 && (
+                    <div>
+                      <div className="p-2 bg-sky-950/80 flex items-center justify-between text-[11px] font-bold text-sky-300">
+                        <span>Services & Technicians ({searchResults.services.length})</span>
+                      </div>
+                      {searchResults.services.map((srv) => (
+                        <div
+                          key={srv.id}
+                          onClick={() => {
+                            handleNavClick('services');
+                            setMobileSearchOpen(false);
+                          }}
+                          className="p-2.5 hover:bg-cyan-950/50 cursor-pointer active:bg-cyan-950/70 border-b border-slate-800/60 last:border-0"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-cyan-300">{srv.name}</span>
+                            <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold">{srv.serviceType}</span>
+                          </div>
+                          <p className="text-[11px] text-slate-300 line-clamp-1 mt-0.5">{srv.description}</p>
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-[10px] text-cyan-400 font-bold uppercase">{prod.brand} • {prod.category}</div>
-                      <div className="text-xs font-bold text-white truncate">{prod.name}</div>
-                      <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
+                  )}
+
+                  {/* Districts */}
+                  {searchResults.districts.length > 0 && (
+                    <div>
+                      <div className="p-2 bg-cyan-950/80 flex items-center justify-between text-[11px] font-bold text-emerald-300">
+                        <span>8 Districts Coverage ({searchResults.districts.length})</span>
+                      </div>
+                      {searchResults.districts.map((dist) => (
+                        <div
+                          key={dist.id}
+                          onClick={() => {
+                            handleNavClick('services');
+                            setMobileSearchOpen(false);
+                          }}
+                          className="p-2.5 hover:bg-emerald-950/40 cursor-pointer active:bg-emerald-950/60"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                              <MapPin className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                              <span>{dist.bnName} ({dist.enName})</span>
+                            </span>
+                            <span className="text-[10px] text-emerald-300 font-medium">On-site Support</span>
+                          </div>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {dist.services.slice(0, 3).map((s, idx) => (
+                              <span key={idx} className="text-[9px] px-1.5 py-0.5 bg-slate-800 text-slate-300 rounded">
+                                {s}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  </div>
-                ))
+                  )}
+                </>
               ) : (
-                <div className="p-3 text-center text-xs text-slate-300 space-y-1.5">
-                  <p className="text-[11px] text-slate-400 font-bangla">"{searchTerm}" এর জন্য কোনো প্রোডাক্ট পাওয়া যায়নি</p>
-                  <a
-                    href="#district-coverage"
-                    onClick={() => {
-                      setMobileSearchOpen(false);
-                      handleNavClick('services');
-                    }}
-                    className="inline-block text-cyan-400 hover:underline font-bold text-xs"
-                  >
-                    রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →
-                  </a>
+                <div className="p-3 text-center text-xs text-slate-300 space-y-2">
+                  <p className="text-[11px] text-slate-400 font-bangla">"{searchTerm}" এর সাথে প্রোডাক্ট বা সার্ভিস খুঁজছেন?</p>
+                  <div className="flex flex-col gap-1.5">
+                    <button
+                      onClick={() => {
+                        setMobileSearchOpen(false);
+                        handleNavClick('services');
+                      }}
+                      className="w-full py-1.5 px-2 rounded-lg bg-cyan-600/30 text-cyan-300 hover:bg-cyan-600/50 font-bold text-[11px] border border-cyan-500/30 text-center cursor-pointer"
+                    >
+                      রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →
+                    </button>
+                    <a
+                      href={`tel:${COMPANY_INFO.phone}`}
+                      className="w-full py-1.5 px-2 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-[11px] font-medium text-center"
+                    >
+                      সরাসরি টেকনিশিয়ান শামিমকে কল করুন: {COMPANY_INFO.phone}
+                    </a>
+                  </div>
                 </div>
               )}
             </div>

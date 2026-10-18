@@ -41,19 +41,21 @@ const CATEGORIES: ProductCategory[] = [
 ];
 
 const POPULAR_SEARCH_TAGS = [
+  'Rangpur CCTV',
   'CCTV Rangpur',
-  'WiFi Camera',
-  'Night Vision',
+  'Shamim BD',
+  'Technician Rangpur',
+  'CCTV Camera Installation',
   'IP Camera',
+  'WiFi Camera',
+  'DVR / NVR',
+  'CCTV Cable',
+  'RJ45 Connector',
+  'CCTV Monitor',
   'PABX Intercom',
   'Access Control',
   'Electrician',
-  'Jovision',
-  'EZVIZ',
-  'Hikvision',
-  'Dahua',
-  'DVR / NVR',
-  'PoE Switch'
+  'CCTV Technology'
 ];
 
 export const ProductShop: React.FC<ProductShopProps> = ({
@@ -68,18 +70,40 @@ export const ProductShop: React.FC<ProductShopProps> = ({
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
 
-  // Filter products by category and search keyword
+  // Filter products by category and search keyword (intelligent multi-token search)
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
       const matchesCategory = 
         selectedCategory === 'All Products' || item.category === selectedCategory;
-      const matchesSearch = 
-        searchTerm.trim() === '' ||
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.specs.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchTerm.toLowerCase());
-      return matchesCategory && matchesSearch;
+
+      if (!matchesCategory) return false;
+      if (!searchTerm.trim()) return true;
+
+      const query = searchTerm.toLowerCase().trim();
+      const productText = `${item.name} ${item.specs} ${item.brand} ${item.category}`.toLowerCase();
+
+      // Direct full query substring match
+      if (productText.includes(query)) return true;
+
+      const tokens = query.split(/\s+/).filter(Boolean);
+
+      // District / location & brand tokens that apply across the store
+      const locationBrandTokens = new Set([
+        'rangpur', 'dinajpur', 'lalmonirhat', 'kurigram', 'nilphamari', 'gaibandha', 'thakurgaon', 'panchagarh',
+        'রংপুর', 'দিনাজপুর', 'লালমনিরহাট', 'কুড়িগ্রাম', 'নীলফামারী', 'গাইবান্ধা', 'ঠাকুরগাঁও', 'পঞ্চগড়',
+        'shamim', 'sts', 'bd', 'bangladesh', 'tech', 'solution', 'technology', 'শামীম'
+      ]);
+
+      const stopWords = new Set(['and', 'in', 'of', 'for', 'the', 'to', 'with', 'on', 'ও', 'এবং']);
+
+      // Non-location tokens (e.g. for "rangpur cctv", productTokens is ["cctv"])
+      const productTokens = tokens.filter(t => !locationBrandTokens.has(t) && !stopWords.has(t));
+
+      // If user typed only location/brand keywords like "rangpur", "shamim bd", "dinajpur"
+      if (productTokens.length === 0) return true;
+
+      // Otherwise, all non-location tokens must match the product
+      return productTokens.every(t => productText.includes(t));
     }).sort((a, b) => {
       if (sortBy === 'price-asc') return a.price - b.price;
       if (sortBy === 'price-desc') return b.price - a.price;

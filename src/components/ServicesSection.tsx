@@ -301,6 +301,9 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
                           <h3 className="font-bold text-slate-900 text-base font-bangla group-hover:text-cyan-700 transition-colors">
                             {district.bnName} — <span className="font-tech text-xs text-slate-500">{district.enName}</span>
                           </h3>
+                          <div className="text-[11px] font-bold text-cyan-700 font-tech">
+                            Technician {district.enName} • টেকনিশিয়ান সার্ভিস
+                          </div>
                         </div>
                       </div>
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">

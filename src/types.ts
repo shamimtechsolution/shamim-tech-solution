@@ -46,6 +46,7 @@ export interface ServiceItem {
   description: string;
   keyFeatures: string[];
   serviceType: string;
+  popularKeywords?: string[];
 }
 
 export interface DistrictCoverage {
