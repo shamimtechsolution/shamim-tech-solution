@@ -1,4 +1,4 @@
-import { Product, ServiceItem, DownloadItem, GalleryItem, ReviewItem, CompanyInfo, SiteContent } from '../types';
+import { Product, ServiceItem, DownloadItem, GalleryItem, ReviewItem, CompanyInfo, SiteContent, DistrictCoverage } from '../types';
 
 export const COMPANY_INFO: CompanyInfo = {
   name: "SHAMIM TECH SOLUTION",
@@ -8,7 +8,7 @@ export const COMPANY_INFO: CompanyInfo = {
   bengaliSlogan: "আপনার নিরাপত্তাই আমাদের অগ্রাধিকার • দক্ষ টেকনিশিয়ান ও ইলেকট্রিশিয়ান সার্ভিস",
   businessType: "CCTV Security, Professional Technician & Electrician Service Provider",
   location: "Haragach, Rangpur, Bangladesh",
-  serviceArea: "Haragach, Rangpur and nearby areas (Sadar, Haragach, Sarai Bazar, Satmata, Saidpur, Dosmail & nearby regions)",
+  serviceArea: "রংপুর বিভাগ — রংপুর (সিটি, সদর, হারাগাছ), দিনাজপুর, লালমনিরহাট, কুড়িগ্রাম, নীলফামারী, গাইবান্ধা, ঠাকুরগাঁও ও পঞ্চগড় (Rangpur Division 8 Districts)",
   phone: "01790139333",
   phoneFormatted: "01790-139333",
   secondaryPhone: "01865321530",
@@ -471,6 +471,30 @@ export const SERVICES_LIST: ServiceItem[] = [
     description: "Skilled technician services for electronic hardware setup, surveillance gear servicing, UPS/IPS battery wiring, power supply replacements, and on-site technical problem solving.",
     keyFeatures: ["Hardware Diagnostics & On-site Repair", "Power Supply & Inverter Connections", "Quick Response Technical Support"],
     serviceType: "Technician"
+  },
+  {
+    id: "srv-14",
+    name: "PABX & Office Intercom System Service",
+    iconName: "Phone",
+    description: "Complete PABX machine setup, intercom telephone cabling, extension programming, and telephone exchange repair for offices, institutions, hospitals, and residences across Rangpur and 8 districts.",
+    keyFeatures: ["PABX Machine Setup & Extension Programming", "Office Intercom Phone Cabling & Testing", "Telephone Exchange Repair & Troubleshooting"],
+    serviceType: "PABX & Intercom"
+  },
+  {
+    id: "srv-15",
+    name: "Door Access Control & Biometric Attendance System",
+    iconName: "Fingerprint",
+    description: "Electronic magnetic door locks, exit buttons, biometric fingerprint and face recognition access control machines, RFID cards, and automated time attendance payroll software setup in Rangpur.",
+    keyFeatures: ["Magnetic Door Lock & Push Exit Sensor", "Fingerprint & Face Recognition Setup", "Automated Attendance & Shift Software"],
+    serviceType: "Access Control"
+  },
+  {
+    id: "srv-16",
+    name: "CCTV Accessories, Cables & Power Solutions",
+    iconName: "Cable",
+    description: "Original Cat6/Cat5e LAN, RG59 Coaxial cables, RJ45 connectors, crimping tools, BNC/DC pins, video balun, 12V power adapters, central power boxes, PoE switches, and junction boxes in Rangpur.",
+    keyFeatures: ["Pure Copper Cat6 & RG59 Coaxial Cables", "High Quality BNC/DC & RJ45 Connectors", "12V CCTV Power Adapters & Central Supplies"],
+    serviceType: "Accessories"
   }
 ];
 
@@ -677,3 +701,222 @@ export const DISTRICTS_LIST = [
   "Dhaka",
   "Other Districts in Bangladesh"
 ];
+
+export const DIVISION_DISTRICTS: DistrictCoverage[] = [
+  {
+    id: "dist-rangpur",
+    bnName: "রংপুর",
+    enName: "Rangpur",
+    services: ["CCTV Camera Sales & Service", "Electrician & Wiring", "PABX & Intercom", "Access Control", "IT Service & LAN"],
+    popularKeywords: [
+      "CCTV Rangpur",
+      "IP Camera Rangpur",
+      "DVR Rangpur",
+      "NVR Rangpur",
+      "XVR Rangpur",
+      "PABX Rangpur",
+      "Intercom Rangpur",
+      "Access Control Rangpur",
+      "Electrician Rangpur",
+      "IT Service Rangpur",
+      "RJ45 Connector Rangpur",
+      "CCTV Monitor Rangpur",
+      "CCTV Cable Rangpur",
+      "Technician Rangpur",
+      "CCTV Technician Rangpur",
+      "IP Camera Technician Rangpur",
+      "Shamim Technician Rangpur",
+      "Shamim Electrician Rangpur",
+      "Shamim CCTV Rangpur",
+      "Shamim Tech Solution Rangpur",
+      "CCTV Service Rangpur City",
+      "CCTV Camera Rangpur Sadar",
+      "CCTV Technician Haragach"
+    ],
+    delivery: "তাৎক্ষণিক অন-সাইট সার্ভিস (Same Day On-site)",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-dinajpur",
+    bnName: "দিনাজপুর",
+    enName: "Dinajpur",
+    services: ["CCTV Camera Installation", "Electrician Service", "PABX & Intercom", "Access Control", "IT Service"],
+    popularKeywords: [
+      "CCTV Dinajpur",
+      "IP Camera Dinajpur",
+      "DVR Dinajpur",
+      "NVR Dinajpur",
+      "XVR Dinajpur",
+      "PABX Dinajpur",
+      "Intercom Dinajpur",
+      "Access Control Dinajpur",
+      "Electrician Dinajpur",
+      "IT Service Dinajpur",
+      "RJ45 Connector Dinajpur",
+      "CCTV Monitor Dinajpur",
+      "CCTV Cable Dinajpur",
+      "Technician Dinajpur",
+      "CCTV Technician Dinajpur",
+      "IP Camera Technician Dinajpur"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-lalmonirhat",
+    bnName: "লালমনিরহাট",
+    enName: "Lalmonirhat",
+    services: ["CCTV Camera Setup", "Electrician Wiring", "PABX Intercom", "Access Control", "IT Networking"],
+    popularKeywords: [
+      "CCTV Lalmonirhat",
+      "IP Camera Lalmonirhat",
+      "DVR Lalmonirhat",
+      "NVR Lalmonirhat",
+      "XVR Lalmonirhat",
+      "PABX Lalmonirhat",
+      "Intercom Lalmonirhat",
+      "Access Control Lalmonirhat",
+      "Electrician Lalmonirhat",
+      "IT Service Lalmonirhat",
+      "RJ45 Connector Lalmonirhat",
+      "CCTV Monitor Lalmonirhat",
+      "CCTV Cable Lalmonirhat",
+      "Technician Lalmonirhat",
+      "CCTV Technician Lalmonirhat",
+      "IP Camera Technician Lalmonirhat"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-kurigram",
+    bnName: "কুড়িগ্রাম",
+    enName: "Kurigram",
+    services: ["CCTV Camera & DVR Setup", "Electrician", "PABX System", "Access Control", "IT Support"],
+    popularKeywords: [
+      "CCTV Kurigram",
+      "IP Camera Kurigram",
+      "DVR Kurigram",
+      "NVR Kurigram",
+      "XVR Kurigram",
+      "PABX Kurigram",
+      "Intercom Kurigram",
+      "Access Control Kurigram",
+      "Electrician Kurigram",
+      "IT Service Kurigram",
+      "RJ45 Connector Kurigram",
+      "CCTV Monitor Kurigram",
+      "CCTV Cable Kurigram",
+      "Technician Kurigram",
+      "CCTV Technician Kurigram",
+      "IP Camera Technician Kurigram"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-nilphamari",
+    bnName: "নীলফামারী",
+    enName: "Nilphamari",
+    services: ["CCTV Installation", "Electrician Service", "PABX & Intercom", "Access Control", "IT Service"],
+    popularKeywords: [
+      "CCTV Nilphamari",
+      "IP Camera Nilphamari",
+      "DVR Nilphamari",
+      "NVR Nilphamari",
+      "XVR Nilphamari",
+      "PABX Nilphamari",
+      "Intercom Nilphamari",
+      "Access Control Nilphamari",
+      "Electrician Nilphamari",
+      "IT Service Nilphamari",
+      "RJ45 Connector Nilphamari",
+      "CCTV Monitor Nilphamari",
+      "CCTV Cable Nilphamari",
+      "Technician Nilphamari",
+      "CCTV Technician Nilphamari",
+      "IP Camera Technician Nilphamari"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-gaibandha",
+    bnName: "গাইবান্ধা",
+    enName: "Gaibandha",
+    services: ["CCTV Security Solution", "Electrician Wiring", "PABX Machine", "Access Control", "IT Service"],
+    popularKeywords: [
+      "CCTV Gaibandha",
+      "IP Camera Gaibandha",
+      "DVR Gaibandha",
+      "NVR Gaibandha",
+      "XVR Gaibandha",
+      "PABX Gaibandha",
+      "Intercom Gaibandha",
+      "Access Control Gaibandha",
+      "Electrician Gaibandha",
+      "IT Service Gaibandha",
+      "RJ45 Connector Gaibandha",
+      "CCTV Monitor Gaibandha",
+      "CCTV Cable Gaibandha",
+      "Technician Gaibandha",
+      "CCTV Technician Gaibandha",
+      "IP Camera Technician Gaibandha"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-thakurgaon",
+    bnName: "ঠাকুরগাঁও",
+    enName: "Thakurgaon",
+    services: ["CCTV Camera Packages", "Electrician", "PABX Intercom", "Access Control", "IT Service"],
+    popularKeywords: [
+      "CCTV Thakurgaon",
+      "IP Camera Thakurgaon",
+      "DVR Thakurgaon",
+      "NVR Thakurgaon",
+      "XVR Thakurgaon",
+      "PABX Thakurgaon",
+      "Intercom Thakurgaon",
+      "Access Control Thakurgaon",
+      "Electrician Thakurgaon",
+      "IT Service Thakurgaon",
+      "RJ45 Connector Thakurgaon",
+      "CCTV Monitor Thakurgaon",
+      "CCTV Cable Thakurgaon",
+      "Technician Thakurgaon",
+      "CCTV Technician Thakurgaon",
+      "IP Camera Technician Thakurgaon"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  },
+  {
+    id: "dist-panchagarh",
+    bnName: "পঞ্চগড়",
+    enName: "Panchagarh",
+    services: ["CCTV Camera Sales & Service", "Electrician", "PABX Intercom", "Access Control", "IT Service"],
+    popularKeywords: [
+      "CCTV Panchagarh",
+      "IP Camera Panchagarh",
+      "DVR Panchagarh",
+      "NVR Panchagarh",
+      "XVR Panchagarh",
+      "PABX Panchagarh",
+      "Intercom Panchagarh",
+      "Access Control Panchagarh",
+      "Electrician Panchagarh",
+      "IT Service Panchagarh",
+      "RJ45 Connector Panchagarh",
+      "CCTV Monitor Panchagarh",
+      "CCTV Cable Panchagarh",
+      "Technician Panchagarh",
+      "CCTV Technician Panchagarh",
+      "IP Camera Technician Panchagarh"
+    ],
+    delivery: "অন-সাইট টেকনিশিয়ান ভিজিট ও হোম ডেলিভারি",
+    onSiteSupport: true
+  }
+];
+

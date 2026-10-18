@@ -204,36 +204,51 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
 
               {/* Desktop Live Search Dropdown (Star Tech Style) */}
-              {searchTerm.trim().length > 0 && liveSearchResults.length > 0 && (
+              {searchTerm.trim().length > 0 && (
                 <div className="absolute top-full left-0 right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn min-w-[280px]">
-                  <div className="px-3 py-1.5 bg-slate-900/90 flex items-center justify-between text-[11px] font-bold text-cyan-300">
-                    <span>Cameras & Products ({liveSearchResults.length})</span>
-                    <button 
-                      onClick={() => handleNavClick('products')}
-                      className="text-cyan-400 hover:underline cursor-pointer"
-                    >
-                      View All →
-                    </button>
-                  </div>
-                  {liveSearchResults.map((prod) => (
-                    <div
-                      key={prod.id}
-                      onClick={() => {
-                        if (onViewProduct) onViewProduct(prod);
-                        handleNavClick('products');
-                      }}
-                      className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/60 cursor-pointer transition-colors"
-                    >
-                      <div className="w-9 h-9 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
-                        <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                  {liveSearchResults.length > 0 ? (
+                    <>
+                      <div className="px-3 py-1.5 bg-slate-900/90 flex items-center justify-between text-[11px] font-bold text-cyan-300">
+                        <span>Cameras & Products ({liveSearchResults.length})</span>
+                        <button 
+                          onClick={() => handleNavClick('products')}
+                          className="text-cyan-400 hover:underline cursor-pointer"
+                        >
+                          View All →
+                        </button>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="text-[9px] text-cyan-400 font-bold uppercase">{prod.brand}</div>
-                        <div className="text-xs font-semibold text-white truncate">{prod.name}</div>
-                        <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
-                      </div>
+                      {liveSearchResults.map((prod) => (
+                        <div
+                          key={prod.id}
+                          onClick={() => {
+                            if (onViewProduct) onViewProduct(prod);
+                            handleNavClick('products');
+                          }}
+                          className="flex items-center gap-2.5 p-2 hover:bg-cyan-950/60 cursor-pointer transition-colors"
+                        >
+                          <div className="w-9 h-9 rounded bg-white p-1 shrink-0 flex items-center justify-center border border-slate-200">
+                            <img src={prod.image} alt={prod.name} className="w-full h-full object-contain" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-[9px] text-cyan-400 font-bold uppercase">{prod.brand}</div>
+                            <div className="text-xs font-semibold text-white truncate">{prod.name}</div>
+                            <div className="text-xs font-black text-cyan-300 font-tech">৳ {prod.price.toLocaleString('en-US')}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <div className="p-3 text-center text-xs text-slate-300 space-y-1.5">
+                      <p className="text-[11px] text-slate-400 font-bangla">"{searchTerm}" এর জন্য সরাসরি প্রোডাক্ট পাওয়া যায়নি</p>
+                      <a
+                        href="#district-coverage"
+                        onClick={() => handleNavClick('services')}
+                        className="inline-block text-cyan-400 hover:underline font-bold text-xs"
+                      >
+                        রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →
+                      </a>
                     </div>
-                  ))}
+                  )}
                 </div>
               )}
             </div>
@@ -397,8 +412,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </div>
                 ))
               ) : (
-                <div className="p-3 text-center text-xs text-slate-400">
-                  No camera or hardware found for "{searchTerm}"
+                <div className="p-3 text-center text-xs text-slate-300 space-y-1.5">
+                  <p className="text-[11px] text-slate-400 font-bangla">"{searchTerm}" এর জন্য কোনো প্রোডাক্ট পাওয়া যায়নি</p>
+                  <a
+                    href="#district-coverage"
+                    onClick={() => {
+                      setMobileSearchOpen(false);
+                      handleNavClick('services');
+                    }}
+                    className="inline-block text-cyan-400 hover:underline font-bold text-xs"
+                  >
+                    রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →
+                  </a>
                 </div>
               )}
             </div>

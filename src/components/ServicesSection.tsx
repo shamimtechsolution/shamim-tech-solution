@@ -15,9 +15,12 @@ import {
   Check,
   ArrowRight,
   MessageSquare,
-  Phone
+  Phone,
+  MapPin,
+  CheckCircle2,
+  PhoneCall
 } from 'lucide-react';
-import { SERVICES_LIST, COMPANY_INFO } from '../data/companyData';
+import { SERVICES_LIST, COMPANY_INFO, DIVISION_DISTRICTS } from '../data/companyData';
 import { ServiceItem } from '../types';
 
 interface ServicesSectionProps {
@@ -26,6 +29,7 @@ interface ServicesSectionProps {
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestService }) => {
   const [selectedFilter, setSelectedFilter] = useState<string>('All');
+  const [selectedDistrict, setSelectedDistrict] = useState<string>('all');
 
   // Mapping icon names to Lucide icons
   const iconComponents: Record<string, React.ElementType> = {
@@ -40,24 +44,34 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
     Fingerprint,
     Network,
     ShieldCheck,
-    Zap
+    Zap,
+    Phone
   };
 
   // Quick service highlights
   const quickServices = [
     { title: "CCTV Installation", icon: Camera, desc: "Professional camera mounting & wiring" },
     { title: "Electrician & Wiring", icon: Zap, desc: "House, office & industrial electrical solutions" },
-    { title: "Expert Technician", icon: Wrench, desc: "Fast hardware diagnostic & repair" },
+    { title: "PABX & Intercom", icon: Phone, desc: "Office intercom & telephone exchange setup" },
+    { title: "Access Control", icon: KeyRound, desc: "Magnetic locks & biometric fingerprint" },
     { title: "DVR/NVR Setup", icon: HardDrive, desc: "Surveillance recording & storage configuration" },
-    { title: "IP Camera", icon: Wifi, desc: "High-definition PoE & PTZ digital cameras" },
-    { title: "Access Control", icon: KeyRound, desc: "Magnetic locks & biometric security" },
+    { title: "IT & Networking", icon: Network, desc: "LAN cables, router & switch configuration" },
   ];
 
-  const categories = ['All', 'Installation', 'Electrician', 'Technician', 'Repair & Support', 'Biometrics', 'Networking'];
+  const categories = [
+    'All',
+    'Installation',
+    'Electrician',
+    'PABX & Intercom',
+    'Access Control',
+    'Technician',
+    'Networking',
+    'Accessories'
+  ];
 
   const filteredServices = selectedFilter === 'All'
     ? SERVICES_LIST
-    : SERVICES_LIST.filter(s => s.serviceType.toLowerCase().includes(selectedFilter.toLowerCase()));
+    : SERVICES_LIST.filter(s => s.serviceType.toLowerCase().includes(selectedFilter.toLowerCase()) || s.name.toLowerCase().includes(selectedFilter.toLowerCase()));
 
   return (
     <div id="services" className="relative py-16 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-50/80 border-b border-sky-300/80 overflow-hidden">
@@ -220,6 +234,130 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
               <Phone className="w-4 h-4 fill-current" />
               <span>Call: {COMPANY_INFO.phone}</span>
             </a>
+          </div>
+        </div>
+
+        {/* 8 Districts Service Coverage in Rangpur Division (User Requested Feature) */}
+        <div id="district-coverage" className="mt-16 pt-12 border-t-2 border-sky-200/90">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider border border-cyan-300 shadow-sm mb-2">
+                <MapPin className="w-3.5 h-3.5 text-cyan-600" />
+                <span>Rangpur Division Service Area • রংপুর বিভাগ</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-tech">
+                রংপুর বিভাগের ৮টি জেলায় আমাদের সার্ভিসসমূহ
+              </h2>
+              <p className="text-slate-600 text-sm mt-1 max-w-2xl font-bangla">
+                রংপুর সিটি ও সদর, দিনাজপুর, লালমনিরহাট, কুড়িগ্রাম, নীলফামারী, গাইবান্ধা, ঠাকুরগাঁও ও পঞ্চগড় — সব জেলাতেই দক্ষ টেকনিশিয়ান দ্বারা সিসিটিভি ক্যামেরা, ইলেকট্রিশিয়ান, PABX ইন্টারকম, অ্যাক্সেস কন্ট্রোল ও আইটি সার্ভিস প্রদান করা হয়।
+              </p>
+            </div>
+
+            {/* Quick District Filter Buttons */}
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                onClick={() => setSelectedDistrict('all')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  selectedDistrict === 'all'
+                    ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/30'
+                    : 'bg-white text-slate-700 hover:text-cyan-800 border border-sky-200 hover:bg-sky-50'
+                }`}
+              >
+                সব জেলা (All)
+              </button>
+              {DIVISION_DISTRICTS.map((d) => (
+                <button
+                  key={d.id}
+                  onClick={() => setSelectedDistrict(d.id)}
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    selectedDistrict === d.id
+                      ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/30'
+                      : 'bg-white text-slate-700 hover:text-cyan-800 border border-sky-200 hover:bg-sky-50'
+                  }`}
+                >
+                  {d.bnName}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 8 Districts Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {DIVISION_DISTRICTS
+              .filter(d => selectedDistrict === 'all' || d.id === selectedDistrict)
+              .map((district) => (
+                <div
+                  key={district.id}
+                  className="p-5 rounded-2xl bg-white border-2 border-sky-200/90 hover:border-cyan-500 shadow-md hover:shadow-xl hover:shadow-cyan-500/10 transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    {/* Header */}
+                    <div className="flex items-center justify-between gap-2 pb-3 border-b border-sky-100">
+                      <div className="flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                          <MapPin className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-slate-900 text-base font-bangla group-hover:text-cyan-700 transition-colors">
+                            {district.bnName} — <span className="font-tech text-xs text-slate-500">{district.enName}</span>
+                          </h3>
+                        </div>
+                      </div>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+                        অন-সাইট
+                      </span>
+                    </div>
+
+                    {/* Services Included */}
+                    <div className="mt-3 space-y-1.5">
+                      <p className="text-[11px] font-bold text-cyan-800 uppercase font-tech tracking-wider">
+                        উপলব্ধ সার্ভিসসমূহ:
+                      </p>
+                      {district.services.map((srv, sidx) => (
+                        <div key={sidx} className="flex items-center gap-1.5 text-xs text-slate-700">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
+                          <span className="font-medium text-[11px] sm:text-xs">{srv}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Popular Search Keywords */}
+                    <div className="mt-3.5 pt-2.5 border-t border-sky-100">
+                      <p className="text-[10px] text-slate-400 uppercase font-mono font-bold mb-1">
+                        জনপ্রিয় সার্চ কীওয়ার্ড:
+                      </p>
+                      <div className="flex flex-wrap gap-1">
+                        {district.popularKeywords.slice(0, 6).map((kw, kwIdx) => (
+                          <span
+                            key={kwIdx}
+                            className="text-[10px] bg-sky-50 text-sky-800 px-2 py-0.5 rounded border border-sky-200 font-medium"
+                          >
+                            {kw}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mt-4 pt-3 border-t border-sky-100 grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => onRequestService(`CCTV Service in ${district.enName} (${district.bnName})`)}
+                      className="flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold transition-all shadow-sm"
+                    >
+                      <span>সার্ভিস বুক</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
+                    <a
+                      href={`tel:${COMPANY_INFO.phone}`}
+                      className="flex items-center justify-center gap-1 py-2 px-2 rounded-xl bg-slate-100 hover:bg-sky-100 text-slate-800 text-[11px] font-bold border border-sky-200 transition-all"
+                    >
+                      <PhoneCall className="w-3 h-3 text-cyan-600" />
+                      <span>কল দিন</span>
+                    </a>
+                  </div>
+                </div>
+              ))}
           </div>
         </div>
 

@@ -48,6 +48,16 @@ export interface ServiceItem {
   serviceType: string;
 }
 
+export interface DistrictCoverage {
+  id: string;
+  bnName: string;
+  enName: string;
+  services: string[];
+  popularKeywords: string[];
+  delivery: string;
+  onSiteSupport: boolean;
+}
+
 export type DownloadCategory = 'Software' | 'Tool' | 'Manual' | 'Guide' | 'Time Attendance' | 'Access Control' | 'CCTV Tools' | 'Other';
 
 export interface DownloadItem {

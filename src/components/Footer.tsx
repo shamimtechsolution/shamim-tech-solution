@@ -123,13 +123,14 @@ export const Footer: React.FC<FooterProps> = ({
               Popular Services
             </h4>
             <ul className="space-y-2 text-xs text-slate-600 font-medium">
-              <li className="hover:text-cyan-700 transition-colors">CCTV Camera Installation</li>
-              <li className="hover:text-cyan-700 transition-colors">DVR & NVR Hard Drive Setup</li>
+              <li className="hover:text-cyan-700 transition-colors">CCTV Camera Sales & Service</li>
+              <li className="hover:text-cyan-700 transition-colors">DVR, NVR & XVR Hard Drive Setup</li>
               <li className="hover:text-cyan-700 transition-colors">IP Camera & Wi-Fi PTZ Setup</li>
-              <li className="hover:text-cyan-700 transition-colors">Remote Mobile Live Viewing</li>
-              <li className="hover:text-cyan-700 transition-colors">Access Control & Magnetic Lock</li>
-              <li className="hover:text-cyan-700 transition-colors">Fingerprint Time Attendance</li>
-              <li className="hover:text-cyan-700 transition-colors">CCTV Cable & Troubleshooting</li>
+              <li className="hover:text-cyan-700 transition-colors">PABX & Office Intercom System</li>
+              <li className="hover:text-cyan-700 transition-colors">Access Control & Biometric Attendance</li>
+              <li className="hover:text-cyan-700 transition-colors">House & Office Electrical Wiring</li>
+              <li className="hover:text-cyan-700 transition-colors">IT Support & LAN Network Setup</li>
+              <li className="hover:text-cyan-700 transition-colors">CCTV Cable, Connectors & Power Supply</li>
             </ul>
           </div>
 
@@ -190,6 +191,41 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
+        </div>
+
+        {/* 8 Districts Service Area Band */}
+        <div className="py-6 border-b border-sky-200/80">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-center md:text-left">
+              <span className="text-xs font-bold text-slate-900 font-tech uppercase tracking-wider block">
+                রংপুর বিভাগের ৮টি জেলায় অন-সাইট সার্ভিস এরিয়া (Service Coverage)
+              </span>
+              <p className="text-[11px] text-slate-500 mt-0.5">
+                CCTV Camera, Electrician, PABX Intercom, Access Control & IT Services available in all 8 districts:
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-1.5">
+              {[
+                { bn: "রংপুর", en: "Rangpur" },
+                { bn: "দিনাজপুর", en: "Dinajpur" },
+                { bn: "লালমনিরহাট", en: "Lalmonirhat" },
+                { bn: "কুড়িগ্রাম", en: "Kurigram" },
+                { bn: "নীলফামারী", en: "Nilphamari" },
+                { bn: "গাইবান্ধা", en: "Gaibandha" },
+                { bn: "ঠাকুরগাঁও", en: "Thakurgaon" },
+                { bn: "পঞ্চগড়", en: "Panchagarh" }
+              ].map((dist, idx) => (
+                <a
+                  key={idx}
+                  href="#district-coverage"
+                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-cyan-50 border border-sky-200 hover:border-cyan-400 text-xs text-slate-700 hover:text-cyan-800 font-medium transition-all shadow-sm flex items-center gap-1"
+                >
+                  <span className="font-bangla font-semibold text-cyan-800">{dist.bn}</span>
+                  <span className="text-[10px] text-slate-400">({dist.en})</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Bottom copyright and back-to-top */}

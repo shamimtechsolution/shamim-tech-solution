@@ -41,13 +41,18 @@ const CATEGORIES: ProductCategory[] = [
 ];
 
 const POPULAR_SEARCH_TAGS = [
+  'CCTV Rangpur',
   'WiFi Camera',
+  'Night Vision',
+  'IP Camera',
+  'PABX Intercom',
+  'Access Control',
+  'Electrician',
   'Jovision',
   'EZVIZ',
-  '3MP',
-  'Dahua',
   'Hikvision',
-  'DVR',
+  'Dahua',
+  'DVR / NVR',
   'PoE Switch'
 ];
 
@@ -283,19 +288,35 @@ export const ProductShop: React.FC<ProductShopProps> = ({
             </div>
 
             {filteredProducts.length === 0 ? (
-              <div className="text-center py-14 px-4 rounded-2xl bg-white border border-sky-200 max-w-lg mx-auto shadow-sm">
+              <div className="text-center py-12 px-5 rounded-2xl bg-white border-2 border-sky-200 max-w-lg mx-auto shadow-sm">
                 <Package className="w-12 h-12 text-cyan-500 mx-auto mb-3" />
-                <h3 className="text-lg font-bold text-slate-900 font-tech">কোনো প্রোডাক্ট পাওয়া যায়নি</h3>
-                <p className="text-slate-500 text-xs sm:text-sm mt-1.5 leading-relaxed">
-                  "{searchTerm}" সার্চ করে কোনো প্রোডাক্ট পাওয়া যায়নি। অন্য কোনো নাম দিয়ে সার্চ করুন অথবা ফিল্টার ক্লিয়ার করুন।
+                <h3 className="text-lg font-bold text-slate-900 font-tech">
+                  {searchTerm ? `"${searchTerm}" এর জন্য প্রোডাক্ট পাওয়া যায়নি` : 'কোনো প্রোডাক্ট পাওয়া যায়নি'}
+                </h3>
+                <p className="text-slate-600 text-xs sm:text-sm mt-1.5 leading-relaxed font-bangla">
+                  আপনি কি সিসিটিভি ক্যামেরা, PABX ইন্টারকম, ইলেকট্রিশিয়ান, অ্যাক্সেস কন্ট্রোল বা কোনো জেলার অন-সাইট সার্ভিস খুঁজছেন?
                 </p>
-                <div className="mt-5 flex justify-center gap-3">
+
+                <div className="mt-4 p-3.5 rounded-xl bg-sky-50 border border-sky-200 text-xs text-left space-y-1">
+                  <span className="font-bold text-cyan-800 block">রংপুর বিভাগের ৮টি জেলায় আমাদের সেবা রয়েছে:</span>
+                  <p className="text-slate-600 text-[11px]">
+                    রংপুর (সিটি ও সদর), দিনাজপুর, লালমনিরহাট, কুড়িগ্রাম, নীলফামারী, গাইবান্ধা, ঠাকুরগাঁও ও পঞ্চগড়।
+                  </p>
+                </div>
+
+                <div className="mt-5 flex flex-wrap justify-center gap-2.5">
+                  <a
+                    href="#district-coverage"
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-xs shadow-md shadow-cyan-600/20"
+                  >
+                    সার্ভিস ও এলাকা দেখুন
+                  </a>
                   <button
                     onClick={() => {
                       setSearchTerm('');
                       setSelectedCategory('All Products');
                     }}
-                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-xs shadow-md shadow-cyan-600/20 cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs border border-slate-300 cursor-pointer"
                   >
                     সকল প্রোডাক্ট দেখুন
                   </button>
