@@ -252,7 +252,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
               {/* Desktop Live Search Dropdown (Products, Services & Districts) */}
               {searchTerm.trim().length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn min-w-[320px] max-h-[460px] overflow-y-auto">
+                <div className="absolute top-full right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn w-[320px] sm:w-[380px] max-w-[90vw] max-h-[460px] overflow-y-auto">
                   {searchResults.totalMatches > 0 ? (
                     <>
                       {/* 1. Products Matches */}
@@ -380,7 +380,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Search Button (Star Tech Style toggle) */}
             <button
               onClick={handleSearchToggle}
-              className={`lg:hidden p-2 rounded-lg border text-slate-200 cursor-pointer shrink-0 transition-colors ${
+              className={`lg:hidden p-1.5 sm:p-2 rounded-lg border text-slate-200 cursor-pointer shrink-0 transition-colors ${
                 mobileSearchOpen 
                   ? 'bg-cyan-500 text-slate-950 border-cyan-400 font-bold' 
                   : 'bg-slate-900/80 border-cyan-800/60 hover:text-cyan-300'
@@ -388,7 +388,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               aria-label="Search Cameras"
               title="Search Cameras & Hardware"
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             {/* Admin Quick Action Button (Visible ONLY to authenticated admin) */}
@@ -410,13 +410,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 id="header-customer-account-btn"
                 onClick={() => handleAuthClick()}
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-blue-950/80 border border-cyan-500/40 text-cyan-200 hover:bg-blue-900 text-xs font-semibold cursor-pointer transition-all shadow-sm shrink-0 whitespace-nowrap"
+                className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-lg bg-blue-950/80 border border-cyan-500/40 text-cyan-200 hover:bg-blue-900 text-xs font-semibold cursor-pointer transition-all shadow-sm shrink-0 whitespace-nowrap"
                 title="View My Account & Orders"
               >
                 <div className="w-5 h-5 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-[10px] shrink-0">
                   {customer.fullName.charAt(0).toUpperCase()}
                 </div>
-                <span className="max-w-[75px] sm:max-w-[110px] truncate text-white">{customer.fullName}</span>
+                <span className="max-w-[50px] xs:max-w-[75px] sm:max-w-[110px] truncate text-white">{customer.fullName}</span>
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
               </button>
             ) : (
@@ -424,20 +424,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   id="header-register-btn"
                   onClick={() => handleAuthClick('register')}
-                  className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/30 text-xs font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
+                  className="hidden sm:flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/30 text-xs font-semibold cursor-pointer transition-all whitespace-nowrap shrink-0 shadow-sm"
                   title="Create Customer Account"
                 >
                   <User className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                  <span className="hidden sm:inline">Create Account</span>
-                  <span className="sm:hidden">Register</span>
+                  <span>Create Account</span>
                 </button>
                 <button
                   id="header-login-btn"
                   onClick={() => handleAuthClick('login')}
-                  className="px-2 sm:px-2.5 py-1.5 rounded-lg bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-white hover:border-cyan-400 text-xs font-semibold cursor-pointer transition-colors whitespace-nowrap shrink-0 shadow-sm"
-                  title="Customer Login"
+                  className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-white hover:border-cyan-400 text-xs font-semibold cursor-pointer transition-colors whitespace-nowrap shrink-0 shadow-sm"
+                  title="Customer Login / Register"
                 >
-                  <span>Login</span>
+                  <User className="w-3.5 h-3.5 text-cyan-400 sm:hidden" />
+                  <span className="hidden xs:inline">Login</span>
                 </button>
               </div>
             )}
@@ -446,12 +446,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="header-cart-btn"
               onClick={handleCartClick}
-              className="relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all cursor-pointer shadow-md shadow-cyan-600/30 shrink-0 whitespace-nowrap"
+              className="relative flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all cursor-pointer shadow-md shadow-cyan-600/30 shrink-0 whitespace-nowrap"
               title="Shopping Cart"
             >
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               <span className="hidden md:inline text-xs font-bold font-tech uppercase tracking-wider">Cart</span>
-              <span className="flex items-center justify-center min-w-[18px] sm:min-w-[20px] h-4.5 sm:h-5 px-1 sm:px-1.5 text-[11px] sm:text-xs font-black bg-white text-cyan-700 rounded-full shadow">
+              <span className="flex items-center justify-center min-w-[17px] sm:min-w-[20px] h-4 sm:h-5 px-1 sm:px-1.5 text-[10px] sm:text-xs font-black bg-white text-cyan-700 rounded-full shadow">
                 {displayCartCount}
               </span>
             </button>
@@ -459,10 +459,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0"
+              className="xl:hidden p-1.5 sm:p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0"
               aria-label="Toggle Navigation"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-cyan-400" /> : <Menu className="w-6 h-6 text-white" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />}
             </button>
           </div>
         </div>
