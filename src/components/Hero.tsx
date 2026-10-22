@@ -208,10 +208,10 @@ export const Hero: React.FC<HeroProps> = ({
                     {/* Bottom Gradient Overlay */}
                     <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-1.5 sm:p-2.5 pt-6 text-white">
                       <div className="text-[10px] sm:text-xs font-bold text-white font-bangla leading-tight truncate">
-                        শামীম মিয়া
+                        শামীম ইসলাম
                       </div>
                       <div className="text-[8px] sm:text-[10px] text-cyan-300 font-mono truncate">
-                        টেকনিক্যাল এক্সপার্ট
+                        Shamim Islam • টেকনিক্যাল এক্সপার্ট
                       </div>
                     </div>
                   </div>
