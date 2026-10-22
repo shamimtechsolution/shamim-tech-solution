@@ -347,21 +347,21 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                 </div>
               </div>
             ) : (
-              /* STAR TECH 2-COLUMN GRID ON MOBILE PHONES (grid-cols-2), 3 on Tablets, 3/4 on Large Screens */
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-2.5 sm:gap-4 md:gap-4.5">
+              /* 3-COLUMN COMPACT GRID ON MOBILE PHONES (grid-cols-3), 2/3 on Tablets, 3/4 on Large Screens */
+              <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-1.5 sm:gap-4 md:gap-4.5">
                 {filteredProducts.map((product) => (
                   <div
                     key={product.id}
-                    className="flex flex-col justify-between rounded-xl sm:rounded-2xl bg-white border border-sky-200/90 hover:border-cyan-500 transition-all shadow-xs hover:shadow-xl hover:shadow-cyan-500/10 group overflow-hidden"
+                    className="flex flex-col justify-between rounded-lg sm:rounded-2xl bg-white border border-sky-200/90 hover:border-cyan-500 transition-all shadow-xs hover:shadow-xl hover:shadow-cyan-500/10 group overflow-hidden"
                   >
                     <div>
                       {/* Top Colorful Accent Strip */}
                       <div className="h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 group-hover:h-1.5 transition-all" />
 
-                      {/* Product Image Container (Star Tech Style - Clean white, centered camera photo) */}
+                      {/* Product Image Container */}
                       <div 
                         onClick={() => onViewDetails(product)}
-                        className="relative aspect-square sm:aspect-[4/3] bg-white p-2.5 sm:p-3 flex items-center justify-center overflow-hidden border-b border-sky-100 cursor-pointer group-hover:bg-sky-50/20 transition-colors"
+                        className="relative aspect-square sm:aspect-[4/3] bg-white p-1 sm:p-3 flex items-center justify-center overflow-hidden border-b border-sky-100 cursor-pointer group-hover:bg-sky-50/20 transition-colors"
                       >
                         <img
                           src={product.image}
@@ -371,50 +371,50 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                         />
 
                         {/* Brand Badge */}
-                        <div className="absolute top-1.5 left-1.5 sm:top-2.5 sm:left-2.5 px-1.5 sm:px-2 py-0.5 rounded bg-gradient-to-r from-cyan-700 to-blue-700 text-[9px] sm:text-[10px] font-bold text-white uppercase tracking-wider shadow-xs pointer-events-none">
+                        <div className="absolute top-1 left-1 sm:top-2.5 sm:left-2.5 px-1 sm:px-2 py-0.5 rounded bg-gradient-to-r from-cyan-700 to-blue-700 text-[7px] sm:text-[10px] font-bold text-white uppercase tracking-wider shadow-xs pointer-events-none">
                           {product.brand}
                         </div>
 
                         {/* Stock Badge */}
-                        <div className="absolute top-1.5 right-1.5 sm:top-2.5 sm:right-2.5 px-1.5 sm:px-2 py-0.5 rounded bg-emerald-600 text-[9px] sm:text-[10px] font-bold text-white shadow-xs pointer-events-none">
-                          ● {product.inStock ? 'In Stock' : 'Pre-order'}
+                        <div className="absolute top-1 right-1 sm:top-2.5 sm:right-2.5 px-1 sm:px-2 py-0.5 rounded bg-emerald-600 text-[7px] sm:text-[10px] font-bold text-white shadow-xs pointer-events-none">
+                          <span className="hidden sm:inline">● </span>{product.inStock ? 'Stock' : 'Pre-order'}
                         </div>
 
                         {/* Quick View Overlay Button */}
                         <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 pointer-events-none">
-                          <div className="px-2.5 py-1 rounded-lg bg-white/95 border border-sky-300 flex items-center gap-1 text-slate-900 shadow-md text-[11px] font-bold">
-                            <Eye className="w-3 h-3 text-cyan-600" />
-                            <span>Quick View</span>
+                          <div className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-white/95 border border-sky-300 flex items-center gap-1 text-slate-900 shadow-md text-[9px] sm:text-[11px] font-bold">
+                            <Eye className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-600" />
+                            <span>View</span>
                           </div>
                         </div>
                       </div>
 
-                      {/* Content details (Star Tech layout) */}
-                      <div className="p-2 sm:p-3.5 space-y-1 sm:space-y-1.5">
-                        <div className="text-[9px] sm:text-[10px] text-cyan-700 font-bold font-tech uppercase tracking-wider">
+                      {/* Content details */}
+                      <div className="p-1.5 sm:p-3.5 space-y-0.5 sm:space-y-1.5">
+                        <div className="text-[8px] sm:text-[10px] text-cyan-700 font-bold font-tech uppercase tracking-wider truncate">
                           {product.category}
                         </div>
 
                         <h3 
                           onClick={() => onViewDetails(product)}
-                          className="text-xs sm:text-sm font-bold text-slate-900 font-tech leading-snug hover:text-cyan-700 transition-colors cursor-pointer line-clamp-2 min-h-[30px] sm:min-h-[38px]"
+                          className="text-[10px] sm:text-sm font-bold text-slate-900 font-tech leading-snug hover:text-cyan-700 transition-colors cursor-pointer line-clamp-2 min-h-[26px] sm:min-h-[38px]"
                           title={product.name}
                         >
                           {product.name}
                         </h3>
 
-                        {/* Star Tech Key Specs Bullet Summary */}
-                        <p className="text-[10px] sm:text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                        {/* Key Specs Bullet Summary - hidden on 3-col mobile for sleek compactness */}
+                        <p className="hidden sm:block text-[10px] sm:text-xs text-slate-500 line-clamp-2 leading-relaxed">
                           {product.specs}
                         </p>
 
                         {/* Price Display in Bangladeshi Taka ৳ */}
-                        <div className="pt-1 flex flex-wrap items-baseline gap-1 sm:gap-2">
-                          <span className="text-sm sm:text-xl font-black text-cyan-800 font-tech">
+                        <div className="pt-0.5 sm:pt-1 flex flex-wrap items-baseline gap-0.5 sm:gap-2">
+                          <span className="text-[11px] sm:text-xl font-black text-cyan-800 font-tech">
                             ৳ {product.price.toLocaleString('en-US')}
                           </span>
                           {(product.regularPrice || product.originalPrice) && (
-                            <span className="text-[10px] sm:text-xs text-slate-400 line-through">
+                            <span className="text-[8px] sm:text-xs text-slate-400 line-through">
                               ৳ {(product.regularPrice || product.originalPrice)?.toLocaleString('en-US')}
                             </span>
                           )}
@@ -422,26 +422,28 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                       </div>
                     </div>
 
-                    {/* Action Buttons (2-Column Mobile Optimized - Star Tech Style) */}
-                    <div className="p-2 sm:p-3.5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                    {/* Action Buttons (3-Column Mobile Optimized with Cart & Buy) */}
+                    <div className="p-1.5 sm:p-3.5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-1.5">
                       <button
                         onClick={() => onAddToCart(product)}
                         id={`add-to-cart-${product.id}`}
-                        className="flex items-center justify-center gap-1 py-1.5 sm:py-2 px-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[10px] sm:text-xs tracking-wide transition-all shadow-xs active:scale-95 cursor-pointer"
+                        className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[9px] sm:text-xs tracking-wide transition-all shadow-xs active:scale-95 cursor-pointer"
                         title="Add to Cart"
                       >
-                        <ShoppingCart className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" />
-                        <span className="truncate">Add to Cart</span>
+                        <ShoppingCart className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 shrink-0" />
+                        <span className="sm:hidden">কার্ট</span>
+                        <span className="hidden sm:inline truncate">Add to Cart</span>
                       </button>
 
                       <button
                         onClick={() => onBuyNow(product)}
                         id={`buy-now-${product.id}`}
-                        className="flex items-center justify-center gap-1 py-1.5 sm:py-2 px-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white text-[10px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
+                        className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
                         title="Buy Now"
                       >
-                        <Zap className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />
-                        <span className="truncate">Buy Now</span>
+                        <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />
+                        <span className="sm:hidden">কিনুন</span>
+                        <span className="hidden sm:inline truncate">Buy Now</span>
                       </button>
                     </div>
                   </div>

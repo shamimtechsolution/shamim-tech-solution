@@ -369,158 +369,88 @@ export const INITIAL_PRODUCTS: Product[] = [
 
 export const SERVICES_LIST: ServiceItem[] = [
   {
-    id: "srv-1",
-    name: "CCTV Camera Installation & Maintenance",
+    id: "srv-cctv-installation-service",
+    name: "CCTV Installation & Service",
+    bnName: "সিসিটিভি ইনস্টলেশন ও সার্ভিস",
+    shortBnName: "সিসিটিভি সার্ভিস",
+    image: "/assets/aistudio/image_4e9a7e85.png",
     iconName: "Camera",
-    description: "Complete professional installation and regular maintenance of indoor dome and outdoor bullet security cameras with optimal angle positioning for houses, shops, factories, and institutions in Rangpur.",
-    keyFeatures: ["Angle & Blind-spot Analysis", "Solid Wall/Ceiling Mounting", "Weatherproof Outdoor Fit", "Comprehensive Maintenance Support"],
-    serviceType: "Installation & Maintenance",
-    popularKeywords: ["CCTV Camera Installation and Maintenance in Rangpur", "CCTV Camera Installation", "CCTV Maintenance", "CCTV Installation and Maintenance", "Rangpur CCTV Installation", "Rangpur CCTV Service", "CCTV Technician Rangpur"]
+    description: "বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরির জন্য নতুন সিসিটিভি ক্যামেরা ইনস্টলেশন, ক্যাবলিং, ডিভিআর সেটআপ, ত্রুটি মেরামত ও অন-সাইট নিয়মিত সার্ভিসিং।",
+    keyFeatures: ["HD সিসিটিভি ক্যামেরা ফিটিং", "ভিডিও লস ও ক্যামেরা ত্রুটি মেরামত", "মোবাইল অনলাইন ভিউ ও নিয়মিত সার্ভিসিং"],
+    serviceType: "CCTV Installation & Service",
+    popularKeywords: ["CCTV Installation and Service", "CCTV Camera Installation", "CCTV Service", "সিসিটিভি ইনস্টলেশন", "সিসিটিভি সার্ভিস"]
   },
   {
-    id: "srv-2",
-    name: "DVR Setup",
-    iconName: "HardDrive",
-    description: "Expert configuration of Digital Video Recorders (DVR), surveillance hard disk formatting, continuous/motion-detection recording scheduling, and video output adjustment.",
-    keyFeatures: ["Hard Drive Initialization", "Motion Detection Scheduling", "HDMI/VGA Display Tuning"],
-    serviceType: "Configuration"
-  },
-  {
-    id: "srv-3",
-    name: "NVR Setup",
-    iconName: "Server",
-    description: "Setup and programming of Network Video Recorders (NVR) for high-definition IP camera ecosystems, IP subnet allocation, and bandwidth optimization.",
-    keyFeatures: ["4K IP Stream Setup", "PoE Switch Integration", "Dual HDD RAID Configuration"],
-    serviceType: "Configuration"
-  },
-  {
-    id: "srv-4",
-    name: "IP Camera Installation",
+    id: "srv-ip-camera-installation-service",
+    name: "IP Camera Installation & Service",
+    bnName: "আইপি ক্যামেরা ইনস্টলেশন ও সার্ভিস",
+    shortBnName: "আইপি ক্যামেরা",
+    image: "/assets/aistudio/image_bde3dd9d.png",
     iconName: "Wifi",
-    description: "Installation, crimping, and network binding of advanced IP and PTZ cameras with motorized zoom, 360-degree rotation, and two-way audio configuration.",
-    keyFeatures: ["PoE Cat6 Cabling", "Static IP Assignment", "Smart Motion Tracking Setup"],
-    serviceType: "Installation"
+    description: "উচ্চ ক্ষমতাসম্পন্ন ওয়াইফাই ও পিওই (PoE) আইপি ক্যামেরা সেটআপ, এনভিআর কনফিগারেশন, ৩৬০ ডিগ্রি ভিউ এবং মোবাইল ক্লাউড রিমোট অ্যাক্সেস সার্ভিস।",
+    keyFeatures: ["PoE ও ওয়াইফাই আইপি ক্যামেরা সেটআপ", "NVR কনফিগারেশন ও ক্লাউড সিঙ্ক", "মোবাইল লাইভ ভিউ ও ২-ওয়ে অডিও"],
+    serviceType: "IP Camera Installation & Service",
+    popularKeywords: ["IP Camera Installation & Service", "IP Camera", "WiFi Camera", "আইপি ক্যামেরা", "আইপি ক্যামেরা সার্ভিস"]
   },
   {
-    id: "srv-5",
-    name: "Remote/Online CCTV View Setup",
-    iconName: "Smartphone",
-    description: "Connect your DVR/NVR to high-speed internet and configure mobile apps (Hik-Connect, DMSS, gDMSS, XMEye) so you can watch live camera video from anywhere in the world.",
-    keyFeatures: ["Router Port Forwarding / Cloud P2P", "Android & iPhone App Sync", "Real-time Push Notifications"],
-    serviceType: "Networking & Cloud"
-  },
-  {
-    id: "srv-6",
-    name: "CCTV Troubleshooting",
-    iconName: "Wrench",
-    description: "Fast diagnostic and repair of common CCTV problems: video loss, black screen, horizontal video noise, night IR failure, forgotten DVR passwords, or offline cameras.",
-    keyFeatures: ["Signal Loss Tracing", "DVR Password Recovery / Reset", "Power Supply Voltage Diagnostics"],
-    serviceType: "Repair & Support"
-  },
-  {
-    id: "srv-7",
-    name: "Camera Cable Installation",
-    iconName: "Cable",
-    description: "Clean, aesthetic cable routing with PVC casing, conduit pipes, and heavy-duty outdoor ties to prevent rodent bites, weather damage, and visible messy wires.",
-    keyFeatures: ["Conduit Pipe & Casing Fitting", "Clean Cable Management", "UV & Weather Resisting Run"],
-    serviceType: "Infrastructure"
-  },
-  {
-    id: "srv-8",
-    name: "Access Control System",
-    iconName: "KeyRound",
-    description: "Electronic magnetic door locks, exit buttons, biometric access keypads, and RFID card scanners to strictly secure private offices, server rooms, and gates.",
-    keyFeatures: ["Magnetic Lock 600lbs Force", "Push-to-Exit Sensor Button", "Power Backup Battery Included"],
-    serviceType: "Access & Security"
-  },
-  {
-    id: "srv-9",
-    name: "Fingerprint Attendance Machine",
-    iconName: "Fingerprint",
-    description: "Setup and employee biometric enrollment on ZKTeco and Realtime attendance devices with payroll time tracking software installation and staff shift programming.",
-    keyFeatures: ["Employee Biometric Enrollment", "Attendance Software Installation", "Monthly Excel Report Export"],
-    serviceType: "Biometrics"
-  },
-  {
-    id: "srv-10",
-    name: "Computer Networking & Structured LAN Setup",
-    iconName: "Network",
-    description: "Complete Computer Networking: Cat6 gigabit cable crimping, RJ45 patch panels, Wi-Fi router setup, gigabit switch installations, bandwidth management, and multi-room network extension.",
-    keyFeatures: ["Cat6 Gigabit Cabling & RJ45 Termination", "High Power Wi-Fi Router & Switch Setup", "MikroTik & Office LAN Configuration"],
-    serviceType: "Computer Networking",
-    popularKeywords: ["Computer Networking", "Computer Technology", "Networking", "IT & Computer Services", "Computer Accessories"]
-  },
-  {
-    id: "srv-11",
-    name: "CCTV Maintenance & Repair",
-    iconName: "ShieldCheck",
-    description: "Periodic servicing contract (AMC) or on-demand maintenance including camera lens cleaning, focus re-alignment, connector replacement, and firmware updates.",
-    keyFeatures: ["Camera Lens & Housing Cleaning", "BNC/DC Connector Replacement", "DVR/NVR Firmware Upgrade"],
-    serviceType: "Maintenance",
-    popularKeywords: ["CCTV Camera Installation and Maintenance in Rangpur", "CCTV Maintenance Rangpur", "CCTV Maintenance & Repair", "CCTV Maintenance", "Rangpur CCTV Service"]
-  },
-  {
-    id: "srv-12",
-    name: "Professional Technician, Electrician & Wiring Services",
-    iconName: "Zap",
-    description: "Complete residential, commercial and industrial electrical wiring, main switchboard installation, circuit breaker (MCB/MCCB) setup, power load distribution, and electrical fault fixing.",
-    keyFeatures: ["House & Commercial Concealed Wiring", "Main DB & Circuit Breaker Setup", "Short Circuit & Power Troubleshooting"],
-    serviceType: "Electrician",
-    popularKeywords: ["Electrician", "Shamim Electrician BD", "Electrician Rangpur", "Electrician Dinajpur", "House Wiring", "Electrical Wiring"]
-  },
-  {
-    id: "srv-13",
-    name: "Expert IT & Hardware Technician",
-    iconName: "Wrench",
-    description: "Skilled technician services for electronic hardware setup, surveillance gear servicing, UPS/IPS battery wiring, power supply replacements, and on-site technical problem solving.",
-    keyFeatures: ["Hardware Diagnostics & On-site Repair", "Power Supply & Inverter Connections", "Quick Response Technical Support"],
-    serviceType: "Technician",
-    popularKeywords: ["IT & Computer Services", "Computer Technology", "Technician", "Shamim Technician BD", "Shamim BD", "Technician Rangpur", "IT Service", "Networking"]
-  },
-  {
-    id: "srv-14",
-    name: "PABX & Office Intercom System Service",
+    id: "srv-pbx-setup-service",
+    name: "PBX Setup & Service",
+    bnName: "পিবিএক্স / ইন্টারকম সেটআপ ও সার্ভিস",
+    shortBnName: "PBX ইন্টারকম",
+    image: "/assets/aistudio/image_6aa2417e.png",
     iconName: "Phone",
-    description: "Complete PABX machine setup, intercom telephone cabling, extension programming, and telephone exchange repair for offices, institutions, hospitals, and residences across Rangpur and 8 districts.",
-    keyFeatures: ["PABX Machine Setup & Extension Programming", "Office Intercom Phone Cabling & Testing", "Telephone Exchange Repair & Troubleshooting"],
-    serviceType: "PABX & Intercom",
-    popularKeywords: ["PABX", "Intercom", "Office Intercom", "Telephone Exchange", "PABX Machine"]
+    description: "অফিস, প্রতিষ্ঠান, হাসপাতাল ও অ্যাপার্টমেন্ট ভবনে প্রফেশনাল পিবিএক্স মেশিন সেটআপ, ইন্টারকম লাইন এক্সটেনশন ওয়্যারিং এবং সার্বিক সার্ভিসিং।",
+    keyFeatures: ["PABX টেলিফোন এক্সচেঞ্জ সেটআপ", "ইন্টারকম লাইন ওয়্যারিং ও এক্সটেনশন", "দ্রুত ত্রুটি নির্ণয় ও অন-সাইট মেরামত"],
+    serviceType: "PBX Setup & Service",
+    popularKeywords: ["PBX Setup and Service", "PABX", "Intercom", "পিবিএক্স সেটআপ", "ইন্টারকম সার্ভিস"]
   },
   {
-    id: "srv-15",
-    name: "Door Access Control & Biometric Attendance System",
+    id: "srv-access-control-system",
+    name: "Access Control System",
+    bnName: "অ্যাক্সেস কন্ট্রোল সিস্টেম",
+    shortBnName: "অ্যাক্সেস কন্ট্রোল",
+    image: "/assets/aistudio/image_0c781491.png",
+    iconName: "KeyRound",
+    description: "সার্ভার রুম, অফিস ও গেটের নিরাপত্তার জন্য হেভি ডিউটি ম্যাগনেটিক ইএম ডোর লক, আরএফআইডি কার্ড ও সিকিউর পাসওয়ার্ড অ্যাক্সেস কন্ট্রোল সিস্টেম।",
+    keyFeatures: ["হেভি ডিউটি ম্যাগনেটিক ইএম লক", "পুশ-টু-এক্সিট সেন্সর বাটন", "পাওয়ার ব্যাকআপ ব্যাটারি ব্যাকআপ"],
+    serviceType: "Access Control System",
+    popularKeywords: ["Access Control System", "Door Lock", "Magnetic Lock", "অ্যাক্সেস কন্ট্রোল", "ডোর লক"]
+  },
+  {
+    id: "srv-computer-lan-networking",
+    name: "Computer LAN Networking",
+    bnName: "কম্পিউটার ল্যান নেটওয়ার্কিং",
+    shortBnName: "ল্যান নেটওয়ার্কিং",
+    image: "/assets/aistudio/image_1948d1c5.png",
+    iconName: "Network",
+    description: "অফিস, প্রতিষ্ঠান ও দোকানে দ্রুতগতির Cat6 গিগাবিট ল্যান কেবলিং, আরজে-৪৫ ক্লিপিং, রাউটার ও সুইচ কনফিগারেশন এবং মাল্টি-পিসি নেটওয়ার্কিং।",
+    keyFeatures: ["Cat6 গিগাবিট ওয়্যারিং ও RJ45 টার্মিনেশন", "রাউটার, গিগাবিট সুইচ ও অ্যাক্সেস পয়েন্ট", "অফিস ল্যান ও ফাইল শেয়ারিং সমাধান"],
+    serviceType: "Computer LAN Networking",
+    popularKeywords: ["Computer LAN Networking", "LAN", "Networking", "কম্পিউটার নেটওয়ার্কিং", "ল্যান সেটআপ"]
+  },
+  {
+    id: "srv-door-access-biometric",
+    name: "Door Access Control & Biometric Attendance",
+    bnName: "ডোর অ্যাক্সেস ও বায়োমেট্রিক হাজিরা",
+    shortBnName: "বায়োমেট্রিক হাজিরা",
+    image: "/assets/aistudio/image_899cbf9e.png",
     iconName: "Fingerprint",
-    description: "Electronic magnetic door locks, exit buttons, biometric fingerprint and face recognition access control machines, RFID cards, and automated time attendance payroll software setup in Rangpur.",
-    keyFeatures: ["Magnetic Door Lock & Push Exit Sensor", "Fingerprint & Face Recognition Setup", "Automated Attendance & Shift Software"],
-    serviceType: "Access Control",
-    popularKeywords: ["Access Control", "Fingerprint", "Door Lock", "Time Attendance", "Biometrics"]
+    description: "ডিজিটাল সিকিউর ডোর অ্যাক্সেস সহ বায়োমেট্রিক ফিঙ্গারপ্রিন্ট ও ফেস রিকগনিশন মেশিন সেটআপ এবং অটোমেটেড কর্মী হাজিরা সফটওয়্যার সমাধান।",
+    keyFeatures: ["বায়োমেট্রিক ফিঙ্গারপ্রিন্ট ও ফেস ডিভাইস", "অটোমেটেড স্টাফ হাজিরা সফটওয়্যার", "হাজিরা ও ওভারটাইম এক্সেল শিট রিপোর্ট"],
+    serviceType: "Door Access Control & Biometric Attendance",
+    popularKeywords: ["Door Access Control & Biometric Attendance", "Biometric Attendance", "Fingerprint Machine", "বায়োমেট্রিক হাজিরা", "ডোর অ্যাক্সেস"]
   },
   {
-    id: "srv-16",
-    name: "Computer & CCTV Accessories, Cables & Power Solutions",
-    iconName: "Cable",
-    description: "Original Cat6/Cat5e LAN, RG59 Coaxial cables, RJ45 connectors, crimping tools, BNC/DC pins, video balun, 12V power adapters, central power boxes, PoE switches, and PC junction accessories in Rangpur.",
-    keyFeatures: ["Pure Copper Cat6 & RG59 Coaxial Cables", "High Quality BNC/DC & RJ45 Connectors", "Computer & CCTV Accessories & Power Adapters"],
-    serviceType: "Accessories",
-    popularKeywords: ["Computer Accessories", "Computer Technology", "CCTV Cable", "RJ45 Connector", "CCTV Monitor", "CCTV Accessories", "BNC Connector"]
-  },
-  {
-    id: "srv-17",
-    name: "Computer Sales & Service",
-    iconName: "Laptop",
-    description: "Brand new & custom Desktop PC, laptop, monitor, and peripherals sales and servicing. High-performance office & gaming PC builds, RAM/SSD upgrades, and genuine parts with warranty.",
-    keyFeatures: ["Custom Desktop PC Build & Laptop Sales", "RAM, SSD & Graphics Card Hardware Upgrade", "Certified Hardware Sales & Full Warranty"],
-    serviceType: "Computer Sales & Service",
-    popularKeywords: ["Computer Sales & Service", "Computer Technology", "Computer Accessories", "IT & Computer Services", "Computer Sales & Service Rangpur"]
-  },
-  {
-    id: "srv-18",
-    name: "Computer Repair & Maintenance",
-    iconName: "Cpu",
-    description: "Professional computer repair service for desktop PCs and laptops. Motherboard chip-level servicing, Windows OS installation, virus/malware removal, power supply replacement, and thermal maintenance.",
-    keyFeatures: ["Desktop PC & Laptop Chip-level Motherboard Repair", "Windows OS Setup, Driver Installation & Antivirus", "Thermal Servicing, Fan Replacement & Hardware Diagnostics"],
-    serviceType: "Computer Repair",
-    popularKeywords: ["Computer Repair", "Computer Technology", "IT & Computer Services", "Computer Repair Rangpur", "Computer Service"]
+    id: "srv-electrician-service",
+    name: "Professional Electrician & House Wiring",
+    bnName: "ইলেকট্রিশিয়ান ও হাউজ ওয়্যারিং সার্ভিস",
+    shortBnName: "ইলেকট্রিশিয়ান সার্ভিস",
+    image: "/assets/aistudio/image_a72619c9.png",
+    iconName: "Zap",
+    description: "বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরির জন্য অভিজ্ঞ ইলেকট্রিশিয়ান সেবা, নতুন ওয়্যারিং, শর্ট সার্কিট সমাধান, সার্কিট ব্রেকার, সুইচ বোর্ড ও লাইটিং ফিটিং।",
+    keyFeatures: ["কমপ্লিট বাসা ও অফিস হাউজ ওয়্যারিং", "শর্ট সার্কিট ও বিদ্যুৎ ত্রুটি মেরামত", "সুইচ-সকেট, সার্কিট ব্রেকার ও লাইটিং ফিটিং"],
+    serviceType: "Electrician",
+    popularKeywords: ["Electrician", "House Wiring", "Electrical Service", "ইলেকট্রিশিয়ান", "হাউজ ওয়্যারিং", "ইলেকট্রিক্যাল সার্ভিস"]
   }
 ];
 

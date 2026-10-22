@@ -42,11 +42,14 @@ export interface CartItem {
 export interface ServiceItem {
   id: string;
   name: string;
+  bnName?: string;
+  image?: string;
   iconName: string;
   description: string;
   keyFeatures: string[];
   serviceType: string;
   popularKeywords?: string[];
+  shortBnName?: string;
 }
 
 export interface DistrictCoverage {

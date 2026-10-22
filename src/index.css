@@ -15,17 +15,24 @@
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'Hind Siliguri', 'Noto Sans Bengali', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background-color: #eaf4ff;
     color: #1e293b;
+    line-height: 1.5;
   }
   
-  h1, h2, h3, .font-tech {
-    font-family: 'Chakra Petch', 'Plus Jakarta Sans', sans-serif;
+  h1, h2, h3 {
+    font-family: 'Hind Siliguri', 'Noto Sans Bengali', 'Chakra Petch', 'Plus Jakarta Sans', sans-serif;
+    line-height: 1.35;
+  }
+
+  .font-tech {
+    font-family: 'Chakra Petch', 'Hind Siliguri', 'Plus Jakarta Sans', sans-serif;
   }
 
   .font-bangla {
-    font-family: 'Tiro Bangla', sans-serif;
+    font-family: 'Hind Siliguri', 'Noto Sans Bengali', 'Tiro Bangla', sans-serif;
+    line-height: 1.45;
   }
 }
 
