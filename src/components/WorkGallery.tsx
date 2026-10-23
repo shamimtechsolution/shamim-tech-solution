@@ -23,7 +23,8 @@ export const WorkGallery: React.FC = () => {
     'Access Control',
     'Fingerprint Machine',
     'Networking',
-    'Cable Installation'
+    'Cable Installation',
+    'PBX Intercom'
   ];
 
   const filteredItems = selectedCategory === 'All'
@@ -46,8 +47,8 @@ export const WorkGallery: React.FC = () => {
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech mt-1">
               Our Work Gallery
             </h2>
-            <p className="text-slate-600 text-sm mt-1 max-w-xl">
-              Inspect our high-standard CCTV installations, clean cable conduit routing, and biometric security projects.
+            <p className="text-slate-600 text-sm mt-1 max-w-xl font-bangla">
+              আমাদের সকল বাস্তব প্রজেক্ট, সিসিটিভি ক্যামেরা ইনস্টলেশন, ক্যাবলিং, বায়োমেট্রিক হাজিরা ও সিকিউরিটি সলিউশন গ্যালারি।
             </p>
           </div>
 
@@ -82,11 +83,16 @@ export const WorkGallery: React.FC = () => {
               className="group relative rounded-2xl overflow-hidden bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-sky-200/90 hover:border-cyan-500 transition-all hover:shadow-2xl hover:shadow-cyan-500/15 cursor-pointer shadow-md transform hover:-translate-y-0.5"
             >
               {/* Image */}
-              <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+              <div className="relative aspect-[4/3] bg-white flex items-center justify-center overflow-hidden border-b border-sky-100">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                    item.image.includes('69e03957') || item.image.includes('a72619c9') 
+                      ? 'object-cover object-top' 
+                      : 'object-contain p-2'
+                  }`}
+                  loading="lazy"
                 />
                 
                 {/* Category Pill */}
@@ -133,11 +139,11 @@ export const WorkGallery: React.FC = () => {
                 <X className="w-5 h-5" />
               </button>
 
-              <div className="aspect-[16/10] bg-slate-950">
+              <div className="aspect-[16/10] bg-slate-950 flex items-center justify-center p-3">
                 <img
                   src={activeItem.image}
                   alt={activeItem.title}
-                  className="w-full h-full object-cover"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
 

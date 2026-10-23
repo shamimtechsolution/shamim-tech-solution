@@ -370,87 +370,99 @@ export const INITIAL_PRODUCTS: Product[] = [
 export const SERVICES_LIST: ServiceItem[] = [
   {
     id: "srv-cctv-installation-service",
-    name: "CCTV Installation & Service",
-    bnName: "সিসিটিভি ইনস্টলেশন ও সার্ভিস",
-    shortBnName: "সিসিটিভি সার্ভিস",
+    name: "CCTV Camera Fitting & Service",
+    bnName: "সিসিটিভি ক্যামেরা ফিটিং ও সার্ভিস",
+    shortBnName: "সিসিটিভি ক্যামেরা ফিটিং ও সার্ভিস",
     image: "/assets/aistudio/image_4e9a7e85.png",
     iconName: "Camera",
     description: "বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরির জন্য নতুন সিসিটিভি ক্যামেরা ইনস্টলেশন, ক্যাবলিং, ডিভিআর সেটআপ, ত্রুটি মেরামত ও অন-সাইট নিয়মিত সার্ভিসিং।",
-    keyFeatures: ["HD সিসিটিভি ক্যামেরা ফিটিং", "ভিডিও লস ও ক্যামেরা ত্রুটি মেরামত", "মোবাইল অনলাইন ভিউ ও নিয়মিত সার্ভিসিং"],
+    keyFeatures: ["HD সিসিটিভি ক্যামেরা ফিটিং ও সার্ভিস", "ভিডিও লস ও ক্যামেরা ত্রুটি মেরামত", "মোবাইল অনলাইন ভিউ ও নিয়মিত সার্ভিসিং"],
     serviceType: "CCTV Installation & Service",
-    popularKeywords: ["CCTV Installation and Service", "CCTV Camera Installation", "CCTV Service", "সিসিটিভি ইনস্টলেশন", "সিসিটিভি সার্ভিস"]
+    popularKeywords: ["CCTV Installation and Service", "CCTV Camera Installation", "CCTV Service", "সিসিটিভি ক্যামেরা ফিটিং ও সার্ভিস", "সিসিটিভি সার্ভিস"]
   },
   {
     id: "srv-ip-camera-installation-service",
-    name: "IP Camera Installation & Service",
-    bnName: "আইপি ক্যামেরা ইনস্টলেশন ও সার্ভিস",
-    shortBnName: "আইপি ক্যামেরা",
+    name: "IP Camera Fitting & Service",
+    bnName: "আইপি ক্যামেরা ফিটিং ও সার্ভিস",
+    shortBnName: "আইপি ক্যামেরা ফিটিং ও সার্ভিস",
     image: "/assets/aistudio/image_bde3dd9d.png",
     iconName: "Wifi",
     description: "উচ্চ ক্ষমতাসম্পন্ন ওয়াইফাই ও পিওই (PoE) আইপি ক্যামেরা সেটআপ, এনভিআর কনফিগারেশন, ৩৬০ ডিগ্রি ভিউ এবং মোবাইল ক্লাউড রিমোট অ্যাক্সেস সার্ভিস।",
     keyFeatures: ["PoE ও ওয়াইফাই আইপি ক্যামেরা সেটআপ", "NVR কনফিগারেশন ও ক্লাউড সিঙ্ক", "মোবাইল লাইভ ভিউ ও ২-ওয়ে অডিও"],
     serviceType: "IP Camera Installation & Service",
-    popularKeywords: ["IP Camera Installation & Service", "IP Camera", "WiFi Camera", "আইপি ক্যামেরা", "আইপি ক্যামেরা সার্ভিস"]
+    popularKeywords: ["IP Camera Installation & Service", "IP Camera", "WiFi Camera", "আইপি ক্যামেরা ফিটিং ও সার্ভিস", "আইপি ক্যামেরা"]
+  },
+  {
+    id: "srv-online-view",
+    name: "DVR / NVR Online View",
+    bnName: "DVR / NVR অনলাইন ভিউ",
+    shortBnName: "DVR / NVR অনলাইন ভিউ",
+    image: "/assets/aistudio/image_affeb060.png",
+    iconName: "Smartphone",
+    description: "মোবাইল ফোন ও কম্পিউটারে বিশ্বের যেকোনো প্রান্ত থেকে সিসিটিভি ক্যামেরা ও ডিভিআরের লাইভ ফুটেজ রিয়েল-টাইম দেখার হাই-স্পিড অনলাইন কনফিগারেশন।",
+    keyFeatures: ["মোবাইলে HD লাইভ ভিউ ও রিমোট অ্যাক্সেস", "ক্লাউড P2P ও স্ট্যাটিক আইপি সেটআপ", "অ্যালার্ম নোটিফিকেশন ও প্লেব্যাক ব্যাকআপ"],
+    serviceType: "DVR / NVR Online View",
+    popularKeywords: ["DVR NVR Online View", "CCTV Mobile View", "Online Camera View", "অনলাইন ভিউ", "মোবাইল সিসিটিভি ভিউ", "DVR / NVR অনলাইন ভিউ", "Online View"]
   },
   {
     id: "srv-pbx-setup-service",
     name: "PBX Setup & Service",
-    bnName: "পিবিএক্স / ইন্টারকম সেটআপ ও সার্ভিস",
-    shortBnName: "PBX ইন্টারকম",
+    bnName: "PBX ও ইন্টারকম সেটআপ",
+    shortBnName: "PBX ও ইন্টারকম সেটআপ",
     image: "/assets/aistudio/image_6aa2417e.png",
     iconName: "Phone",
     description: "অফিস, প্রতিষ্ঠান, হাসপাতাল ও অ্যাপার্টমেন্ট ভবনে প্রফেশনাল পিবিএক্স মেশিন সেটআপ, ইন্টারকম লাইন এক্সটেনশন ওয়্যারিং এবং সার্বিক সার্ভিসিং।",
     keyFeatures: ["PABX টেলিফোন এক্সচেঞ্জ সেটআপ", "ইন্টারকম লাইন ওয়্যারিং ও এক্সটেনশন", "দ্রুত ত্রুটি নির্ণয় ও অন-সাইট মেরামত"],
     serviceType: "PBX Setup & Service",
-    popularKeywords: ["PBX Setup and Service", "PABX", "Intercom", "পিবিএক্স সেটআপ", "ইন্টারকম সার্ভিস"]
+    popularKeywords: ["PBX Setup and Service", "PABX", "Intercom", "PBX ও ইন্টারকম সেটআপ", "ইন্টারকম"]
   },
   {
     id: "srv-access-control-system",
     name: "Access Control System",
-    bnName: "অ্যাক্সেস কন্ট্রোল সিস্টেম",
-    shortBnName: "অ্যাক্সেস কন্ট্রোল",
+    bnName: "অ্যাক্সেস কন্ট্রোল ডোর লক",
+    shortBnName: "অ্যাক্সেস কন্ট্রোল ডোর লক",
     image: "/assets/aistudio/image_0c781491.png",
     iconName: "KeyRound",
     description: "সার্ভার রুম, অফিস ও গেটের নিরাপত্তার জন্য হেভি ডিউটি ম্যাগনেটিক ইএম ডোর লক, আরএফআইডি কার্ড ও সিকিউর পাসওয়ার্ড অ্যাক্সেস কন্ট্রোল সিস্টেম।",
     keyFeatures: ["হেভি ডিউটি ম্যাগনেটিক ইএম লক", "পুশ-টু-এক্সিট সেন্সর বাটন", "পাওয়ার ব্যাকআপ ব্যাটারি ব্যাকআপ"],
     serviceType: "Access Control System",
-    popularKeywords: ["Access Control System", "Door Lock", "Magnetic Lock", "অ্যাক্সেস কন্ট্রোল", "ডোর লক"]
+    popularKeywords: ["Access Control System", "Door Lock", "Magnetic Lock", "অ্যাক্সেস কন্ট্রোল ডোর লক", "ডোর লক"]
   },
   {
     id: "srv-computer-lan-networking",
     name: "Computer LAN Networking",
-    bnName: "কম্পিউটার ল্যান নেটওয়ার্কিং",
-    shortBnName: "ল্যান নেটওয়ার্কিং",
+    bnName: "কম্পিউটার LAN নেটওয়ার্ক",
+    shortBnName: "কম্পিউটার LAN নেটওয়ার্ক",
     image: "/assets/aistudio/image_1948d1c5.png",
     iconName: "Network",
     description: "অফিস, প্রতিষ্ঠান ও দোকানে দ্রুতগতির Cat6 গিগাবিট ল্যান কেবলিং, আরজে-৪৫ ক্লিপিং, রাউটার ও সুইচ কনফিগারেশন এবং মাল্টি-পিসি নেটওয়ার্কিং।",
     keyFeatures: ["Cat6 গিগাবিট ওয়্যারিং ও RJ45 টার্মিনেশন", "রাউটার, গিগাবিট সুইচ ও অ্যাক্সেস পয়েন্ট", "অফিস ল্যান ও ফাইল শেয়ারিং সমাধান"],
     serviceType: "Computer LAN Networking",
-    popularKeywords: ["Computer LAN Networking", "LAN", "Networking", "কম্পিউটার নেটওয়ার্কিং", "ল্যান সেটআপ"]
+    popularKeywords: ["Computer LAN Networking", "LAN", "Networking", "কম্পিউটার LAN নেটওয়ার্ক", "ল্যান সেটআপ"]
   },
   {
     id: "srv-door-access-biometric",
     name: "Door Access Control & Biometric Attendance",
-    bnName: "ডোর অ্যাক্সেস ও বায়োমেট্রিক হাজিরা",
-    shortBnName: "বায়োমেট্রিক হাজিরা",
+    bnName: "বায়োমেট্রিক হাজিরা মেশিন",
+    shortBnName: "বায়োমেট্রিক হাজিরা মেশিন",
     image: "/assets/aistudio/image_899cbf9e.png",
     iconName: "Fingerprint",
     description: "ডিজিটাল সিকিউর ডোর অ্যাক্সেস সহ বায়োমেট্রিক ফিঙ্গারপ্রিন্ট ও ফেস রিকগনিশন মেশিন সেটআপ এবং অটোমেটেড কর্মী হাজিরা সফটওয়্যার সমাধান।",
     keyFeatures: ["বায়োমেট্রিক ফিঙ্গারপ্রিন্ট ও ফেস ডিভাইস", "অটোমেটেড স্টাফ হাজিরা সফটওয়্যার", "হাজিরা ও ওভারটাইম এক্সেল শিট রিপোর্ট"],
     serviceType: "Door Access Control & Biometric Attendance",
-    popularKeywords: ["Door Access Control & Biometric Attendance", "Biometric Attendance", "Fingerprint Machine", "বায়োমেট্রিক হাজিরা", "ডোর অ্যাক্সেস"]
+    popularKeywords: ["Door Access Control & Biometric Attendance", "Biometric Attendance", "Fingerprint Machine", "বায়োমেট্রিক হাজিরা মেশিন", "হাজিরা মেশিন"]
   },
   {
     id: "srv-electrician-service",
     name: "Professional Electrician & House Wiring",
-    bnName: "ইলেকট্রিশিয়ান ও হাউজ ওয়্যারিং সার্ভিস",
-    shortBnName: "ইলেকট্রিশিয়ান সার্ভিস",
+    bnName: "হাউস ও অফিস ওয়্যারিং",
+    shortBnName: "হাউস ও অফিস ওয়্যারিং",
     image: "/assets/aistudio/image_a72619c9.png",
     iconName: "Zap",
     description: "বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরির জন্য অভিজ্ঞ ইলেকট্রিশিয়ান সেবা, নতুন ওয়্যারিং, শর্ট সার্কিট সমাধান, সার্কিট ব্রেকার, সুইচ বোর্ড ও লাইটিং ফিটিং।",
     keyFeatures: ["কমপ্লিট বাসা ও অফিস হাউজ ওয়্যারিং", "শর্ট সার্কিট ও বিদ্যুৎ ত্রুটি মেরামত", "সুইচ-সকেট, সার্কিট ব্রেকার ও লাইটিং ফিটিং"],
     serviceType: "Electrician",
-    popularKeywords: ["Electrician", "House Wiring", "Electrical Service", "ইলেকট্রিশিয়ান", "হাউজ ওয়্যারিং", "ইলেকট্রিক্যাল সার্ভিস"]
+    popularKeywords: ["Electrician", "House Wiring", "Electrical Service", "হাউস ও অফিস ওয়্যারিং", "ইলেকট্রিশিয়ান", "হাউজ ওয়্যারিং"]
   }
 ];
 
@@ -549,8 +561,8 @@ export const SOFTWARE_DOWNLOADS: DownloadItem[] = [
 ];
 
 export const DEFAULT_SITE_CONTENT: SiteContent = {
-  heroHeadline: "Professional CCTV & Security System Solutions",
-  heroSubheadline: "Sales, installation, repair, and remote mobile viewing setup in Haragach, Rangpur and nearby areas. High-quality security cameras, DVR, NVR, access control, and biometric solutions with dedicated after-sales support.",
+  heroHeadline: "প্রফেশনাল CCTV, টেকনিশিয়ান, ইলেকট্রিশিয়ান ও সিকিউরিটি সলিউশন",
+  heroSubheadline: "রংপুর বিভাগজুড়ে বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরিতে সিসিটিভি ক্যামেরা ইনস্টলেশন, আইপি ক্যামেরা, মোবাইলের মাধ্যমে অনলাইন লাইভ ভিউ, পিবিএক্স ইন্টারকম সেটআপ, অ্যাক্সেস কন্ট্রোল ও ডোর লক সিস্টেম, বায়োমেট্রিক হাজিরা মেশিন, কম্পিউটার ল্যান নেটওয়ার্কিং, হাউজ ওয়্যারিং এবং অভিজ্ঞ টেকনিশিয়ান ও ইলেকট্রিশিয়ানের মাধ্যমে সেবা প্রদান করা হয়। পাশাপাশি অরিজিনাল প্রোডাক্ট ও এক্সেসরিজ বিক্রয় করা হয়।",
   noticeTicker: "",
   bannerBadge: "Official CCTV & Security Service Provider • Haragach, Rangpur",
   emergencySupportText: "Need immediate CCTV or DVR troubleshooting in Haragach or Rangpur? Call technician Shamim at 01790139333 / 01865321530 for on-site visit."
@@ -559,59 +571,67 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
 export const WORK_GALLERY: GalleryItem[] = [
   {
     id: "gal-1",
-    title: "Commercial Warehouse High-Angle CCTV",
+    title: "Professional CCTV Camera & DVR Setup",
     category: "CCTV Installation",
-    image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/aistudio/image_4e9a7e85.png",
     location: "Haragach, Rangpur",
-    description: "Installed 12 high-resolution weatherproof bullet cameras covering warehouse perimeter and truck loading docks with night vision IR."
+    description: "Installed high-resolution weatherproof cameras and DVR with 24/7 night vision and remote mobile view."
   },
   {
     id: "gal-2",
-    title: "Enterprise 16-Channel DVR & Display Rack",
+    title: "STS Surveillance Control & Workstation",
     category: "DVR/NVR Setup",
-    image: "https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&w=800&q=80",
-    location: "Sarai Bazar, Rangpur",
-    description: "Structured DVR rack mount with 4TB surveillance HDD, HDMI split matrix, and 24/7 uninterrupted online mobile view setup."
+    image: "/assets/aistudio/image_69e03957.png",
+    location: "Haragach, Rangpur",
+    description: "Live camera monitoring station, multi-channel DVR/NVR configuration, PoE networking rack, and workstation setup by Shamim Islam."
   },
   {
     id: "gal-3",
-    title: "Biometric Fingerprint & Magnetic Door Lock",
+    title: "Digital Access Control & Magnetic EM Lock",
     category: "Access Control",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/aistudio/image_0c781491.png",
     location: "Rangpur Sadar",
-    description: "Heavy duty magnetic door lock with emergency release and biometric entry installed for private company accounting chamber."
+    description: "Heavy duty magnetic door lock with RFID card reader, digital touch keypad, and secure power backup system."
   },
   {
     id: "gal-4",
-    title: "Structured Cat6 Network & Server Cabinet",
+    title: "Gigabit LAN & Computer Networking",
     category: "Networking",
-    image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/aistudio/image_1948d1c5.png",
     location: "Haragach, Rangpur",
-    description: "Gigabit switch panel, Cat6 termination, color-coded patch cables, and UPS backup for zero downtime security network."
+    description: "Structured Cat6 network wiring, Gigabit switch and router setup, LAN file sharing, and office network troubleshooting."
   },
   {
     id: "gal-5",
-    title: "High-Definition 360° PTZ IP Camera",
+    title: "Hikvision Full HD IP Camera Setup",
     category: "IP Camera Installation",
-    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/aistudio/image_bde3dd9d.png",
     location: "Saidpur Road, Rangpur",
-    description: "4K Motorized PTZ camera installation with auto-tracking, optical zoom, and remote pan-tilt control via mobile phone."
+    description: "High-definition PoE IP Camera installation with H.265+ smart compression, crystal clear night vision, and cloud remote view."
   },
   {
     id: "gal-6",
-    title: "Clean PVC Conduit Cable Routing",
+    title: "House Wiring & Electrical Solution",
     category: "Cable Installation",
-    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/aistudio/image_a72619c9.png",
     location: "Haragach, Rangpur",
-    description: "Aesthetic cable routing inside industrial grade PVC conduits to prevent wire degradation and ensure long lasting durability."
+    description: "Professional house wiring, circuit breaker setup, aesthetic switch-socket board fitting, and short circuit troubleshooting."
   },
   {
     id: "gal-7",
-    title: "Staff Fingerprint Attendance Machine Setup",
+    title: "ZKTeco Biometric Fingerprint Attendance",
     category: "Fingerprint Machine",
-    image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=800&q=80",
+    image: "/assets/aistudio/image_899cbf9e.png",
     location: "Satmata, Rangpur",
-    description: "ZKTeco biometric terminal configured with shift timetables, overtime calculation, and local network sync."
+    description: "ZKTeco biometric terminal configured with shift timetables, staff fingerprint registration, and automatic Excel report sync."
+  },
+  {
+    id: "gal-8",
+    title: "PABX Machine & Office Intercom System",
+    category: "PBX Intercom",
+    image: "/assets/aistudio/image_6aa2417e.png",
+    location: "Rangpur City",
+    description: "Multi-line PABX telephone exchange setup, intercom extension cabling, and high-clarity voice communication system."
   }
 ];
 

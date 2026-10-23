@@ -145,7 +145,8 @@ export interface GalleryItem {
     | 'Access Control'
     | 'Fingerprint Machine'
     | 'Networking'
-    | 'Cable Installation';
+    | 'Cable Installation'
+    | 'PBX Intercom';
   image: string;
   location: string;
   description: string;
