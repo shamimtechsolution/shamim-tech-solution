@@ -89,13 +89,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div>
                 <span className="text-xs text-slate-400 block">Unit Price (BDT)</span>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl sm:text-3xl font-black text-cyan-400 font-tech">
-                    ৳ {product.price.toLocaleString('en-US')}
-                  </span>
-                  {product.originalPrice && (
-                    <span className="text-sm text-slate-500 line-through">
-                      ৳ {product.originalPrice.toLocaleString('en-US')}
+                  {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                    <span className="text-xl sm:text-2xl font-black text-amber-400 font-tech">
+                      Contact for Price
                     </span>
+                  ) : (
+                    <>
+                      <span className="text-2xl sm:text-3xl font-black text-cyan-400 font-tech">
+                        ৳ {product.price.toLocaleString('en-US')}
+                      </span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-slate-500 line-through">
+                          ৳ {product.originalPrice.toLocaleString('en-US')}
+                        </span>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
@@ -129,42 +137,66 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               </div>
             </div>
 
-            {/* Buttons */}
+            {/* Buttons (Conditional on Price Mode) */}
             <div className="space-y-2 pt-2">
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  onClick={() => {
-                    onAddToCart(product);
-                    onClose();
-                  }}
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.3)]"
-                >
-                  <ShoppingCart className="w-4 h-4" />
-                  <span>Add to Cart</span>
-                </button>
+              {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                <>
+                  <a
+                    href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${encodeURIComponent(`Hello Shamim Tech Solution, I am inquiring about price and details for: ${product.name} (Category: ${product.category}).`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-xs sm:text-sm transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]"
+                  >
+                    <MessageSquare className="w-4 h-4 fill-current" />
+                    <span>WhatsApp-এ দাম ও বিস্তারিত জানুন ({COMPANY_INFO.phoneFormatted})</span>
+                  </a>
 
-                <button
-                  onClick={() => {
-                    onBuyNow(product);
-                    onClose();
-                  }}
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-lg"
-                >
-                  <Zap className="w-4 h-4" />
-                  <span>Buy Now</span>
-                </button>
-              </div>
+                  <a
+                    href={`tel:${COMPANY_INFO.phone}`}
+                    className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-xs transition-all border border-slate-700"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>সরাসরি কল করে দাম জানুন: {COMPANY_INFO.phoneFormatted}</span>
+                  </a>
+                </>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => {
+                        onAddToCart(product);
+                        onClose();
+                      }}
+                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-[0_0_15px_rgba(6,182,212,0.3)]"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      <span>Add to Cart</span>
+                    </button>
 
-              {/* Direct WhatsApp Question for this Product */}
-              <a
-                href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${encodeURIComponent(`Hello Shamim Tech Solution, I am inquiring about product: ${product.name} (Price: ৳${product.price}). Is it currently available for installation in Rangpur?`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-950/60 hover:bg-emerald-600/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-semibold text-xs transition-all"
-              >
-                <MessageSquare className="w-4 h-4 fill-current" />
-                <span>Ask Technician on WhatsApp (01865321530)</span>
-              </a>
+                    <button
+                      onClick={() => {
+                        onBuyNow(product);
+                        onClose();
+                      }}
+                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-lg"
+                    >
+                      <Zap className="w-4 h-4" />
+                      <span>Buy Now</span>
+                    </button>
+                  </div>
+
+                  {/* Direct WhatsApp Question for this Product */}
+                  <a
+                    href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${encodeURIComponent(`Hello Shamim Tech Solution, I am inquiring about product: ${product.name} (Price: ৳${product.price}). Is it currently available for installation in Rangpur?`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-950/60 hover:bg-emerald-600/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-semibold text-xs transition-all"
+                  >
+                    <MessageSquare className="w-4 h-4 fill-current" />
+                    <span>Ask Technician on WhatsApp ({COMPANY_INFO.phoneFormatted})</span>
+                  </a>
+                </>
+              )}
             </div>
 
           </div>

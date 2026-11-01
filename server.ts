@@ -11,7 +11,7 @@ import {
   SOFTWARE_DOWNLOADS as DEFAULT_DOWNLOADS,
   DEFAULT_SITE_CONTENT 
 } from './src/data/companyData';
-import { Product, DownloadItem, CompanyInfo, SiteContent, SavedOrder } from './src/types';
+import { Product, ProductCategory, DownloadItem, CompanyInfo, SiteContent, SavedOrder } from './src/types';
 
 dotenv.config();
 
@@ -930,27 +930,86 @@ async function startServer() {
 
   // --- PRODUCTS CRUD ---
 
+  // Helper to persist base64 uploaded product images as permanent files on disk
+  const persistProductImage = (imageStr: string | undefined, identifier: string): string => {
+    if (!imageStr || !imageStr.trim()) {
+      return 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80';
+    }
+    const trimmed = imageStr.trim();
+    if (trimmed.startsWith('data:image/')) {
+      try {
+        const match = trimmed.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
+        if (match) {
+          let ext = match[1].toLowerCase();
+          if (ext === 'jpeg') ext = 'jpg';
+          if (ext === 'svg+xml') ext = 'svg';
+          const buffer = Buffer.from(match[2], 'base64');
+          const cleanId = String(identifier).replace(/[^a-zA-Z0-9_-]/g, '');
+          const filename = `prod-${cleanId}-${Date.now()}.${ext}`;
+          const targetDir = path.join(process.cwd(), 'public', 'uploads', 'products');
+          if (!fs.existsSync(targetDir)) {
+            fs.mkdirSync(targetDir, { recursive: true });
+          }
+          fs.writeFileSync(path.join(targetDir, filename), buffer);
+          console.log(`[Upload] Permanently saved user product image to /uploads/products/${filename} (${buffer.length} bytes)`);
+          return `/uploads/products/${filename}`;
+        }
+      } catch (err) {
+        console.error('[Upload] Error converting base64 product image:', err);
+      }
+    }
+    return trimmed;
+  };
+
   // Add Product
   app.post('/api/admin/products', requireAdminAuth, (req: Request, res: Response) => {
-    const { name, category, brand, price, originalPrice, specs, description, inStock, isActive, image, features, warranty, modelNumber } = req.body;
+    const { name, category, brand, price, originalPrice, specs, description, inStock, isActive, image, features, warranty, modelNumber, priceType, isContactForPrice } = req.body;
 
-    if (!name || !category || price === undefined) {
-      res.status(400).json({ success: false, error: 'Product name, category, and price are required' });
+    const isContact = priceType === 'contact' || isContactForPrice === true;
+    if (!name || (!isContact && price === undefined)) {
+      res.status(400).json({ success: false, error: 'Product name is required, along with price for Fixed Price products' });
       return;
     }
 
+    // Respect the admin's chosen category directly without overriding with keyword guessing
+    const VALID_CATEGORIES: ProductCategory[] = [
+      'CCTV Camera', 'DVR', 'NVR', 'Hard Disk (HDD)', 'Monitor',
+      'Access Control', 'Fingerprint Machine', 'CCTV Cable',
+      'Power Supply/Adapter', 'Networking Products', 'Other Accessories'
+    ];
+    let finalCategory: ProductCategory = 'Other Accessories';
+    if (category && VALID_CATEGORIES.includes(category as ProductCategory)) {
+      finalCategory = category as ProductCategory;
+    } else if (category && typeof category === 'string' && category.trim()) {
+      finalCategory = category.trim() as ProductCategory;
+    } else {
+      // Fallback only if category was completely missing
+      const textLower = `${String(name || '')} ${String(modelNumber || '')} ${String(specs || '')}`.toLowerCase();
+      if (/\bnvr\b/i.test(textLower)) finalCategory = 'NVR';
+      else if (/\bdvr\b/i.test(textLower) || /\bxvr\b/i.test(textLower)) finalCategory = 'DVR';
+      else if (textLower.includes('hard disk') || /\bhdd\b/i.test(textLower)) finalCategory = 'Hard Disk (HDD)';
+      else if (textLower.includes('fingerprint') || textLower.includes('attendance')) finalCategory = 'Fingerprint Machine';
+      else if (textLower.includes('access control')) finalCategory = 'Access Control';
+      else if (textLower.includes('camera')) finalCategory = 'CCTV Camera';
+    }
+
+    const productId = `prod-${Date.now()}`;
+    const savedImage = persistProductImage(image, productId);
+
     const newProduct: Product = {
-      id: `prod-${Date.now()}`,
+      id: productId,
       name: String(name).trim(),
-      category,
+      category: finalCategory,
       brand: brand ? String(brand).trim() : 'STS',
-      price: Number(price) || 0,
-      originalPrice: originalPrice ? Number(originalPrice) : undefined,
+      price: isContact ? 0 : (Number(price) || 0),
+      priceType: isContact ? 'contact' : 'fixed',
+      isContactForPrice: isContact,
+      originalPrice: (!isContact && originalPrice) ? Number(originalPrice) : undefined,
       specs: specs ? String(specs).trim() : '',
       description: description ? String(description).trim() : '',
       inStock: inStock !== false,
       isActive: isActive !== false,
-      image: image || 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
+      image: savedImage,
       features: Array.isArray(features) ? features : [],
       rating: 5.0,
       warranty: warranty ? String(warranty).trim() : '1 Year Warranty',
@@ -974,12 +1033,30 @@ async function startServer() {
     }
 
     const current = db.products[index];
+    const isContact = req.body.isContactForPrice !== undefined 
+      ? Boolean(req.body.isContactForPrice) 
+      : (req.body.priceType === 'contact' ? true : (req.body.priceType === 'fixed' ? false : (current.isContactForPrice || current.priceType === 'contact')));
+
+    // Respect the admin's chosen category directly when editing
+    const updatedCategory = (req.body.category && typeof req.body.category === 'string' && req.body.category.trim())
+      ? (req.body.category.trim() as ProductCategory)
+      : current.category;
+
+    let finalImage = current.image;
+    if (req.body.image !== undefined && String(req.body.image).trim()) {
+      finalImage = persistProductImage(String(req.body.image).trim(), id);
+    }
+
     const updated: Product = {
       ...current,
       ...req.body,
       id, // keep original ID
-      price: req.body.price !== undefined ? Number(req.body.price) : current.price,
-      originalPrice: req.body.originalPrice !== undefined ? Number(req.body.originalPrice) : current.originalPrice,
+      image: finalImage,
+      category: updatedCategory,
+      price: isContact ? 0 : (req.body.price !== undefined ? Number(req.body.price) : current.price),
+      priceType: isContact ? 'contact' : 'fixed',
+      isContactForPrice: isContact,
+      originalPrice: (!isContact && req.body.originalPrice !== undefined) ? (req.body.originalPrice ? Number(req.body.originalPrice) : undefined) : current.originalPrice,
       inStock: req.body.inStock !== undefined ? Boolean(req.body.inStock) : current.inStock,
       isActive: req.body.isActive !== undefined ? Boolean(req.body.isActive) : current.isActive
     };

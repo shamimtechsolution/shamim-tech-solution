@@ -18,6 +18,8 @@ export interface Product {
   category: ProductCategory;
   brand: string;
   price: number;
+  priceType?: 'fixed' | 'contact';
+  isContactForPrice?: boolean;
   regularPrice?: number;
   originalPrice?: number;
   specs: string;

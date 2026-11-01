@@ -116,7 +116,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         </button>
                       </div>
                       <span className="text-[11px] text-cyan-400 font-semibold font-tech">
-                        ৳ {product.price.toLocaleString('en-US')}
+                        {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                          <span className="text-amber-400 font-bold">Contact for Price</span>
+                        ) : (
+                          `৳ ${product.price.toLocaleString('en-US')}`
+                        )}
                       </span>
                     </div>
 
@@ -143,7 +147,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       </div>
 
                       <span className="text-xs font-bold text-slate-200 font-mono">
-                        ৳ {(product.price * quantity).toLocaleString('en-US')}
+                        {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                          <span className="text-amber-400 font-bold">Price on Contact</span>
+                        ) : (
+                          `৳ ${(product.price * quantity).toLocaleString('en-US')}`
+                        )}
                       </span>
                     </div>
                   </div>

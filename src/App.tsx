@@ -38,8 +38,19 @@ export default function App() {
     }
   });
 
-  // Dynamic Content States synchronized with backend database
-  const [products, setProducts] = useState<Product[]>(PRODUCTS_CATALOG);
+  // Dynamic Content States synchronized with backend database and localStorage backup
+  const [products, setProducts] = useState<Product[]>(() => {
+    try {
+      const stored = localStorage.getItem('sts_custom_products');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      }
+    } catch {}
+    return PRODUCTS_CATALOG;
+  });
   const [downloads, setDownloads] = useState<DownloadItem[]>(SOFTWARE_DOWNLOADS);
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo>(COMPANY_INFO);
   const [siteContent, setSiteContent] = useState<SiteContent>(DEFAULT_SITE_CONTENT);
@@ -85,7 +96,7 @@ export default function App() {
   const [customerAuthMode, setCustomerAuthMode] = useState<'register' | 'login' | 'forgot'>('register');
   const [isCustomerProfileOpen, setIsCustomerProfileOpen] = useState(false);
 
-  // Load public data from live Express backend
+  // Load public data from live Express backend with localStorage persistence
   const loadPublicData = useCallback(async () => {
     try {
       const res = await fetch('/api/public/data');
@@ -94,6 +105,9 @@ export default function App() {
         const data = await res.json();
         if (data.products && Array.isArray(data.products) && data.products.length > 0) {
           setProducts(data.products);
+          try {
+            localStorage.setItem('sts_custom_products', JSON.stringify(data.products));
+          } catch {}
         }
         if (data.downloads && Array.isArray(data.downloads) && data.downloads.length > 0) {
           setDownloads(data.downloads);
@@ -104,11 +118,44 @@ export default function App() {
         if (data.siteContent) {
           setSiteContent(data.siteContent);
         }
+      } else {
+        const stored = localStorage.getItem('sts_custom_products');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) setProducts(parsed);
+        }
       }
     } catch (err) {
       console.warn('Backend public data fetch note: using local fallback defaults.', err);
+      const stored = localStorage.getItem('sts_custom_products');
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) setProducts(parsed);
+        } catch {}
+      }
     }
   }, []);
+
+  // Listen to manual product updates from admin dashboard
+  useEffect(() => {
+    const handleProductsUpdated = () => {
+      try {
+        const stored = localStorage.getItem('sts_custom_products');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setProducts(parsed);
+          }
+        }
+      } catch {}
+      loadPublicData();
+    };
+    window.addEventListener('sts_products_updated', handleProductsUpdated);
+    return () => {
+      window.removeEventListener('sts_products_updated', handleProductsUpdated);
+    };
+  }, [loadPublicData]);
 
   // Verify Admin Session on mount or token change
   useEffect(() => {

@@ -12,9 +12,15 @@ import {
   Sparkles,
   Package,
   ShieldCheck,
-  Tag
+  Tag,
+  ChevronDown,
+  ChevronUp,
+  MessageSquare,
+  Phone
 } from 'lucide-react';
 import { Product, ProductCategory } from '../types';
+import { COMPANY_INFO } from '../data/companyData';
+import { matchesProductCategory, getProductCategory } from '../utils/categoryHelper';
 
 interface ProductShopProps {
   products: Product[];
@@ -41,6 +47,10 @@ const CATEGORIES: ProductCategory[] = [
 ];
 
 const POPULAR_SEARCH_TAGS = [
+  'Video Balun',
+  'Power Supply',
+  'DVR / NVR',
+  'Hard Disk',
   'Rangpur CCTV',
   'CCTV Rangpur',
   'Shamim BD',
@@ -48,14 +58,11 @@ const POPULAR_SEARCH_TAGS = [
   'CCTV Camera Installation',
   'IP Camera',
   'WiFi Camera',
-  'DVR / NVR',
   'CCTV Cable',
   'RJ45 Connector',
   'CCTV Monitor',
   'PABX Intercom',
-  'Access Control',
-  'Electrician',
-  'CCTV Technology'
+  'Access Control'
 ];
 
 export const ProductShop: React.FC<ProductShopProps> = ({
@@ -73,8 +80,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
   // Filter products by category and search keyword (intelligent multi-token search)
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
-      const matchesCategory = 
-        selectedCategory === 'All Products' || item.category === selectedCategory;
+      const matchesCategory = matchesProductCategory(item, selectedCategory);
 
       if (!matchesCategory) return false;
       if (!searchTerm.trim()) return true;
@@ -105,17 +111,28 @@ export const ProductShop: React.FC<ProductShopProps> = ({
       // Otherwise, all non-location tokens must match the product
       return productTokens.every(t => productText.includes(t));
     }).sort((a, b) => {
-      if (sortBy === 'price-asc') return a.price - b.price;
-      if (sortBy === 'price-desc') return b.price - a.price;
+      const aIsContact = a.priceType === 'contact' || a.isContactForPrice;
+      const bIsContact = b.priceType === 'contact' || b.isContactForPrice;
+      if (sortBy === 'price-asc') {
+        if (aIsContact && !bIsContact) return 1;
+        if (!aIsContact && bIsContact) return -1;
+        return a.price - b.price;
+      }
+      if (sortBy === 'price-desc') {
+        if (aIsContact && !bIsContact) return 1;
+        if (!aIsContact && bIsContact) return -1;
+        return b.price - a.price;
+      }
       return 0;
     });
   }, [products, selectedCategory, searchTerm, sortBy]);
 
-  // Count per category
+  // Count per category with smart category matching
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = { 'All Products': products.length };
-    products.forEach((p) => {
-      counts[p.category] = (counts[p.category] || 0) + 1;
+    CATEGORIES.forEach(cat => {
+      if (cat === 'All Products') return;
+      counts[cat] = products.filter(p => matchesProductCategory(p, cat)).length;
     });
     return counts;
   }, [products]);
@@ -233,6 +250,69 @@ export const ProductShop: React.FC<ProductShopProps> = ({
               </button>
             );
           })}
+        </div>
+
+        {/* Mobile Product Categories Drawer/Card (PC এর মতো মোবাইলেও সম্পূর্ণ ক্যাটাগরি তালিকা) */}
+        <div className="lg:hidden mb-5">
+          <div className="bg-white border-2 border-sky-300 rounded-2xl p-3 shadow-md">
+            <button
+              onClick={() => setMobileCategoryOpen(!mobileCategoryOpen)}
+              className="w-full flex items-center justify-between text-left cursor-pointer"
+            >
+              <div className="flex items-center gap-2">
+                <div className="p-1.5 rounded-lg bg-sky-100 text-cyan-700">
+                  <Layers className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-slate-900 font-tech">Product Categories</div>
+                  <div className="text-[11px] text-cyan-700 font-semibold">
+                    বর্তমান: <span className="underline">{selectedCategory}</span> ({categoryCounts[selectedCategory] || 0})
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] font-bold text-cyan-700 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-200">
+                  {mobileCategoryOpen ? 'বন্ধ করুন' : 'সব ক্যাটাগরি দেখুন'}
+                </span>
+                {mobileCategoryOpen ? (
+                  <ChevronUp className="w-4 h-4 text-cyan-600" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-cyan-600" />
+                )}
+              </div>
+            </button>
+
+            {/* Collapsible Category Grid on Mobile */}
+            {mobileCategoryOpen && (
+              <div className="mt-3 pt-3 border-t border-sky-100 grid grid-cols-2 gap-1.5 animate-fadeIn">
+                {CATEGORIES.map((cat) => {
+                  const isSelected = selectedCategory === cat;
+                  const count = categoryCounts[cat] || 0;
+                  return (
+                    <button
+                      key={cat}
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setMobileCategoryOpen(false);
+                      }}
+                      className={`flex items-center justify-between p-2 rounded-xl text-[11px] font-semibold text-left transition-all border cursor-pointer ${
+                        isSelected
+                          ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-500 font-bold shadow-xs'
+                          : 'bg-sky-50/70 hover:bg-sky-100 text-slate-700 border-sky-200/80'
+                      }`}
+                    >
+                      <span className="truncate pr-1">{cat}</span>
+                      <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold shrink-0 ${
+                        isSelected ? 'bg-white/25 text-white' : 'bg-white text-slate-600 border border-sky-200'
+                      }`}>
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Layout with Sidebar Categories & 2-Column Responsive Product Cards Grid */}
@@ -392,7 +472,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                       {/* Content details */}
                       <div className="p-1.5 sm:p-3.5 space-y-0.5 sm:space-y-1.5">
                         <div className="text-[8px] sm:text-[10px] text-cyan-700 font-bold font-tech uppercase tracking-wider truncate">
-                          {product.category}
+                          {getProductCategory(product)}
                         </div>
 
                         <h3 
@@ -408,43 +488,79 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                           {product.specs}
                         </p>
 
-                        {/* Price Display in Bangladeshi Taka ৳ */}
-                        <div className="pt-0.5 sm:pt-1 flex flex-wrap items-baseline gap-0.5 sm:gap-2">
-                          <span className="text-[11px] sm:text-xl font-black text-cyan-800 font-tech">
-                            ৳ {product.price.toLocaleString('en-US')}
-                          </span>
-                          {(product.regularPrice || product.originalPrice) && (
-                            <span className="text-[8px] sm:text-xs text-slate-400 line-through">
-                              ৳ {(product.regularPrice || product.originalPrice)?.toLocaleString('en-US')}
+                        {/* Price Display in Bangladeshi Taka ৳ or Contact for Price */}
+                        <div className="pt-0.5 sm:pt-1 flex flex-wrap items-baseline gap-0.5 sm:gap-2 min-h-[20px] sm:min-h-[26px]">
+                          {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                            <span className="text-[10px] sm:text-xs font-bold text-amber-700 bg-amber-50 border border-amber-300/80 px-1.5 py-0.5 rounded font-tech tracking-wide inline-flex items-center">
+                              Contact for Price
                             </span>
+                          ) : (
+                            <>
+                              <span className="text-[11px] sm:text-xl font-black text-cyan-800 font-tech">
+                                ৳ {product.price.toLocaleString('en-US')}
+                              </span>
+                              {(product.regularPrice || product.originalPrice) && (
+                                <span className="text-[8px] sm:text-xs text-slate-400 line-through">
+                                  ৳ {(product.regularPrice || product.originalPrice)?.toLocaleString('en-US')}
+                                </span>
+                              )}
+                            </>
                           )}
                         </div>
                       </div>
                     </div>
 
-                    {/* Action Buttons (3-Column Mobile Optimized with Cart & Buy) */}
-                    <div className="p-1.5 sm:p-3.5 pt-0 grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-1.5">
-                      <button
-                        onClick={() => onAddToCart(product)}
-                        id={`add-to-cart-${product.id}`}
-                        className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[9px] sm:text-xs tracking-wide transition-all shadow-xs active:scale-95 cursor-pointer"
-                        title="Add to Cart"
-                      >
-                        <ShoppingCart className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 shrink-0" />
-                        <span className="sm:hidden">কার্ট</span>
-                        <span className="hidden sm:inline truncate">Add to Cart</span>
-                      </button>
+                    {/* Action Buttons (Card Bottom: Cart & Buy for fixed price; View Details & Inquire for Contact for Price) */}
+                    <div className="p-1.5 sm:p-3.5 pt-0">
+                      {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-1.5">
+                          <button
+                            onClick={() => onViewDetails(product)}
+                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-bold text-[9px] sm:text-xs tracking-wide transition-all border border-slate-700 active:scale-95 cursor-pointer"
+                            title="View Details"
+                          >
+                            <Eye className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 shrink-0" />
+                            <span className="sm:hidden">বিস্তারিত</span>
+                            <span className="hidden sm:inline truncate">Details</span>
+                          </button>
 
-                      <button
-                        onClick={() => onBuyNow(product)}
-                        id={`buy-now-${product.id}`}
-                        className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
-                        title="Buy Now"
-                      >
-                        <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />
-                        <span className="sm:hidden">কিনুন</span>
-                        <span className="hidden sm:inline truncate">Buy Now</span>
-                      </button>
+                          <a
+                            href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${encodeURIComponent(`Hello Shamim Tech Solution, I want to know the price for: ${product.name} (Category: ${product.category}).`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer text-center"
+                            title="Contact for Price on WhatsApp"
+                          >
+                            <MessageSquare className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />
+                            <span className="sm:hidden">দাম জানুন</span>
+                            <span className="hidden sm:inline truncate">দাম জানুন</span>
+                          </a>
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-1.5">
+                          <button
+                            onClick={() => onAddToCart(product)}
+                            id={`add-to-cart-${product.id}`}
+                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[9px] sm:text-xs tracking-wide transition-all shadow-xs active:scale-95 cursor-pointer"
+                            title="Add to Cart"
+                          >
+                            <ShoppingCart className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 shrink-0" />
+                            <span className="sm:hidden">কার্ট</span>
+                            <span className="hidden sm:inline truncate">Add to Cart</span>
+                          </button>
+
+                          <button
+                            onClick={() => onBuyNow(product)}
+                            id={`buy-now-${product.id}`}
+                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
+                            title="Buy Now"
+                          >
+                            <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />
+                            <span className="sm:hidden">কিনুন</span>
+                            <span className="hidden sm:inline truncate">Buy Now</span>
+                          </button>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}

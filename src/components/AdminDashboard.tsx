@@ -38,6 +38,7 @@ import {
 import { STSLogo } from './STSLogo';
 import { Product, DownloadItem, CompanyInfo, SiteContent, SavedOrder, ProductCategory, UploadedFileRecord, CustomerRecord } from '../types';
 import { INITIAL_PRODUCTS, COMPANY_INFO, DEFAULT_SITE_CONTENT, SOFTWARE_DOWNLOADS } from '../data/companyData';
+import { CATEGORY_DETAILS, detectCategoryFromText, normalizeCategory, getProductCategory } from '../utils/categoryHelper';
 
 interface AdminDashboardProps {
   token: string;
@@ -124,6 +125,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     confirmPassword: ''
   });
 
+  // Custom in-app Delete Confirmation Dialog (replacing window.confirm which is blocked in iframes)
+  const [deleteDialog, setDeleteDialog] = useState<{
+    isOpen: boolean;
+    type: 'product' | 'download' | 'file';
+    id: string;
+    title: string;
+  } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   const showNotification = (type: 'success' | 'error', message: string) => {
     setNotification({ type, message });
     setTimeout(() => {
@@ -156,6 +166,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 return stored ? JSON.parse(stored) : INITIAL_PRODUCTS;
               })();
           setProducts(loadedProducts);
+          try {
+            localStorage.setItem('sts_custom_products', JSON.stringify(loadedProducts));
+          } catch {}
           setDownloads(data.downloads && data.downloads.length > 0 ? data.downloads : SOFTWARE_DOWNLOADS);
           setCompanyInfo(data.companyInfo || COMPANY_INFO);
           setSiteContent(data.siteContent || DEFAULT_SITE_CONTENT);
@@ -228,6 +241,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       name: '',
       category: 'CCTV Camera',
       brand: 'Hikvision',
+      priceType: 'fixed',
+      isContactForPrice: false,
       price: 2500,
       originalPrice: 2800,
       specs: '1080p Full HD • Night Vision',
@@ -245,17 +260,58 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   const handleOpenEditProduct = (p: Product) => {
     setEditingProduct(p);
-    setProductForm({ ...p });
+    const isContact = p.priceType === 'contact' || p.isContactForPrice === true;
+    setProductForm({ 
+      ...p,
+      priceType: isContact ? 'contact' : 'fixed',
+      isContactForPrice: isContact,
+      price: isContact ? 0 : (p.price || 0)
+    });
     setImagePreview(p.image || '');
     setIsProductModalOpen(true);
   };
 
   const handleSaveProduct = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!productForm.name || !productForm.price || !productForm.category) {
-      showNotification('error', 'Please fill in Name, Category, and Price');
+    const isContact = productForm.priceType === 'contact' || productForm.isContactForPrice === true;
+
+    let finalName = (productForm.name || '').trim();
+    // If user filled in Model Number instead of Product Name
+    if (!finalName && productForm.modelNumber?.trim()) {
+      finalName = productForm.modelNumber.trim();
+    }
+
+    if (!finalName) {
+      showNotification('error', '⚠️ অনুগ্রহ করে উপরে পণ্যের নাম (Product Name) লিখুন');
+      const scrollEl = document.getElementById('product-modal-scroll');
+      if (scrollEl) scrollEl.scrollTo({ top: 0, behavior: 'smooth' });
+      const nameInput = document.getElementById('product-form-name-input');
+      if (nameInput) (nameInput as HTMLInputElement).focus();
       return;
     }
+
+    if (!isContact && (productForm.price === undefined || productForm.price === null || isNaN(productForm.price))) {
+      showNotification('error', 'Fixed Price এর জন্য নির্দিষ্ট মূল্য (Price) লিখুন');
+      return;
+    }
+
+    // 100% respect the category explicitly selected by the user
+    let finalCategory = productForm.category;
+    if (!finalCategory) {
+      const detected = detectCategoryFromText(`${finalName} ${productForm.modelNumber || ''}`);
+      finalCategory = detected || 'Other Accessories';
+    } else {
+      finalCategory = normalizeCategory(finalCategory);
+    }
+
+    const payload = {
+      ...productForm,
+      name: finalName,
+      category: finalCategory,
+      priceType: isContact ? 'contact' : 'fixed',
+      isContactForPrice: isContact,
+      price: isContact ? 0 : Number(productForm.price)
+    };
 
     setSaving(true);
     try {
@@ -269,7 +325,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(productForm)
+        body: JSON.stringify(payload)
       });
 
       const data = await res.json();
@@ -280,6 +336,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       showNotification('success', isEdit ? 'Product updated successfully!' : 'Product added successfully!');
       setIsProductModalOpen(false);
       await fetchAdminData();
+      try {
+        window.dispatchEvent(new Event('sts_products_updated'));
+      } catch {}
       onDataUpdated();
     } catch (err: any) {
       showNotification('error', err.message || 'Failed to save product');
@@ -288,25 +347,80 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
-  const handleDeleteProduct = async (id: string, name: string) => {
-    if (!window.confirm(`Are you sure you want to delete "${name}"?`)) return;
+  const handleDeleteProduct = (id: string, name: string) => {
+    setDeleteDialog({
+      isOpen: true,
+      type: 'product',
+      id,
+      title: name
+    });
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deleteDialog) return;
+    setIsDeleting(true);
 
     try {
-      const res = await fetch(`/api/admin/products/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
+      if (deleteDialog.type === 'product') {
+        const res = await fetch(`/api/admin/products/${deleteDialog.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Failed to delete product');
         }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Failed to delete product');
+
+        setProducts(prev => {
+          const next = prev.filter(p => p.id !== deleteDialog.id);
+          try {
+            localStorage.setItem('sts_custom_products', JSON.stringify(next));
+            window.dispatchEvent(new Event('sts_products_updated'));
+          } catch {}
+          return next;
+        });
+
+        showNotification('success', `পণ্য "${deleteDialog.title}" সফলভাবে মুছে ফেলা হয়েছে!`);
+        await fetchAdminData();
+        onDataUpdated();
+      } else if (deleteDialog.type === 'download') {
+        const res = await fetch(`/api/admin/downloads/${deleteDialog.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Failed to delete software');
+        }
+        showNotification('success', `সফটওয়্যার "${deleteDialog.title}" সফলভাবে মুছে ফেলা হয়েছে!`);
+        await fetchAdminData();
+        await fetchUploadedFiles();
+        onDataUpdated();
+      } else if (deleteDialog.type === 'file') {
+        const res = await fetch(`/api/admin/uploaded-files/${encodeURIComponent(deleteDialog.id)}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          throw new Error(data.error || 'Failed to delete file');
+        }
+        showNotification('success', `ফাইল "${deleteDialog.title}" সার্ভার স্টোরেজ থেকে স্থায়ীভাবে মুছে ফেলা হয়েছে!`);
+        await fetchUploadedFiles();
+        await fetchAdminData();
+        onDataUpdated();
       }
-      showNotification('success', 'Product deleted successfully');
-      await fetchAdminData();
-      onDataUpdated();
     } catch (err: any) {
-      showNotification('error', err.message || 'Failed to delete product');
+      showNotification('error', err.message || 'মুছে ফেলার প্রক্রিয়ায় ত্রুটি হয়েছে');
+    } finally {
+      setIsDeleting(false);
+      setDeleteDialog(null);
     }
   };
 
@@ -324,7 +438,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       const data = await res.json();
       if (!res.ok || !data.success) throw new Error(data.error);
 
-      setProducts(prev => prev.map(item => item.id === p.id ? { ...item, isActive: newStatus } : item));
+      setProducts(prev => {
+        const next = prev.map(item => item.id === p.id ? { ...item, isActive: newStatus } : item);
+        try {
+          localStorage.setItem('sts_custom_products', JSON.stringify(next));
+          window.dispatchEvent(new Event('sts_products_updated'));
+        } catch {}
+        return next;
+      });
       showNotification('success', `Product ${newStatus ? 'Activated' : 'Inactivated'}`);
       onDataUpdated();
     } catch (err: any) {
@@ -551,28 +672,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   // Permanently delete an uploaded file from server storage
-  const handleDeleteUploadedFile = async (storedName: string, displayName: string) => {
-    if (!window.confirm(`Are you sure you want to permanently delete "${displayName}" from the server storage?`)) return;
-
-    try {
-      const res = await fetch(`/api/admin/uploaded-files/${encodeURIComponent(storedName)}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Failed to delete file');
-      }
-
-      showNotification('success', `File "${displayName}" deleted from server storage.`);
-      await fetchUploadedFiles();
-      await fetchAdminData();
-      onDataUpdated();
-    } catch (err: any) {
-      showNotification('error', err.message || 'Failed to delete file');
-    }
+  const handleDeleteUploadedFile = (storedName: string, displayName: string) => {
+    setDeleteDialog({
+      isOpen: true,
+      type: 'file',
+      id: storedName,
+      title: displayName
+    });
   };
 
   // Copy URL to clipboard helper
@@ -668,27 +774,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
-  const handleDeleteDownload = async (id: string, title: string) => {
-    if (!window.confirm(`Are you sure you want to delete "${title}"? This will also remove the uploaded file from the server.`)) return;
-
-    try {
-      const res = await fetch(`/api/admin/downloads/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Failed to delete software');
-      }
-      showNotification('success', 'Software item and stored file deleted successfully');
-      await fetchAdminData();
-      await fetchUploadedFiles();
-      onDataUpdated();
-    } catch (err: any) {
-      showNotification('error', err.message || 'Failed to delete software');
-    }
+  const handleDeleteDownload = (id: string, title: string) => {
+    setDeleteDialog({
+      isOpen: true,
+      type: 'download',
+      id,
+      title
+    });
   };
 
   const handleToggleDownloadActive = async (d: DownloadItem) => {
@@ -824,7 +916,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     const matchesSearch = p.name.toLowerCase().includes(productSearch.toLowerCase()) ||
       p.brand.toLowerCase().includes(productSearch.toLowerCase()) ||
       (p.modelNumber && p.modelNumber.toLowerCase().includes(productSearch.toLowerCase()));
-    const matchesCat = productCategoryFilter === 'All' || p.category === productCategoryFilter;
+    const matchesCat = productCategoryFilter === 'All' || getProductCategory(p) === productCategoryFilter;
     return matchesSearch && matchesCat;
   });
 
@@ -1125,13 +1217,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               </td>
                               <td className="py-3 px-4">
                                 <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[11px] font-medium border border-slate-700">
-                                  {p.category}
+                                  {getProductCategory(p)}
                                 </span>
                               </td>
                               <td className="py-3 px-4">
-                                <div className="font-bold text-cyan-300 font-mono text-sm">৳{p.price.toLocaleString()}</div>
-                                {p.originalPrice && (
-                                  <div className="text-[11px] text-slate-500 line-through">৳{p.originalPrice.toLocaleString()}</div>
+                                {(p.priceType === 'contact' || p.isContactForPrice) ? (
+                                  <span className="px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-600/50 text-[11px] font-bold">
+                                    Contact for Price
+                                  </span>
+                                ) : (
+                                  <>
+                                    <div className="font-bold text-cyan-300 font-mono text-sm">৳{p.price.toLocaleString()}</div>
+                                    {p.originalPrice && (
+                                      <div className="text-[11px] text-slate-500 line-through">৳{p.originalPrice.toLocaleString()}</div>
+                                    )}
+                                  </>
                                 )}
                               </td>
                               <td className="py-3 px-4 text-center">
@@ -2281,7 +2381,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* PRODUCT ADD / EDIT MODAL */}
       {/* ======================================================== */}
       {isProductModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
+        <div id="product-modal-scroll" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
           <div className="relative w-full max-w-2xl rounded-2xl bg-gradient-to-b from-[#0b152d] to-[#050b18] border border-cyan-500/40 p-6 shadow-2xl my-8">
             <button
               onClick={() => setIsProductModalOpen(false)}
@@ -2295,66 +2395,175 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               {editingProduct ? 'Edit Product (পণ্য এডিট করুন)' : 'Add New Product (নতুন পণ্য যোগ করুন)'}
             </h3>
 
-            <form onSubmit={handleSaveProduct} className="space-y-4">
+            <form onSubmit={handleSaveProduct} noValidate className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="sm:col-span-2">
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Product Name *</label>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="text-xs font-bold text-slate-300">Product Name * (পণ্যের নাম)</label>
+                    <span className="text-[10px] text-cyan-400 font-semibold">প্রয়োজনীয় ফিল্ড</span>
+                  </div>
                   <input
+                    id="product-form-name-input"
                     type="text"
-                    required
-                    placeholder="e.g. Hikvision 2MP Dome Camera"
+                    placeholder="যেমন: Dahua 4 Channel NVR বা 12V 5A Power Supply বা Hikvision Camera"
                     value={productForm.name || ''}
-                    onChange={(e) => setProductForm({ ...productForm, name: e.target.value })}
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none"
+                    onChange={(e) => {
+                      const newName = e.target.value;
+                      const detected = detectCategoryFromText(newName);
+                      setProductForm(prev => ({
+                        ...prev,
+                        name: newName,
+                        category: detected || prev.category || 'CCTV Camera'
+                      }));
+                    }}
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Category *</label>
-                  <select
-                    value={productForm.category || 'CCTV Camera'}
-                    onChange={(e) => setProductForm({ ...productForm, category: e.target.value as ProductCategory })}
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none cursor-pointer"
-                  >
-                    {PRODUCT_CATEGORIES.map(cat => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
-                  </select>
+                {/* Prominent Visual Category Selector with Bengali Subtitles */}
+                <div className="sm:col-span-2 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-200">
+                        পণ্য ক্যাটাগরি নির্বাচন করুন (Select Product Category) *
+                      </label>
+                      <p className="text-[11px] text-slate-400 mt-0.5">
+                        যে ক্যাটাগরি বেছে নিবেন, ওয়েবসাইটে পণ্যটি ঠিক সেই ক্যাটাগরিতে দৃশ্যমান হবে।
+                      </p>
+                    </div>
+                    <span className="px-2.5 py-1 rounded-full bg-cyan-950 border border-cyan-500/40 text-cyan-300 font-bold text-xs shrink-0">
+                      নির্বাচিত: {productForm.category || 'CCTV Camera'}
+                    </span>
+                  </div>
+
+                  {/* 1-Click Selectable Category Chips */}
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-1">
+                    {CATEGORY_DETAILS.map((item) => {
+                      const isSelected = (productForm.category || 'CCTV Camera') === item.category;
+                      return (
+                        <button
+                          key={item.category}
+                          type="button"
+                          onClick={() => setProductForm(prev => ({ ...prev, category: item.category }))}
+                          className={`flex flex-col items-start p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                            isSelected
+                              ? 'bg-gradient-to-r from-cyan-950 to-blue-950 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.25)] ring-1 ring-cyan-400'
+                              : 'bg-slate-900/90 border-slate-700/80 text-slate-300 hover:border-slate-500 hover:bg-slate-850'
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5 w-full">
+                            <span className="text-sm shrink-0">{item.icon}</span>
+                            <span className="text-xs font-bold truncate">{item.category}</span>
+                          </div>
+                          <span className={`text-[10px] mt-0.5 truncate w-full ${isSelected ? 'text-cyan-200' : 'text-slate-400'}`}>
+                            {item.bnName}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Brand</label>
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-slate-300 mb-1">Brand (ব্র্যান্ড)</label>
                   <input
                     type="text"
-                    placeholder="e.g. Hikvision, Dahua, ZKTeco"
+                    placeholder="e.g. Hikvision, Dahua, ZKTeco, Jovision, Imou"
                     value={productForm.brand || ''}
                     onChange={(e) => setProductForm({ ...productForm, brand: e.target.value })}
                     className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white focus:border-cyan-500 outline-none"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Selling Price (৳) *</label>
-                  <input
-                    type="number"
-                    required
-                    placeholder="2500"
-                    value={productForm.price || ''}
-                    onChange={(e) => setProductForm({ ...productForm, price: Number(e.target.value) })}
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-cyan-300 font-mono font-bold focus:border-cyan-500 outline-none"
-                  />
+                {/* Price Mode Selector (Fixed Price vs Contact for Price) */}
+                <div className="sm:col-span-2 p-3.5 rounded-xl bg-slate-950/90 border border-cyan-500/30 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <label className="block text-xs font-bold text-cyan-300">
+                      মূল্য নির্ধারণ ব্যবস্থা (Price Option) *
+                    </label>
+                    <span className="text-[10px] text-slate-400 font-semibold">
+                      {(productForm.priceType === 'contact' || productForm.isContactForPrice) ? 'Contact for Price সক্রিয়' : 'Fixed Price সক্রিয়'}
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setProductForm(prev => ({ ...prev, priceType: 'fixed', isContactForPrice: false }))}
+                      className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                        (productForm.priceType !== 'contact' && !productForm.isContactForPrice)
+                          ? 'bg-gradient-to-r from-cyan-950 to-blue-950 text-cyan-300 border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
+                          : 'bg-slate-900/80 text-slate-400 border-slate-700 hover:text-white hover:bg-slate-850'
+                      }`}
+                    >
+                      <span className={`w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center ${
+                        (productForm.priceType !== 'contact' && !productForm.isContactForPrice) ? 'border-cyan-400' : 'border-slate-600'
+                      }`}>
+                        {(productForm.priceType !== 'contact' && !productForm.isContactForPrice) && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                        )}
+                      </span>
+                      <span>Fixed Price (নির্দিষ্ট মূল্য)</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setProductForm(prev => ({ ...prev, priceType: 'contact', isContactForPrice: true }))}
+                      className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                        (productForm.priceType === 'contact' || productForm.isContactForPrice)
+                          ? 'bg-gradient-to-r from-amber-950 to-orange-950 text-amber-300 border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
+                          : 'bg-slate-900/80 text-slate-400 border-slate-700 hover:text-white hover:bg-slate-850'
+                      }`}
+                    >
+                      <span className={`w-3.5 h-3.5 rounded-full border-2 flex items-center justify-center ${
+                        (productForm.priceType === 'contact' || productForm.isContactForPrice) ? 'border-amber-400' : 'border-slate-600'
+                      }`}>
+                        {(productForm.priceType === 'contact' || productForm.isContactForPrice) && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                        )}
+                      </span>
+                      <span>Contact for Price (দাম জানতে যোগাযোগ)</span>
+                    </button>
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-bold text-slate-300 mb-1">Original Price (৳) (Optional)</label>
-                  <input
-                    type="number"
-                    placeholder="2900"
-                    value={productForm.originalPrice || ''}
-                    onChange={(e) => setProductForm({ ...productForm, originalPrice: e.target.value ? Number(e.target.value) : undefined })}
-                    className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-slate-300 font-mono focus:border-cyan-500 outline-none"
-                  />
-                </div>
+                {/* Conditional Price Inputs based on selected Price Mode */}
+                {(productForm.priceType === 'contact' || productForm.isContactForPrice) ? (
+                  <div className="sm:col-span-2 p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-center gap-3 text-amber-300 text-xs">
+                    <span className="text-base shrink-0">💬</span>
+                    <div>
+                      <div className="font-bold text-amber-200">"Contact for Price" মোড সক্রিয়</div>
+                      <p className="text-[11px] text-amber-300/80 mt-0.5">
+                        এই পণ্যের কোনো নির্দিষ্ট সংখ্যা বা মূল্য দেখানো হবে না। ওয়েবসাইট ও পণ্যের পেজে "Contact for Price" লেখা থাকবে এবং ক্রেতারা কল বা WhatsApp-এ যোগাযোগ করতে পারবে।
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-1">Selling Price (৳) * (বিক্রয় মূল্য)</label>
+                      <input
+                        type="number"
+                        required
+                        placeholder="2500"
+                        value={productForm.price || ''}
+                        onChange={(e) => setProductForm({ ...productForm, price: Number(e.target.value) })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-cyan-300 font-mono font-bold focus:border-cyan-500 outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-300 mb-1">Original / Regular Price (৳) (ঐচ্ছিক)</label>
+                      <input
+                        type="number"
+                        placeholder="2900"
+                        value={productForm.originalPrice || ''}
+                        onChange={(e) => setProductForm({ ...productForm, originalPrice: e.target.value ? Number(e.target.value) : undefined })}
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-slate-300 font-mono focus:border-cyan-500 outline-none"
+                      />
+                    </div>
+                  </>
+                )}
 
                 {/* Product Image File Upload & Preview */}
                 <div className="sm:col-span-2 p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
@@ -2877,6 +3086,61 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer"
               >
                 Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* IN-APP DELETE CONFIRMATION MODAL (100% Works in iFrames) */}
+      {/* ======================================================== */}
+      {deleteDialog?.isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-[#1b0a1a] via-[#10081d] to-[#060814] border border-red-500/50 p-6 shadow-2xl space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-red-950/90 border border-red-500/60 flex items-center justify-center text-red-400 shrink-0 shadow-lg shadow-red-950/50">
+                <Trash2 className="w-6 h-6 stroke-[2.5]" />
+              </div>
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-white font-tech">
+                  {deleteDialog.type === 'product' && 'পণ্য মুছে ফেলতে চান? (Delete Product)'}
+                  {deleteDialog.type === 'download' && 'সফটওয়্যার মুছে ফেলতে চান? (Delete Software)'}
+                  {deleteDialog.type === 'file' && 'ফাইল স্থায়ীভাবে মুছতে চান? (Delete File)'}
+                </h3>
+                <p className="text-xs text-red-300 font-semibold mt-0.5">
+                  সতর্কতা: এটি স্থায়ীভাবে ডিলিট হয়ে যাবে, ফিরিয়ে আনা যাবে না।
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-300 space-y-1">
+              <span className="text-[11px] text-slate-400 block font-semibold uppercase tracking-wider">
+                {deleteDialog.type === 'product' ? 'পণ্যের নাম:' : 'আইটেম:'}
+              </span>
+              <div className="font-bold text-white text-sm break-words leading-snug">
+                {deleteDialog.title}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={() => setDeleteDialog(null)}
+                className="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition cursor-pointer disabled:opacity-50"
+              >
+                বাতিল (Cancel)
+              </button>
+
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={handleConfirmDelete}
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white text-xs font-black uppercase tracking-wider shadow-lg shadow-red-950/60 cursor-pointer disabled:opacity-50 transition"
+              >
+                <Trash2 className="w-4 h-4 stroke-[2.5]" />
+                <span>{isDeleting ? 'মুছে ফেলা হচ্ছে...' : 'হ্যাঁ, মুছে ফেলুন (Delete)'}</span>
               </button>
             </div>
           </div>

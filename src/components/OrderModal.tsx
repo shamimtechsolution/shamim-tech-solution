@@ -92,10 +92,15 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     ];
 
     items.forEach((item, index) => {
+      const isContact = item.product.priceType === 'contact' || item.product.isContactForPrice;
       lines.push(
         `${index + 1}. *${item.product.name}*`,
-        `   • Qty: ${item.quantity} | Unit Price: ৳${item.product.price.toLocaleString('en-US')}`,
-        `   • Line Total: ৳${(item.product.price * item.quantity).toLocaleString('en-US')}`
+        isContact 
+          ? `   • Qty: ${item.quantity} | Unit Price: Contact for Price`
+          : `   • Qty: ${item.quantity} | Unit Price: ৳${item.product.price.toLocaleString('en-US')}`,
+        isContact
+          ? `   • Line Total: Price on Contact`
+          : `   • Line Total: ৳${(item.product.price * item.quantity).toLocaleString('en-US')}`
       );
     });
 
@@ -290,7 +295,11 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       {product.name} (x{quantity})
                     </span>
                     <span className="font-mono text-cyan-400 font-bold">
-                      ৳ {(product.price * quantity).toLocaleString('en-US')}
+                      {(product.priceType === 'contact' || product.isContactForPrice) ? (
+                        <span className="text-amber-400">Contact Price</span>
+                      ) : (
+                        `৳ ${(product.price * quantity).toLocaleString('en-US')}`
+                      )}
                     </span>
                   </div>
                 ))}
