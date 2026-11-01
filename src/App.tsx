@@ -99,8 +99,14 @@ export default function App() {
   // Load public data from live Express backend with localStorage persistence
   const loadPublicData = useCallback(async () => {
     try {
-      const res = await fetch('/api/public/data');
-      const contentType = res.headers.get('content-type') || '';
+      let res = await fetch('/api/public/data');
+      let contentType = res.headers.get('content-type') || '';
+      if (!res.ok || !contentType.includes('application/json')) {
+        // Fallback for static hosts (e.g. Vercel)
+        res = await fetch('/data/public-data.json');
+        contentType = res.headers.get('content-type') || '';
+      }
+
       if (res.ok && contentType.includes('application/json')) {
         const data = await res.json();
         if (data.products && Array.isArray(data.products) && data.products.length > 0) {

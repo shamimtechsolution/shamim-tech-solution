@@ -182,6 +182,18 @@ let db: DatabaseSchema = initDatabase();
 function saveDatabase() {
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf-8');
+    const publicDataDir = path.join(process.cwd(), 'public', 'data');
+    if (!fs.existsSync(publicDataDir)) {
+      fs.mkdirSync(publicDataDir, { recursive: true });
+    }
+    const publicData = {
+      success: true,
+      products: db.products.filter(p => p.isActive !== false),
+      downloads: db.downloads.filter(d => d.isActive !== false),
+      companyInfo: db.companyInfo,
+      siteContent: db.siteContent
+    };
+    fs.writeFileSync(path.join(publicDataDir, 'public-data.json'), JSON.stringify(publicData, null, 2), 'utf-8');
   } catch (err) {
     console.error('Failed to write db.json:', err);
   }
