@@ -448,6 +448,9 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                           alt={product.name}
                           className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80';
+                          }}
                         />
 
                         {/* Brand Badge */}

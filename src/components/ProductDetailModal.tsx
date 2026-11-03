@@ -58,10 +58,12 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
 
             <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs space-y-2">
-              <div className="flex items-center gap-2 text-cyan-300 font-semibold">
-                <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                <span>{product.warranty || '1 Year Official Warranty'}</span>
-              </div>
+              {product.warranty && product.warranty.trim() && (
+                <div className="flex items-center gap-2 text-cyan-300 font-semibold">
+                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                  <span>{product.warranty}</span>
+                </div>
+              )}
               <div className="flex items-center gap-2 text-slate-300">
                 <Truck className="w-4 h-4 text-cyan-400" />
                 <span>Haragach / Rangpur Fast Delivery Available</span>

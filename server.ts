@@ -1024,7 +1024,7 @@ async function startServer() {
       image: savedImage,
       features: Array.isArray(features) ? features : [],
       rating: 5.0,
-      warranty: warranty ? String(warranty).trim() : '1 Year Warranty',
+      warranty: warranty !== undefined ? String(warranty).trim() : '',
       modelNumber: modelNumber ? String(modelNumber).trim() : ''
     };
 
@@ -1065,6 +1065,7 @@ async function startServer() {
       id, // keep original ID
       image: finalImage,
       category: updatedCategory,
+      warranty: req.body.warranty !== undefined ? String(req.body.warranty).trim() : current.warranty,
       price: isContact ? 0 : (req.body.price !== undefined ? Number(req.body.price) : current.price),
       priceType: isContact ? 'contact' : 'fixed',
       isContactForPrice: isContact,

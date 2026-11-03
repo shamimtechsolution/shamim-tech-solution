@@ -145,7 +145,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const fetchAdminData = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin/data', {
+      let res = await fetch('/api/admin/data', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -155,16 +155,28 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         onLogout();
         return;
       }
-      const contentType = res.headers.get('content-type') || '';
-      if (contentType.includes('application/json')) {
+      let contentType = res.headers.get('content-type') || '';
+      if (!res.ok || !contentType.includes('application/json')) {
+        // Fallback for static hosting (e.g. Vercel)
+        res = await fetch('/data/public-data.json');
+        contentType = res.headers.get('content-type') || '';
+      }
+
+      if (res.ok && contentType.includes('application/json')) {
         const data = await res.json();
-        if (data.success) {
-          const loadedProducts = (data.products && data.products.length > 0) 
-            ? data.products 
-            : (() => {
-                const stored = localStorage.getItem('sts_custom_products');
-                return stored ? JSON.parse(stored) : INITIAL_PRODUCTS;
-              })();
+        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
+          const stored = localStorage.getItem('sts_custom_products');
+          let loadedProducts = data.products;
+          if (stored) {
+            try {
+              const parsed = JSON.parse(stored);
+              if (Array.isArray(parsed) && parsed.length > 0) {
+                const serverIdSet = new Set(data.products.map((p: Product) => p.id));
+                const customOnly = parsed.filter((p: Product) => !serverIdSet.has(p.id));
+                loadedProducts = [...data.products, ...customOnly];
+              }
+            } catch {}
+          }
           setProducts(loadedProducts);
           try {
             localStorage.setItem('sts_custom_products', JSON.stringify(loadedProducts));
@@ -214,24 +226,65 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     fetchCustomers();
   }, [token]);
 
-  // Handle Product Image Upload (Converts file to Base64 data URL)
-  const handleImageFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Intelligent HTML5 Canvas Image Compressor (compresses to ~40KB JPEG to fit in localStorage and upload instantly)
+  const compressImageFile = (file: File): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxDim = 800;
+          let width = img.width;
+          let height = img.height;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(img, 0, 0, width, height);
+            const compressed = canvas.toDataURL('image/jpeg', 0.82);
+            resolve(compressed);
+            return;
+          }
+          resolve(event.target?.result as string);
+        };
+        img.onerror = () => resolve(event.target?.result as string);
+        img.src = event.target?.result as string;
+      };
+      reader.onerror = () => resolve('');
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Handle Product Image Upload (Auto-optimized & resized)
+  const handleImageFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Check size limit (max 10MB)
-    if (file.size > 10 * 1024 * 1024) {
-      showNotification('error', 'Image size must be less than 10MB');
+    if (file.size > 20 * 1024 * 1024) {
+      showNotification('error', 'Image size must be less than 20MB');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      const base64Url = reader.result as string;
-      setImagePreview(base64Url);
-      setProductForm(prev => ({ ...prev, image: base64Url }));
-    };
-    reader.readAsDataURL(file);
+    try {
+      const compressedDataUrl = await compressImageFile(file);
+      if (compressedDataUrl) {
+        setImagePreview(compressedDataUrl);
+        setProductForm(prev => ({ ...prev, image: compressedDataUrl }));
+        showNotification('success', 'ছবি সফলভাবে প্রসেস ও যুক্ত হয়েছে!');
+      }
+    } catch {
+      showNotification('error', 'ছবি প্রসেস করতে সমস্যা হয়েছে');
+    }
   };
 
   // --- PRODUCTS CRUD ---
@@ -320,6 +373,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
     try {
       let savedToBackend = false;
+      let backendProduct: Product | null = null;
       try {
         const res = await fetch(url, {
           method,
@@ -335,6 +389,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           const data = await res.json();
           if (data.success) {
             savedToBackend = true;
+            if (data.product) {
+              backendProduct = data.product;
+            }
           }
         }
       } catch (backendErr) {
@@ -343,16 +400,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
       // Update state and localStorage
       const productId = isEdit ? editingProduct!.id : `prod-${Date.now()}`;
-      const savedProd: Product = {
+      const savedProd: Product = backendProduct || {
         ...payload,
         id: productId,
         brand: payload.brand || 'STS',
         inStock: payload.inStock !== false,
         isActive: payload.isActive !== false,
-        image: payload.image || 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
+        image: payload.image || editingProduct?.image || 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
         features: Array.isArray(payload.features) ? payload.features : [],
         rating: 5.0,
-        warranty: payload.warranty || '1 Year Official Warranty'
+        warranty: (payload.warranty !== undefined) ? String(payload.warranty).trim() : ''
       } as Product;
 
       setProducts(prev => {
@@ -1176,13 +1233,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       </p>
                     </div>
 
-                    <button
-                      onClick={handleOpenAddProduct}
-                      className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all cursor-pointer shrink-0"
-                    >
-                      <Plus className="w-4 h-4 stroke-[3]" />
-                      <span>Add New Product</span>
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          showNotification('success', 'Syncing products with server...');
+                          localStorage.removeItem('sts_custom_products');
+                          await fetchAdminData();
+                          showNotification('success', 'সার্ভার থেকে সব ছবি ও প্রোডাক্ট সফলভাবে রিফ্রেশ হয়েছে!');
+                          try { window.dispatchEvent(new Event('sts_products_updated')); } catch {}
+                        }}
+                        className="flex items-center gap-1.5 px-3 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-400 border border-slate-700 text-xs font-bold transition-all cursor-pointer"
+                        title="সার্ভার থেকে ছবি ও ডাটা সিঙ্ক করুন"
+                      >
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Sync Server</span>
+                      </button>
+
+                      <button
+                        onClick={handleOpenAddProduct}
+                        className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all cursor-pointer shrink-0"
+                      >
+                        <Plus className="w-4 h-4 stroke-[3]" />
+                        <span>Add New Product</span>
+                      </button>
+                    </div>
                   </div>
 
                   {/* Search and Filters */}
