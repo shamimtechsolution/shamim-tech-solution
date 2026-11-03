@@ -1371,10 +1371,11 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                                   </button>
                                   <button
                                     onClick={() => handleDeleteProduct(p.id, p.name)}
-                                    className="p-1.5 rounded-lg bg-slate-800 hover:bg-red-950 text-slate-300 hover:text-red-400 border border-slate-700 cursor-pointer"
-                                    title="Delete Product"
+                                    className="flex items-center gap-1 px-2 py-1.5 rounded-lg bg-red-950/80 hover:bg-red-800 text-red-300 border border-red-600/60 cursor-pointer shadow-xs transition-colors"
+                                    title="Delete Product (পণ্যটি স্থায়ীভাবে মুছে ফেলুন)"
                                   >
-                                    <Trash2 className="w-4 h-4" />
+                                    <Trash2 className="w-3.5 h-3.5 text-red-400" />
+                                    <span className="text-[10px] font-bold hidden sm:inline">Delete</span>
                                   </button>
                                 </div>
                               </td>
@@ -2789,22 +2790,39 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
               </div>
 
-              <div className="flex justify-end gap-3 pt-4 border-t border-slate-800">
-                <button
-                  type="button"
-                  onClick={() => setIsProductModalOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="flex items-center gap-2 px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs uppercase tracking-wider cursor-pointer disabled:opacity-50"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>{saving ? 'Saving...' : 'Save Product'}</span>
-                </button>
+              <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-800">
+                {editingProduct ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const prodToDelete = editingProduct;
+                      setIsProductModalOpen(false);
+                      handleDeleteProduct(prodToDelete.id, prodToDelete.name);
+                    }}
+                    className="flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-700/60 text-xs font-bold cursor-pointer transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4 text-red-400" />
+                    <span>Delete Product (পণ্যটি মুছে ফেলুন)</span>
+                  </button>
+                ) : <div />}
+
+                <div className="flex items-center justify-end gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsProductModalOpen(false)}
+                    className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={saving}
+                    className="flex items-center justify-center gap-2 px-6 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black text-xs uppercase tracking-wider cursor-pointer disabled:opacity-50 shadow-md shadow-cyan-500/20"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>{saving ? 'Saving...' : (editingProduct ? 'Update Product' : 'Save Product')}</span>
+                  </button>
+                </div>
               </div>
             </form>
           </div>
