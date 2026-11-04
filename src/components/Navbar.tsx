@@ -72,18 +72,33 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (!searchTerm.trim()) {
       return { products: [], services: [], districts: [], totalMatches: 0 };
     }
-    const query = searchTerm.toLowerCase().trim();
+    const rawQuery = searchTerm.toLowerCase().trim();
+    const query = rawQuery
+      .replace(/\bpower\s+suply\b/g, 'power supply')
+      .replace(/\bsuply\b/g, 'supply');
     const tokens = query.split(/\s+/).filter(Boolean);
     const locationBrandTokens = new Set([
       'rangpur', 'dinajpur', 'lalmonirhat', 'kurigram', 'nilphamari', 'gaibandha', 'thakurgaon', 'panchagarh',
       'রংপুর', 'দিনাজপুর', 'লালমনিরহাট', 'কুড়িগ্রাম', 'নীলফামারী', 'গাইবান্ধা', 'ঠাকুরগাঁও', 'পঞ্চগড়',
-      'shamim', 'sts', 'bd', 'bangladesh', 'tech', 'solution', 'technology', 'শামীম'
+      'shamim', 'sts', 'bd', 'bangladesh', 'tech', 'solution', 'technology', 'শামীম',
+      'startech', 'star', 'ryans', 'datatech'
     ]);
     const stopWords = new Set(['and', 'in', 'of', 'for', 'the', 'to', 'ও', 'এবং']);
     const productTokens = tokens.filter(t => !locationBrandTokens.has(t) && !stopWords.has(t));
     const matchedProducts = (products || []).filter((item) => {
-      const text = `${item.name} ${item.specs} ${item.brand} ${item.category}`.toLowerCase();
-      if (text.includes(query)) return true;
+      const text = `${item.name} ${item.specs || ''} ${item.brand || ''} ${item.category || ''} ${item.description || ''} ${item.modelNumber || ''}`.toLowerCase();
+      if (text.includes(query) || text.includes(rawQuery)) return true;
+
+      if (query.includes('video balun') || query.includes('balun')) {
+        if (text.includes('balun') || text.includes('transceiver') || item.category === 'Other Accessories') return true;
+      }
+      if (query.includes('box adapter') || query.includes('cctv box adapter')) {
+        if (text.includes('box adapter') || text.includes('fvl') || text.includes('adapter')) return true;
+      }
+      if (query.includes('adapter') || query.includes('cctv adapter') || query.includes('power supply') || query.includes('power suply')) {
+        if (text.includes('adapter') || item.category === 'Power Supply/Adapter' || text.includes('power supply') || text.includes('12v') || text.includes('fvl')) return true;
+      }
+
       if (productTokens.length === 0) return true;
       return productTokens.every(t => text.includes(t));
     }).slice(0, 6);
