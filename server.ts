@@ -4,6 +4,8 @@ import fs from 'fs';
 import crypto from 'crypto';
 import dotenv from 'dotenv';
 import multer from 'multer';
+import * as _archiver from 'archiver';
+const archiver = ((_archiver as any).default || _archiver) as any;
 import { createServer as createViteServer } from 'vite';
 import { 
   COMPANY_INFO as DEFAULT_COMPANY_INFO, 
@@ -909,6 +911,44 @@ async function startServer() {
       order: newOrder
     });
   });
+
+  // Project ZIP generation and download route (serves full project archive)
+  const handleProjectZipDownload = (_req: Request, res: Response) => {
+    try {
+      const zipPath = path.join(process.cwd(), 'public', 'shamim-tech-solution-source.zip');
+      if (fs.existsSync(zipPath)) {
+        res.download(zipPath, 'shamim-tech-solution-source.zip');
+        return;
+      }
+
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', 'attachment; filename="shamim-tech-solution-source.zip"');
+
+      const archive = new (archiver as any).ZipArchive({ zlib: { level: 9 } });
+      archive.on('error', (err: any) => {
+        console.error('Archive error:', err);
+        if (!res.headersSent) {
+          res.status(500).json({ success: false, error: 'Failed to create project ZIP' });
+        }
+      });
+
+      archive.pipe(res);
+      archive.glob('**/*', {
+        cwd: process.cwd(),
+        ignore: ['node_modules/**', '.git/**', 'dist/**', '.aistudio/**', '*.zip'],
+        dot: true
+      });
+      archive.finalize();
+    } catch (err: any) {
+      console.error('ZIP download error:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ success: false, error: err.message });
+      }
+    }
+  };
+
+  app.get('/api/admin/download-project-zip', handleProjectZipDownload);
+  app.get('/api/public/download-project-zip', handleProjectZipDownload);
 
   // ==========================================
   // PROTECTED ADMIN MANAGEMENT ROUTES

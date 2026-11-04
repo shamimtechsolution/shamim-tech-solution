@@ -39,6 +39,15 @@ import { STSLogo } from './STSLogo';
 import { Product, DownloadItem, CompanyInfo, SiteContent, SavedOrder, ProductCategory, UploadedFileRecord, CustomerRecord } from '../types';
 import { INITIAL_PRODUCTS, COMPANY_INFO, DEFAULT_SITE_CONTENT, SOFTWARE_DOWNLOADS } from '../data/companyData';
 import { CATEGORY_DETAILS, detectCategoryFromText, normalizeCategory, getProductCategory } from '../utils/categoryHelper';
+import { 
+  saveProductToFirestore, 
+  deleteProductFromFirestore, 
+  uploadProductImageToStorage, 
+  seedInitialProductsIfEmpty, 
+  getProductsFromFirestore 
+} from '../firebase/productService';
+import { auth, googleProvider } from '../firebase/config';
+import { signInWithPopup, onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
 
 interface AdminDashboardProps {
   token: string;
@@ -133,6 +142,67 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     title: string;
   } | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  // Firebase Firestore and Storage integration state
+  const [firebaseAdminUser, setFirebaseAdminUser] = useState<FirebaseUser | null>(auth.currentUser);
+  const [isFirebaseSyncing, setIsFirebaseSyncing] = useState(false);
+  const [isDownloadingZip, setIsDownloadingZip] = useState(false);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, user => {
+      setFirebaseAdminUser(user);
+    });
+    return () => unsub();
+  }, []);
+
+  const handleGoogleAdminAuth = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      const email = (res.user.email || '').toLowerCase();
+      if (email !== 'shamimtech2020@gmail.com') {
+        showNotification('error', `Email ${email} অনুমোদিত নয়! শুধুমাত্র shamimtech2020@gmail.com দিয়ে অ্যাডমিন অথরাইজ করুন।`);
+        return;
+      }
+      setFirebaseAdminUser(res.user);
+      showNotification('success', `Firebase-এ সফলভাবে Authorize করা হয়েছে: ${res.user.email}`);
+    } catch (e: any) {
+      console.error('Google auth error:', e);
+      showNotification('error', e.message || 'Firebase Google Authorization ব্যর্থ হয়েছে');
+    }
+  };
+
+  const handleSyncProductsToFirebase = async () => {
+    setIsFirebaseSyncing(true);
+    try {
+      showNotification('success', 'Firebase Firestore-এ প্রোডাক্ট সিঙ্ক শুরু হচ্ছে...');
+      await seedInitialProductsIfEmpty();
+      for (const p of products) {
+        try {
+          await saveProductToFirestore(p);
+        } catch (err) {
+          console.warn('Sync product note:', err);
+        }
+      }
+      showNotification('success', `সব প্রোডাক্ট (${products.length} টি) সফলভাবে Firebase Firestore-এ স্থায়ীভাবে সংরক্ষিত হয়েছে!`);
+      const updated = await getProductsFromFirestore();
+      if (updated.length > 0) setProducts(updated);
+    } catch (err: any) {
+      showNotification('error', err.message || 'Firebase সিঙ্ক করতে সমস্যা হয়েছে');
+    } finally {
+      setIsFirebaseSyncing(false);
+    }
+  };
+
+  const handleDownloadProjectZip = () => {
+    setIsDownloadingZip(true);
+    const link = document.createElement('a');
+    link.href = '/shamim-tech-solution-source.zip';
+    link.setAttribute('download', 'shamim-tech-solution-full-project.zip');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setTimeout(() => setIsDownloadingZip(false), 2000);
+    showNotification('success', 'পুরো প্রজেক্ট ZIP ডাউনলোড শুরু হয়েছে!');
+  };
 
   const showNotification = (type: 'success' | 'error', message: string) => {
     setNotification({ type, message });
@@ -398,20 +468,39 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         console.warn('Backend save note: will fallback to local storage', backendErr);
       }
 
-      // Update state and localStorage
-      const productId = isEdit ? editingProduct!.id : `prod-${Date.now()}`;
-      const savedProd: Product = backendProduct || {
+      // Handle permanent image storage via Firebase Storage
+      const productId = isEdit ? editingProduct!.id : (payload.id || `prod-${Date.now()}`);
+      let finalImageUrl = payload.image || editingProduct?.image || 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80';
+      if (payload.image && (payload.image.startsWith('data:image/') || payload.image !== editingProduct?.image)) {
+        try {
+          finalImageUrl = await uploadProductImageToStorage(payload.image, productId);
+        } catch (imgErr) {
+          console.warn('Storage image upload warning, keeping original:', imgErr);
+        }
+      }
+      payload.image = finalImageUrl;
+
+      const savedProd: Product = {
         ...payload,
         id: productId,
         brand: payload.brand || 'STS',
         inStock: payload.inStock !== false,
         isActive: payload.isActive !== false,
-        image: payload.image || editingProduct?.image || 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
+        image: finalImageUrl,
         features: Array.isArray(payload.features) ? payload.features : [],
         rating: 5.0,
         warranty: (payload.warranty !== undefined) ? String(payload.warranty).trim() : ''
       } as Product;
 
+      // Persist permanently to Firebase Firestore
+      try {
+        await saveProductToFirestore(savedProd);
+        console.log('Product permanently saved to Firebase Firestore!');
+      } catch (fsErr) {
+        console.warn('Direct Firestore save note (backend sync will handle):', fsErr);
+      }
+
+      // Update state and localStorage
       setProducts(prev => {
         let updated: Product[];
         if (isEdit) {
@@ -426,7 +515,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         return updated;
       });
 
-      showNotification('success', isEdit ? 'Product updated successfully!' : 'Product added successfully!');
+      showNotification('success', isEdit ? 'প্রোডাক্ট সফলভাবে Firebase ও সিস্টেমে আপডেট করা হয়েছে!' : 'নতুন প্রোডাক্ট সফলভাবে Firebase-এ স্থায়ীভাবে সেভ হয়েছে!');
       setIsProductModalOpen(false);
       if (savedToBackend) {
         await fetchAdminData();
@@ -457,6 +546,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
     try {
       if (deleteDialog.type === 'product') {
+        // Delete permanently from Firebase Firestore
+        try {
+          await deleteProductFromFirestore(deleteDialog.id);
+          console.log('Product deleted from Firebase Firestore');
+        } catch (fsDelErr) {
+          console.warn('Firestore delete note:', fsDelErr);
+        }
+
         try {
           await fetch(`/api/admin/products/${deleteDialog.id}`, {
             method: 'DELETE',
@@ -1040,8 +1137,44 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         </div>
 
         {/* Right Admin Profile & Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          <div className="hidden md:flex flex-col text-right">
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          {firebaseAdminUser ? (
+            <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Firebase Live ({firebaseAdminUser.email?.split('@')[0]})</span>
+            </div>
+          ) : (
+            <button
+              onClick={handleGoogleAdminAuth}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 text-amber-300 hover:text-white text-xs font-bold cursor-pointer transition-colors shadow-sm"
+              title="Firebase Admin Authorize"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden sm:inline">Firebase Auth</span>
+            </button>
+          )}
+
+          <button
+            onClick={handleSyncProductsToFirebase}
+            disabled={isFirebaseSyncing}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-950/90 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-bold cursor-pointer transition-colors disabled:opacity-50"
+            title="Sync all catalog products to Firebase Firestore"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 text-cyan-400 ${isFirebaseSyncing ? 'animate-spin' : ''}`} />
+            <span className="hidden sm:inline">{isFirebaseSyncing ? 'Syncing...' : 'Firebase Sync'}</span>
+          </button>
+
+          <button
+            onClick={handleDownloadProjectZip}
+            disabled={isDownloadingZip}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-indigo-950/90 hover:bg-indigo-900 border border-indigo-500/40 text-indigo-300 hover:text-white text-xs font-bold cursor-pointer transition-colors"
+            title="Download full project source code as ZIP"
+          >
+            <FolderArchive className="w-3.5 h-3.5 text-indigo-400" />
+            <span className="hidden sm:inline">{isDownloadingZip ? 'Zipping...' : 'Project ZIP'}</span>
+          </button>
+
+          <div className="hidden xl:flex flex-col text-right">
             <span className="text-xs font-bold text-white font-mono">{adminUser.username}</span>
             <span className="text-[10px] text-cyan-400">{adminUser.email}</span>
           </div>

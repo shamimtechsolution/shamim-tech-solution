@@ -26,6 +26,7 @@ import {
 } from './data/companyData';
 import { Product, CartItem, SavedOrder, CompanyInfo, SiteContent, DownloadItem, CustomerUser } from './types';
 import { getStoredCustomerUser, apiGetCustomerProfile, clearCustomerSession } from './utils/customerAuth';
+import { getProductsFromFirestore, subscribeToProducts, seedInitialProductsIfEmpty } from './firebase/productService';
 
 export default function App() {
   // Shopping Cart state with localStorage persistence
@@ -142,6 +143,50 @@ export default function App() {
       }
     }
   }, []);
+
+  // Synchronize products with Firebase Firestore in real-time across all visitors
+  useEffect(() => {
+    // 1. Initial attempt from Firestore
+    getProductsFromFirestore()
+      .then(items => {
+        if (items && items.length > 0) {
+          setProducts(items);
+          try {
+            localStorage.setItem('sts_custom_products', JSON.stringify(items));
+          } catch {}
+        } else {
+          loadPublicData();
+        }
+      })
+      .catch(err => {
+        console.warn('Firestore initial fetch fallback:', err);
+        loadPublicData();
+      });
+
+    // 2. Real-time subscription to Firestore collection 'products'
+    let unsubscribe: (() => void) | undefined;
+    try {
+      unsubscribe = subscribeToProducts(
+        firestoreProducts => {
+          if (firestoreProducts && firestoreProducts.length > 0) {
+            setProducts(firestoreProducts);
+            try {
+              localStorage.setItem('sts_custom_products', JSON.stringify(firestoreProducts));
+            } catch {}
+          }
+        },
+        err => {
+          console.warn('Firestore subscription fallback:', err);
+        }
+      );
+    } catch (subErr) {
+      console.warn('Real-time subscription init notice:', subErr);
+    }
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, [loadPublicData]);
 
   // Listen to manual product updates from admin dashboard
   useEffect(() => {

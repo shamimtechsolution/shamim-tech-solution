@@ -1,0 +1,119 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "Product catalog item for Shamim Tech Solution CCTV & security store",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique product identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Product display name in English or Bengali",
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "description": "Product category",
+          "maxLength": 100
+        },
+        "brand": {
+          "type": "string",
+          "description": "Product brand",
+          "maxLength": 100
+        },
+        "price": {
+          "type": "number",
+          "description": "Current selling price in BDT"
+        },
+        "priceType": {
+          "type": "string",
+          "enum": ["fixed", "contact"],
+          "description": "Pricing model: fixed or contact for price"
+        },
+        "isContactForPrice": {
+          "type": "boolean",
+          "description": "Whether price is revealed upon call/inquiry"
+        },
+        "originalPrice": {
+          "type": "number",
+          "description": "Regular or strike-through price in BDT"
+        },
+        "specs": {
+          "type": "string",
+          "description": "Technical specifications",
+          "maxLength": 1000
+        },
+        "description": {
+          "type": "string",
+          "description": "Full product description",
+          "maxLength": 5000
+        },
+        "inStock": {
+          "type": "boolean",
+          "description": "Inventory stock availability"
+        },
+        "isActive": {
+          "type": "boolean",
+          "description": "Whether visible in public catalog"
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL or storage reference",
+          "maxLength": 500000
+        },
+        "warranty": {
+          "type": "string",
+          "description": "Warranty information",
+          "maxLength": 100
+        },
+        "modelNumber": {
+          "type": "string",
+          "description": "Manufacturer model number",
+          "maxLength": 100
+        },
+        "rating": {
+          "type": "number",
+          "description": "Customer rating"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["id", "name", "category", "price", "image"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Designated administrator identity record",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Admin email address"
+        },
+        "role": {
+          "type": "string",
+          "description": "Administrative role title"
+        }
+      },
+      "required": ["email", "role"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "CCTV & Security products readable by all visitors and managed by administrators"
+    },
+    "/admins/{adminId}": {
+      "schema": "Admin",
+      "description": "Authorized admin users collection"
+    }
+  }
+}
