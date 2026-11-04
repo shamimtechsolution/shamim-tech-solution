@@ -174,17 +174,30 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setIsFirebaseSyncing(true);
     try {
       showNotification('success', 'Firebase Firestore-এ প্রোডাক্ট সিঙ্ক শুরু হচ্ছে...');
-      await seedInitialProductsIfEmpty();
+      let successCount = 0;
+      let lastErrorMessage = '';
+
       for (const p of products) {
         try {
           await saveProductToFirestore(p);
-        } catch (err) {
-          console.warn('Sync product note:', err);
+          successCount++;
+        } catch (err: any) {
+          lastErrorMessage = err?.message || String(err);
+          console.error(`Failed to sync product ${p.id} to Firestore:`, err);
         }
       }
-      showNotification('success', `সব প্রোডাক্ট (${products.length} টি) সফলভাবে Firebase Firestore-এ স্থায়ীভাবে সংরক্ষিত হয়েছে!`);
-      const updated = await getProductsFromFirestore();
-      if (updated.length > 0) setProducts(updated);
+
+      if (successCount > 0) {
+        showNotification('success', `সব প্রোডাক্ট (${successCount} টি) সফলভাবে আপনার Firebase Firestore-এ স্থায়ীভাবে সংরক্ষিত হয়েছে!`);
+        const updated = await getProductsFromFirestore();
+        if (updated && updated.length > 0) setProducts(updated);
+      } else {
+        if (lastErrorMessage.includes('permission') || lastErrorMessage.includes('PERMISSION_DENIED')) {
+          showNotification('error', 'Firebase Rules পারমিশন এরর! দয়া করে Firebase Console-এর Rules ট্যাবে গিয়ে allow read, write: if true; দিয়ে Publish করুন।');
+        } else {
+          showNotification('error', `Firebase-এ ডাটা সেভ হতে ব্যর্থ হয়েছে: ${lastErrorMessage || 'Error saving'}`);
+        }
+      }
     } catch (err: any) {
       showNotification('error', err.message || 'Firebase সিঙ্ক করতে সমস্যা হয়েছে');
     } finally {

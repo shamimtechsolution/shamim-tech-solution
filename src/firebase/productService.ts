@@ -14,7 +14,57 @@ import { INITIAL_PRODUCTS } from '../data/companyData';
 
 const PRODUCTS_COLLECTION = 'products';
 
-// Upload product image file or base64 to Firebase Storage and return permanent URL
+// Client-side image compression: converts big camera photos to crisp, lightweight web images (~40-70 KB)
+export async function compressAndResizeImage(fileOrBase64: File | string, maxWidth = 800, quality = 0.82): Promise<string> {
+  return new Promise((resolve) => {
+    // If it's already an HTTP URL, no compression needed
+    if (typeof fileOrBase64 === 'string' && (fileOrBase64.startsWith('http://') || fileOrBase64.startsWith('https://'))) {
+      resolve(fileOrBase64);
+      return;
+    }
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          resolve(dataUrl);
+        } else {
+          resolve(typeof fileOrBase64 === 'string' ? fileOrBase64 : '');
+        }
+      } catch {
+        resolve(typeof fileOrBase64 === 'string' ? fileOrBase64 : '');
+      }
+    };
+    img.onerror = () => {
+      resolve(typeof fileOrBase64 === 'string' ? fileOrBase64 : '');
+    };
+
+    if (typeof fileOrBase64 === 'string') {
+      img.src = fileOrBase64;
+    } else {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        img.src = e.target?.result as string;
+      };
+      reader.readAsDataURL(fileOrBase64);
+    }
+  });
+}
+
+// Upload product image file or base64: tries Firebase Storage first, with automatic compressed Firestore persistence
 export async function uploadProductImageToStorage(
   fileOrBase64: File | string, 
   productId: string
@@ -23,44 +73,27 @@ export async function uploadProductImageToStorage(
     const timestamp = Date.now();
     const cleanId = productId.replace(/[^a-zA-Z0-9_-]/g, '') || 'prod';
 
-    if (typeof fileOrBase64 === 'string') {
-      const trimmed = fileOrBase64.trim();
-      // If it's already a hosted URL (http/https), return directly
-      if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
-        return trimmed;
-      }
-      
-      // If it's a data URL, upload to Firebase Storage
-      if (trimmed.startsWith('data:image/')) {
-        try {
-          const extension = trimmed.substring('data:image/'.length, trimmed.indexOf(';')) || 'jpg';
-          const storageRef = ref(storage, `products/${cleanId}_${timestamp}.${extension}`);
-          await uploadString(storageRef, trimmed, 'data_url');
-          const downloadUrl = await getDownloadURL(storageRef);
-          return downloadUrl;
-        } catch (storageErr) {
-          console.warn('Firebase Storage uploadString notice (using direct URI fallback):', storageErr);
-          return trimmed;
-        }
-      }
-      return trimmed;
-    } else {
-      // It's a File object from input
-      try {
-        const fileExt = fileOrBase64.name.split('.').pop() || 'jpg';
-        const storageRef = ref(storage, `products/${cleanId}_${timestamp}.${fileExt}`);
-        await uploadBytes(storageRef, fileOrBase64);
+    // First, compress the image to ensure lightweight storage
+    const optimizedImage = await compressAndResizeImage(fileOrBase64, 800, 0.82);
+
+    if (optimizedImage.startsWith('http://') || optimizedImage.startsWith('https://')) {
+      return optimizedImage;
+    }
+
+    // Try uploading to Firebase Storage if available
+    try {
+      if (storage) {
+        const storageRef = ref(storage, `products/${cleanId}_${timestamp}.jpg`);
+        await uploadString(storageRef, optimizedImage, 'data_url');
         const downloadUrl = await getDownloadURL(storageRef);
         return downloadUrl;
-      } catch (storageErr) {
-        console.warn('Firebase Storage uploadBytes notice (reading as data URL fallback):', storageErr);
-        return new Promise((resolve) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result as string);
-          reader.readAsDataURL(fileOrBase64);
-        });
       }
+    } catch (storageErr) {
+      console.warn('Firebase Storage requires Blaze/Billing. Safely saving compressed image into Cloud Firestore directly:', storageErr);
     }
+
+    // Return the optimized image directly for Cloud Firestore permanent persistence
+    return optimizedImage;
   } catch (error) {
     console.error('Failed to process image upload:', error);
     return typeof fileOrBase64 === 'string' ? fileOrBase64 : '';

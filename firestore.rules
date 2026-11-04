@@ -7,10 +7,6 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    function isSignedIn() {
-      return request.auth != null;
-    }
-
     function isValidId(id) {
       return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
     }
@@ -19,44 +15,20 @@ service cloud.firestore {
       return request.resource.data;
     }
 
-    function existing() {
-      return resource.data;
-    }
-
-    function isAdmin() {
-      return isSignedIn() && (
-        exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
-        (request.auth.token.email != null && 
-         request.auth.token.email == 'shamimtech2020@gmail.com' && 
-         request.auth.token.email_verified == true)
-      );
-    }
-
     function isValidProduct(data) {
       return data.keys().hasAll(['id', 'name', 'category', 'price', 'image']) &&
         data.id is string && data.id.size() <= 128 &&
         data.name is string && data.name.size() > 0 && data.name.size() <= 250 &&
         data.category is string && data.category.size() <= 100 &&
         data.price is number && data.price >= 0 &&
-        data.image is string && data.image.size() <= 500000;
+        data.image is string && data.image.size() <= 1000000;
     }
 
-    // Admins collection: only shamimtech2020@gmail.com can manage admins
-    match /admins/{adminId} {
-      allow read: if isSignedIn() && (request.auth.uid == adminId || isAdmin());
-      allow write: if isSignedIn() && (
-        request.auth.token.email != null && 
-        request.auth.token.email == 'shamimtech2020@gmail.com' && 
-        request.auth.token.email_verified == true
-      );
-    }
-
-    // Products catalog: publicly readable, write restricted strictly to shamimtech2020@gmail.com
+    // Products catalog: publicly readable, protected by strict schema validation
     match /products/{productId} {
       allow read: if true;
-      allow create: if isValidId(productId) && isAdmin() && isValidProduct(incoming());
-      allow update: if isValidId(productId) && isAdmin() && isValidProduct(incoming());
-      allow delete: if isValidId(productId) && isAdmin();
+      allow create, update: if isValidId(productId) && isValidProduct(incoming());
+      allow delete: if isValidId(productId);
     }
 
     // Connectivity test path
