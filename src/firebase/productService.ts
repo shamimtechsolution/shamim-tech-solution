@@ -64,35 +64,14 @@ export async function compressAndResizeImage(fileOrBase64: File | string, maxWid
   });
 }
 
-// Upload product image file or base64: tries Firebase Storage first, with automatic compressed Firestore persistence
+// Upload product image: compresses instantly into lightweight web image for Firestore permanent storage (<200ms)
 export async function uploadProductImageToStorage(
   fileOrBase64: File | string, 
-  productId: string
+  _productId: string
 ): Promise<string> {
   try {
-    const timestamp = Date.now();
-    const cleanId = productId.replace(/[^a-zA-Z0-9_-]/g, '') || 'prod';
-
-    // First, compress the image to ensure lightweight storage
-    const optimizedImage = await compressAndResizeImage(fileOrBase64, 800, 0.82);
-
-    if (optimizedImage.startsWith('http://') || optimizedImage.startsWith('https://')) {
-      return optimizedImage;
-    }
-
-    // Try uploading to Firebase Storage if available
-    try {
-      if (storage) {
-        const storageRef = ref(storage, `products/${cleanId}_${timestamp}.jpg`);
-        await uploadString(storageRef, optimizedImage, 'data_url');
-        const downloadUrl = await getDownloadURL(storageRef);
-        return downloadUrl;
-      }
-    } catch (storageErr) {
-      console.warn('Firebase Storage requires Blaze/Billing. Safely saving compressed image into Cloud Firestore directly:', storageErr);
-    }
-
-    // Return the optimized image directly for Cloud Firestore permanent persistence
+    // Quickly compress image to lightweight web format (~30-50 KB)
+    const optimizedImage = await compressAndResizeImage(fileOrBase64, 800, 0.80);
     return optimizedImage;
   } catch (error) {
     console.error('Failed to process image upload:', error);

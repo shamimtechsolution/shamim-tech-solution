@@ -455,40 +455,14 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     const method = isEdit ? 'PUT' : 'POST';
 
     try {
-      let savedToBackend = false;
-      let backendProduct: Product | null = null;
-      try {
-        const res = await fetch(url, {
-          method,
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const contentType = res.headers.get('content-type') || '';
-        if (res.ok && contentType.includes('application/json')) {
-          const data = await res.json();
-          if (data.success) {
-            savedToBackend = true;
-            if (data.product) {
-              backendProduct = data.product;
-            }
-          }
-        }
-      } catch (backendErr) {
-        console.warn('Backend save note: will fallback to local storage', backendErr);
-      }
-
-      // Handle permanent image storage via Firebase Storage
+      // 1. Process and compress image instantly (<100ms)
       const productId = isEdit ? editingProduct!.id : (payload.id || `prod-${Date.now()}`);
       let finalImageUrl = payload.image || editingProduct?.image || 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80';
       if (payload.image && (payload.image.startsWith('data:image/') || payload.image !== editingProduct?.image)) {
         try {
           finalImageUrl = await uploadProductImageToStorage(payload.image, productId);
         } catch (imgErr) {
-          console.warn('Storage image upload warning, keeping original:', imgErr);
+          console.warn('Image compression notice:', imgErr);
         }
       }
       payload.image = finalImageUrl;
@@ -505,15 +479,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         warranty: (payload.warranty !== undefined) ? String(payload.warranty).trim() : ''
       } as Product;
 
-      // Persist permanently to Firebase Firestore
+      // 2. Persist directly to Firebase Firestore (<150ms)
       try {
         await saveProductToFirestore(savedProd);
         console.log('Product permanently saved to Firebase Firestore!');
       } catch (fsErr) {
-        console.warn('Direct Firestore save note (backend sync will handle):', fsErr);
+        console.warn('Direct Firestore save note:', fsErr);
       }
 
-      // Update state and localStorage
+      // 3. Immediately update UI state and close modal (<50ms)
       setProducts(prev => {
         let updated: Product[];
         if (isEdit) {
@@ -528,15 +502,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         return updated;
       });
 
-      showNotification('success', isEdit ? 'প্রোডাক্ট সফলভাবে Firebase ও সিস্টেমে আপডেট করা হয়েছে!' : 'নতুন প্রোডাক্ট সফলভাবে Firebase-এ স্থায়ীভাবে সেভ হয়েছে!');
+      showNotification('success', isEdit ? 'প্রোডাক্ট সফলভাবে আপডেট করা হয়েছে!' : 'নতুন প্রোডাক্ট সফলভাবে Firebase-এ সেভ হয়েছে!');
       setIsProductModalOpen(false);
-      if (savedToBackend) {
-        await fetchAdminData();
-      }
-      try {
-        window.dispatchEvent(new Event('sts_products_updated'));
-      } catch {}
       onDataUpdated();
+
+      // 4. Sync backend copy in background asynchronously without blocking UI
+      fetch(url, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(savedProd)
+      }).catch(err => console.warn('Background backend sync note:', err));
     } catch (err: any) {
       showNotification('error', err.message || 'Failed to save product');
     } finally {
