@@ -387,7 +387,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       isActive: true,
       image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80',
       features: ['Full HD Resolution', 'Official Warranty', 'Reliable Performance'],
-      warranty: '1 Year Official Warranty',
+      warranty: '',
       modelNumber: ''
     });
     setImagePreview('https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80');
