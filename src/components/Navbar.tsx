@@ -41,6 +41,8 @@ interface NavbarProps {
   companyInfo?: CompanyInfo;
   products?: Product[];
   onViewProduct?: (product: Product) => void;
+  onSelectDistrict?: (slug: string) => void;
+  onNavigateHome?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -62,6 +64,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   companyInfo: passedCompany,
   products = [],
   onViewProduct,
+  onSelectDistrict,
+  onNavigateHome,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -138,13 +142,16 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   const handleNavClick = (id: string) => {
+    if (onNavigateHome) onNavigateHome();
     if (typeof setActiveSection === 'function') {
       try { setActiveSection(id); } catch (e) { console.warn('setActiveSection error', e); }
     }
     setMobileMenuOpen(false);
     setMobileSearchOpen(false);
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      const element = document.getElementById(id);
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   };
 
   const handleCartClick = () => {
@@ -174,7 +181,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center justify-between h-[72px] sm:h-20 gap-2 w-full">
           
           <button 
-            onClick={() => handleNavClick('home')}
+            onClick={() => {
+              if (onNavigateHome) onNavigateHome();
+              handleNavClick('home');
+            }}
             className="flex items-center text-left focus:outline-none group cursor-pointer shrink-0 min-w-0 max-w-[150px] sm:max-w-none"
             title={activeCompany.name}
           >
@@ -255,14 +265,31 @@ export const Navbar: React.FC<NavbarProps> = ({
                             <span>8 Districts Service Coverage ({searchResults.districts.length})</span>
                             <button onClick={() => handleNavClick('services')} className="text-emerald-400 hover:underline cursor-pointer">View Coverage →</button>
                           </div>
-                          {searchResults.districts.map((dist) => (
-                            <div key={dist.id} onClick={() => handleNavClick('services')} className="p-2 hover:bg-emerald-950/40 cursor-pointer transition-colors">
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs font-bold text-white flex items-center gap-1.5"><MapPin className="w-3 h-3 text-cyan-400 shrink-0" /><span>{dist.bnName} ({dist.enName})</span></span>
-                                <span className="text-[10px] text-emerald-300 font-medium">On-site Support</span>
+                          {searchResults.districts.map((dist) => {
+                            const distSlug = dist.enName.toLowerCase();
+                            return (
+                              <div 
+                                key={dist.id} 
+                                onClick={() => {
+                                  if (onSelectDistrict) {
+                                    onSelectDistrict(distSlug);
+                                    setSearchTerm('');
+                                  } else {
+                                    handleNavClick('services');
+                                  }
+                                }} 
+                                className="p-2 hover:bg-emerald-950/40 cursor-pointer transition-colors"
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                                    <MapPin className="w-3 h-3 text-cyan-400 shrink-0" />
+                                    <span>{dist.bnName} ({dist.enName})</span>
+                                  </span>
+                                  <span className="text-[10px] text-emerald-300 font-medium">View Service Area →</span>
+                                </div>
                               </div>
-                            </div>
-                          ))}
+                            );
+                          })}
                         </div>
                       )}
                     </>

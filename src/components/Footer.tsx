@@ -19,12 +19,14 @@ interface FooterProps {
   companyInfo?: CompanyInfo;
   onOpenAdmin?: () => void;
   isAdminLoggedIn?: boolean;
+  onSelectDistrict?: (slug: string) => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ 
   companyInfo: passedCompany,
   onOpenAdmin,
-  isAdminLoggedIn 
+  isAdminLoggedIn,
+  onSelectDistrict
 }) => {
   const activeCompany = passedCompany || COMPANY_INFO;
 
@@ -206,19 +208,26 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
             <div className="flex flex-wrap justify-center gap-1.5">
               {[
-                { bn: "রংপুর", en: "Rangpur" },
-                { bn: "দিনাজপুর", en: "Dinajpur" },
-                { bn: "লালমনিরহাট", en: "Lalmonirhat" },
-                { bn: "কুড়িগ্রাম", en: "Kurigram" },
-                { bn: "নীলফামারী", en: "Nilphamari" },
-                { bn: "গাইবান্ধা", en: "Gaibandha" },
-                { bn: "ঠাকুরগাঁও", en: "Thakurgaon" },
-                { bn: "পঞ্চগড়", en: "Panchagarh" }
+                { bn: "রংপুর", en: "Rangpur", slug: "rangpur" },
+                { bn: "দিনাজপুর", en: "Dinajpur", slug: "dinajpur" },
+                { bn: "গাইবান্ধা", en: "Gaibandha", slug: "gaibandha" },
+                { bn: "কুড়িগ্রাম", en: "Kurigram", slug: "kurigram" },
+                { bn: "নীলফামারী", en: "Nilphamari", slug: "nilphamari" },
+                { bn: "লালমনিরহাট", en: "Lalmonirhat", slug: "lalmonirhat" },
+                { bn: "পঞ্চগড়", en: "Panchagarh", slug: "panchagarh" },
+                { bn: "ঠাকুরগাঁও", en: "Thakurgaon", slug: "thakurgaon" }
               ].map((dist, idx) => (
                 <a
                   key={idx}
-                  href="#district-coverage"
-                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-cyan-50 border border-sky-200 hover:border-cyan-400 text-xs text-slate-700 hover:text-cyan-800 font-medium transition-all shadow-sm flex items-center gap-1"
+                  href={`/service-area/${dist.slug}`}
+                  onClick={(e) => {
+                    if (onSelectDistrict) {
+                      e.preventDefault();
+                      onSelectDistrict(dist.slug);
+                    }
+                  }}
+                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-cyan-50 border border-sky-200 hover:border-cyan-400 text-xs text-slate-700 hover:text-cyan-800 font-medium transition-all shadow-sm flex items-center gap-1 cursor-pointer"
+                  title={`CCTV Camera Price & Service in ${dist.en}`}
                 >
                   <span className="font-bangla font-semibold text-cyan-800">{dist.bn}</span>
                   <span className="text-[10px] text-slate-400">({dist.en})</span>
