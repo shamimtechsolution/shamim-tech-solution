@@ -203,13 +203,15 @@ export const Footer: React.FC<FooterProps> = ({
                 রংপুর বিভাগের ৮টি জেলায় অন-সাইট সার্ভিস এরিয়া (Service Coverage)
               </span>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                CCTV Camera, Electrician, PABX Intercom, Access Control & IT Services available in all 8 districts:
+                CCTV Camera, Electrician, PABX Intercom, Access Control & IT Services available in all major districts & Dhaka:
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-1.5">
               {[
+                { bn: "ঢাকা", en: "Dhaka", slug: "dhaka" },
                 { bn: "রংপুর", en: "Rangpur", slug: "rangpur" },
                 { bn: "দিনাজপুর", en: "Dinajpur", slug: "dinajpur" },
+                { bn: "বগুড়া", en: "Bogura", slug: "bogura" },
                 { bn: "গাইবান্ধা", en: "Gaibandha", slug: "gaibandha" },
                 { bn: "কুড়িগ্রাম", en: "Kurigram", slug: "kurigram" },
                 { bn: "নীলফামারী", en: "Nilphamari", slug: "nilphamari" },

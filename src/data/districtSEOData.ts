@@ -1135,6 +1135,8 @@ export const DISTRICT_SEO_DATA: Record<string, DistrictSEOInfo> = {
       'লালমনিরহাট এক্সেস কন্ট্রোল ও ডোর লক',
       'লালমনিরহাট বায়োমেট্রিক হাজিরা মেশিন',
       'লালমনিরহাট ইলেকট্রিশিয়ান',
+      'লালমণি ইলেকট্রিশিয়ান',
+      'লালমনিরহাট ইলেকট্রিক্যাল ওয়্যারিং ও টেকনিশিয়ান',
       'লালমনিরহাট কম্পিউটার মেরামত'
     ],
     popularSearchesEn: [
@@ -1154,6 +1156,9 @@ export const DISTRICT_SEO_DATA: Record<string, DistrictSEOInfo> = {
       'Access Control Lalmonirhat',
       'Biometric Machine Lalmonirhat',
       'Lalmonirhat Electrician',
+      'Electrician Lalmonirhat',
+      'Lalmoni Electrician',
+      'Electrician Lalmoni',
       'Computer Technician Lalmonirhat'
     ],
     productSalesItems: buildDistrictProductSales(
@@ -1510,5 +1515,314 @@ export const DISTRICT_SEO_DATA: Record<string, DistrictSEOInfo> = {
     deliveryTimeline: 'ঠাকুরগাঁও সদর ও পীরগঞ্জে ২৪ ঘণ্টার মধ্যে ডেলিভারি ও অন-সাইট সার্ভিস।',
     onSiteSupportNote: 'কোল্ড স্টোরেজ ও বাণিজ্যিক প্রজেক্টের জন্য পূর্ব শিডিউলে অন-সাইট টিম পাঠানো হয়। হটলাইন: 01790139333, 01865321530',
     productCategoriesHighlighted: ['CCTV Camera', 'Power Supply/Adapter', 'DVR', 'NVR', 'Hard Disk (HDD)', 'Other Accessories']
+  },
+
+  bogura: {
+    slug: 'bogura',
+    enName: 'Bogura',
+    bnName: 'বগুড়া',
+    title: 'CCTV Camera Services in Bogura | CCTV Installation, Price & Technician | Shamim Tech Solution',
+    metaDescription: 'CCTV Camera Services & expert CCTV technician in Bogura (Bogra). Best CCTV camera price, IP camera setup, DVR/NVR online view, PBX intercom, access control & electrician services with fast on-site support.',
+    h1: 'Bogura CCTV Camera Sales, Installation, Electrician & Technical Service (বগুড়া সিসিটিভি ক্যামেরা ও টেকনিক্যাল সলিউশন)',
+    tagline: 'Premier Security System Supplier, Commercial Surveillance & Automation Hub for Bogura (Bogra)',
+    bengaliTagline: 'উত্তরবঙ্গের প্রাণকেন্দ্র বগুড়া জেলা ও শিল্পাঞ্চলে আধুনিক সিসিটিভি ক্যামেরা বিক্রয়, ইনস্টলেশন, ইলেকট্রিশিয়ান ও অন-সাইট টেকনিশিয়ান সেবা',
+    aboutDistrict: 'উত্তরবঙ্গের প্রবেশদ্বার ও প্রধান বাণিজ্যিক শিল্পনগরী বগুড়া (সাতমাথা, বড়গোলা, শেরপুর, শিবগঞ্জ, বিসিক শিল্পনগরী ও সান্তাহার)-এর বাণিজ্যিক ভবন, অটোমোবাইল ও মেটাল কারখানা, কোল্ড স্টোরেজ, শপিং মল এবং বাসাবাড়ির নিরবচ্ছিন্ন সুরক্ষায় বিশ্বমানের সিসিটিভি ক্যামেরা, আইপি ক্যামেরা, পিবিএক্স ইন্টারকম, এক্সেস কন্ট্রোল ও ইলেকট্রিক্যাল সার্ভিস দিচ্ছে শামীম টেক সলিউশন।',
+    upazilas: [
+      'Bogura Sadar (বগুড়া সদর ও সাতমাথা)',
+      'Sherpur (শেরপুর)',
+      'Shibganj (শিবগঞ্জ)',
+      'Shajahanpur (শাজাহানপুর)',
+      'Gabtali (গাবতলী)',
+      'Sonatola (সোনাতলা)',
+      'Sariakandi (সারিয়াকান্দি)',
+      'Dhunat (ধুনট)',
+      'Nandigram (নন্দীগ্রাম)',
+      'Kahaloo (কাহালু)',
+      'Dupchanchia (দুপচাঁচিয়া)',
+      'Adamdighi & Santahar (আদমদীঘি ও সান্তাহার)'
+    ],
+    keyLandmarks: [
+      'Bogura Satmatha Commercial Circle (সাতমাথা)',
+      'Borogola Commercial Market (বড়গোলা)',
+      'Thonthonia Bus Terminal Area (ঠনঠনিয়া)',
+      'Tinmatha Railgate (তিনমাথা রেলগেট)',
+      'BSCIC Industrial Area (বিসিক শিল্পনগরী)',
+      'Sherpur Road & Jahangirabad Cantonment Area',
+      'Santahar Railway Junction & Commercial Hub'
+    ],
+    popularSearchesBn: [
+      'বগুড়া সিসিটিভি টেকনিশিয়ান',
+      'বগুড়া সিসিটিভি ক্যামেরা দাম',
+      'বগুড়া সিসিটিভি ক্যামেরা দোকান',
+      'বগুড়া সিসিটিভি ক্যামেরা সার্ভিস ও মেরামত',
+      'বগুড়া আইপি ক্যামেরা ইনস্টলেশন',
+      'শেরপুর বগুড়া সিসিটিভি টেকনিশিয়ান',
+      'শিবগঞ্জ সিসিটিভি ক্যামেরা',
+      'বগুড়া ডিভিআর অনলাইন মোবাইল ভিউ',
+      'বগুড়া ইন্টারকম টেকনিশিয়ান',
+      'বগুড়া এক্সেস কন্ট্রোল ও ডোর লক',
+      'বগুড়া বায়োমেট্রিক হাজিরা মেশিন',
+      'বগুড়া ইলেকট্রিশিয়ান',
+      'বগুড়া ইলেকট্রিক্যাল ওয়্যারিং ও টেকনিশিয়ান',
+      'বগুড়া পিবিএক্স সিস্টেম',
+      'বগুড়া কম্পিউটার মেরামত ও ল্যান নেটওয়ার্কিং'
+    ],
+    popularSearchesEn: [
+      'CCTV Camera Services in Bogura',
+      'Bogura CCTV Technician',
+      'Bogra CCTV Technician',
+      'CCTV Technician Bogura',
+      'Bogura CCTV Camera Price',
+      'Bogra CCTV Camera Price',
+      'CCTV Camera Shop Bogura',
+      'Bogura CCTV Installation',
+      'CCTV Service Bogura',
+      'IP Camera Bogura',
+      'DVR NVR Online Setup Bogura',
+      'Bogura Intercom Technician',
+      'Access Control Bogura',
+      'Biometric Machine Bogura',
+      'Bogura Electrician',
+      'Bogra Electrician',
+      'Electrician Bogura',
+      'Electrician Bogra',
+      'Sherpur Bogura CCTV Technician',
+      'Computer Technician Bogura'
+    ],
+    productSalesItems: buildDistrictProductSales(
+      'bogura',
+      'Bogura',
+      'বগুড়া',
+      'বগুড়া সদর, সাতমাথা, শেরপুর ও বিসিক শিল্পাঞ্চলের কারখানা, কোল্ড স্টোরেজ ও শোরুমের জন্য'
+    ),
+    technicianServiceItems: buildDistrictTechnicianServices(
+      'bogura',
+      'Bogura',
+      'বগুড়া',
+      'বগুড়ার সাতমাথা, শেরপুর, শিবগঞ্জ ও সান্তাহারের যেকোনো ব্যবসা ও বাসাবাড়িতে দ্রুততম অন-সাইট টেকনিশিয়ান ও ইলেকট্রিশিয়ান সাপোর্ট দেওয়া হয়।'
+    ),
+    servicesOffered: [
+      {
+        title: 'Industrial & Factory Surveillance in Bogura BSCIC',
+        bengaliTitle: 'বগুড়া বিসিক শিল্পাঞ্চল ও কারখানা সিসিটিভি টেকনিশিয়ান সার্ভিস',
+        description: 'বগুড়া বিসিক শিল্পাঞ্চল, মেটাল ফ্যাক্টরি, রাইস মিল ও কোল্ড স্টোরেজের জন্য হেভি-ডিউটি সেন্ট্রালাইজড এনভিআর ও ক্যামেরা স্থাপন সেবা।',
+        features: ['PoE গিগাবিট সুইচ নেটওয়ার্ক', 'মেটাল বডি হেভি-ডিউটি ক্যামেরা', 'কন্ট্রোল রুম মনিটরিং সেটআপ']
+      },
+      {
+        title: 'IP Camera & Wi-Fi CCTV Solutions in Bogura',
+        bengaliTitle: 'বগুড়া আইপি ক্যামেরা ও ওয়াইফাই স্মার্ট ক্যামেরা ইনস্টলেশন',
+        description: 'বাসাবাড়ি, দোকান, শপিং মল ও কর্পোরেট অফিসের জন্য উচ্চ রেজোলিউশনের আইপি ক্যামেরা এবং ওয়াইফাই রোটেটিং ক্যামেরা সেটআপ।',
+        features: ['ফুল এইচডি ক্লিয়ার নাইট ভিশন', 'মোবাইল লাইভ স্ট্রিমিং', 'স্মার্ট টু-ওয়ে অডিও ইন্টারকম']
+      },
+      {
+        title: 'DVR / NVR Online View & Password Reset',
+        bengaliTitle: 'বগুড়া ডিভিআর/এনভিআর অনলাইন মোবাইল ভিউ ও পাসওয়ার্ড রিসেট',
+        description: 'ডিভিআর/এনভিআর ইন্টারনেটের সাথে যুক্ত করে দেশ-বিদেশের যেকোনো স্থান থেকে লাইভ ক্যামেরা দেখা ও ভুলে যাওয়া পাসওয়ার্ড তাৎক্ষণিক আনলক।',
+        features: ['মোবাইলে লাইভ ভিডিও', 'হার্ডডিস্ক স্টোরেজ হেলথ টেস্ট', 'মোশন ডিটেকশন পুশ অ্যালার্ট']
+      },
+      {
+        title: 'PBX & Intercom System Setup',
+        bengaliTitle: 'বগুড়া পিবিএক্স সিস্টেম ও ইন্টারকম টেকনিশিয়ান',
+        description: 'বগুড়ার বহুতল আবাসিক ভবন, ক্লিনিক, হাসপাতাল, হোটেল ও বাণিজ্যিক প্রতিষ্ঠানে রুম টু রুম ক্লিয়ার অডিও ইন্টারকম ও এক্সচেঞ্জ সার্ভিস।',
+        features: ['ক্লিয়ার ভয়েস কলিং', 'এক্সটেনশন হ্যান্ডসেট সেটআপ', 'নিয়মিত মেইনটেন্যান্স']
+      },
+      {
+        title: 'Access Control & Electric Door Lock',
+        bengaliTitle: 'বগুড়া এক্সেস কন্ট্রোল ও ডিজিটাল ডোর লক',
+        description: 'অফিস ও গুরুত্বপূর্ণ কক্ষে অননুমোদিত প্রবেশ ঠেকাতে ফিঙ্গারপ্রিন্ট, কার্ড ও রিমোট কন্ট্রোল ডোর লক স্থাপন।',
+        features: ['ম্যাগনেটিক ও ড্রপবোল্ট লক', 'এক্সিট বাটন', 'জরুরি ব্যাটারি ব্যাকআপ']
+      },
+      {
+        title: 'Biometric Attendance Machine',
+        bengaliTitle: 'বগুড়া বায়োমেট্রিক হাজিরা মেশিন ও সফটওয়্যার সাপোর্ট',
+        description: 'অফিস, কারখানা ও শিক্ষাপ্রতিষ্ঠানের স্টাফ উপস্থিতি নিশ্চিত করতে আধুনিক ফিঙ্গারপ্রিন্ট ও ফেস মেশিন স্থাপন ও বাংলা সফটওয়্যার ট্রেনিং।',
+        features: ['সহজ বাংলা সফটওয়্যার সাপোর্ট', 'এক্সেল ডেটা ব্যাকআপ', 'সুরক্ষিত অ্যাক্সেস কার্ড']
+      },
+      {
+        title: 'House & Commercial Electrician Service',
+        bengaliTitle: 'বগুড়া ইলেকট্রিশিয়ান ও নিরাপদ ইলেকট্রিক্যাল ওয়্যারিং',
+        description: 'দক্ষ ইলেকট্রিশিয়ান দ্বারা বাসা, কারখানা, খামার ও শোরুমের নিরাপদ বিদ্যুৎ ওয়্যারিং, সার্কিট ব্রেকার, ডিবি বক্স ও ফল্ট ফিক্সিং।',
+        features: ['শর্ট সার্কিট সেফটি ব্যবস্থা', 'সুরক্ষিত আর্থিং সংযোগ', 'জরুরি ইলেকট্রিক্যাল সাপোর্ট']
+      },
+      {
+        title: 'Computer LAN Networking & Hardware Repair',
+        bengaliTitle: 'বগুড়া কম্পিউটার টেকনিশিয়ান ও লোকাল নেটওয়ার্কিং',
+        description: 'Cat6 LAN ক্যাবলিং, রাউটার-সুইচ কনফিগারেশন এবং ডেস্কটপ পিসি হার্ডওয়্যার ট্রাবলশুটিং ও উইন্ডোজ ইনস্টল।',
+        features: ['উচ্চগতির লোকাল নেটওয়ার্ক', 'RJ45 পাঞ্চিং ও টেস্ট', 'কম্পিউটার হার্ডওয়্যার মেরামত']
+      }
+    ],
+    faqs: [
+      {
+        question: 'বগুড়া সদরে কি অন-সাইট টেকনিশিয়ান ও ফিটিং পাওয়া যায়?',
+        answer: 'হ্যাঁ, বগুড়া সদর, সাতমাথা, শেরপুর, শিবগঞ্জ এবং সান্তাহার সহ পুরো বগুড়া জেলায় আমাদের দক্ষ টেকনিশিয়ান ও ইলেকট্রিশিয়ান অন-সাইটে গিয়ে ক্যামেরা ফিটিং ও সার্ভিস কাজ সম্পন্ন করে।'
+      },
+      {
+        question: 'বগুড়ায় ক্যামেরা বা ইলেকট্রিক্যাল সমস্যা হলে কীভাবে সার্ভিস পাব?',
+        answer: 'যেকোনো কারিগরি সমস্যায় আমাদের হটলাইনে (01790139333 / 01865321530) কল করলে তাৎক্ষণিক ট্রাবলশুটিং সমাধান অথবা দ্রুত টেকনিশিয়ান পাঠিয়ে মেরামত নিশ্চিত করা হয়।'
+      },
+      {
+        question: 'বগুড়া থেকে পণ্য অর্ডারে কত সময় লাগে?',
+        answer: 'বগুড়া সদর ও শেরপুরে একই দিনে বা ২৪ ঘণ্টার মধ্যে সরাসরি অন-সাইট টিম বা দ্রুততম কুরিয়ারের মাধ্যমে পণ্য ও টেকনিশিয়ান পৌঁছে যায়।'
+      }
+    ],
+    deliveryTimeline: 'বগুড়া সদর ও শেরপুরে ২৪ ঘণ্টার মধ্যে ডেলিভারি ও অন-সাইট সার্ভিস।',
+    onSiteSupportNote: 'বগুড়ার বাণিজ্যিক হাব ও শিল্পাঞ্চলের জন্য সার্বক্ষণিক টেকনিক্যাল সাপোর্ট। হটলাইন: 01790139333, 01865321530',
+    productCategoriesHighlighted: ['CCTV Camera', 'Power Supply/Adapter', 'DVR', 'NVR', 'Hard Disk (HDD)', 'Other Accessories']
+  },
+
+  dhaka: {
+    slug: 'dhaka',
+    enName: 'Dhaka',
+    bnName: 'ঢাকা',
+    title: 'CCTV Camera Services in Dhaka | CCTV Installation, Price & Technician | Shamim Tech Solution',
+    metaDescription: 'CCTV Camera Services & expert CCTV technician in Dhaka. Best CCTV camera price, IP camera installation, DVR/NVR online view, access control, intercom & electrician services across Dhaka.',
+    h1: 'Dhaka CCTV Camera Sales, Installation, Electrician & Technical Service (ঢাকা সিসিটিভি ক্যামেরা ও টেকনিক্যাল সলিউশন)',
+    tagline: 'Premier Security System Supplier, Corporate Surveillance & Automation Hub in Dhaka Mega City',
+    bengaliTagline: 'রাজধানী ঢাকা ও আশপাশের অঞ্চলে আধুনিক সিসিটিভি ক্যামেরা বিক্রয়, ইনস্টলেশন, ইলেকট্রিশিয়ান ও অন-সাইট টেকনিশিয়ান সেবা',
+    aboutDistrict: 'রাজধানী ঢাকার মতিঝিল, ধানমন্ডি, গুলশান, বনানী, উত্তরা, মিরপুর, তেজগাঁও শিল্পাঞ্চল, বাড্ডা, পুরান ঢাকা, সাভার ও কেরানীগঞ্জের কর্পোরেট অফিস, বহুতল বাণিজ্যিক ভবন, গার্মেন্টস ও কলকারখানা, ব্যাংকিং প্রতিষ্ঠান এবং বাসাবাড়ির সামগ্রিক ডিজিটাল সুরক্ষায় আসল সিসিটিভি ক্যামেরা, আইপি ক্যামেরা, পিবিএক্স ইন্টারকম, এক্সেস কন্ট্রোল ও পেশাদার ইলেকট্রিক্যাল সার্ভিস সরবরাহ করছে শামীম টেক সলিউশন।',
+    upazilas: [
+      'Gulshan & Banani (গুলশান ও বনানী)',
+      'Uttara Model Town (উত্তরা)',
+      'Dhanmondi (ধানমন্ডি)',
+      'Mirpur (মিরপুর)',
+      'Motijheel & Dilkusha (মতিঝিল ও দিলকুশা)',
+      'Mohammadpur (মোহাম্মদপুর)',
+      'Tejgaon Industrial Area (তেজগাঁও শিল্পাঞ্চল)',
+      'Badda & Rampura (বাড্ডা ও রামপুরা)',
+      'Old Dhaka & Sadarghat (পুরান ঢাকা ও সদরঘাট)',
+      'Jatrabari (যাত্রাবাড়ী)',
+      'Savar & Ashulia (সাভার ও আশুলিয়া)',
+      'Keraniganj (কেরানীগঞ্জ)'
+    ],
+    keyLandmarks: [
+      'Motijheel Commercial Zone',
+      'BCS Computer City (IDB Bhaban Agargaon)',
+      'Multiplan Center (Elephant Road)',
+      'Gulshan 1 & 2 Circle',
+      'Kawran Bazar Commercial Area',
+      'Uttara House Building Circle',
+      'Mirpur 10 Circle'
+    ],
+    popularSearchesBn: [
+      'ঢাকা সিসিটিভি টেকনিশিয়ান',
+      'ঢাকা সিসিটিভি ক্যামেরা দাম',
+      'ঢাকা সিসিটিভি ক্যামেরা মার্কেট ও দোকান',
+      'ঢাকা সিসিটিভি সার্ভিস ও মেরামত',
+      'ঢাকা আইপি ক্যামেরা ইনস্টলেশন',
+      'উত্তরা সিসিটিভি টেকনিশিয়ান',
+      'গুলশান সিসিটিভি ক্যামেরা ইনস্টলেশন',
+      'মিরপুর সিসিটিভি ক্যামেরা ফিটিং',
+      'ঢাকা ডিভিআর অনলাইন মোবাইল ভিউ',
+      'ঢাকা ইন্টারকম টেকনিশিয়ান',
+      'ঢাকা এক্সেস কন্ট্রোল ও ডোর লক',
+      'ঢাকা বায়োমেট্রিক হাজিরা মেশিন',
+      'ঢাকা ইলেকট্রিশিয়ান',
+      'ঢাকা ইলেকট্রিক্যাল ওয়্যারিং ও টেকনিশিয়ান',
+      'ঢাকা কম্পিউটার টেকনিশিয়ান ও লোকাল নেটওয়ার্কিং'
+    ],
+    popularSearchesEn: [
+      'CCTV Camera Services in Dhaka',
+      'Dhaka CCTV Technician',
+      'CCTV Technician Dhaka',
+      'CCTV Camera Price in Dhaka',
+      'CCTV Camera Shop Dhaka',
+      'Dhaka CCTV Installation',
+      'CCTV Repair Dhaka',
+      'IP Camera Dhaka',
+      'DVR NVR Online Setup Dhaka',
+      'Dhaka Intercom Technician',
+      'Access Control Dhaka',
+      'Biometric Machine Dhaka',
+      'Dhaka Electrician',
+      'Electrician Dhaka',
+      'Electrician in Dhaka',
+      'Technician in Dhaka',
+      'Uttara CCTV Technician',
+      'Mirpur CCTV Camera',
+      'Computer Technician Dhaka'
+    ],
+    productSalesItems: buildDistrictProductSales(
+      'dhaka',
+      'Dhaka',
+      'ঢাকা',
+      'ঢাকার মতিঝিল, গুলশান, উত্তরা, মিরপুর ও ধানমন্ডির কর্পোরেট অফিস, শোরুম ও আবাসিক ভবনের জন্য'
+    ),
+    technicianServiceItems: buildDistrictTechnicianServices(
+      'dhaka',
+      'Dhaka',
+      'ঢাকা',
+      'ঢাকার যেকোনো থানা ও বাণিজ্যিক জোনে অভিজ্ঞ অন-সাইট টেকনিশিয়ান ও ইলেকট্রিশিয়ান সাপোর্ট সরবরাহ করা হয়।'
+    ),
+    servicesOffered: [
+      {
+        title: 'Corporate & Commercial Surveillance in Dhaka',
+        bengaliTitle: 'ঢাকা কর্পোরেট অফিস ও বাণিজ্যিক ভবন সিসিটিভি টেকনিশিয়ান সার্ভিস',
+        description: 'মতিঝিল, গুলশান, বনানী ও ধানমন্ডির হেড অফিস, ব্যাংক ও মাল্টি-স্টোরি বাণিজ্যিক ভবনে হাই-এন্ড আইপি ক্যামেরা ও সেন্ট্রালাইজড এনভিআর মনিটরিং সেটআপ।',
+        features: ['গিগাবিট PoE নেটওয়ার্ক', 'ফেস রিকগনিশন ও AI ক্যামেরা', 'কন্ট্রোল রুম ওয়াল স্ক্রিন ইন্টিগ্রেশন']
+      },
+      {
+        title: 'IP Camera & Wi-Fi CCTV Solutions in Dhaka',
+        bengaliTitle: 'ঢাকা আইপি ক্যামেরা ও ওয়াইফাই স্মার্ট ক্যামেরা ইনস্টলেশন',
+        description: 'বাসাবাড়ি, ফ্ল্যাট, দোকান ও বুটিক শোরুমের জন্য উচ্চ রেজোলিউশনের ওয়্যারলেস আইপি ক্যামেরা এবং ৩৬০ ডিগ্রি রোটেটিং ক্যামেরা সেটআপ।',
+        features: ['ফুল এইচডি ক্লিয়ার নাইট ভিশন', 'মোবাইল অ্যাপ লাইভ ভিউ', 'স্মার্ট টু-ওয়ে অডিও ইন্টারকম']
+      },
+      {
+        title: 'DVR / NVR Online View & Remote Mobile Monitoring',
+        bengaliTitle: 'ঢাকা ডিভিআর/এনভিআর অনলাইন মোবাইল ভিউ ও পাসওয়ার্ড রিকভারি',
+        description: 'ডিভিআর/এনভিআর দ্রুত ইন্টারনেটে যুক্ত করে দেশে বা বিদেশ থেকে মোবাইলে লাইভ নজরদারি ও ভুলে যাওয়া পাসওয়ার্ড তাৎক্ষণিক আনলক।',
+        features: ['মোবাইলে হাই-স্পিড লাইভ ভিডিও', 'রেকর্ডিং ড্রাইভ হেলথ টেস্ট', 'রিয়েল-টাইম মোশন নোটিফিকেশন']
+      },
+      {
+        title: 'PBX & Intercom System Setup for High-Rise Buildings',
+        bengaliTitle: 'ঢাকা পিবিএক্স সিস্টেম ও ইন্টারকম টেকনিশিয়ান সার্ভিস',
+        description: 'ঢাকার বহুতল আবাসিক অ্যাপার্টমেন্ট, কল সেন্টার ও কর্পোরেট অফিসে মাল্টি-লাইন পিবিএক্স টেলিফোন এক্সচেঞ্জ ও রুম টু রুম ইন্টারকম সংযোগ।',
+        features: ['ক্লিয়ার ভয়েস কলিং', 'এক্সটেনশন প্রোগ্রামিং', 'জরুরি ফল্ট মেরামত']
+      },
+      {
+        title: 'Access Control & Smart Door Lock Solutions',
+        bengaliTitle: 'ঢাকা এক্সেস কন্ট্রোল ও ম্যাগনেটিক ডোর লক ইনস্টলেশন',
+        description: 'সার্ভার রুম ও অফিসের মূল প্রবেশদ্বারে ফিঙ্গারপ্রিন্ট, RFID কার্ড, ফেস ডিটেকশন ও রিমোট ম্যাগনেটিক লক স্থাপন।',
+        features: ['ম্যাগনেটিক ও ড্রপবোল্ট লক', 'এক্সিট সেন্সর সুইচ', 'জরুরি ব্যাটারি ব্যাকআপ']
+      },
+      {
+        title: 'Biometric Attendance Machine & HR Integration',
+        bengaliTitle: 'ঢাকা বায়োমেট্রিক হাজিরা মেশিন ও সফটওয়্যার সাপোর্ট',
+        description: 'অফিস ও শিক্ষাপ্রতিষ্ঠানের স্টাফ উপস্থিতি নিয়ন্ত্রণে আধুনিক ফিঙ্গারপ্রিন্ট ও ফেস এটেন্ডেন্স মেশিন স্থাপন ও বাংলা সফটওয়্যার ট্রেনিং।',
+        features: ['সহজ বাংলা সফটওয়্যার সাপোর্ট', 'এক্সেল শিট রিপোর্ট অটো-জেনারেশন', 'সুরক্ষিত বায়োমেট্রিক ডেটা']
+      },
+      {
+        title: 'House & Commercial Electrician Service in Dhaka',
+        bengaliTitle: 'ঢাকা ইলেকট্রিশিয়ান ও নিরাপদ ইলেকট্রিক্যাল ওয়্যারিং সার্ভিস',
+        description: 'দক্ষ ইলেকট্রিশিয়ান দ্বারা বাসা, ফ্ল্যাট, কারখানা ও শোরুমের নিরাপদ বিদ্যুৎ ওয়্যারিং, সার্কিট ব্রেকার, ডিবি বক্স ও ফল্ট ফিক্সিং।',
+        features: ['শর্ট সার্কিট সেফটি ব্যবস্থা', 'সুরক্ষিত আর্থিং সংযোগ', 'জরুরি ইলেকট্রিক্যাল সাপোর্ট']
+      },
+      {
+        title: 'Computer LAN Networking & Hardware Repair',
+        bengaliTitle: 'ঢাকা কম্পিউটার টেকনিশিয়ান ও লোকাল নেটওয়ার্কিং',
+        description: 'Cat6 LAN ক্যাবলিং, রাউটার-সুইচ কনফিগারেশন এবং ডেস্কটপ পিসি হার্ডওয়্যার ট্রাবলশুটিং ও উইন্ডোজ ইনস্টল।',
+        features: ['উচ্চগতির লোকাল নেটওয়ার্ক', 'RJ45 পাঞ্চিং ও টেস্ট', 'কম্পিউটার হার্ডওয়্যার মেরামত']
+      }
+    ],
+    faqs: [
+      {
+        question: 'ঢাকায় কি অন-সাইট টেকনিশিয়ান ও ক্যামেরা ফিটিং পাওয়া যায়?',
+        answer: 'হ্যাঁ, ধানমন্ডি, গুলশান, উত্তরা, মিরপুর, মতিঝিল ও সাভার সহ ঢাকার যেকোনো এলাকায় আমাদের পেশাদার টেকনিশিয়ান টিম অন-সাইটে গিয়ে কাজ সম্পন্ন করে।'
+      },
+      {
+        question: 'ঢাকায় জরুরি সিসিটিভি বা ইলেকট্রিক্যাল সার্ভিসের জন্য কীভাবে যোগাযোগ করব?',
+        answer: 'আমাদের হটলাইন 01790139333 অথবা টেকনিশিয়ান নম্বর 01865321530-এ কল বা হোয়াটসঅ্যাপ মেসেজ দিয়ে তাৎক্ষণিক বুক করতে পারেন।'
+      },
+      {
+        question: 'ঢাকায় পণ্য ডেলিভারি ও পেমেন্ট পদ্ধতি কী?',
+        answer: 'ঢাকায় দ্রুততম হোম ডেলিভারি দেওয়া হয় এবং পণ্য বুঝে পেয়ে মূল্য পরিশোধের সুবিধা রয়েছে।'
+      }
+    ],
+    deliveryTimeline: 'ঢাকায় ২৪ ঘণ্টার মধ্যে দ্রুততম হোম ডেলিভারি ও অন-সাইট টেকনিক্যাল সার্ভিস।',
+    onSiteSupportNote: 'কর্পোরেট অফিস ও বাণিজ্যিক প্রজেক্টের জন্য ডেডিকেটেড টেকনিক্যাল টিম। হটলাইন: 01790139333, 01865321530',
+    productCategoriesHighlighted: ['CCTV Camera', 'Power Supply/Adapter', 'DVR', 'NVR', 'Hard Disk (HDD)', 'Other Accessories']
   }
 };
+
+// Aliases for alternate spellings
+DISTRICT_SEO_DATA['bogra'] = DISTRICT_SEO_DATA['bogura'];
+

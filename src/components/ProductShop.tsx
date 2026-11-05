@@ -7,14 +7,11 @@ import {
   Check, 
   Filter, 
   ChevronRight, 
-  SlidersHorizontal,
   Layers,
   Sparkles,
   Package,
   ShieldCheck,
-  Tag,
   ChevronDown,
-  ChevronUp,
   MessageSquare,
   Phone
 } from 'lucide-react';
@@ -48,24 +45,6 @@ const CATEGORIES: ProductCategory[] = [
   'Other Accessories'
 ];
 
-const POPULAR_SEARCH_TAGS = [
-  'cctv video balun',
-  'cctv adapter',
-  'cctv box adapter',
-  'cctv power suply',
-  'star tech rangpur',
-  'startech',
-  'star tech',
-  'ryans',
-  'datatech',
-  'cctv star tech',
-  'Video Balun',
-  'CCTV Camera',
-  'DVR / NVR',
-  'Hard Disk',
-  'Rangpur CCTV'
-];
-
 export const ProductShop: React.FC<ProductShopProps> = ({
   products,
   onAddToCart,
@@ -87,8 +66,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
     }
   };
 
-  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
-  const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
+  const [sortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
 
   // Filter products by category and search keyword (intelligent multi-token search with requested keywords)
   const filteredProducts = useMemo(() => {
@@ -198,22 +176,22 @@ export const ProductShop: React.FC<ProductShopProps> = ({
           </span>
         </div>
 
-        {/* Search & Sort Controls (Star Tech Style - Compact & No Gaps) */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 mb-2.5 sm:mb-3">
-          {/* Search Box */}
-          <div className="relative flex-1 sm:max-w-md">
+        {/* Search Box & Product Category (এক লাইনে পাশাপাশি - সার্চ ছোট ও ডান পাশে প্রোডাক্ট ক্যাটাগরি) */}
+        <div className="flex items-center gap-2 mb-4">
+          {/* Search Box (ছোট/কমপ্যাক্ট) */}
+          <div className="relative flex-1 min-w-0">
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search camera, DVR, brand..."
-              className="w-full bg-white text-xs sm:text-sm text-slate-800 placeholder-slate-400 rounded-xl pl-9 pr-8 py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/20 transition-all shadow-xs"
+              className="w-full bg-white text-xs sm:text-sm text-slate-800 placeholder-slate-400 rounded-xl pl-8 sm:pl-9 pr-7 py-2 border-2 border-sky-300 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/20 transition-all shadow-xs"
             />
-            <Search className="w-3.5 h-3.5 text-cyan-600 absolute left-3 top-2.5 pointer-events-none" />
+            <Search className="w-3.5 h-3.5 text-cyan-600 absolute left-2.5 sm:left-3 top-2.5 pointer-events-none" />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-2 text-xs text-slate-400 hover:text-slate-700 p-0.5 font-bold"
+                className="absolute right-2 top-2 text-xs text-slate-400 hover:text-slate-700 p-0.5 font-bold cursor-pointer"
                 title="Clear search"
               >
                 ✕
@@ -221,136 +199,24 @@ export const ProductShop: React.FC<ProductShopProps> = ({
             )}
           </div>
 
-          {/* Sort Selector */}
-          <div className="flex items-center gap-1.5 bg-white px-2.5 py-1.5 rounded-xl border border-sky-200 text-xs text-slate-700 shadow-xs shrink-0 self-end sm:self-auto">
-            <SlidersHorizontal className="w-3 h-3 text-cyan-600" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-transparent text-slate-700 focus:outline-none cursor-pointer text-xs font-medium"
-            >
-              <option value="featured">Featured First</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
-            </select>
-          </div>
-        </div>
-
-        {/* Quick Search Tags (Star Tech Style) */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-4 scrollbar-none text-xs">
-          <span className="text-[11px] font-bold text-slate-500 flex items-center gap-1 shrink-0 mr-1">
-            <Tag className="w-3 h-3 text-cyan-600" />
-            <span>Popular:</span>
-          </span>
-          {POPULAR_SEARCH_TAGS.map((tag) => (
-            <button
-              key={tag}
-              onClick={() => setSearchTerm(searchTerm === tag ? '' : tag)}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-medium whitespace-nowrap shrink-0 transition-all cursor-pointer ${
-                searchTerm.toLowerCase() === tag.toLowerCase()
-                  ? 'bg-cyan-600 text-white font-bold shadow-xs'
-                  : 'bg-white/90 text-slate-600 hover:text-cyan-700 hover:bg-sky-50 border border-sky-200/80 shadow-2xs'
-              }`}
-            >
-              {tag}
-            </button>
-          ))}
-          {searchTerm && (
-            <button
-              onClick={() => setSearchTerm('')}
-              className="text-[11px] font-bold text-red-600 hover:underline shrink-0 ml-1 cursor-pointer"
-            >
-              Clear Filter
-            </button>
-          )}
-        </div>
-
-        {/* Horizontal Category Carousel for Mobile & Tablets (Star Tech Style) */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none">
-          {CATEGORIES.map((cat) => {
-            const isSelected = selectedCategory === cat;
-            const count = categoryCounts[cat] || 0;
-            return (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold whitespace-nowrap shrink-0 transition-all border cursor-pointer ${
-                  isSelected
-                    ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-500 shadow-sm font-bold'
-                    : 'bg-white text-slate-700 hover:text-cyan-800 border-sky-200 hover:bg-sky-50 shadow-xs'
-                }`}
+          {/* Product Category Dropdown (সার্চ অপশনের ঠিক ডান পাশে) */}
+          <div className="relative shrink-0 w-[145px] sm:w-[220px]">
+            <div className="relative flex items-center bg-white border-2 border-sky-300 hover:border-cyan-500 rounded-xl px-2 sm:px-2.5 py-2 shadow-xs transition-all">
+              <Layers className="w-3.5 h-3.5 text-cyan-600 shrink-0 mr-1 sm:mr-1.5 pointer-events-none" />
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value as ProductCategory)}
+                className="w-full bg-transparent text-[11px] sm:text-xs font-bold text-slate-800 focus:outline-none cursor-pointer truncate appearance-none pr-4"
+                title="Product Category"
               >
-                <span>{cat}</span>
-                <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
-                  isSelected ? 'bg-white/25 text-white' : 'bg-sky-100 text-slate-600'
-                }`}>
-                  {count}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Mobile Product Categories Drawer/Card (PC এর মতো মোবাইলেও সম্পূর্ণ ক্যাটাগরি তালিকা) */}
-        <div className="lg:hidden mb-5">
-          <div className="bg-white border-2 border-sky-300 rounded-2xl p-3 shadow-md">
-            <button
-              onClick={() => setMobileCategoryOpen(!mobileCategoryOpen)}
-              className="w-full flex items-center justify-between text-left cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-lg bg-sky-100 text-cyan-700">
-                  <Layers className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-xs font-bold text-slate-900 font-tech">Product Categories</div>
-                  <div className="text-[11px] text-cyan-700 font-semibold">
-                    বর্তমান: <span className="underline">{selectedCategory}</span> ({categoryCounts[selectedCategory] || 0})
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-bold text-cyan-700 bg-sky-50 px-2.5 py-1 rounded-full border border-sky-200">
-                  {mobileCategoryOpen ? 'বন্ধ করুন' : 'সব ক্যাটাগরি দেখুন'}
-                </span>
-                {mobileCategoryOpen ? (
-                  <ChevronUp className="w-4 h-4 text-cyan-600" />
-                ) : (
-                  <ChevronDown className="w-4 h-4 text-cyan-600" />
-                )}
-              </div>
-            </button>
-
-            {/* Collapsible Category Grid on Mobile */}
-            {mobileCategoryOpen && (
-              <div className="mt-3 pt-3 border-t border-sky-100 grid grid-cols-2 gap-1.5 animate-fadeIn">
-                {CATEGORIES.map((cat) => {
-                  const isSelected = selectedCategory === cat;
-                  const count = categoryCounts[cat] || 0;
-                  return (
-                    <button
-                      key={cat}
-                      onClick={() => {
-                        setSelectedCategory(cat);
-                        setMobileCategoryOpen(false);
-                      }}
-                      className={`flex items-center justify-between p-2 rounded-xl text-[11px] font-semibold text-left transition-all border cursor-pointer ${
-                        isSelected
-                          ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white border-cyan-500 font-bold shadow-xs'
-                          : 'bg-sky-50/70 hover:bg-sky-100 text-slate-700 border-sky-200/80'
-                      }`}
-                    >
-                      <span className="truncate pr-1">{cat}</span>
-                      <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold shrink-0 ${
-                        isSelected ? 'bg-white/25 text-white' : 'bg-white text-slate-600 border border-sky-200'
-                      }`}>
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
+                {CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat === 'All Products' ? `All Products (${products.length})` : `${cat} (${categoryCounts[cat] || 0})`}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="w-3.5 h-3.5 text-cyan-700 absolute right-1.5 sm:right-2 pointer-events-none shrink-0" />
+            </div>
           </div>
         </div>
 

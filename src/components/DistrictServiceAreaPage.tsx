@@ -52,7 +52,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
   const [activeTab, setActiveTab] = useState<'all' | 'products' | 'services'>('all');
 
   const districtData: DistrictSEOInfo = DISTRICT_SEO_DATA[districtSlug] || DISTRICT_SEO_DATA['rangpur'];
-  const allDistricts = Object.values(DISTRICT_SEO_DATA);
+  const allDistricts = Array.from(new Map(Object.values(DISTRICT_SEO_DATA).map(d => [d.slug, d])).values());
 
   // Update document title, meta tags and canonical link dynamically for search engines
   useEffect(() => {
@@ -97,6 +97,12 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
           "@id": `https://www.shamimtechsolution.com/service-area/${districtData.slug}#localbusiness`,
           "name": `Shamim Tech Solution - CCTV Sales & Technical Service ${districtData.enName}`,
           "alternateName": [
+            `${districtData.enName} Technician`,
+            `${districtData.enName} Electrician`,
+            `Technician in ${districtData.enName}`,
+            `Electrician in ${districtData.enName}`,
+            `${districtData.bnName} টেকনিশিয়ান`,
+            `${districtData.bnName} ইলেকট্রিশিয়ান`,
             `${districtData.enName} CCTV Camera Price`,
             `${districtData.enName} CCTV Products`,
             `${districtData.enName} DVR`,
@@ -120,7 +126,6 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
             `${districtData.enName} CCTV Camera Installation`,
             `${districtData.enName} CCTV Camera Service`,
             `${districtData.enName} Intercom`,
-            `${districtData.enName} Electrician`,
             `${districtData.enName} Access Control`,
             `${districtData.enName} Networking`,
             `${districtData.enName} DVR NVR`,
@@ -750,7 +755,12 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                 <span>বাংলা সার্চ কিওয়ার্ডস ({districtData.bnName}):</span>
               </h3>
               <div className="flex flex-wrap gap-1.5">
-                {districtData.popularSearchesBn.map((kw, idx) => (
+                {Array.from(new Set([
+                  `${districtData.bnName} টেকনিশিয়ান`,
+                  `${districtData.bnName} ইলেকট্রিশিয়ান`,
+                  `${districtData.bnName} সিসিটিভি টেকনিশিয়ান`,
+                  ...districtData.popularSearchesBn
+                ])).map((kw, idx) => (
                   <span key={idx} className="bg-white text-slate-700 px-2.5 py-1 rounded-lg text-xs font-medium border border-slate-200 font-bangla">
                     {kw}
                   </span>
@@ -764,7 +774,13 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                 <span>English Search Queries ({districtData.enName}):</span>
               </h3>
               <div className="flex flex-wrap gap-1.5">
-                {districtData.popularSearchesEn.map((kw, idx) => (
+                {Array.from(new Set([
+                  `${districtData.enName} Technician`,
+                  `${districtData.enName} Electrician`,
+                  `Technician in ${districtData.enName}`,
+                  `Electrician in ${districtData.enName}`,
+                  ...districtData.popularSearchesEn
+                ])).map((kw, idx) => (
                   <span key={idx} className="bg-white text-slate-700 px-2.5 py-1 rounded-lg text-xs font-medium border border-slate-200">
                     {kw}
                   </span>
