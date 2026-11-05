@@ -13,6 +13,7 @@ import {
   SOFTWARE_DOWNLOADS as DEFAULT_DOWNLOADS,
   DEFAULT_SITE_CONTENT 
 } from './src/data/companyData';
+import { DISTRICT_SEO_DATA } from './src/data/districtSEOData';
 import { Product, ProductCategory, DownloadItem, CompanyInfo, SiteContent, SavedOrder } from './src/types';
 
 dotenv.config();
@@ -1423,14 +1424,70 @@ async function startServer() {
   // ==========================================
   // VITE DEV MIDDLEWARE & PRODUCTION SERVING
   // ==========================================
+  const renderDistrictHtml = (templateHtml: string, districtSlug: string): string => {
+    const district = DISTRICT_SEO_DATA[districtSlug.toLowerCase()];
+    if (!district) return templateHtml;
+
+    let modified = templateHtml;
+    // Replace document title
+    modified = modified.replace(/<title>.*?<\/title>/is, `<title>${district.title}</title>`);
+    // Replace meta description
+    modified = modified.replace(
+      /<meta\s+name="description"\s+content=".*?"\s*\/?>/is,
+      `<meta name="description" content="${district.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    // Replace canonical link
+    modified = modified.replace(
+      /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/is,
+      `<link rel="canonical" href="https://www.shamimtechsolution.com/service-area/${district.slug}" />`
+    );
+    return modified;
+  };
+
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
     });
+
+    // Server-side meta tag injection for 8 District SEO pages
+    app.get(['/service-area/:district', '/service-area'], async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const districtSlug = (req.params.district || 'rangpur').toLowerCase().trim();
+        const district = DISTRICT_SEO_DATA[districtSlug] || DISTRICT_SEO_DATA['rangpur'];
+        const indexPath = path.join(process.cwd(), 'index.html');
+        let template = fs.readFileSync(indexPath, 'utf-8');
+        template = await vite.transformIndexHtml(req.originalUrl, template);
+        const html = renderDistrictHtml(template, district.slug);
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
+
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
+
+    // Server-side meta tag injection for 8 District SEO pages in production
+    app.get(['/service-area/:district', '/service-area'], (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const districtSlug = (req.params.district || 'rangpur').toLowerCase().trim();
+        const district = DISTRICT_SEO_DATA[districtSlug] || DISTRICT_SEO_DATA['rangpur'];
+        const distIndexPath = path.join(distPath, 'index.html');
+        if (fs.existsSync(distIndexPath)) {
+          const template = fs.readFileSync(distIndexPath, 'utf-8');
+          const html = renderDistrictHtml(template, district.slug);
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+          return;
+        }
+        next();
+      } catch (e) {
+        next(e);
+      }
+    });
+
     app.use(express.static(distPath, {
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.html')) {

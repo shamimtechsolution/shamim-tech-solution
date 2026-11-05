@@ -135,10 +135,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'home', label: 'Home', icon: HomeIcon },
     { id: 'products', label: 'Products', icon: Package },
     { id: 'services', label: 'Services', icon: Wrench },
+    { id: 'service-areas', label: 'Service Areas', icon: MapPin },
     { id: 'downloads', label: 'Downloads', icon: Download },
     { id: 'gallery', label: 'Gallery', icon: GalleryIcon },
     { id: 'about', label: 'About', icon: Info },
-    { id: 'contact', label: 'Contact', icon: MapPin },
+    { id: 'contact', label: 'Contact', icon: Phone },
   ];
 
   const handleNavClick = (id: string) => {
@@ -149,9 +150,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     setMobileMenuOpen(false);
     setMobileSearchOpen(false);
     setTimeout(() => {
-      const element = document.getElementById(id);
+      const targetId = id === 'service-areas' ? 'district-coverage' : id;
+      const element = document.getElementById(targetId) || document.getElementById(id);
       if (element) element.scrollIntoView({ behavior: 'smooth' });
-    }, 50);
+    }, 60);
   };
 
   const handleCartClick = () => {

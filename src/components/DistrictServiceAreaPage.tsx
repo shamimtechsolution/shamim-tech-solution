@@ -8,17 +8,17 @@ import {
   CheckCircle2, 
   ArrowLeft, 
   ShoppingCart, 
-  ExternalLink,
-  ChevronRight,
-  HelpCircle,
-  Eye,
-  Truck,
-  Sparkles,
-  Search,
-  HardDrive,
+  ChevronRight, 
+  Truck, 
+  Sparkles, 
+  Search, 
+  Layers, 
+  Tag, 
+  SlidersHorizontal,
+  Package,
   Cpu,
   Zap,
-  SlidersHorizontal
+  HardDrive
 } from 'lucide-react';
 import { DistrictSEOInfo, DISTRICT_SEO_DATA } from '../data/districtSEOData';
 import { Product, CompanyInfo } from '../types';
@@ -49,6 +49,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
 }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'products' | 'services'>('all');
 
   const districtData: DistrictSEOInfo = DISTRICT_SEO_DATA[districtSlug] || DISTRICT_SEO_DATA['rangpur'];
   const allDistricts = Object.values(DISTRICT_SEO_DATA);
@@ -94,15 +95,37 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         {
           "@type": "LocalBusiness",
           "@id": `https://www.shamimtechsolution.com/service-area/${districtData.slug}#localbusiness`,
-          "name": `Shamim Tech Solution - CCTV Sales & Service ${districtData.enName}`,
+          "name": `Shamim Tech Solution - CCTV Sales & Technical Service ${districtData.enName}`,
           "alternateName": [
-            `CCTV Camera Price in ${districtData.enName}`,
-            `${districtData.enName} CCTV Camera Shop`,
+            `${districtData.enName} CCTV Camera Price`,
+            `${districtData.enName} CCTV Products`,
+            `${districtData.enName} DVR`,
+            `${districtData.enName} NVR`,
+            `${districtData.enName} IP Camera`,
+            `${districtData.enName} WiFi Camera`,
+            `${districtData.enName} Security Camera`,
+            `${districtData.enName} HD Camera`,
+            `${districtData.enName} Video Door Phone`,
+            `${districtData.enName} Intercom Machine`,
+            `${districtData.enName} PBX System`,
+            `${districtData.enName} Access Control Machine`,
+            `${districtData.enName} Door Lock`,
+            `${districtData.enName} Biometric Machine`,
+            `${districtData.enName} Fingerprint Machine`,
+            `${districtData.enName} CCTV Hard Disk`,
+            `${districtData.enName} CCTV Accessories`,
+            `${districtData.enName} LAN Cable`,
+            `${districtData.enName} Power Supply`,
             `${districtData.enName} CCTV Technician`,
-            `CCTV Service ${districtData.enName}`,
-            `CCTV Repair ${districtData.enName}`,
-            `IP Camera ${districtData.enName}`,
-            `Access Control ${districtData.enName}`
+            `${districtData.enName} CCTV Camera Installation`,
+            `${districtData.enName} CCTV Camera Service`,
+            `${districtData.enName} Intercom`,
+            `${districtData.enName} Electrician`,
+            `${districtData.enName} Access Control`,
+            `${districtData.enName} Networking`,
+            `${districtData.enName} DVR NVR`,
+            `${districtData.enName} PBX Technician`,
+            `${districtData.enName} Door Lock Technician`
           ],
           "image": "https://www.shamimtechsolution.com/logo.png",
           "telephone": "+8801790139333",
@@ -162,12 +185,9 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
     };
 
     script.textContent = JSON.stringify(jsonLdData);
-
-    // Scroll to top upon district page mount
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
     return () => {
-      // Clean up script on unmount
       const existing = document.getElementById(scriptId);
       if (existing) existing.remove();
     };
@@ -179,11 +199,23 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
     return item.category === selectedCategory;
   });
 
-  const categories = Array.from(new Set((products || []).map(p => p.category))).filter(Boolean);
+  const categories = Array.from(new Set<string>((products || []).map(p => String(p.category || '')))).filter(Boolean);
 
   const primaryPhone = companyInfo.phone || '01790139333';
   const secondaryPhone = companyInfo.secondaryPhone || '01865321530';
   const whatsappNumber = companyInfo.whatsappInternational || '8801790139333';
+
+  const handleFilterProductCategory = (catName: string) => {
+    // Match closely with live category
+    const found = categories.find(c => c.toLowerCase().includes(catName.toLowerCase()) || catName.toLowerCase().includes(c.toLowerCase()));
+    if (found) {
+      setSelectedCategory(found);
+    } else {
+      setSelectedCategory('all');
+    }
+    const el = document.getElementById('district-live-products');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <div className="bg-slate-50 text-slate-800 min-h-screen">
@@ -226,7 +258,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
           
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Rangpur Division Local Service Hub • {districtData.enName}</span>
+            <span>Rangpur Division Local Service & Product Hub • {districtData.enName}</span>
           </div>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white font-tech tracking-tight leading-tight max-w-4xl">
@@ -300,18 +332,23 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
             {allDistricts.map((dist) => {
               const isActive = dist.slug === districtData.slug;
               return (
-                <button
+                <a
                   key={dist.slug}
-                  onClick={() => onSelectDistrict(dist.slug)}
+                  href={`/service-area/${dist.slug}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onSelectDistrict(dist.slug);
+                  }}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                     isActive
                       ? 'bg-cyan-600 text-white shadow-sm ring-2 ring-cyan-400'
                       : 'bg-slate-100 hover:bg-cyan-50 text-slate-700 hover:text-cyan-800 border border-slate-200'
                   }`}
+                  title={`${dist.enName} (${dist.bnName}) সিসিটিভি ও টেকনিক্যাল সার্ভিস`}
                 >
                   <span className="font-bangla">{dist.bnName}</span>
                   <span className={`text-[10px] ${isActive ? 'text-cyan-100' : 'text-slate-500'}`}>({dist.enName})</span>
-                </button>
+                </a>
               );
             })}
           </div>
@@ -321,124 +358,129 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
       {/* Main Content Area */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
 
-        {/* 1. Local Coverage & Upazilas */}
-        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm">
-          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-sky-100 pb-4 mb-6">
-            <div>
-              <h2 className="text-lg sm:text-xl font-black text-slate-900 font-tech">
-                Service Area Coverage in {districtData.enName} District (সেবা অঞ্চল ও উপজেলা)
+        {/* Section View Switcher Buttons */}
+        <div className="flex items-center justify-center gap-2 flex-wrap">
+          <button
+            onClick={() => setActiveTab('all')}
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+              activeTab === 'all'
+                ? 'bg-slate-900 text-white shadow-md'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            সব কিছু একসাথে দেখুন
+          </button>
+          <button
+            onClick={() => setActiveTab('products')}
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              activeTab === 'products'
+                ? 'bg-cyan-600 text-white shadow-md'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Package className="w-4 h-4" />
+            <span>Product Sales (১৯টি পণ্য)</span>
+          </button>
+          <button
+            onClick={() => setActiveTab('services')}
+            className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              activeTab === 'services'
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-100'
+            }`}
+          >
+            <Wrench className="w-4 h-4" />
+            <span>Technician & Services (১২টি সার্ভিস)</span>
+          </button>
+        </div>
+
+        {/* 1. PRODUCT SALES – ১৯টি প্রধান পণ্য ক্যাটালগ ও মূল্য তালিকা */}
+        {(activeTab === 'all' || activeTab === 'products') && (
+          <section id="district-product-sales" className="space-y-6">
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
+                Product Sales • {districtData.enName}
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-2">
+                {districtData.enName} সিসিটিভি ও সিকিউরিটি পণ্য বিক্রয় (Product Sales & Price)
               </h2>
-              <p className="text-xs text-slate-500 font-bangla mt-1">
-                {districtData.enName} জেলার নিচের সকল উপজেলা এবং সংলগ্ন বাণিজ্যিক অঞ্চলে আমাদের অন-সাইট টেকনিশিয়ান সার্ভিস চালু রয়েছে:
+              <p className="text-xs sm:text-sm text-slate-600 font-bangla mt-1">
+                {districtData.enName} জেলার গ্রাহকদের জন্য ১৯টি প্রধান সিকিউরিটি ও আইটি পণ্যের অফিসিয়াল মূল্য ও স্পেসিফিকেশন
               </p>
             </div>
-            <span className="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-full border border-cyan-200">
-              {districtData.upazilas.length}টি প্রধান এলাকা / উপজেলা
-            </span>
-          </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
-            {districtData.upazilas.map((upazila, idx) => (
-              <div 
-                key={idx}
-                className="p-3 rounded-xl bg-slate-50 hover:bg-cyan-50 border border-slate-200/80 hover:border-cyan-300 text-xs font-semibold text-slate-700 hover:text-cyan-900 transition-all flex items-center gap-2 shadow-2xs"
-              >
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
-                <span className="truncate">{upazila}</span>
-              </div>
-            ))}
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {(districtData.productSalesItems || []).map((prod) => (
+                <div 
+                  key={prod.id}
+                  className="bg-white rounded-2xl p-5 border border-sky-200 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Search Query Pill */}
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
+                        <Tag className="w-2.5 h-2.5" />
+                        <span>Google Search: "{prod.searchQuery}"</span>
+                      </span>
+                      <span className="text-xs font-mono font-black text-slate-900 bg-slate-100 px-2 py-0.5 rounded">
+                        {prod.priceRange}
+                      </span>
+                    </div>
 
-          {/* Key Landmarks */}
-          <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs">
-            <span className="font-bold text-slate-600">গুরুত্বপূর্ণ স্পট / ল্যান্ডমার্ক:</span>
-            {districtData.keyLandmarks.map((landmark, idx) => (
-              <span key={idx} className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-200">
-                {landmark}
-              </span>
-            ))}
-          </div>
-        </section>
+                    <h3 className="text-sm sm:text-base font-bold text-slate-900 font-tech leading-snug">
+                      {prod.title}
+                    </h3>
+                    <h4 className="text-xs font-bold text-cyan-700 font-bangla mt-0.5">
+                      {prod.bnTitle}
+                    </h4>
 
-        {/* 2. Technical Services Grid */}
-        <section className="space-y-6">
-          <div className="text-center max-w-3xl mx-auto">
-            <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
-              Technical Services in {districtData.enName}
-            </span>
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-2">
-              পেশাদার টেকনিক্যাল সার্ভিস ও ইনস্টলেশন সাপোর্ট
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 font-bangla mt-1">
-              অভিজ্ঞ টেকনিশিয়ান দ্বারা দ্রুততম সময়ে অন-সাইট ফিটিং, ওয়্যারিং ও ত্রুটি সমাধান
-            </p>
-          </div>
+                    <p className="text-xs text-slate-600 leading-relaxed mt-2.5 font-bangla">
+                      {prod.description}
+                    </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {districtData.servicesOffered.map((svc, idx) => (
-              <div 
-                key={idx}
-                className="bg-white rounded-2xl p-6 border border-sky-200 hover:border-cyan-400 shadow-sm hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-700 flex items-center justify-center font-bold text-base mb-4">
-                    <Wrench className="w-5 h-5" />
+                    <div className="mt-3 flex flex-wrap gap-1.5">
+                      {prod.highlights.map((h, hIdx) => (
+                        <span key={hIdx} className="text-[10px] font-medium bg-slate-100 text-slate-700 px-2 py-0.5 rounded border border-slate-200">
+                          ✓ {h}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <h3 className="text-base font-bold text-slate-900 font-tech leading-snug">
-                    {svc.title}
-                  </h3>
-                  <h4 className="text-xs font-bold text-cyan-700 font-bangla mt-0.5">
-                    {svc.bengaliTitle}
-                  </h4>
-                  <p className="text-xs text-slate-600 leading-relaxed mt-2.5 font-bangla">
-                    {svc.description}
-                  </p>
 
-                  <ul className="mt-4 space-y-1.5 text-xs text-slate-700">
-                    {svc.features.map((feat, fIdx) => (
-                      <li key={fIdx} className="flex items-center gap-1.5 text-[11px]">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                    <button
+                      onClick={() => handleFilterProductCategory(prod.categoryFilter)}
+                      className="flex-1 py-1.5 px-2 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-cyan-800 text-xs font-bold text-center border border-cyan-200 transition-colors cursor-pointer"
+                    >
+                      <span>লাইভ স্টক দেখুন →</span>
+                    </button>
+                    <a
+                      href={`tel:${primaryPhone}`}
+                      className="py-1.5 px-3 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center gap-1 transition-colors"
+                      title="অর্ডার করতে কল দিন"
+                    >
+                      <Phone className="w-3 h-3" />
+                      <span>অর্ডার</span>
+                    </a>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </section>
+        )}
 
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2">
-                  <a
-                    href={`tel:${primaryPhone}`}
-                    className="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-cyan-700 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 cursor-pointer"
-                  >
-                    <Phone className="w-3 h-3" />
-                    <span>সার্ভিস বুক করুন</span>
-                  </a>
-                  <a
-                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`I want to book "${svc.title}" in ${districtData.enName}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition-colors"
-                    title="WhatsApp Consultation"
-                  >
-                    <MessageSquare className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 3. Real Product Catalog with Live Pricing in BDT */}
-        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm space-y-6">
+        {/* 2. REAL PRODUCT CATALOG WITH LIVE PRICING IN BDT */}
+        <section id="district-live-products" className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm space-y-6">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-sky-100 pb-5">
             <div>
               <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-2.5 py-0.5 rounded border border-cyan-200">
                 Genuine Products • Live Database
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-1">
-                CCTV Camera Price in {districtData.enName} & Available Products
+                CCTV Camera Price in {districtData.enName} & Live Store
               </h2>
               <p className="text-xs text-slate-500 font-bangla mt-0.5">
-                {districtData.enName} জেলার গ্রাহকদের জন্য বিদ্যমান ডাটাবেসের অরিজিনাল প্রোডাক্ট, সঠিক মূল্য ও তাৎক্ষণিক ডেলিভারি
+                {districtData.enName} জেলার গ্রাহকদের জন্য আসল পণ্য, ওয়ারেন্টি ও হোম ডেলিভারি সুবিধা
               </p>
             </div>
 
@@ -531,9 +573,9 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                       <span className="text-base font-black text-slate-900 font-mono">
                         ৳{item.price.toLocaleString('en-BD')}
                       </span>
-                      {item.regularPrice && item.regularPrice > item.price && (
+                      {item.originalPrice && item.originalPrice > item.price && (
                         <span className="text-xs text-slate-400 line-through font-mono ml-1.5">
-                          ৳{item.regularPrice.toLocaleString('en-BD')}
+                          ৳{item.originalPrice.toLocaleString('en-BD')}
                         </span>
                       )}
                     </div>
@@ -574,10 +616,128 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
           </div>
         </section>
 
-        {/* 4. Search Intents & District Keywords (Rich SEO Context) */}
+        {/* 3. TECHNICIAN & SERVICE – ১২টি টেকনিশিয়ান ও সার্ভিস */}
+        {(activeTab === 'all' || activeTab === 'services') && (
+          <section id="district-technician-services" className="space-y-6">
+            <div className="text-center max-w-3xl mx-auto">
+              <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
+                Technician & Field Services • {districtData.enName}
+              </span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-2">
+                {districtData.enName} টেকনিশিয়ান, ইনস্টলেশন ও মেরামত সার্ভিস (Technician & Services)
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 font-bangla mt-1">
+                দক্ষ ও সার্টিফাইড টেকনিশিয়ান দ্বারা {districtData.enName} জেলার যেকোনো উপজেলা বা স্পটে অন-সাইট সেবা
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {(districtData.technicianServiceItems || []).map((tech) => (
+                <div 
+                  key={tech.id}
+                  className="bg-white rounded-2xl p-6 border border-sky-200 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    {/* Search Query Pill */}
+                    <div className="mb-2.5">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                        <Tag className="w-2.5 h-2.5" />
+                        <span>Google Search: "{tech.searchQuery}"</span>
+                      </span>
+                    </div>
+
+                    <div className="w-10 h-10 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-700 flex items-center justify-center font-bold text-base mb-3">
+                      <Wrench className="w-5 h-5" />
+                    </div>
+
+                    <h3 className="text-base font-bold text-slate-900 font-tech leading-snug">
+                      {tech.title}
+                    </h3>
+                    <h4 className="text-xs font-bold text-cyan-700 font-bangla mt-0.5">
+                      {tech.bnTitle}
+                    </h4>
+
+                    <p className="text-xs text-slate-600 leading-relaxed mt-2.5 font-bangla">
+                      {tech.description}
+                    </p>
+
+                    <ul className="mt-4 space-y-1.5 text-xs text-slate-700">
+                      {tech.features.map((feat, fIdx) => (
+                        <li key={fIdx} className="flex items-center gap-1.5 text-[11px]">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2">
+                    <a
+                      href={`tel:${primaryPhone}`}
+                      className="flex-1 py-2 rounded-xl bg-slate-900 hover:bg-cyan-700 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1 cursor-pointer"
+                    >
+                      <Phone className="w-3 h-3" />
+                      <span>টেকনিশিয়ান বুক করুন</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`I want to book "${tech.title}" in ${districtData.enName}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition-colors"
+                      title="WhatsApp Consultation"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 4. LOCAL COVERAGE & UPAZILAS */}
+        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm">
+          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-sky-100 pb-4 mb-6">
+            <div>
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 font-tech">
+                Service Area Coverage in {districtData.enName} District (সেবা অঞ্চল ও উপজেলা)
+              </h2>
+              <p className="text-xs text-slate-500 font-bangla mt-1">
+                {districtData.enName} জেলার নিচের সকল উপজেলা এবং সংলগ্ন বাণিজ্যিক অঞ্চলে আমাদের অন-সাইট টেকনিশিয়ান সার্ভিস চালু রয়েছে:
+              </p>
+            </div>
+            <span className="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-full border border-cyan-200">
+              {districtData.upazilas.length}টি প্রধান এলাকা / উপজেলা
+            </span>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5">
+            {districtData.upazilas.map((upazila, idx) => (
+              <div 
+                key={idx}
+                className="p-3 rounded-xl bg-slate-50 hover:bg-cyan-50 border border-slate-200/80 hover:border-cyan-300 text-xs font-semibold text-slate-700 hover:text-cyan-900 transition-all flex items-center gap-2 shadow-2xs"
+              >
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
+                <span className="truncate">{upazila}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Key Landmarks */}
+          <div className="mt-6 pt-5 border-t border-slate-100 flex flex-wrap items-center gap-2 text-xs">
+            <span className="font-bold text-slate-600">গুরুত্বপূর্ণ স্পট / ল্যান্ডমার্ক:</span>
+            {districtData.keyLandmarks.map((landmark, idx) => (
+              <span key={idx} className="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-[11px] font-medium border border-slate-200">
+                {landmark}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* 5. SEARCH INTENTS & DISTRICT KEYWORDS (Rich SEO Context) */}
         <section className="bg-slate-100/80 rounded-2xl p-6 sm:p-8 border border-slate-200">
           <h2 className="text-base sm:text-lg font-black text-slate-900 font-tech mb-2">
-            Popular Searches in {districtData.enName} (সার্চ ইনটেন্ট ও সেবা সমূহ)
+            Popular Searches in {districtData.enName} (সার্চ ইনটেন্ট ও কিওয়ার্ডস)
           </h2>
           <p className="text-xs text-slate-600 font-bangla mb-4">
             {districtData.enName} জেলা ও উপজেলা থেকে গ্রাহকরা গুগল সার্চে যেসব তথ্যের খোঁজ করেন:
@@ -614,7 +774,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
           </div>
         </section>
 
-        {/* 5. Frequently Asked Questions (Accordion) */}
+        {/* 6. FREQUENTLY ASKED QUESTIONS (Accordion) */}
         <section className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-6">
@@ -656,7 +816,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
           </div>
         </section>
 
-        {/* 6. Direct Contact & Booking Banner */}
+        {/* 7. DIRECT CONTACT & BOOKING BANNER */}
         <section className="bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-700 rounded-2xl p-6 sm:p-10 text-white shadow-xl relative overflow-hidden">
           <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-10 translate-y-10">
             <STSLogo size="lg" showText={false} theme="light" />

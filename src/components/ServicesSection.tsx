@@ -25,9 +25,10 @@ import { SERVICES_LIST, COMPANY_INFO, DIVISION_DISTRICTS } from '../data/company
 
 interface ServicesSectionProps {
   onRequestService: (serviceName?: string) => void;
+  onSelectDistrict?: (slug: string) => void;
 }
 
-export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestService }) => {
+export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestService, onSelectDistrict }) => {
   const [selectedFilter, setSelectedFilter] = useState('সকল');
   // Default to 3 columns on mobile as requested ('দরকার হলে ৩ কলাম করেন')
   const [mobileCols, setMobileCols] = useState<3 | 2>(3);
@@ -214,46 +215,65 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
 
           {/* Responsive Grid: 3 Columns on Mobile (forming exactly 3 clean lines/rows), 4 Columns on Tablet & Desktop PC */}
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 sm:gap-3.5">
-            {DIVISION_DISTRICTS.map((district: any) => (
-              <div
-                key={district.id}
-                className="bg-white border-2 border-sky-200 hover:border-cyan-400 rounded-xl sm:rounded-2xl p-1.5 sm:p-4 flex flex-col justify-between shadow-xs sm:shadow-sm hover:shadow-md transition-all group overflow-hidden"
-              >
-                <div>
-                  <div className="flex items-center gap-1 sm:gap-2 mb-1">
-                    <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-                      <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 shrink-0" />
+            {DIVISION_DISTRICTS.map((district: any) => {
+              const slug = district.enName.toLowerCase();
+              return (
+                <div
+                  key={district.id}
+                  className="bg-white border-2 border-sky-200 hover:border-cyan-400 rounded-xl sm:rounded-2xl p-1.5 sm:p-4 flex flex-col justify-between shadow-xs sm:shadow-sm hover:shadow-md transition-all group overflow-hidden"
+                >
+                  <a 
+                    href={`/service-area/${slug}`}
+                    onClick={(e) => {
+                      if (onSelectDistrict) {
+                        e.preventDefault();
+                        onSelectDistrict(slug);
+                      }
+                    }}
+                    className="cursor-pointer block"
+                    title={`${district.bnName} (${district.enName}) সিসিটিভি সার্ভিস পেজ দেখুন`}
+                  >
+                    <div className="flex items-center gap-1 sm:gap-2 mb-1">
+                      <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-cyan-100 text-cyan-700 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                        <MapPin className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-600 shrink-0" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <span className="font-extrabold text-slate-900 text-[11px] sm:text-base leading-tight block truncate group-hover:text-cyan-700">
+                          {district.bnName}
+                        </span>
+                        <span className="text-[8px] sm:text-xs text-cyan-700 font-medium block truncate">
+                          {district.enName}
+                        </span>
+                      </div>
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="font-extrabold text-slate-900 text-[11px] sm:text-base leading-tight block truncate">
-                        {district.bnName}
-                      </span>
-                      <span className="text-[8px] sm:text-xs text-cyan-700 font-medium block truncate">
-                        {district.enName}
-                      </span>
-                    </div>
+                  </a>
+
+                  <div className="mt-1 pt-1 sm:mt-2 sm:pt-2 border-t border-sky-100 flex items-stretch gap-1 sm:grid sm:grid-cols-2 sm:gap-1.5">
+                    <a
+                      href={`/service-area/${slug}`}
+                      onClick={(e) => {
+                        if (onSelectDistrict) {
+                          e.preventDefault();
+                          onSelectDistrict(slug);
+                        }
+                      }}
+                      className="flex-1 py-1 sm:py-1.5 px-1 rounded-md sm:rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[9px] sm:text-xs flex items-center justify-center gap-0.5 transition-all cursor-pointer shadow-xs active:scale-95 text-center"
+                      title={`${district.bnName} সার্ভিস পেজ`}
+                    >
+                      <span>পেজ দেখুন</span>
+                    </a>
+                    <a
+                      href={`tel:${COMPANY_INFO.phone}`}
+                      className="py-1 px-1 sm:px-2 rounded-md sm:rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold text-[9px] sm:text-xs flex items-center justify-center gap-0.5 transition-all text-center shrink-0"
+                      title="সরাসরি কল দিন"
+                    >
+                      <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-700 shrink-0" />
+                      <span className="hidden sm:inline">কল</span>
+                    </a>
                   </div>
                 </div>
-
-                <div className="mt-1 pt-1 sm:mt-2 sm:pt-2 border-t border-sky-100 flex items-stretch gap-1 sm:grid sm:grid-cols-2 sm:gap-1.5">
-                  <button
-                    onClick={() => onRequestService(`${district.bnName} জেলা সার্ভিস`)}
-                    className="flex-1 py-1 sm:py-1.5 px-1 rounded-md sm:rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[9px] sm:text-xs flex items-center justify-center gap-0.5 transition-all cursor-pointer shadow-xs active:scale-95"
-                    title={`${district.bnName} সার্ভিস বুক করুন`}
-                  >
-                    <span>বুক</span>
-                  </button>
-                  <a
-                    href={`tel:${COMPANY_INFO.phone}`}
-                    className="py-1 px-1 sm:px-2 rounded-md sm:rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 font-bold text-[9px] sm:text-xs flex items-center justify-center gap-0.5 transition-all text-center shrink-0"
-                    title="সরাসরি কল দিন"
-                  >
-                    <Phone className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-cyan-700 shrink-0" />
-                    <span className="hidden sm:inline">কল</span>
-                  </a>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

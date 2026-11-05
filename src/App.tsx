@@ -649,6 +649,7 @@ export default function App() {
             {/* 2. Services Section (Quick services & 11 detailed services) */}
             <ServicesSection
               onRequestService={handleServiceSelect}
+              onSelectDistrict={navigateToDistrict}
             />
 
             {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
