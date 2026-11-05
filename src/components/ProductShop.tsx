@@ -29,6 +29,8 @@ interface ProductShopProps {
   onViewDetails: (product: Product) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
+  selectedCategory?: ProductCategory;
+  onSelectCategory?: (category: ProductCategory) => void;
 }
 
 const CATEGORIES: ProductCategory[] = [
@@ -71,8 +73,20 @@ export const ProductShop: React.FC<ProductShopProps> = ({
   onViewDetails,
   searchTerm,
   setSearchTerm,
+  selectedCategory: passedCategory,
+  onSelectCategory
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('All Products');
+  const [internalCategory, setInternalCategory] = useState<ProductCategory>('All Products');
+  const selectedCategory = passedCategory ?? internalCategory;
+
+  const setSelectedCategory = (cat: ProductCategory) => {
+    if (onSelectCategory) {
+      onSelectCategory(cat);
+    } else {
+      setInternalCategory(cat);
+    }
+  };
+
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
   const [mobileCategoryOpen, setMobileCategoryOpen] = useState(false);
 
@@ -166,62 +180,59 @@ export const ProductShop: React.FC<ProductShopProps> = ({
   }, [products]);
 
   return (
-    <section id="products" className="relative py-12 sm:py-16 bg-gradient-to-b from-sky-50/90 via-blue-100/60 to-sky-100/70 border-b border-sky-300/80 overflow-hidden">
+    <section id="products" className="relative py-4 sm:py-6 bg-gradient-to-b from-sky-50/90 via-blue-100/60 to-sky-100/70 border-b border-sky-300/80 overflow-hidden">
       {/* Soft ambient lighting */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-gradient-to-br from-cyan-400/20 to-blue-500/15 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header Title Bar */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8">
-          <div>
-            <div className="flex items-center gap-2 text-cyan-700 text-xs font-bold uppercase tracking-wider font-tech">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Direct CCTV Hardware Store • Haragach, Rangpur</span>
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech mt-1">
+        {/* CCTV Camera & Security Store Long Horizontal Box (লম্বা পাতালি এক লাইনে সম্পূর্ণ ঘর) */}
+        <div className="bg-white/95 border-2 border-sky-300 rounded-xl sm:rounded-2xl py-2 px-3 sm:px-4 mb-2.5 sm:mb-3 shadow-xs flex items-center justify-between gap-2 font-tech">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-600 animate-pulse shrink-0" />
+            <h2 className="text-xs sm:text-base md:text-lg font-black text-slate-900 uppercase tracking-wide truncate">
               CCTV Camera & Security Store
             </h2>
-            <p className="text-slate-600 text-xs sm:text-sm mt-1 max-w-xl">
-              100% Genuine surveillance equipment with official warranty and technician installation support.
-            </p>
+          </div>
+          <span className="text-[10px] sm:text-xs font-bold text-cyan-700 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200 shrink-0">
+            100% Original Products
+          </span>
+        </div>
+
+        {/* Search & Sort Controls (Star Tech Style - Compact & No Gaps) */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 mb-2.5 sm:mb-3">
+          {/* Search Box */}
+          <div className="relative flex-1 sm:max-w-md">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search camera, DVR, brand..."
+              className="w-full bg-white text-xs sm:text-sm text-slate-800 placeholder-slate-400 rounded-xl pl-9 pr-8 py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/20 transition-all shadow-xs"
+            />
+            <Search className="w-3.5 h-3.5 text-cyan-600 absolute left-3 top-2.5 pointer-events-none" />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-2.5 top-2 text-xs text-slate-400 hover:text-slate-700 p-0.5 font-bold"
+                title="Clear search"
+              >
+                ✕
+              </button>
+            )}
           </div>
 
-          {/* Search & Sort Controls (Star Tech Style) */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full md:w-auto">
-            {/* Search Box */}
-            <div className="relative flex-1 sm:w-64 md:w-72">
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search camera, DVR, brand..."
-                className="w-full bg-white text-xs sm:text-sm text-slate-800 placeholder-slate-400 rounded-xl pl-9 pr-8 py-2.5 border border-sky-300 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all shadow-sm"
-              />
-              <Search className="w-4 h-4 text-cyan-600 absolute left-3 top-3 pointer-events-none" />
-              {searchTerm && (
-                <button
-                  onClick={() => setSearchTerm('')}
-                  className="absolute right-2.5 top-2.5 text-xs text-slate-400 hover:text-slate-700 p-1 font-bold"
-                  title="Clear search"
-                >
-                  ✕
-                </button>
-              )}
-            </div>
-
-            {/* Sort Selector */}
-            <div className="flex items-center gap-1.5 bg-white px-3 py-2.5 rounded-xl border border-sky-200 text-xs text-slate-700 shadow-sm shrink-0">
-              <SlidersHorizontal className="w-3.5 h-3.5 text-cyan-600" />
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value as any)}
-                className="bg-transparent text-slate-700 focus:outline-none cursor-pointer text-xs font-medium"
-              >
-                <option value="featured">Featured First</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-              </select>
-            </div>
+          {/* Sort Selector */}
+          <div className="flex items-center gap-1.5 bg-white px-2.5 py-1.5 rounded-xl border border-sky-200 text-xs text-slate-700 shadow-xs shrink-0 self-end sm:self-auto">
+            <SlidersHorizontal className="w-3 h-3 text-cyan-600" />
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value as any)}
+              className="bg-transparent text-slate-700 focus:outline-none cursor-pointer text-xs font-medium"
+            >
+              <option value="featured">Featured First</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
           </div>
         </div>
 
@@ -397,7 +408,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
           </aside>
 
           {/* Right Product Grid - 2 Columns on Phone Mobile, 3 on Tablet, 4 on Desktop (Star Tech Layout) */}
-          <main className="lg:col-span-9">
+          <main className="lg:col-span-9 scroll-mt-24 sm:scroll-mt-20" id="product-items-grid">
             
             {/* Active filter summary bar */}
             <div className="flex items-center justify-between mb-3 text-xs text-slate-600 px-1">

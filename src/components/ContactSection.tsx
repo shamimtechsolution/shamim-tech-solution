@@ -65,13 +65,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="relative py-16 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-100/80 border-b border-sky-300/80 overflow-hidden">
+    <section id="contact" className="relative py-8 sm:py-10 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-100/80 border-b border-sky-300/80 overflow-hidden">
       {/* Decorative ambient lighting */}
       <div className="absolute top-1/4 right-0 w-[550px] h-[350px] bg-gradient-to-l from-cyan-400/25 to-blue-500/20 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
             <Phone className="w-3.5 h-3.5" />
             <span>Haragach & Rangpur Headquarters</span>

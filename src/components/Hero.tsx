@@ -9,27 +9,160 @@ import {
   Tag, 
   Users,
   Shield,
+  ShieldCheck,
   Activity,
-  Facebook
+  Facebook,
+  Camera,
+  Video,
+  Wifi,
+  Server,
+  HardDrive,
+  Cpu,
+  Zap,
+  Lock,
+  Fingerprint,
+  Cable,
+  Network,
+  Monitor,
+  SlidersHorizontal,
+  Layers,
+  Sparkles,
+  ChevronRight
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
-import { CompanyInfo, SiteContent } from '../types';
+import { CompanyInfo, SiteContent, ProductCategory } from '../types';
 
 interface HeroProps {
   onViewProducts: () => void;
   onRequestQuote: () => void;
   companyInfo?: CompanyInfo;
   siteContent?: SiteContent;
+  onSelectCategory?: (category: ProductCategory, searchTag?: string) => void;
 }
+
+interface StarTechCategory {
+  id: string;
+  name: string;
+  bnName: string;
+  category: ProductCategory;
+  icon: React.FC<{ className?: string }>;
+  searchQuery?: string;
+  badge?: string;
+}
+
+const STAR_TECH_CATEGORIES: StarTechCategory[] = [
+  {
+    id: 'all-products',
+    name: 'All Categories',
+    bnName: 'সব প্রোডাক্ট',
+    category: 'All Products',
+    icon: Layers,
+    badge: 'All'
+  },
+  {
+    id: 'wifi-cam',
+    name: 'WiFi Camera',
+    bnName: 'ওয়াইফাই ক্যামেরা',
+    category: 'CCTV Camera',
+    icon: Wifi,
+    badge: 'Popular'
+  },
+  {
+    id: 'cctv-cam',
+    name: 'CCTV Camera',
+    bnName: 'সিসিটিভি ক্যামেরা',
+    category: 'CCTV Camera',
+    icon: Video
+  },
+  {
+    id: 'dvr',
+    name: 'DVR / XVR',
+    bnName: 'ডিভিআর রেকর্ডার',
+    category: 'DVR',
+    icon: Server
+  },
+  {
+    id: 'nvr',
+    name: 'NVR',
+    bnName: 'এনভিআর মেশিন',
+    category: 'NVR',
+    icon: Cpu
+  },
+  {
+    id: 'hdd',
+    name: 'Hard Disk',
+    bnName: 'সার্ভিলেন্স হার্ডডিস্ক',
+    category: 'Hard Disk (HDD)',
+    icon: HardDrive
+  },
+  {
+    id: 'power',
+    name: 'Power Adapter',
+    bnName: 'এডাপ্টার ও পাওয়ার',
+    category: 'Power Supply/Adapter',
+    icon: Zap
+  },
+  {
+    id: 'access-control',
+    name: 'Access Control',
+    bnName: 'ডোর লক সিস্টেম',
+    category: 'Access Control',
+    icon: Lock
+  },
+  {
+    id: 'biometric',
+    name: 'Fingerprint Machine',
+    bnName: 'হাজিরা মেশিন',
+    category: 'Fingerprint Machine',
+    icon: Fingerprint
+  },
+  {
+    id: 'cable',
+    name: 'CCTV Cable',
+    bnName: 'ক্যাবল',
+    category: 'CCTV Cable',
+    icon: Cable
+  },
+  {
+    id: 'networking',
+    name: 'Networking',
+    bnName: 'রাউটার ও সুইচ',
+    category: 'Networking Products',
+    icon: Network
+  },
+  {
+    id: 'monitor',
+    name: 'Monitor',
+    bnName: 'সিসিটিভি মনিটর',
+    category: 'Monitor',
+    icon: Monitor
+  },
+  {
+    id: 'other-acc',
+    name: 'Accessories',
+    bnName: 'অন্যান্য এক্সেসরিজ',
+    category: 'Other Accessories',
+    icon: SlidersHorizontal
+  }
+];
 
 export const Hero: React.FC<HeroProps> = ({ 
   onViewProducts, 
   onRequestQuote,
   companyInfo: passedCompany,
-  siteContent: passedSiteContent
+  siteContent: passedSiteContent,
+  onSelectCategory
 }) => {
   const activeCompany = passedCompany || COMPANY_INFO;
   const activeContent = passedSiteContent;
+
+  const handleCategoryClick = (category: ProductCategory, searchTag?: string) => {
+    if (onSelectCategory) {
+      onSelectCategory(category, searchTag);
+    } else {
+      onViewProducts();
+    }
+  };
 
   const highlightPoints = [
     "CCTV Camera Fitting & Service",
@@ -50,36 +183,89 @@ export const Hero: React.FC<HeroProps> = ({
   ];
 
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-b from-sky-200/70 via-blue-100/50 to-sky-100/60 pt-12 pb-14 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 font-bangla">
+    <section id="home" className="relative overflow-hidden bg-gradient-to-b from-sky-200/70 via-blue-100/50 to-sky-100/60 pt-2 pb-5 sm:pt-4 sm:pb-8 lg:pt-5 lg:pb-10 font-bangla">
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/25 via-sky-400/25 to-blue-500/20 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -top-12 right-0 w-80 h-80 bg-gradient-to-br from-blue-500/20 to-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-sky-400/20 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
           
           {/* Left Hero Content */}
-          <div className="lg:col-span-7 space-y-5 text-left">
+          <div className="lg:col-span-7 space-y-2 sm:space-y-2.5 text-left">
             
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 border border-sky-300 text-cyan-800 text-xs sm:text-sm font-bold tracking-wide shadow-sm">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-600"></span>
               </span>
-              <span>{activeCompany.name} • {activeCompany.location}</span>
+              <span>SHAMIM TECH SOLUTION • Sales and Service, Rangpur Division</span>
             </div>
 
-            {/* Main Headline & Description Inside a Clean Styled Box (ঘর) */}
-            <div className="bg-white/95 border-2 border-sky-300 hover:border-cyan-400 rounded-2xl p-3.5 sm:p-5 shadow-lg shadow-sky-950/5 backdrop-blur-sm space-y-2 transition-all">
-              <h1 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 leading-snug sm:leading-normal font-bangla">
-                প্রফেশনাল <span className="text-cyan-700 font-extrabold">CCTV, টেকনিশিয়ান, ইলেকট্রিশিয়ান ও সিকিউরিটি</span> সলিউশন
-              </h1>
+            {/* Original Product Sales Slim Long Horizontal Button (Star Tech Style Direct Product Jump) */}
+            <button
+              onClick={() => handleCategoryClick('All Products')}
+              className="w-full bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-700 hover:from-cyan-500 hover:via-sky-500 hover:to-blue-600 text-white rounded-xl py-1.5 sm:py-2 px-3 shadow-xs border border-cyan-300 flex items-center justify-center gap-2 cursor-pointer transition-all transform hover:-translate-y-0.5 active:scale-[0.99] group"
+              title="Click to view original products directly"
+            >
+              <ShieldCheck className="w-4 h-4 text-cyan-200 shrink-0 group-hover:scale-110 transition-transform" />
+              <h2 className="text-xs sm:text-sm font-extrabold text-white font-tech tracking-wide text-center uppercase">
+                Original Product Sales
+              </h2>
+              <ChevronRight className="w-3.5 h-3.5 text-cyan-200 opacity-75 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+            </button>
 
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-                {(activeContent?.heroSubheadline && activeContent.heroSubheadline.includes('রংপুর বিভাগজুড়ে')) 
-                  ? activeContent.heroSubheadline 
-                  : "রংপুর বিভাগজুড়ে বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরিতে সিসিটিভি ক্যামেরা ইনস্টলেশন, আইপি ক্যামেরা, মোবাইলের মাধ্যমে অনলাইন লাইভ ভিউ, পিবিএক্স ইন্টারকম সেটআপ, অ্যাক্সেস কন্ট্রোল ও ডোর লক সিস্টেম, বায়োমেট্রিক হাজিরা মেশিন, কম্পিউটার ল্যান নেটওয়ার্কিং, হাউজ ওয়্যারিং এবং অভিজ্ঞ টেকনিশিয়ান ও ইলেকট্রিশিয়ানের মাধ্যমে সেবা প্রদান করা হয়। পাশাপাশি অরিজিনাল প্রোডাক্ট ও এক্সেসরিজ বিক্রয় করা হয়।"}
-              </p>
+            {/* Star Tech Style Featured Categories Grid (মোবাইলে পারফেক্ট সাইজ ও অল ক্যাটাগরি সামনে) */}
+            <div className="bg-white/95 border-2 border-sky-300 hover:border-cyan-400 rounded-2xl p-2.5 sm:p-3.5 shadow-lg shadow-sky-950/5 backdrop-blur-sm transition-all space-y-2">
+              
+              {/* Category Box Header */}
+              <div className="flex items-center justify-between border-b border-sky-100 pb-1.5">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
+                  <h2 className="text-[11px] sm:text-xs font-black text-slate-900 font-tech uppercase tracking-wide">
+                    Featured Product Categories
+                  </h2>
+                </div>
+                <button
+                  onClick={() => handleCategoryClick('All Products')}
+                  className="text-[10.5px] font-bold text-cyan-700 hover:text-cyan-900 flex items-center gap-0.5 cursor-pointer font-tech uppercase tracking-wider"
+                >
+                  <span>View All</span>
+                  <ChevronRight className="w-3 h-3" />
+                </button>
+              </div>
+
+              {/* Star Tech Graphic Logo Grid - Clean English Only (Star Tech Style) */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-1.5 sm:gap-2">
+                {STAR_TECH_CATEGORIES.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={() => handleCategoryClick(item.category, item.searchQuery)}
+                      className="group relative flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-slate-50 hover:bg-cyan-50/70 border border-slate-200/90 hover:border-cyan-500 hover:shadow-xs transition-all duration-200 cursor-pointer text-center"
+                      title={item.name}
+                    >
+                      {item.badge && (
+                        <span className="absolute -top-1 right-1 bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-[7.5px] sm:text-[8px] font-bold px-1 py-0.2 rounded-full shadow-2xs">
+                          {item.badge}
+                        </span>
+                      )}
+
+                      {/* Graphic Icon like Star Tech - Compact size */}
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-white group-hover:bg-cyan-100/60 border border-slate-200/70 group-hover:border-cyan-400 flex items-center justify-center text-slate-700 group-hover:text-cyan-700 group-hover:scale-105 transition-all shadow-2xs mb-1">
+                        <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.8]" />
+                      </div>
+
+                      {/* Category English Name (Only English - Star Tech Style) */}
+                      <span className="text-[10px] sm:text-[11px] font-bold text-slate-800 group-hover:text-cyan-700 leading-tight transition-colors line-clamp-1 font-tech">
+                        {item.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
             </div>
 
             {/* CTA Buttons - 2 Clean Lines: Line 1 (Call + WhatsApp), Line 2 (Products + Facebook) */}
@@ -128,23 +314,14 @@ export const Hero: React.FC<HeroProps> = ({
                 </a>
               </div>
 
-              {/* Line 2: Product View (Left) and Facebook (Right) */}
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                <button
-                  onClick={onViewProducts}
-                  id="hero-view-products-btn"
-                  className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-white hover:bg-sky-50 text-cyan-800 hover:text-cyan-900 border-2 border-sky-300 hover:border-cyan-500 text-xs sm:text-sm font-bold transition-all shadow-sm cursor-pointer"
-                >
-                  <Package className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600 shrink-0" />
-                  <span className="truncate">প্রোডাক্ট দেখুন</span>
-                </button>
-
+              {/* Facebook Button (প্রোডাক্ট দেখুন বাটন বাদ দেওয়া হয়েছে) */}
+              <div>
                 <a
                   href={activeCompany.facebook || "https://www.facebook.com/profile.php?id=100014153359472"}
                   target="_blank"
                   rel="noopener noreferrer"
                   id="hero-facebook-btn"
-                  className="flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-blue-600/25 transition-all transform hover:-translate-y-0.5"
+                  className="w-full flex items-center justify-center gap-2 py-2 sm:py-2.5 px-3 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-blue-600/25 transition-all transform hover:-translate-y-0.5"
                 >
                   <Facebook className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" />
                   <span className="truncate">ফেসবুক পেজ</span>
@@ -152,101 +329,71 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
             </div>
 
-            {/* Trust Badges: 2 on mobile, 4 on desktop */}
-            <div className="pt-3 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              {trustBadges.map((badge, idx) => {
-                const Icon = badge.icon;
-                return (
-                  <div key={idx} className="flex items-center gap-2 p-2 rounded-xl bg-white/95 border border-sky-200 text-slate-800 shadow-sm">
-                    <div className="p-1.5 rounded-lg bg-sky-100 text-cyan-700 shrink-0">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <span className="font-bold text-xs leading-tight">{badge.label}</span>
-                  </div>
-                );
-              })}
+            {/* Trust Badges - Single Slim Horizontal Box (একক ঘর, পাতালি, ছোট ও চিকন) */}
+            <div className="pt-2">
+              <div className="bg-white/95 border border-sky-300/80 rounded-xl py-1 sm:py-1.5 px-2 sm:px-3 shadow-xs backdrop-blur-sm">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-2 items-center">
+                  {trustBadges.map((badge, idx) => {
+                    const Icon = badge.icon;
+                    return (
+                      <div 
+                        key={idx} 
+                        className="flex items-center justify-center gap-1.5 py-0.5 px-1 text-slate-800 text-center"
+                      >
+                        <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-600 shrink-0" />
+                        <span className="font-bold text-[9.5px] sm:text-[11px] leading-tight truncate">
+                          {badge.label}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right Visual - Top Long Header Box + 2 Columns below like before */}
-          <div className="lg:col-span-5 relative space-y-2.5 sm:space-y-3">
+          {/* Right Visual - Service Technician & Electrician Unified Services Card (বাম পাশের Featured Categories ঘরের সমান বরাবর অ্যালাইন) */}
+          <div className="lg:col-span-5 relative space-y-2 sm:space-y-2.5 lg:pt-[86px]">
             
-            {/* Top Long Box (সবুজ দাগের জায়গায় লম্বা ঘর) */}
-            <div className="bg-white/95 border-2 border-cyan-400 rounded-xl sm:rounded-2xl p-2.5 sm:p-3 shadow-md shadow-sky-950/10 backdrop-blur-md flex items-center justify-between gap-2 font-bangla">
-              <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                <div className="p-1.5 sm:p-2 rounded-xl bg-sky-100 text-cyan-700 shrink-0 border border-sky-200">
-                  <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-600" />
+            {/* Top Header Box - Ultra-slim Long Horizontal Bar (লম্বা, পাতালি ও চিকন) */}
+            <div className="bg-white/95 border border-cyan-400 rounded-xl py-1 sm:py-1.5 px-2.5 sm:px-3 shadow-xs backdrop-blur-md flex items-center justify-between gap-2 font-bangla">
+              <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                <div className="p-1 rounded-lg bg-sky-100 text-cyan-700 shrink-0 border border-sky-200">
+                  <Shield className="w-3.5 h-3.5 text-cyan-600" />
                 </div>
-                <div className="min-w-0">
-                  <h3 className="text-cyan-950 font-bold text-xs sm:text-sm md:text-base leading-snug">
-                    আপনার নিরাপত্তাই আমাদের অগ্রাধিকার
+                <div className="min-w-0 flex flex-col sm:flex-row sm:items-center sm:gap-1.5 leading-tight">
+                  <h3 className="text-cyan-950 font-black text-xs sm:text-[13px] font-bangla leading-tight truncate">
+                    সার্ভিস টেকনিশিয়ান ও ইলেকট্রিশিয়ান
                   </h3>
-                  <p className="text-[10px] sm:text-xs text-cyan-700 font-semibold leading-tight mt-0.5">
-                    অফিসিয়াল সিকিউরিটি সার্ভিস
-                  </p>
+                  <span className="text-[9px] sm:text-[10px] text-cyan-700 font-bold font-tech leading-none">
+                    <span className="hidden sm:inline">• </span>Service Technician & Electrician
+                  </span>
                 </div>
               </div>
-              <div className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-emerald-50 text-emerald-700 text-[10px] sm:text-[11px] font-bold shrink-0 border border-emerald-200">
+              <div className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[9px] sm:text-[10px] font-bold shrink-0 border border-emerald-200">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>ভেরিফাইড সার্ভিস</span>
+                <span className="whitespace-nowrap">ভেরিফাইড সার্ভিস</span>
               </div>
             </div>
 
-            {/* Bottom 2 Columns Grid - Like Before (আগের মতো পাশাপাশি ২ কলাম) */}
-            <div className="grid grid-cols-2 gap-2 sm:gap-3.5 items-stretch">
+            {/* Main Unified Services Box (পাতালি/হরাইজন্টাল ২-কলাম গ্রিড, কোনো ছবি নেই, বাড়তি লেখা নেই) */}
+            <div className="bg-white/95 border-2 border-cyan-400 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 shadow-lg shadow-sky-950/10 backdrop-blur-md font-bangla">
               
-              {/* Column 1: 9 Services Checklist + Guarantee */}
-              <div className="bg-white/95 border-2 border-cyan-400 rounded-xl sm:rounded-2xl p-2 sm:p-2.5 shadow-lg shadow-sky-950/10 backdrop-blur-md flex flex-col justify-between font-bangla">
-                <div className="space-y-1 sm:space-y-1.5 font-sans">
-                  {highlightPoints.map((point, index) => (
-                    <div 
-                      key={index} 
-                      className="flex items-center gap-1.5 px-2 py-1 sm:py-1.5 rounded-lg bg-sky-50/90 hover:bg-sky-100/80 border border-sky-200/70 hover:border-cyan-300 transition-colors shadow-2xs"
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600 shrink-0" />
-                      <span className="text-[9.5px] sm:text-xs font-semibold text-slate-800 leading-tight tracking-tight">
-                        {point}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="mt-2 pt-1.5 border-t border-sky-100 text-[9px] sm:text-[10px] font-bold text-cyan-800 flex items-center gap-1 px-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 animate-pulse" />
-                  <span className="leading-tight">১০০% আসল পার্টস ও সাপোর্ট</span>
-                </div>
-              </div>
-
-              {/* Column 2: User's Authentic Workstation Photo */}
-              <div className="relative rounded-xl sm:rounded-2xl bg-white border-2 border-cyan-400 p-1 sm:p-2.5 shadow-lg flex flex-col justify-between overflow-hidden group">
-                <div className="relative rounded-lg overflow-hidden bg-slate-900 border border-slate-800 flex-1 flex flex-col">
-                  {/* Real User Photo */}
-                  <div className="relative flex-1 min-h-[170px] sm:min-h-[240px] bg-slate-900 overflow-hidden">
-                    <img 
-                      src="/assets/aistudio/image_69e03957.png" 
-                      alt="Shamim Tech Solution - CCTV, PBX, Networking Workstation" 
-                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      loading="eager"
-                    />
-                    
-                    {/* Bottom Gradient Overlay */}
-                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-1.5 sm:p-2 pt-6 text-white">
-                      <div className="text-[11px] sm:text-xs font-bold text-white font-bangla leading-tight">
-                        নাম: শামীম ইসলাম
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Footer Quote Button */}
-                <div className="mt-1 sm:mt-1.5 pt-1 border-t border-sky-100">
-                  <button 
-                    onClick={onRequestQuote} 
-                    className="w-full py-1 sm:py-1.5 px-1 rounded-md sm:rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-[9px] sm:text-xs flex items-center justify-center gap-0.5 shadow-xs transition-all active:scale-95 cursor-pointer"
+              {/* 8 Services Checklist - 2 Columns Grid on both Mobile and Desktop (পাতালি/হরাইজন্টাল) */}
+              <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                {highlightPoints.map((point, index) => (
+                  <div 
+                    key={index} 
+                    className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-sky-50/90 hover:bg-sky-100/90 border border-sky-200/80 hover:border-cyan-400 transition-all shadow-2xs group"
                   >
-                    <span>কোটেশন নিন →</span>
-                  </button>
-                </div>
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-white text-cyan-600 flex items-center justify-center shrink-0 border border-sky-200 group-hover:bg-cyan-600 group-hover:text-white transition-colors">
+                      <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-bold text-slate-800 group-hover:text-cyan-900 leading-tight">
+                      {point}
+                    </span>
+                  </div>
+                ))}
               </div>
 
             </div>

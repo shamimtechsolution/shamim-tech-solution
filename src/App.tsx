@@ -26,7 +26,7 @@ import {
   COMPANY_INFO, 
   DEFAULT_SITE_CONTENT 
 } from './data/companyData';
-import { Product, CartItem, SavedOrder, CompanyInfo, SiteContent, DownloadItem, CustomerUser } from './types';
+import { Product, CartItem, SavedOrder, CompanyInfo, SiteContent, DownloadItem, CustomerUser, ProductCategory } from './types';
 import { getStoredCustomerUser, apiGetCustomerProfile, clearCustomerSession } from './utils/customerAuth';
 import { getProductsFromFirestore, subscribeToProducts, seedInitialProductsIfEmpty } from './firebase/productService';
 
@@ -106,6 +106,7 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<ProductCategory>('All Products');
   const [searchTerm, setSearchTerm] = useState('');
   const [preselectedService, setPreselectedService] = useState<string>('');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -484,11 +485,44 @@ export default function App() {
   };
 
   // Scroll helpers
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId: string, offset = 70) => {
     const el = document.getElementById(sectionId);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      const elementPosition = el.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = Math.max(0, elementPosition - offset);
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
+  };
+
+  const scrollToProducts = () => {
+    setActiveDistrictSlug(null);
+    const gridEl = document.getElementById('product-items-grid') || document.getElementById('products');
+    if (gridEl) {
+      const navOffset = 75;
+      const elementPosition = gridEl.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = Math.max(0, elementPosition - navOffset);
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleCategorySelect = (category: ProductCategory, searchTag?: string) => {
+    setActiveDistrictSlug(null);
+    setSelectedCategory(category);
+    if (searchTag) {
+      setSearchTerm(searchTag);
+    } else {
+      setSearchTerm('');
+    }
+    // Direct scroll to product items grid so user immediately sees product cards like Star Tech
+    setTimeout(() => {
+      scrollToProducts();
+    }, 50);
   };
 
   const handleServiceSelect = (serviceName?: string) => {
@@ -605,10 +639,11 @@ export default function App() {
           <>
             {/* 1. Hero Section */}
             <Hero
-              onViewProducts={() => scrollToSection('products')}
+              onViewProducts={scrollToProducts}
               onRequestQuote={() => scrollToSection('contact')}
               companyInfo={companyInfo}
               siteContent={siteContent}
+              onSelectCategory={handleCategorySelect}
             />
 
             {/* 2. Services Section (Quick services & 11 detailed services) */}
@@ -624,6 +659,8 @@ export default function App() {
               onViewDetails={(product) => setSelectedProduct(product)}
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
             />
 
             {/* 4. Software & Tools Downloads + Profile Download + How to Order */}

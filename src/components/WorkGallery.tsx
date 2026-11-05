@@ -32,13 +32,13 @@ export const WorkGallery: React.FC = () => {
     : WORK_GALLERY.filter(item => item.category === selectedCategory);
 
   return (
-    <section id="gallery" className="relative py-16 bg-gradient-to-b from-sky-50/90 via-blue-100/60 to-sky-100/70 border-b border-sky-300/80 overflow-hidden">
+    <section id="gallery" className="relative py-8 sm:py-10 bg-gradient-to-b from-sky-50/90 via-blue-100/60 to-sky-100/70 border-b border-sky-300/80 overflow-hidden">
       {/* Soft ambient light */}
       <div className="absolute top-1/3 left-10 w-96 h-96 bg-cyan-400/20 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-5 sm:mb-6">
           <div>
             <div className="flex items-center gap-2 text-cyan-700 text-xs font-bold font-tech uppercase tracking-wider">
               <Camera className="w-4 h-4 text-cyan-600" />

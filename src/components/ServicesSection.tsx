@@ -188,22 +188,28 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
           })}
         </div>
 
-        {/* 4. Rangpur Division 8 Districts Coverage: Auto Responsive
-            - On Mobile: 2 Columns with clear district names and buttons
-            - On Tablet & Desktop: 4 Columns (8 districts in exactly 2 spacious rows)
-        */}
-        <div id="district-coverage" className="mt-10 sm:mt-16 pt-6 sm:pt-8 border-t-2 border-sky-200">
-          <div className="text-center sm:text-left mb-4 sm:mb-6">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100 text-cyan-800 text-xs font-bold mb-2">
-              <MapPin className="w-3.5 h-3.5 text-cyan-600" />
-              <span>সার্ভিস এলাকা (Coverage Area)</span>
+        {/* 4. Rangpur Division 8 Districts Coverage: Auto Responsive */}
+        <div id="district-coverage" className="mt-5 sm:mt-8 pt-3 sm:pt-4 border-t border-sky-200">
+          {/* Coverage Area Long Horizontal Box (লম্বা পাতালি ঘর - লেখা ঘরের ভেতরে) */}
+          <div className="bg-white/95 border-2 border-sky-300 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 mb-3 sm:mb-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="min-w-0">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-[10.5px] sm:text-xs font-bold mb-1">
+                <MapPin className="w-3.5 h-3.5 text-cyan-600" />
+                <span>সার্ভিস এলাকা (Coverage Area)</span>
+              </div>
+              <h3 className="text-sm sm:text-lg font-black text-slate-900 font-tech leading-snug">
+                রংপুর বিভাগের ৮টি জেলায় আমাদের অন-সাইট সেবা
+              </h3>
+              <p className="text-[11px] sm:text-xs text-slate-600 mt-0.5 leading-relaxed font-bangla">
+                রংপুর বিভাগের যে কোনো জেলা বা উপজেলায় আমাদের দক্ষ টেকনিশিয়ান অন-সাইট গিয়ে সিসিটিভি ইনস্টলেশন ও ইলেকট্রিক্যাল সার্ভিস প্রদান করে।
+              </p>
             </div>
-            <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-tech">
-              রংপুর বিভাগের ৮টি জেলায় আমাদের অন-সাইট সেবা
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
-              রংপুর বিভাগের যে কোনো জেলা বা উপজেলায় আমাদের দক্ষ টেকনিশিয়ান অন-সাইট গিয়ে সিসিটিভি ইনস্টলেশন ও ইলেকট্রিক্যাল সার্ভিস প্রদান করে।
-            </p>
+            <div className="shrink-0 flex items-center">
+              <span className="text-[10px] sm:text-xs font-bold text-cyan-800 bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-full flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span>৮ জেলা কাভারেজ</span>
+              </span>
+            </div>
           </div>
 
           {/* Responsive Grid: 3 Columns on Mobile (forming exactly 3 clean lines/rows), 4 Columns on Tablet & Desktop PC */}
