@@ -170,7 +170,7 @@ export interface OrderFormState {
   whatsappNumber: string;
   fullAddress: string;
   district: string;
-  deliveryOption: 'Haragach Local Delivery' | 'Rangpur City Express' | 'Courier Delivery (Bangladesh)';
+  deliveryOption: 'Rangpur Division Delivery' | 'Rangpur City Express' | 'Courier Delivery (Bangladesh)' | string;
   paymentMethod: 'Cash on Delivery (COD)' | 'bKash' | 'Nagad' | 'Bank Transfer';
   notes?: string;
 }

@@ -40,7 +40,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
     whatsappNumber: customer?.phone || '',
     fullAddress: customer?.address || '',
     district: customer?.district ? customer.district.split(' ')[0] : 'Rangpur',
-    deliveryOption: 'Haragach Local Delivery',
+    deliveryOption: 'Rangpur Division Delivery',
     paymentMethod: 'Cash on Delivery (COD)',
     notes: '',
   });
@@ -56,8 +56,8 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   );
 
   const deliveryFee = 
-    formData.deliveryOption === 'Haragach Local Delivery' ? 50 :
-    formData.deliveryOption === 'Rangpur City Express' ? 100 : 150;
+    formData.deliveryOption === 'Rangpur City Express' ? 100 :
+    formData.deliveryOption === 'Courier Delivery (Bangladesh)' ? 150 : 50;
 
   const totalAmount = subtotal + deliveryFee;
 
@@ -264,7 +264,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 Place Your Security Equipment Order
               </h2>
               <p className="text-xs text-slate-400 mt-0.5">
-                Quick dispatch from Haragach, Rangpur. All orders include technician testing.
+                Quick dispatch across Rangpur Division. All orders include technician testing.
               </p>
             </div>
 
@@ -397,7 +397,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     onChange={(e) => setFormData({ ...formData, deliveryOption: e.target.value as any })}
                     className="w-full bg-slate-900 text-sm text-white rounded-xl px-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none cursor-pointer"
                   >
-                    <option value="Haragach Local Delivery">Haragach Local Delivery (৳50)</option>
+                    <option value="Rangpur Division Delivery">Rangpur Division Delivery (৳50)</option>
                     <option value="Rangpur City Express">Rangpur City Express (৳100)</option>
                     <option value="Courier Delivery (Bangladesh)">Courier Delivery (Sundarban/SA Paribahan) (৳150)</option>
                   </select>
@@ -415,7 +415,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     required
                     value={formData.fullAddress}
                     onChange={(e) => setFormData({ ...formData, fullAddress: e.target.value })}
-                    placeholder="e.g. Haragach Bazar Main Road, Near Rangpur Thana, Haragach"
+                    placeholder="e.g. Hospital Road, Sadar, Rangpur / Dinajpur"
                     className="w-full bg-slate-900 text-sm text-white rounded-xl pl-9 pr-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none"
                   />
                   <MapPin className="w-4 h-4 text-cyan-400 absolute left-3 top-2.5" />

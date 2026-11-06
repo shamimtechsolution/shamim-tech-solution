@@ -12,6 +12,7 @@ import {
   Lock
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
+import { DISTRICT_SEO_DATA } from '../data/districtSEOData';
 import { STSLogo } from './STSLogo';
 import { CompanyInfo } from '../types';
 
@@ -20,15 +21,18 @@ interface FooterProps {
   onOpenAdmin?: () => void;
   isAdminLoggedIn?: boolean;
   onSelectDistrict?: (slug: string) => void;
+  activeDistrictSlug?: string | null;
 }
 
 export const Footer: React.FC<FooterProps> = ({ 
   companyInfo: passedCompany,
   onOpenAdmin,
   isAdminLoggedIn,
-  onSelectDistrict
+  onSelectDistrict,
+  activeDistrictSlug
 }) => {
   const activeCompany = passedCompany || COMPANY_INFO;
+  const currentDistrict = activeDistrictSlug ? DISTRICT_SEO_DATA[activeDistrictSlug.toLowerCase()] : null;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -77,7 +81,9 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <p className="text-xs text-slate-600 leading-relaxed max-w-sm">
-              Certified CCTV technician & security system service provider in Haragach, Rangpur. Expert camera installation, DVR/NVR configuration, IP setups, and biometric systems.
+              {currentDistrict
+                ? `Certified CCTV technician & security system service provider in ${currentDistrict.enName} (${currentDistrict.bnName}) & Rangpur Division. Expert camera installation, DVR/NVR configuration, IP setups, electrical and biometric security solutions.`
+                : 'Certified CCTV technician & security system service provider across Rangpur Division (রংপুর বিভাগ). Expert camera installation, DVR/NVR configuration, IP setups, electrical and biometric security solutions.'}
             </p>
 
             <div className="p-3.5 rounded-xl bg-white border-2 border-sky-200 text-xs text-slate-700 font-tech shadow-sm">
@@ -103,9 +109,6 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <a href="#products" className="hover:text-cyan-700 transition-colors">Product Shop</a>
-              </li>
-              <li>
-                <a href="#downloads" className="hover:text-cyan-700 transition-colors">Software & Tools</a>
               </li>
               <li>
                 <a href="#gallery" className="hover:text-cyan-700 transition-colors">Work Gallery</a>
@@ -171,10 +174,10 @@ export const Footer: React.FC<FooterProps> = ({
               <div>
                 <span className="text-[11px] text-slate-500 block uppercase font-tech font-bold">Base Address:</span>
                 <p className="text-slate-800 font-medium">
-                  {activeCompany.location}
+                  {currentDistrict ? `${currentDistrict.enName} District, Rangpur Division, Bangladesh` : (activeCompany.location || 'Rangpur Division, Bangladesh')}
                 </p>
                 <p className="text-[11px] text-cyan-700 font-semibold">
-                  Area: {activeCompany.serviceArea}
+                  Area: {currentDistrict ? `${currentDistrict.enName} (${currentDistrict.bnName}) & Rangpur Division` : 'All 8 Districts of Rangpur Division'}
                 </p>
               </div>
 
@@ -250,7 +253,9 @@ export const Footer: React.FC<FooterProps> = ({
               © {currentYear} <strong className="text-slate-900">{activeCompany.name}</strong>. All rights reserved.
             </p>
             <p className="text-[11px] text-slate-500 mt-0.5">
-              Service location: Jahaj Company & Haragachh, Rangpur, Bangladesh.
+              {currentDistrict
+                ? `Dedicated on-site service across ${currentDistrict.enName} (${currentDistrict.bnName}) & all 8 districts of Rangpur Division, Bangladesh.`
+                : 'Service coverage: All 8 Districts across Rangpur Division (রংপুর বিভাগ), Bangladesh.'}
             </p>
           </div>
 

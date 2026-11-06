@@ -66,7 +66,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               )}
               <div className="flex items-center gap-2 text-slate-300">
                 <Truck className="w-4 h-4 text-cyan-400" />
-                <span>Haragach / Rangpur Fast Delivery Available</span>
+                <span>Rangpur Division Fast Delivery Available</span>
               </div>
               <div className="flex items-center gap-2 text-slate-300">
                 <RotateCcw className="w-4 h-4 text-cyan-400" />

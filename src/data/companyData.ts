@@ -7,8 +7,8 @@ export const COMPANY_INFO: CompanyInfo = {
   slogan: "Your Safety & Tech Priority • CCTV, Computer Sales & Service, Electrician",
   bengaliSlogan: "আপনার নিরাপত্তাই আমাদের অগ্রাধিকার • সিসিটিভি, কম্পিউটার ও টেকনিশিয়ান সার্ভিস",
   businessType: "CCTV Security, Computer Sales & Service, Professional Technician & Electrician Service Provider",
-  location: "Jahaj Company & Haragachh, Rangpur, Bangladesh",
-  serviceArea: "Rangpur Division, Dhaka & Bogura, Bangladesh",
+  location: "Rangpur Division, Bangladesh",
+  serviceArea: "All 8 Districts of Rangpur Division, Bangladesh",
   phone: "01790139333",
   phoneFormatted: "01790-139333",
   secondaryPhone: "01865321530",
@@ -686,8 +686,8 @@ export const DEFAULT_SITE_CONTENT: SiteContent = {
   heroHeadline: "প্রফেশনাল CCTV, টেকনিশিয়ান, ইলেকট্রিশিয়ান ও সিকিউরিটি সলিউশন",
   heroSubheadline: "রংপুর বিভাগজুড়ে বাসা-বাড়ি, অফিস, দোকান ও ফ্যাক্টরিতে সিসিটিভি ক্যামেরা ইনস্টলেশন, আইপি ক্যামেরা, মোবাইলের মাধ্যমে অনলাইন লাইভ ভিউ, পিবিএক্স ইন্টারকম সেটআপ, অ্যাক্সেস কন্ট্রোল ও ডোর লক সিস্টেম, বায়োমেট্রিক হাজিরা মেশিন, কম্পিউটার ল্যান নেটওয়ার্কিং, হাউজ ওয়্যারিং এবং অভিজ্ঞ টেকনিশিয়ান ও ইলেকট্রিশিয়ানের মাধ্যমে সেবা প্রদান করা হয়। পাশাপাশি অরিজিনাল প্রোডাক্ট ও এক্সেসরিজ বিক্রয় করা হয়।",
   noticeTicker: "",
-  bannerBadge: "Official CCTV & Security Service Provider • Haragach, Rangpur",
-  emergencySupportText: "Need immediate CCTV or DVR troubleshooting in Haragach or Rangpur? Call technician Shamim at 01790139333 / 01865321530 for on-site visit."
+  bannerBadge: "Official CCTV & Security Service Provider • Rangpur Division",
+  emergencySupportText: "Need immediate CCTV or DVR troubleshooting in Rangpur Division? Call technician Shamim at 01790139333 / 01865321530 for on-site visit."
 };
 
 export const WORK_GALLERY: GalleryItem[] = [
@@ -696,7 +696,7 @@ export const WORK_GALLERY: GalleryItem[] = [
     title: "Professional CCTV Camera & DVR Setup",
     category: "CCTV Installation",
     image: "/assets/aistudio/image_4e9a7e85.png",
-    location: "Haragach, Rangpur",
+    location: "Rangpur Division",
     description: "Installed high-resolution weatherproof cameras and DVR with 24/7 night vision and remote mobile view."
   },
   {
@@ -704,7 +704,7 @@ export const WORK_GALLERY: GalleryItem[] = [
     title: "STS Surveillance Control & Workstation",
     category: "DVR/NVR Setup",
     image: "/assets/aistudio/image_69e03957.png",
-    location: "Haragach, Rangpur",
+    location: "Rangpur Division",
     description: "Live camera monitoring station, multi-channel DVR/NVR configuration, PoE networking rack, and workstation setup by Shamim Islam."
   },
   {
@@ -720,7 +720,7 @@ export const WORK_GALLERY: GalleryItem[] = [
     title: "Gigabit LAN & Computer Networking",
     category: "Networking",
     image: "/assets/aistudio/image_1948d1c5.png",
-    location: "Haragach, Rangpur",
+    location: "Rangpur Division",
     description: "Structured Cat6 network wiring, Gigabit switch and router setup, LAN file sharing, and office network troubleshooting."
   },
   {
@@ -728,7 +728,7 @@ export const WORK_GALLERY: GalleryItem[] = [
     title: "Hikvision Full HD IP Camera Setup",
     category: "IP Camera Installation",
     image: "/assets/aistudio/image_bde3dd9d.png",
-    location: "Saidpur Road, Rangpur",
+    location: "Rangpur Division",
     description: "High-definition PoE IP Camera installation with H.265+ smart compression, crystal clear night vision, and cloud remote view."
   },
   {
@@ -736,7 +736,7 @@ export const WORK_GALLERY: GalleryItem[] = [
     title: "House Wiring & Electrical Solution",
     category: "Cable Installation",
     image: "/assets/aistudio/image_a72619c9.png",
-    location: "Haragach, Rangpur",
+    location: "Rangpur Division",
     description: "Professional house wiring, circuit breaker setup, aesthetic switch-socket board fitting, and short circuit troubleshooting."
   },
   {
@@ -761,7 +761,7 @@ export const CUSTOMER_REVIEWS: ReviewItem[] = [
   {
     id: "rev-1",
     name: "Md. Rahman",
-    role: "Home Owner, Haragach",
+    role: "Home Owner, Rangpur",
     rating: 5,
     comment: "Very professional service. CCTV setup and remote view works perfectly on my mobile phone. Shamim bhai did clean cable management with no messy wires.",
     date: "August 2026",
@@ -861,7 +861,7 @@ export const DIVISION_DISTRICTS: DistrictCoverage[] = [
       "IT Service Rangpur",
       "CCTV Service Rangpur City",
       "CCTV Camera Rangpur Sadar",
-      "CCTV Technician Haragach"
+      "CCTV Technician Rangpur Division"
     ],
     delivery: "তাৎক্ষণিক অন-সাইট সার্ভিস (Same Day On-site)",
     onSiteSupport: true

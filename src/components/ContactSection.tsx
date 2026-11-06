@@ -74,7 +74,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
             <Phone className="w-3.5 h-3.5" />
-            <span>Haragach & Rangpur Headquarters</span>
+            <span>Rangpur Division Service Headquarters</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech">
             Contact Technician Shamim
@@ -164,13 +164,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <div>
                     <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Address:</span>
                     <p className="text-xs sm:text-sm font-bold text-slate-800">
-                      Jahaj Company & Haragachh, Rangpur, Bangladesh
+                      {activeCompany.location || 'Rangpur Division, Bangladesh'}
                     </p>
                   </div>
                   <div>
                     <span className="text-[11px] text-cyan-700 font-tech uppercase font-bold block">Service Areas:</span>
                     <p className="text-xs sm:text-sm font-semibold text-slate-700">
-                      Rangpur Division, Dhaka & Bogura, Bangladesh
+                      {activeCompany.serviceArea || 'All 8 Districts of Rangpur Division, Bangladesh'}
                     </p>
                   </div>
                   <div>
@@ -235,19 +235,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             </div>
 
-            {/* Embedded Google Map for Jahaj Company & Haragachh, Rangpur */}
+            {/* Embedded Google Map for Rangpur Division */}
             <div className="rounded-2xl overflow-hidden border-2 border-sky-200/90 shadow-xl bg-white">
               <div className="p-3 bg-sky-50 border-b border-sky-200 flex items-center justify-between text-xs text-slate-600">
                 <div className="flex items-center gap-1.5 text-cyan-800 font-bold font-tech">
                   <MapPin className="w-3.5 h-3.5 text-cyan-600" />
-                  <span>Jahaj Company & Haragachh, Rangpur</span>
+                  <span>Rangpur Division Service Area</span>
                 </div>
                 <span className="text-[11px] text-slate-500 font-medium">Bangladesh</span>
               </div>
               <div className="w-full h-56 relative bg-slate-100">
                 <iframe
-                  title="Haragach Rangpur Map"
-                  src="https://maps.google.com/maps?q=Haragach,%20Rangpur,%20Bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                  title="Rangpur Division Map"
+                  src="https://maps.google.com/maps?q=Rangpur%20Division,%20Bangladesh&t=&z=9&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -332,7 +332,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         required
                         value={formData.location}
                         onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        placeholder="e.g. Haragach Bazar / Rangpur Sadar"
+                        placeholder="e.g. Rangpur / Dinajpur / Lalmonirhat"
                         className="w-full bg-white text-sm text-slate-900 rounded-xl px-4 py-2.5 border-2 border-sky-200 focus:border-cyan-500 focus:outline-none placeholder-slate-400 shadow-sm"
                       />
                     </div>

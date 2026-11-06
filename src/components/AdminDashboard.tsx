@@ -1122,7 +1122,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
               </span>
             </div>
             <p className="text-[11px] text-slate-400">
-              Haragach, Rangpur • Official Security & CCTV Control Center
+              Rangpur Division • Official Security & CCTV Control Center
             </p>
           </div>
         </div>
@@ -1329,7 +1329,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           <div className="hidden md:block mt-auto pt-6 border-t border-slate-800/80 text-[11px] text-slate-400 space-y-1">
             <div className="text-cyan-400 font-semibold">STS Security Core v2.0</div>
             <div>PBKDF2 Salted Auth</div>
-            <div>Haragach, Rangpur</div>
+            <div>Rangpur Division</div>
           </div>
         </aside>
 
@@ -2029,7 +2029,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       Contact & Social Information (যোগাযোগ ও সোশ্যাল মিডিয়া)
                     </h2>
                     <p className="text-xs text-slate-400 mt-1">
-                      Update official phone numbers, WhatsApp, Facebook links, and Haragach/Rangpur location.
+                      Update official phone numbers, WhatsApp, Facebook links, and Rangpur Division location.
                     </p>
                   </div>
 

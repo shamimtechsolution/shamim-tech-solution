@@ -148,7 +148,7 @@ export const AdminLoginModal: React.FC<AdminLoginModalProps> = ({ isOpen, onClos
             SHAMIM TECH SOLUTION
           </h2>
           <p className="text-xs text-slate-400 mt-1">
-            Admin Management Portal • Haragach, Rangpur
+            Admin Management Portal • Rangpur Division
           </p>
         </div>
 

@@ -93,7 +93,7 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
                   <span className="text-[10px] text-slate-500 block font-tech uppercase font-bold">Base Location</span>
                   <span className="text-xs font-bold text-slate-800 flex items-center gap-1 mt-0.5">
                     <MapPin className="w-3.5 h-3.5 text-cyan-600" />
-                    Haragach, Rangpur
+                    Rangpur Division
                   </span>
                 </div>
                 <div className="p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
@@ -115,19 +115,19 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
                 <span>About Our Business</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech leading-tight">
-                Dedicated Security & Surveillance Partner in Rangpur
+                Dedicated Security & Surveillance Partner in Rangpur Division
               </h2>
             </div>
 
             {/* Exact Required Text */}
             <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal bg-sky-50/50 p-5 rounded-2xl border border-sky-200 shadow-sm">
-              <strong className="text-slate-900 font-bold">SHAMIM TECH SOLUTION (STS)</strong> provides professional CCTV and security system solutions in Haragach, Rangpur and nearby areas. We provide CCTV camera installation, DVR/NVR configuration, IP camera setup, remote/online viewing setup, access control, fingerprint attendance, networking and CCTV troubleshooting services.
+              <strong className="text-slate-900 font-bold">SHAMIM TECH SOLUTION (STS)</strong> provides professional CCTV and security system solutions across all 8 districts of Rangpur Division (রংপুর বিভাগ). We provide CCTV camera installation, DVR/NVR configuration, IP camera setup, remote/online viewing setup, access control, fingerprint attendance, networking and electrical troubleshooting services.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-700">
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
                 <CheckCircle className="w-4 h-4 text-cyan-600 shrink-0" />
-                <span>Haragach, Rangpur Sadar, Sarai, Satmata Coverage</span>
+                <span>Rangpur Division All 8 Districts Coverage</span>
               </div>
               <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white border border-sky-200 shadow-sm">
                 <CheckCircle className="w-4 h-4 text-cyan-600 shrink-0" />

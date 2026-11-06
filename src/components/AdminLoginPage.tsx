@@ -166,7 +166,7 @@ export const AdminLoginPage: React.FC<AdminLoginPageProps> = ({
               SHAMIM TECH SOLUTION
             </h1>
             <p className="text-xs text-slate-400 mt-1">
-              Private Management System • Haragach, Rangpur
+              Private Management System • Rangpur Division
             </p>
           </div>
 

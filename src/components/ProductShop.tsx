@@ -266,7 +266,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                   <span>Free Setup Consultation</span>
                 </div>
                 <p className="text-[11px] text-slate-500">
-                  Not sure how many cameras or DVR channels you need? We calculate storage & wiring for free in Haragach & Rangpur.
+                  Not sure how many cameras or DVR channels you need? We calculate storage & wiring for free across Rangpur Division.
                 </p>
               </div>
 

@@ -1441,6 +1441,33 @@ async function startServer() {
       /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/is,
       `<link rel="canonical" href="https://www.shamimtechsolution.com/service-area/${district.slug}" />`
     );
+    // Replace OpenGraph title & description & url
+    modified = modified.replace(
+      /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:title" content="${district.title.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:description" content="${district.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:url" content="https://www.shamimtechsolution.com/service-area/${district.slug}" />`
+    );
+    // Replace Twitter title & description
+    modified = modified.replace(
+      /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/is,
+      `<meta name="twitter:title" content="${district.title.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/is,
+      `<meta name="twitter:description" content="${district.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    // Replace geo placename with the district name
+    modified = modified.replace(
+      /<meta\s+name="geo\.placename"\s+content=".*?"\s*\/?>/is,
+      `<meta name="geo.placename" content="${district.enName}, Rangpur Division, Bangladesh" />`
+    );
     return modified;
   };
 

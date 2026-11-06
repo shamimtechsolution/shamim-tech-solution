@@ -42,7 +42,7 @@ export const WorkGallery: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 text-cyan-700 text-xs font-bold font-tech uppercase tracking-wider">
               <Camera className="w-4 h-4 text-cyan-600" />
-              <span>Real Field Projects • Haragach & Rangpur</span>
+              <span>Real Field Projects • Rangpur Division</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-tech mt-1">
               Our Work Gallery
@@ -168,7 +168,7 @@ export const WorkGallery: React.FC = () => {
 
                 <div className="pt-2 flex items-center justify-between text-xs text-slate-400 border-t border-slate-800">
                   <span>Work done by SHAMIM TECH SOLUTION</span>
-                  <span className="text-cyan-400 font-semibold">Haragach, Rangpur</span>
+                  <span className="text-cyan-400 font-semibold">Rangpur Division</span>
                 </div>
               </div>
             </div>

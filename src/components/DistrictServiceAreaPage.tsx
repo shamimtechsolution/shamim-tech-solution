@@ -138,10 +138,9 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
           "priceRange": "৳৳",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Rangpur Jahaj Company Mor, and Haragach Bazar Road",
-            "addressLocality": "Haragach, Rangpur",
+            "streetAddress": `${districtData.enName} District Sadar & Commercial Hub`,
+            "addressLocality": districtData.enName,
             "addressRegion": "Rangpur Division",
-            "postalCode": "5440",
             "addressCountry": "BD"
           },
           "areaServed": [
@@ -877,8 +876,8 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
               </a>
             </div>
 
-            <p className="mt-4 text-[11px] text-cyan-100/80 font-mono">
-              অফিস ঠিকানা: রংপুর জাহাজ কোম্পানি মোড় ও হারাগাছ বাজার রোড, রংপুর।
+            <p className="mt-4 text-[11px] text-cyan-100/90 font-mono">
+              সার্ভিস এলাকা: {districtData.bnName} জেলা ({districtData.enName} District) ও রংপুর বিভাগের সকল উপজেলায় অন-সাইট টেকনিক্যাল সেবা।
             </p>
           </div>
         </section>

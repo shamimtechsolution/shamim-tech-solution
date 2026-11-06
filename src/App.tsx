@@ -6,7 +6,7 @@ import { ProductShop } from './components/ProductShop';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { OrderModal } from './components/OrderModal';
-import { SoftwareDownloads } from './components/SoftwareDownloads';
+
 import { WorkGallery } from './components/WorkGallery';
 import { AboutAndWhyUs } from './components/AboutAndWhyUs';
 import { CustomerReviews } from './components/CustomerReviews';
@@ -343,7 +343,7 @@ export default function App() {
 
   // Synchronize active section based on scroll position
   useEffect(() => {
-    const sectionIds = ['home', 'services', 'products', 'downloads', 'gallery', 'about', 'contact'];
+    const sectionIds = ['home', 'services', 'products', 'gallery', 'about', 'contact'];
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 180;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -664,12 +664,6 @@ export default function App() {
               onSelectCategory={setSelectedCategory}
             />
 
-            {/* 4. Software & Tools Downloads + Profile Download + How to Order */}
-            <SoftwareDownloads
-              onOrderNow={() => scrollToSection('products')}
-              downloads={downloads}
-              companyInfo={companyInfo}
-            />
 
             {/* 5. Work Gallery with Lightbox and Real Field Projects */}
             <WorkGallery />
@@ -683,7 +677,7 @@ export default function App() {
             {/* 7. Customer Testimonials & Reviews */}
             <CustomerReviews />
 
-            {/* 8. Contact Section with Working Form & Haragach, Rangpur Google Map */}
+            {/* 8. Contact Section with Working Form & Rangpur Division Map */}
             <ContactSection
               preselectedService={preselectedService}
               companyInfo={companyInfo}
@@ -698,6 +692,7 @@ export default function App() {
         onOpenAdmin={handleOpenAdmin}
         isAdminLoggedIn={isAdminLoggedIn}
         onSelectDistrict={navigateToDistrict}
+        activeDistrictSlug={activeDistrictSlug}
       />
 
       {/* Product Detail Modal */}

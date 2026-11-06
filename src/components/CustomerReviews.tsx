@@ -208,7 +208,7 @@ export const CustomerReviews: React.FC = () => {
                     type="text"
                     value={newReview.role}
                     onChange={(e) => setNewReview({ ...newReview, role: e.target.value })}
-                    placeholder="e.g. Shop Owner, Haragach"
+                    placeholder="e.g. Shop Owner, Rangpur"
                     className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
                   />
                 </div>
