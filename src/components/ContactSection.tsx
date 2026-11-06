@@ -155,19 +155,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
               </div>
 
-              {/* Service Base Location */}
+              {/* Address, Service Areas & Product Sales */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
                   <MapPin className="w-5 h-5" />
                 </div>
-                <div>
-                  <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Service Base</span>
-                  <p className="text-sm font-semibold text-slate-800">
-                    {activeCompany.location}
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    Serving: {activeCompany.serviceArea}
-                  </p>
+                <div className="space-y-1.5 min-w-0">
+                  <div>
+                    <span className="text-[11px] text-slate-500 font-tech uppercase font-bold block">Address:</span>
+                    <p className="text-xs sm:text-sm font-bold text-slate-800">
+                      Jahaj Company & Haragachh, Rangpur, Bangladesh
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[11px] text-cyan-700 font-tech uppercase font-bold block">Service Areas:</span>
+                    <p className="text-xs sm:text-sm font-semibold text-slate-700">
+                      Rangpur Division, Dhaka & Bogura, Bangladesh
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[11px] text-emerald-700 font-tech uppercase font-bold block">Product Sales:</span>
+                    <p className="text-xs sm:text-sm font-semibold text-slate-700">
+                      Online Product Sales Across Bangladesh
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -224,12 +235,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             </div>
 
-            {/* Embedded Google Map for Haragach, Rangpur */}
+            {/* Embedded Google Map for Jahaj Company & Haragachh, Rangpur */}
             <div className="rounded-2xl overflow-hidden border-2 border-sky-200/90 shadow-xl bg-white">
               <div className="p-3 bg-sky-50 border-b border-sky-200 flex items-center justify-between text-xs text-slate-600">
                 <div className="flex items-center gap-1.5 text-cyan-800 font-bold font-tech">
                   <MapPin className="w-3.5 h-3.5 text-cyan-600" />
-                  <span>Haragach, Rangpur Base Location</span>
+                  <span>Jahaj Company & Haragachh, Rangpur</span>
                 </div>
                 <span className="text-[11px] text-slate-500 font-medium">Bangladesh</span>
               </div>

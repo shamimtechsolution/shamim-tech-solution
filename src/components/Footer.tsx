@@ -250,7 +250,7 @@ export const Footer: React.FC<FooterProps> = ({
               © {currentYear} <strong className="text-slate-900">{activeCompany.name}</strong>. All rights reserved.
             </p>
             <p className="text-[11px] text-slate-500 mt-0.5">
-              Service location: Haragach, Rangpur, Bangladesh.
+              Service location: Jahaj Company & Haragachh, Rangpur, Bangladesh.
             </p>
           </div>
 

@@ -7,8 +7,8 @@ export const COMPANY_INFO: CompanyInfo = {
   slogan: "Your Safety & Tech Priority • CCTV, Computer Sales & Service, Electrician",
   bengaliSlogan: "আপনার নিরাপত্তাই আমাদের অগ্রাধিকার • সিসিটিভি, কম্পিউটার ও টেকনিশিয়ান সার্ভিস",
   businessType: "CCTV Security, Computer Sales & Service, Professional Technician & Electrician Service Provider",
-  location: "Haragach, Rangpur, Bangladesh",
-  serviceArea: "রংপুর বিভাগ — রংপুর (সিটি, সদর, হারাগাছ), দিনাজপুর, লালমনিরহাট, কুড়িগ্রাম, নীলফামারী, গাইবান্ধা, ঠাকুরগাঁও ও পঞ্চগড় (Rangpur Division 8 Districts)",
+  location: "Jahaj Company & Haragachh, Rangpur, Bangladesh",
+  serviceArea: "Rangpur Division, Dhaka & Bogura, Bangladesh",
   phone: "01790139333",
   phoneFormatted: "01790-139333",
   secondaryPhone: "01865321530",
@@ -18,8 +18,8 @@ export const COMPANY_INFO: CompanyInfo = {
   whatsappInternational: "8801790139333",
   facebook: "https://www.facebook.com/profile.php?id=100014153359472",
   emailPlaceholder: "Email coming soon",
-  mapQuery: "Haragach, Rangpur, Bangladesh",
-  mapDirectionsUrl: "https://www.google.com/maps/search/?api=1&query=Haragach,+Rangpur,+Bangladesh",
+  mapQuery: "Jahaj Company Mor, Rangpur, Bangladesh",
+  mapDirectionsUrl: "https://www.google.com/maps/search/?api=1&query=Jahaj+Company+Mor,+Rangpur,+Bangladesh",
 };
 
 export const INITIAL_PRODUCTS: Product[] = [
