@@ -1464,9 +1464,10 @@ async function startServer() {
       `<meta name="twitter:description" content="${district.metaDescription.replace(/"/g, '&quot;')}" />`
     );
     // Replace geo placename with the district name
+    const regionName = district.slug === 'dhaka' ? 'Dhaka, Bangladesh' : district.slug === 'bogura' ? 'Bogura, Bangladesh' : `${district.enName}, Rangpur Division, Bangladesh`;
     modified = modified.replace(
       /<meta\s+name="geo\.placename"\s+content=".*?"\s*\/?>/is,
-      `<meta name="geo.placename" content="${district.enName}, Rangpur Division, Bangladesh" />`
+      `<meta name="geo.placename" content="${regionName}" />`
     );
     return modified;
   };

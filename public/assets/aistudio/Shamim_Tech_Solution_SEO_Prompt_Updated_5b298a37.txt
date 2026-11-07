@@ -1,0 +1,771 @@
+# SHAMIM TECH SOLUTION – COMPLETE 10 AREA SEO, PRODUCT, SERVICE, TECHNICIAN & MAIN WEBSITE RESTORATION PROJECT
+
+**Website:** https://www.shamimtechsolution.com/
+
+## ১. আমার মূল উদ্দেশ্য – অত্যন্ত গুরুত্বপূর্ণ
+
+আমার একটি মূল ওয়েবসাইট থাকবে। এই একই ওয়েবসাইট ১০টি সার্ভিস এরিয়ার আলাদা URL দিয়ে পাওয়া যাবে।
+
+আমি ১০টি আলাদা ডিজাইনের ওয়েবসাইট চাই না।
+
+আমার মূল ওয়েবসাইটের সম্পূর্ণ ডিজাইন, Layout, Product Store, Product Search, Service, Technician, Electrician, Accessories, Header, Footer, Menu, Images, Buttons এবং সব Functionality প্রতিটি জেলার URL-এ একই থাকতে হবে।
+
+**শুধু URL এবং প্রতিটি জেলার SEO তথ্য ও HTML Title আলাদা হবে।**
+
+কেউ Google-এ যে জেলার নামের সঙ্গে যে পণ্য বা সার্ভিস লিখে সার্চ করবে, তার সঙ্গে প্রাসঙ্গিক SEO তথ্য Google-কে দিতে হবে।
+
+আমার মূল ওয়েবসাইটের কোনো ডিজাইন বা ফিচার পরিবর্তন করা যাবে না।
+
+## ২. মূল ওয়েবসাইট
+
+প্রথমে এই ওয়েবসাইটের সম্পূর্ণ কোড ও ডিজাইন পরীক্ষা করুন:
+
+https://www.shamimtechsolution.com/
+
+এই ওয়েবসাইটকেই সব জেলার পেজের মূল Template হিসেবে ব্যবহার করতে হবে।
+
+মূল ওয়েবসাইটের বর্তমান ডিজাইন ও Functionality হুবহু রাখতে হবে।
+
+## ৩. মোট ১০টি সার্ভিস এরিয়া
+
+নিচের ১০টি এলাকা অন্তর্ভুক্ত থাকবে:
+
+1. Rangpur
+2. Dinajpur
+3. Lalmonirhat
+4. Kurigram
+5. Nilphamari
+6. Gaibandha
+7. Thakurgaon
+8. Panchagarh
+9. Bogura
+10. Dhaka
+
+## ৪. প্রতিটি জেলার আলাদা URL
+
+বর্তমান আটটি জেলার URL অপরিবর্তিত রাখতে হবে:
+
+1. https://www.shamimtechsolution.com/service-area/rangpur
+2. https://www.shamimtechsolution.com/service-area/dinajpur
+3. https://www.shamimtechsolution.com/service-area/lalmonirhat
+4. https://www.shamimtechsolution.com/service-area/kurigram
+5. https://www.shamimtechsolution.com/service-area/nilphamari
+6. https://www.shamimtechsolution.com/service-area/gaibandha
+7. https://www.shamimtechsolution.com/service-area/thakurgaon
+8. https://www.shamimtechsolution.com/service-area/panchagarh
+
+Bogura ও Dhaka-এর URL আগে পরীক্ষা করুন। না থাকলে তৈরি করুন:
+
+9. https://www.shamimtechsolution.com/service-area/bogura
+10. https://www.shamimtechsolution.com/service-area/dhaka
+
+প্রতিটি URL সরাসরি ব্রাউজারে খুলতে হবে এবং সঠিকভাবে কাজ করতে হবে।
+
+## ৫. প্রতিটি জেলার HTML Title
+
+প্রতিটি জেলার নিজস্ব SEO Title থাকবে।
+
+উদাহরণ:
+
+- Rangpur – CCTV Sales & Service | Shamim Tech Solution
+- Dinajpur – CCTV Sales & Service | Shamim Tech Solution
+- Lalmonirhat – CCTV Sales & Service | Shamim Tech Solution
+- Kurigram – CCTV Sales & Service | Shamim Tech Solution
+- Nilphamari – CCTV Sales & Service | Shamim Tech Solution
+- Gaibandha – CCTV Sales & Service | Shamim Tech Solution
+- Thakurgaon – CCTV Sales & Service | Shamim Tech Solution
+- Panchagarh – CCTV Sales & Service | Shamim Tech Solution
+- Bogura – CCTV Sales & Service | Shamim Tech Solution
+- Dhaka – CCTV Sales & Service | Shamim Tech Solution
+
+প্রতিটি জেলার URL-এর জন্য আলাদা HTML Title, Meta Description, Canonical URL এবং উপযুক্ত SEO Metadata তৈরি করুন।
+
+## ৬. সব জেলার জন্য Product SEO Mapping
+
+নিচের প্রতিটি Keyword-এর ক্ষেত্রে ১০টি জেলার নাম ব্যবহার করতে হবে।
+
+অর্থাৎ, [District] বলতে Rangpur, Dinajpur, Lalmonirhat, Kurigram, Nilphamari, Gaibandha, Thakurgaon, Panchagarh, Bogura এবং Dhaka—সবগুলো বোঝাবে।
+
+### CCTV Camera & Security Products
+
+- [District] CCTV Camera Price
+- [District] CCTV Camera Sales
+- [District] CCTV Products
+- [District] CCTV Camera Shop
+- [District] Security Camera
+- [District] HD CCTV Camera
+- [District] IP Camera
+- [District] WiFi Camera
+- [District] Wireless Camera
+- [District] Dome Camera
+- [District] Bullet Camera
+- [District] PTZ Camera
+- [District] Outdoor CCTV Camera
+- [District] Indoor CCTV Camera
+- [District] Night Vision Camera
+- [District] Color Night Vision Camera
+- [District] 4G Camera
+- [District] Solar CCTV Camera
+- [District] CCTV Camera Accessories
+
+### DVR, NVR & Recording Products
+
+- [District] DVR Price
+- [District] DVR Sales
+- [District] NVR Price
+- [District] NVR Sales
+- [District] DVR NVR System
+- [District] CCTV Recorder
+- [District] CCTV Hard Disk
+- [District] Surveillance Hard Disk
+- [District] CCTV Storage
+- [District] CCTV Power Supply
+- [District] CCTV Adapter
+- [District] CCTV Connector
+- [District] BNC Connector
+- [District] DC Connector
+- [District] CCTV Cable
+
+### Intercom & PBX Products
+
+- [District] Intercom Machine
+- [District] Intercom System
+- [District] Intercom Products
+- [District] PBX System
+- [District] PBX Machine
+- [District] Telephone Exchange
+- [District] Office Intercom
+- [District] Video Door Phone
+- [District] Door Phone
+- [District] Intercom Accessories
+
+### Access Control & Door Lock Products
+
+- [District] Access Control Machine
+- [District] Access Control System
+- [District] Access Control Products
+- [District] Access Control Door Lock
+- [District] Electric Door Lock
+- [District] Magnetic Door Lock
+- [District] Fingerprint Door Lock
+- [District] RFID Access Control
+- [District] Card Access Control
+- [District] Push Button
+- [District] Exit Button
+- [District] Access Control Accessories
+
+### Biometric & Attendance Products
+
+- [District] Biometric Machine
+- [District] Biometric Attendance Machine
+- [District] Fingerprint Machine
+- [District] Fingerprint Attendance Machine
+- [District] Face Recognition Attendance Machine
+- [District] Attendance Machine Price
+- [District] Employee Attendance System
+- [District] Time Attendance Machine
+
+### Networking & LAN Products
+
+- [District] LAN Cable
+- [District] Networking Products
+- [District] Computer Networking
+- [District] Network Switch
+- [District] Router
+- [District] Ethernet Cable
+- [District] CAT6 Cable
+- [District] CAT5 Cable
+- [District] Network Accessories
+- [District] RJ45 Connector
+- [District] Network Installation Accessories
+
+## ৭. সব জেলার জন্য Service SEO Mapping
+
+### CCTV Services
+
+- [District] CCTV Technician
+- [District] CCTV Installation
+- [District] CCTV Camera Installation
+- [District] CCTV Camera Service
+- [District] CCTV Repair
+- [District] CCTV Maintenance
+- [District] CCTV Setup
+- [District] CCTV Configuration
+- [District] CCTV Online View Setup
+- [District] DVR Online View
+- [District] NVR Online View
+- [District] Mobile CCTV Viewing Setup
+- [District] CCTV Troubleshooting
+- [District] CCTV Security Solution
+
+### IP Camera Services
+
+- [District] IP Camera Installation
+- [District] IP Camera Setup
+- [District] IP Camera Service
+- [District] WiFi Camera Installation
+- [District] Wireless Camera Setup
+- [District] Network Camera Configuration
+
+### DVR & NVR Services
+
+- [District] DVR Installation
+- [District] NVR Installation
+- [District] DVR Setup
+- [District] NVR Setup
+- [District] DVR Technician
+- [District] NVR Technician
+- [District] DVR Repair
+- [District] NVR Service
+- [District] Hard Disk Installation
+
+### Intercom & PBX Services
+
+- [District] Intercom Technician
+- [District] Intercom Installation
+- [District] Intercom Setup
+- [District] Intercom Service
+- [District] Intercom Repair
+- [District] PBX Technician
+- [District] PBX Installation
+- [District] PBX Setup
+- [District] PBX Configuration
+- [District] PBX Service
+- [District] Office Intercom Installation
+
+### Access Control Services
+
+- [District] Access Control Technician
+- [District] Access Control Installation
+- [District] Access Control Setup
+- [District] Access Control Service
+- [District] Access Control Repair
+- [District] Door Lock Installation
+- [District] Magnetic Door Lock Installation
+- [District] Electric Door Lock Setup
+- [District] Fingerprint Door Lock Setup
+- [District] RFID Access Control Setup
+
+### Biometric Services
+
+- [District] Biometric Technician
+- [District] Biometric Machine Installation
+- [District] Biometric Machine Setup
+- [District] Biometric Machine Service
+- [District] Fingerprint Machine Installation
+- [District] Attendance Machine Setup
+- [District] Face Recognition Machine Setup
+- [District] Attendance Software Configuration
+
+### Electrical Services
+
+- [District] Electrician
+- [District] Electrical Technician
+- [District] Electrical Service
+- [District] Electrical Wiring
+- [District] House Wiring
+- [District] Office Electrical Wiring
+- [District] Shop Electrical Wiring
+- [District] Electrical Installation
+- [District] Electrical Maintenance
+- [District] Electrical Repair
+- [District] Electrical Troubleshooting
+- [District] Lighting Installation
+- [District] Switch Board Installation
+- [District] Distribution Board Wiring
+
+### Networking Services
+
+- [District] Networking Technician
+- [District] Computer Networking Service
+- [District] LAN Network Installation
+- [District] LAN Cable Installation
+- [District] Office Network Setup
+- [District] Network Configuration
+- [District] Router Setup
+- [District] Switch Configuration
+- [District] Network Troubleshooting
+- [District] Network Maintenance
+
+## ৮. Search Query অনুযায়ী SEO Title ও Content
+
+প্রতিটি জেলার জন্য উপরের সব Product ও Service Keyword-এর প্রাসঙ্গিক তথ্য ওয়েবসাইটে রাখতে হবে।
+
+উদাহরণ:
+
+- [District] + CCTV Camera Price → [District] – CCTV Camera Sales & Price
+- [District] + DVR Price → [District] – DVR Sales & Price
+- [District] + IP Camera → [District] – IP Camera Sales & Service
+- [District] + Intercom Machine → [District] – Intercom Products Sales
+- [District] + CCTV Technician → [District] – CCTV Technician & Security Solution
+- [District] + Electrician → [District] – Electrician & Electrical Services
+- [District] + Access Control → [District] – Access Control Installation & Service
+- [District] + Biometric Machine → [District] – Biometric Attendance Machine Sales
+- [District] + PBX Technician → [District] – PBX Installation & Service
+- [District] + Networking → [District] – Computer LAN & Networking Services
+
+এখানে [District] এর জায়গায় ১০টি জেলার প্রতিটি নাম প্রযোজ্য হবে।
+
+প্রতিটি জেলার পেজে প্রাসঙ্গিক Product ও Service-এর Heading, Description, FAQ এবং প্রয়োজনীয় তথ্য রাখতে হবে।
+
+**SEO Title সম্পর্কে গুরুত্বপূর্ণ নিয়ম:**
+
+একটি URL-এর HTML Title এক সময়ে একটি নির্দিষ্ট Title হবে। Google ব্যবহারকারীর Search Query অনুযায়ী নিজের সিদ্ধান্তে Search Result-এর Title পরিবর্তন করে দেখাতে পারে। তাই একই URL-এ প্রতিটি সার্চের জন্য আলাদা HTML Title জোর করে তৈরি করবেন না। বরং প্রাসঙ্গিক কনটেন্ট, Heading, Metadata এবং অভ্যন্তরীণ লিংক ঠিকভাবে সাজান।
+
+## ৯. Technician, Electrician ও Professional Services
+
+আমার ওয়েবসাইট শুধু পণ্য বিক্রির জন্য নয়। এখানে পণ্য বিক্রি এবং টেকনিক্যাল সার্ভিস—দুটিই গুরুত্বপূর্ণ।
+
+নিচের বিষয়গুলো অবশ্যই রাখতে হবে:
+
+- Professional CCTV Technician
+- CCTV Installation Technician
+- IP Camera Technician
+- DVR / NVR Technician
+- PBX & Intercom Technician
+- Access Control Technician
+- Biometric Machine Technician
+- Electrician
+- Electrical Technician
+- LAN Networking Technician
+- CCTV Security Solution
+- Home Security Solution
+- Office Security Solution
+- Shop Security Solution
+- Factory Security Solution
+
+প্রতিটি জেলার পেজে বাস্তবে যে সার্ভিস দেওয়া হয়, সেগুলোর সঠিক তথ্য দেখাতে হবে।
+
+## ১০. Product Sales ও Online Product Store
+
+আমার মূল ওয়েবসাইটে Product Sales System আছে।
+
+সেই কারণে:
+
+- সব Product Card একই থাকবে।
+- Product Image একই থাকবে।
+- Product Name ও Description একই থাকবে।
+- Product Price ডেটাবেস থেকে আসবে।
+- Product Availability বাস্তব তথ্য অনুযায়ী দেখাবে।
+- Product Details Page কাজ করবে।
+- Product Search কাজ করবে।
+- Category Filter কাজ করবে।
+- Contact ও Order Button কাজ করবে।
+- Product URL ও Internal Links অক্ষত থাকবে।
+
+কোনো কাল্পনিক Product, Price, Stock বা Warranty তৈরি করা যাবে না।
+
+## ১১. আগের সব SEO Keyword অক্ষত রাখুন
+
+আমার ওয়েবসাইটে আগে যেসব SEO Keyword, Search Option, Search Mapping এবং Service Mapping তৈরি করা হয়েছে, সব পরীক্ষা করে সংরক্ষণ করুন।
+
+নতুন Keyword যোগ করার সময় পুরোনো Keyword মুছে ফেলা যাবে না।
+
+আগের সব Search Option, Product Search, Service Search এবং Category Search আগের মতো কাজ করতে হবে।
+
+## ১২. সব জেলার ডিজাইন মূল ওয়েবসাইটের মতো রাখুন
+
+প্রতিটি জেলার URL-এ নিচের সব অংশ মূল ওয়েবসাইটের মতো একই থাকবে:
+
+- Header
+- Navigation Menu
+- Logo
+- Branding
+- Homepage Layout
+- Hero Section
+- Product Store
+- Product Cards
+- Product Search
+- Category Filter
+- Product Images
+- Product Details
+- All Services
+- Technician Information
+- Electrical Services
+- Networking Services
+- Accessories
+- Contact Information
+- Phone Number
+- WhatsApp Button
+- Footer
+- Desktop Layout
+- Mobile Responsive Layout
+- সব Buttons
+- সব Existing Functions
+
+কোনো জেলার পেজে আলাদা বা সাধারণ মানের নতুন ডিজাইন তৈরি করবেন না।
+
+## ১৩. Technical SEO Configuration
+
+- প্রতিটি জেলার URL-এর আলাদা HTML Title থাকবে।
+- প্রতিটি জেলার উপযুক্ত Meta Description থাকবে।
+- Canonical URL সঠিকভাবে সেট করতে হবে।
+- Sitemap-এ ১০টি জেলার URL রাখতে হবে।
+- Robots.txt পরীক্ষা করতে হবে।
+- Internal Linking ঠিক রাখতে হবে।
+- Structured Data বাস্তব তথ্য অনুযায়ী তৈরি করতে হবে।
+- Product Schema-তে বাস্তব Product Data ব্যবহার করতে হবে।
+- Local Business Schema-তে সঠিক Business Information ব্যবহার করতে হবে।
+- Breadcrumb Schema সঠিকভাবে সেট করতে হবে।
+- প্রতিটি URL Google-এর Crawl করার উপযোগী করতে হবে।
+- কোনো ভুয়া Rating, Review বা Business Location তৈরি করা যাবে না।
+
+একই কনটেন্টের কারণে Duplicate Content বা Canonical সমস্যা হচ্ছে কি না পরীক্ষা করুন। সব পেজ হুবহু একই করে কেবল জেলার নাম পরিবর্তন করবেন না; বাস্তব ও প্রাসঙ্গিক জেলা-ভিত্তিক তথ্য যোগ করুন।
+
+## ১৪. যেসব কাজ একেবারেই করা যাবে না
+
+1. মূল ওয়েবসাইটের ডিজাইন পরিবর্তন করা যাবে না।
+2. কোনো Product বাদ দেওয়া যাবে না।
+3. কোনো Service বাদ দেওয়া যাবে না।
+4. কোনো Search Option বাদ দেওয়া যাবে না।
+5. আগের SEO Keyword মুছে ফেলা যাবে না।
+6. নতুন আলাদা জেলা ওয়েবসাইটের ডিজাইন তৈরি করা যাবে না।
+7. মূল Homepage নষ্ট করা যাবে না।
+8. Header, Footer বা Navigation পরিবর্তন করা যাবে না।
+9. Product Store বা Search System নষ্ট করা যাবে না।
+10. অপ্রয়োজনীয় নতুন URL তৈরি করা যাবে না।
+11. অপ্রয়োজনীয় Redirect তৈরি করা যাবে না।
+12. মিথ্যা Customer Review বা Rating তৈরি করা যাবে না।
+13. বাস্তবে নেই এমন Service Area বা Service Availability দাবি করা যাবে না।
+14. বিদ্যমান Database বা Product Data নষ্ট করা যাবে না।
+
+## ১৫. কাজ করার আগে ও পরে পরীক্ষা
+
+প্রথমে বর্তমান Project-এর Backup নিন।
+
+তারপর:
+
+1. মূল ওয়েবসাইটের সম্পূর্ণ কোড পরীক্ষা করুন।
+2. আটটি জেলার বর্তমান পেজ পরীক্ষা করুন।
+3. Bogura ও Dhaka-এর URL পরীক্ষা করুন।
+4. বর্তমান SEO Keyword ও Search Mapping সংরক্ষণ করুন।
+5. মূল ওয়েবসাইটের Component পুনরায় ব্যবহার করুন।
+6. প্রতিটি জেলার HTML Title ও Metadata ঠিক করুন।
+7. সব ১০টি URL পরীক্ষা করুন।
+8. সব Product ও Service পরীক্ষা করুন।
+9. সব Search Option পরীক্ষা করুন।
+10. Desktop ও Mobile Design পরীক্ষা করুন।
+11. Homepage-এর সঙ্গে সব জেলার পেজ তুলনা করুন।
+12. কোনো Error বা Broken Link আছে কি না পরীক্ষা করুন।
+
+## ১৬. চূড়ান্ত ফলাফল
+
+আমি চাই:
+
+**ONE MAIN WEBSITE + 10 AREA URLS + ONE SAME DESIGN + ALL PRODUCTS + ALL SERVICES + ALL SEARCH OPTIONS + COMPLETE SEO OPTIMIZATION.**
+
+আমার মূল ওয়েবসাইট সব জেলার URL-এ একই থাকবে।
+
+শুধু জেলার URL, HTML Title এবং প্রাসঙ্গিক SEO তথ্য আলাদা থাকবে।
+
+কেউ যে জেলার নাম দিয়ে CCTV Camera, DVR, NVR, IP Camera, Intercom, PBX, Access Control, Biometric Machine, Electrician, CCTV Technician, Networking, Accessories অথবা অন্য কোনো Product ও Service সার্চ করবে, সেই সার্চের সঙ্গে প্রাসঙ্গিক তথ্য Google-কে দিতে হবে।
+
+**সবচেয়ে গুরুত্বপূর্ণ: আমার মূল ওয়েবসাইটের ডিজাইন, কনটেন্ট, Product Store, Service, Search System এবং কোনো Functionality নষ্ট করা যাবে না।**
+
+কাজ শেষে একটি বিস্তারিত রিপোর্ট দিন। কোন ফাইল পরিবর্তন করেছেন, কোন Keyword সংরক্ষণ করেছেন, কোন URL ঠিক করেছেন এবং কোন কোন পরীক্ষা সফল হয়েছে তা জানান।
+
+কোড পরিবর্তনের আগে বর্তমান Project-এর Backup নিশ্চিত করুন।
+
+
+## ১৭. জেলার নাম ছাড়া সার্চ করলেও Shamim Tech Solution খুঁজে পাওয়ার SEO ব্যবস্থা
+
+আগের ১–১৬ নম্বরের সব নির্দেশনা, Keyword, URL, Design, Product, Service এবং Functionality সম্পূর্ণ অপরিবর্তিত রাখতে হবে। এই নতুন অংশটি শুধু অতিরিক্ত নির্দেশনা হিসেবে যোগ হবে। আগের কোনো লেখা, Keyword বা Search Mapping মুছে ফেলা বা ছোট করা যাবে না।
+
+আমার ওয়েবসাইট যেন শুধু জেলার নাম দিয়ে সার্চ করলে নয়, জেলার নাম ছাড়াও সাধারণভাবে Product, Service, Technician বা Electrician লিখে সার্চ করলে Google-এ প্রাসঙ্গিকভাবে খুঁজে পাওয়ার উপযোগী হয়।
+
+উদাহরণ:
+- CCTV / CCTV Camera
+- CCTV Technician / CCTV Camera Technician
+- Intercom / Intercom Machine / Intercom Technician
+- PBX / PBX System / PBX Technician
+- Access Control / Access Control Machine / Access Control Technician
+- Door Lock Technician
+- Biometric Machine / Biometric Technician
+- Electrician / Electrical Technician / Electrical Wiring
+- LAN Networking / Networking Technician
+- DVR NVR Technician / IP Camera Technician
+- CCTV Accessories / Intercom Accessories / Access Control Accessories
+
+### ১৭.১ জেলার নাম ছাড়া Product Search Keywords
+
+নিচের Keyword-গুলো জেলার নাম ছাড়াও ওয়েবসাইটের প্রাসঙ্গিক Product, Category, Heading, Description, FAQ এবং Search Content-এ স্বাভাবিকভাবে অন্তর্ভুক্ত করতে হবে:
+
+**CCTV ও Security Products**
+- CCTV Camera
+- CCTV Camera Price
+- CCTV Camera Sales
+- CCTV Products
+- CCTV Camera Shop
+- Security Camera
+- HD CCTV Camera
+- IP Camera
+- WiFi Camera
+- Wireless Camera
+- Dome Camera
+- Bullet Camera
+- PTZ Camera
+- Outdoor CCTV Camera
+- Indoor CCTV Camera
+- Night Vision Camera
+- Color Night Vision Camera
+- 4G Camera
+- Solar CCTV Camera
+- CCTV Accessories
+
+**DVR, NVR ও Recording Products**
+- DVR
+- DVR Price
+- DVR Machine
+- NVR
+- NVR Price
+- NVR Machine
+- DVR NVR System
+- CCTV Recorder
+- CCTV Hard Disk
+- Surveillance Hard Disk
+- CCTV Storage
+- CCTV Power Supply
+- CCTV Adapter
+- CCTV Connector
+- BNC Connector
+- DC Connector
+- CCTV Cable
+
+**Intercom ও PBX Products**
+- Intercom Machine
+- Intercom System
+- Intercom Products
+- PBX System
+- PBX Machine
+- Telephone Exchange
+- Office Intercom
+- Video Door Phone
+- Door Phone
+- Intercom Accessories
+
+**Access Control ও Door Lock Products**
+- Access Control Machine
+- Access Control System
+- Access Control Products
+- Access Control Door Lock
+- Electric Door Lock
+- Magnetic Door Lock
+- Fingerprint Door Lock
+- RFID Access Control
+- Card Access Control
+- Push Button
+- Exit Button
+- Access Control Accessories
+
+**Biometric ও Attendance Products**
+- Biometric Machine
+- Biometric Attendance Machine
+- Fingerprint Machine
+- Fingerprint Attendance Machine
+- Face Recognition Attendance Machine
+- Attendance Machine Price
+- Employee Attendance System
+- Time Attendance Machine
+
+**Networking ও LAN Products**
+- LAN Cable
+- Networking Products
+- Computer Networking
+- Network Switch
+- Router
+- Ethernet Cable
+- CAT6 Cable
+- CAT5 Cable
+- Network Accessories
+- RJ45 Connector
+- Network Installation Accessories
+
+### ১৭.২ জেলার নাম ছাড়া Technician ও Service Search Keywords
+
+**CCTV Technician ও Service**
+- CCTV Technician
+- CCTV Camera Technician
+- CCTV Installation Technician
+- CCTV Service Technician
+- CCTV Repair Technician
+- CCTV Camera Installer
+- CCTV Installation
+- CCTV Camera Installation
+- CCTV Camera Service
+- CCTV Repair
+- CCTV Maintenance
+- CCTV Setup
+- CCTV Configuration
+- CCTV Online View Setup
+- DVR Online View
+- NVR Online View
+- Mobile CCTV Viewing Setup
+- CCTV Troubleshooting
+- CCTV Security Solution
+
+**IP Camera Technician ও Service**
+- IP Camera Technician
+- IP Camera Installation Technician
+- IP Camera Service
+- IP Camera Installation
+- IP Camera Setup
+- WiFi Camera Installation
+- Wireless Camera Setup
+- Network Camera Configuration
+
+**DVR ও NVR Technician**
+- DVR Technician
+- NVR Technician
+- DVR NVR Technician
+- DVR Installation
+- NVR Installation
+- DVR Setup
+- NVR Setup
+- DVR Repair
+- NVR Service
+- Hard Disk Installation
+
+**Intercom ও PBX Technician**
+- Intercom Technician
+- Intercom Machine Technician
+- Intercom Installation Technician
+- Intercom Installation
+- Intercom Setup
+- Intercom Service
+- Intercom Repair
+- PBX Technician
+- PBX System Technician
+- PBX Installation Technician
+- PBX Installation
+- PBX Setup
+- PBX Configuration
+- PBX Service
+- Office Intercom Installation
+
+**Access Control ও Door Lock Technician**
+- Access Control Technician
+- Access Control Machine Technician
+- Access Control Installation Technician
+- Access Control Installation
+- Access Control Setup
+- Access Control Service
+- Access Control Repair
+- Door Lock Technician
+- Door Lock Installation
+- Magnetic Door Lock Installation
+- Electric Door Lock Setup
+- Fingerprint Door Lock Setup
+- RFID Access Control Setup
+
+**Biometric Technician**
+- Biometric Technician
+- Biometric Machine Technician
+- Biometric Machine Installation
+- Biometric Machine Setup
+- Biometric Machine Service
+- Fingerprint Machine Technician
+- Fingerprint Machine Installation
+- Attendance Machine Technician
+- Attendance Machine Setup
+- Face Recognition Machine Setup
+- Attendance Software Configuration
+
+**Electrician ও Electrical Technician**
+- Electrician
+- Electrical Technician
+- Electrical Service
+- Electrical Wiring
+- House Wiring
+- Office Electrical Wiring
+- Shop Electrical Wiring
+- Electrical Installation
+- Electrical Maintenance
+- Electrical Repair
+- Electrical Troubleshooting
+- Lighting Installation
+- Switch Board Installation
+- Distribution Board Wiring
+
+**Networking Technician**
+- Networking Technician
+- LAN Technician
+- Computer Networking Technician
+- Network Technician
+- Computer Networking Service
+- LAN Network Installation
+- LAN Cable Installation
+- Office Network Setup
+- Network Configuration
+- Router Setup
+- Switch Configuration
+- Network Troubleshooting
+- Network Maintenance
+
+### ১৭.৩ একাধিক Service একসঙ্গে লিখে সার্চ করার উদাহরণ
+
+মানুষ অনেক সময় একটি মাত্র Keyword না লিখে একসঙ্গে একাধিক পণ্য বা সার্ভিস লিখে সার্চ করে। তাই নিচের মতো Search Combination-গুলোর বিষয়বস্তুও ওয়েবসাইটে স্বাভাবিকভাবে উল্লেখ করতে হবে:
+
+- CCTV Technician & Intercom Technician
+- CCTV & Access Control
+- CCTV, Access Control & Intercom
+- CCTV, PBX & Intercom
+- CCTV Technician & Electrician
+- CCTV Installation & Access Control
+- CCTV Camera & PBX System
+- Intercom & PBX Technician
+- Access Control & Door Lock Technician
+- CCTV, IP Camera & Networking
+- CCTV, DVR & NVR Technician
+- CCTV Security & Electrical Services
+- CCTV, Intercom, Access Control & Electrical
+- CCTV Products & Accessories
+- Intercom Products & Accessories
+- Access Control Products & Accessories
+
+এগুলোকে শুধু Keyword-এর তালিকা হিসেবে অকারণে বারবার বসানো যাবে না। ওয়েবসাইটের বাস্তব Service ও Product অনুযায়ী প্রাসঙ্গিক Heading, Description, Category, FAQ এবং Internal Link-এ স্বাভাবিকভাবে ব্যবহার করতে হবে।
+
+### ১৭.৪ জেলার নামসহ এবং জেলার নাম ছাড়া—দুই ধরনের সার্চই বিবেচনা করতে হবে
+
+দুই ধরনের Search Intent-ই গুরুত্বপূর্ণ:
+
+১. জেলার নামসহ:
+- Rangpur CCTV Technician
+- Dinajpur Intercom Technician
+- Lalmonirhat Access Control
+- Gaibandha Electrician
+- Kurigram PBX Technician
+
+২. জেলার নাম ছাড়া:
+- CCTV Technician
+- Intercom Technician
+- Access Control Technician
+- PBX Technician
+- Electrician
+- CCTV & Intercom
+- CCTV, Access Control & PBX
+
+জেলার নামসহ সার্চের জন্য ১০টি Service Area URL-এর SEO তথ্য আগের নির্দেশনা অনুযায়ী থাকবে। জেলার নাম ছাড়া সাধারণ সার্চের জন্য মূল Homepage এবং ওয়েবসাইটের বিদ্যমান প্রাসঙ্গিক Product ও Service Content-কে সঠিকভাবে সাজাতে হবে। মূল ওয়েবসাইটের বর্তমান URL ও কাঠামো পরীক্ষা না করে অপ্রয়োজনীয় নতুন URL তৈরি করা যাবে না।
+
+### ১৭.৫ Search Intent, Location ও Service Availability সম্পর্কে সতর্কতা
+
+- জেলার নাম ছাড়া সার্চ করলে Google-এ প্রদর্শিত হওয়া নিশ্চিত করা যায় না; Google-এর Ranking, Search Intent, প্রতিযোগিতা এবং ব্যবহারকারীর অবস্থানসহ বিভিন্ন বিষয়ের ওপর ফল নির্ভর করে।
+- জেলার নাম ছাড়া CCTV Technician বা Electrician সার্চের ক্ষেত্রে ওয়েবসাইটে Shamim Tech Solution-এর পরিচয়, বাস্তব যোগাযোগের তথ্য এবং বাস্তবে দেওয়া সার্ভিস স্পষ্টভাবে থাকতে হবে।
+- কোনো জেলায় বাস্তবে সার্ভিস দেওয়া না হলে সেই জেলায় সার্ভিস আছে বলে দাবি করা যাবে না।
+- শুধু সার্চে আসার জন্য একই Keyword অস্বাভাবিকভাবে বারবার লেখা যাবে না।
+- ভুয়া ঠিকানা, ভুয়া শাখা, ভুয়া Customer Review, ভুয়া Rating বা মিথ্যা Service Availability তৈরি করা যাবে না।
+- Google Search-এ নির্দিষ্ট অবস্থান বা নির্দিষ্ট Keyword-এ প্রথমে আসার নিশ্চয়তা দেওয়া যাবে না।
+- আগে থেকে থাকা সব Keyword, Search Option, Product Search, Service Search এবং Mapping অক্ষত রাখতে হবে।
+
+## ১৮. চূড়ান্ত অতিরিক্ত নির্দেশনা
+
+আমার ওয়েবসাইট যেন এই দুইভাবেই সার্চের জন্য প্রাসঙ্গিক হয়:
+
+**A. District + Product / Service / Technician Search**
+
+উদাহরণ: Rangpur CCTV Technician, Dinajpur Intercom Technician, Gaibandha Electrician, Lalmonirhat Access Control।
+
+**B. District Name ছাড়া Product / Service / Technician Search**
+
+উদাহরণ: CCTV Technician, Intercom Technician, PBX Technician, Access Control Technician, Electrician, CCTV & Intercom, CCTV, Access Control & PBX।
+
+আগের সম্পূর্ণ নির্দেশনার কোনো অংশ বাদ বা পরিবর্তন না করে এই নতুন Search Keyword ও নির্দেশনাগুলো যোগ করুন। মূল ওয়েবসাইটের একই Design, Product Store, Services, Search System, সব Functionality এবং আগের সব SEO Keyword সংরক্ষণ করেই কাজ করুন।

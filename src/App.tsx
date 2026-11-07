@@ -18,7 +18,6 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AdminLoginPage } from './components/AdminLoginPage';
 import { CustomerAuthModal } from './components/CustomerAuthModal';
 import { CustomerProfileModal } from './components/CustomerProfileModal';
-import { DistrictServiceAreaPage } from './components/DistrictServiceAreaPage';
 import { DISTRICT_SEO_DATA } from './data/districtSEOData';
 import { 
   INITIAL_PRODUCTS as PRODUCTS_CATALOG, 
@@ -296,17 +295,11 @@ export default function App() {
     };
   }, []);
 
-  const navigateToDistrict = useCallback((slug: string) => {
-    const validSlug = DISTRICT_SEO_DATA[slug] ? slug : 'rangpur';
-    try {
-      window.history.pushState(null, '', `/service-area/${validSlug}`);
-    } catch {
-      window.location.hash = `service-area/${validSlug}`;
+  const navigateToDistrict = useCallback((_slug: string) => {
+    const el = document.getElementById('services');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
-    setActiveDistrictSlug(validSlug);
-    setIsAdminRoute(false);
-    setIsAdminDashboardOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const navigateToHome = useCallback(() => {
@@ -621,69 +614,52 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Content Sections */}
+      {/* Main Content Sections - Always Full Website Homepage */}
       <main className="flex-1 w-full max-w-full overflow-x-hidden">
-        {activeDistrictSlug ? (
-          <DistrictServiceAreaPage
-            districtSlug={activeDistrictSlug}
-            products={products}
-            companyInfo={companyInfo}
-            onAddToCart={handleAddToCart}
-            onBuyNow={handleBuyNow}
-            onViewProduct={(product) => setSelectedProduct(product)}
-            onNavigateHome={navigateToHome}
-            onSelectDistrict={navigateToDistrict}
-            onRequestService={handleServiceSelect}
-          />
-        ) : (
-          <>
-            {/* 1. Hero Section */}
-            <Hero
-              onViewProducts={scrollToProducts}
-              onRequestQuote={() => scrollToSection('contact')}
-              companyInfo={companyInfo}
-              siteContent={siteContent}
-              onSelectCategory={handleCategorySelect}
-            />
+        {/* 1. Hero Section */}
+        <Hero
+          onViewProducts={scrollToProducts}
+          onRequestQuote={() => scrollToSection('contact')}
+          companyInfo={companyInfo}
+          siteContent={siteContent}
+          onSelectCategory={handleCategorySelect}
+        />
 
-            {/* 2. Services Section (Quick services & 11 detailed services) */}
-            <ServicesSection
-              onRequestService={handleServiceSelect}
-              onSelectDistrict={navigateToDistrict}
-            />
+        {/* 2. Services Section (Quick services & 11 detailed services) */}
+        <ServicesSection
+          onRequestService={handleServiceSelect}
+          onSelectDistrict={navigateToDistrict}
+        />
 
-            {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
-            <ProductShop
-              products={products}
-              onAddToCart={handleAddToCart}
-              onBuyNow={handleBuyNow}
-              onViewDetails={(product) => setSelectedProduct(product)}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-            />
+        {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
+        <ProductShop
+          products={products}
+          onAddToCart={handleAddToCart}
+          onBuyNow={handleBuyNow}
+          onViewDetails={(product) => setSelectedProduct(product)}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          onSelectCategory={setSelectedCategory}
+        />
 
+        {/* 5. Work Gallery with Lightbox and Real Field Projects */}
+        <WorkGallery />
 
-            {/* 5. Work Gallery with Lightbox and Real Field Projects */}
-            <WorkGallery />
+        {/* 6. About Us & Why Choose Us */}
+        <AboutAndWhyUs
+          onContactClick={() => scrollToSection('contact')}
+          onRequestQuote={() => scrollToSection('contact')}
+        />
 
-            {/* 6. About Us & Why Choose Us */}
-            <AboutAndWhyUs
-              onContactClick={() => scrollToSection('contact')}
-              onRequestQuote={() => scrollToSection('contact')}
-            />
+        {/* 7. Customer Testimonials & Reviews */}
+        <CustomerReviews />
 
-            {/* 7. Customer Testimonials & Reviews */}
-            <CustomerReviews />
-
-            {/* 8. Contact Section with Working Form & Rangpur Division Map */}
-            <ContactSection
-              preselectedService={preselectedService}
-              companyInfo={companyInfo}
-            />
-          </>
-        )}
+        {/* 8. Contact Section with Working Form & Rangpur Division Map */}
+        <ContactSection
+          preselectedService={preselectedService}
+          companyInfo={companyInfo}
+        />
       </main>
 
       {/* Footer with Admin Portal link */}
