@@ -1,17 +1,9 @@
 import React from 'react';
 import { 
   ShieldCheck, 
-  Wrench, 
-  Sparkles, 
-  Clock, 
   CheckCircle, 
   MapPin, 
-  Phone, 
-  Award, 
-  Zap, 
-  DollarSign, 
-  Headphones, 
-  Layers
+  Phone 
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import { STSLogo } from './STSLogo';
@@ -25,38 +17,6 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
   onContactClick,
   onRequestQuote,
 }) => {
-  const whyChooseUsPoints = [
-    {
-      title: "Professional Installation",
-      desc: "Certified CCTV technician standard installation with laser-sharp camera angle calibration and zero blind spots.",
-      icon: Award
-    },
-    {
-      title: "Reliable Service",
-      desc: "Dependable 24/7 continuous surveillance recording with industry-grade Hikvision, Dahua, and Seagate components.",
-      icon: ShieldCheck
-    },
-    {
-      title: "Clean Cable Management",
-      desc: "Strict adherence to aesthetic casing, conduit piping, and secure routing with no tangled or exposed wires.",
-      icon: Layers
-    },
-    {
-      title: "Fast Troubleshooting",
-      desc: "Rapid diagnostic response for video signal loss, black screen, forgotten passwords, and network issues.",
-      icon: Zap
-    },
-    {
-      title: "Affordable Pricing",
-      desc: "Direct-to-consumer transparent rates in Bangladeshi Taka (৳) with no hidden surcharges or surprise fees.",
-      icon: DollarSign
-    },
-    {
-      title: "Customer Support",
-      desc: "Friendly post-installation assistance, warranty backing, and free remote phone/WhatsApp guidance anytime.",
-      icon: Headphones
-    }
-  ];
 
   return (
     <div id="about" className="relative py-16 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-50/80 border-b border-sky-300/80 overflow-hidden">
@@ -160,44 +120,6 @@ export const AboutAndWhyUs: React.FC<AboutAndWhyUsProps> = ({
             </div>
           </div>
 
-        </div>
-
-        {/* Why Choose Us Section */}
-        <div className="pt-8 border-t border-sky-200">
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs uppercase font-bold tracking-widest text-cyan-700 font-tech">
-              Quality That Matters
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-tech mt-1">
-              Why Choose Us?
-            </h2>
-            <p className="text-slate-600 text-sm mt-1">
-              Here is why homeowners, retailers, and corporate offices trust Shamim Tech Solution.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyChooseUsPoints.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-6 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-sky-200/90 hover:border-cyan-500 transition-all hover:shadow-xl hover:shadow-cyan-500/10 group relative overflow-hidden transform hover:-translate-y-0.5"
-                >
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 group-hover:h-1.5 transition-all" />
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center mb-4 transition-transform group-hover:scale-110 shadow-md shadow-cyan-500/25">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <h3 className="text-base font-bold text-slate-900 font-tech mb-1.5 group-hover:text-cyan-700 transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
         </div>
 
       </div>

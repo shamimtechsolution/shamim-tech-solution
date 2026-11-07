@@ -198,39 +198,43 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
       <div 
-        className="relative w-full max-w-xl bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden my-6 transition-all"
+        className="relative w-full max-w-lg max-h-[90vh] bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden my-3 sm:my-6 transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header Banner */}
-        <div className="relative bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-950/80 p-5 sm:p-6 border-b border-slate-800">
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-xl bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700 transition"
-            aria-label="Close"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        <div className="relative bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-950/80 p-3 sm:p-4.5 border-b border-slate-800">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+              <div className="min-w-0">
+                <h2 className="text-sm sm:text-base font-bold text-white tracking-wide truncate">
+                  SHAMIM <span className="text-cyan-400">TECH</span> SOLUTION
+                </h2>
+                <p className="text-[10px] sm:text-[11px] text-slate-400 truncate">
+                  {mode === 'register' && '📝 Create Account / কাস্টমার রেজিস্ট্রেশন'}
+                  {mode === 'login' && '🔐 Customer Login / কাস্টমার লগইন'}
+                  {mode === 'forgot' && '🔑 Forgot Password / পাসওয়ার্ড রিসেট'}
+                </p>
+              </div>
+            </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-11 h-11 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white tracking-wide flex items-center gap-2">
-                SHAMIM <span className="text-cyan-400">TECH</span> SOLUTION
-              </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
-                {mode === 'register' && '📝 Create Account / কাস্টমার রেজিস্ট্রেশন'}
-                {mode === 'login' && '🔐 Customer Login / কাস্টমার লগইন'}
-                {mode === 'forgot' && '🔑 Forgot Password / পাসওয়ার্ড রিসেট'}
-              </p>
-            </div>
+            <button
+              onClick={onClose}
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-slate-800/90 text-slate-300 hover:text-white hover:bg-slate-700 transition text-xs font-semibold cursor-pointer border border-slate-700/80 shadow-sm shrink-0"
+              aria-label="Cancel and Close"
+              title="বাতিল করুন / Cancel"
+            >
+              <X className="w-3.5 h-3.5" />
+              <span className="text-[11px]">Cancel</span>
+            </button>
           </div>
 
           {/* Tab Switcher */}
-          <div className="flex items-center gap-2 mt-5 p-1 bg-slate-950/80 rounded-xl border border-slate-800 text-sm">
+          <div className="flex items-center gap-1.5 mt-3 p-1 bg-slate-950/80 rounded-xl border border-slate-800 text-xs">
             <button
               type="button"
               onClick={() => {
@@ -238,7 +242,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 setErrorMessage(null);
                 setSuccessMessage(null);
               }}
-              className={`flex-1 py-2 rounded-lg font-medium transition text-xs sm:text-sm ${
+              className={`flex-1 py-1.5 px-2 rounded-lg font-medium transition text-xs ${
                 mode === 'register'
                   ? 'bg-cyan-500 text-slate-950 font-semibold shadow-md'
                   : 'text-slate-400 hover:text-white'
@@ -253,7 +257,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 setErrorMessage(null);
                 setSuccessMessage(null);
               }}
-              className={`flex-1 py-2 rounded-lg font-medium transition text-xs sm:text-sm ${
+              className={`flex-1 py-1.5 px-2 rounded-lg font-medium transition text-xs ${
                 mode === 'login'
                   ? 'bg-cyan-500 text-slate-950 font-semibold shadow-md'
                   : 'text-slate-400 hover:text-white'
@@ -268,7 +272,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 setErrorMessage(null);
                 setSuccessMessage(null);
               }}
-              className={`py-2 px-3 rounded-lg font-medium transition text-xs sm:text-sm ${
+              className={`py-1.5 px-2.5 rounded-lg font-medium transition text-xs ${
                 mode === 'forgot'
                   ? 'bg-amber-500 text-slate-950 font-semibold shadow-md'
                   : 'text-slate-400 hover:text-white'
@@ -280,7 +284,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
         </div>
 
         {/* Modal Body */}
-        <div className="p-5 sm:p-6 max-h-[75vh] overflow-y-auto space-y-4">
+        <div className="p-3.5 sm:p-5 max-h-[78vh] overflow-y-auto space-y-3">
           {/* Status Messages */}
           {errorMessage && (
             <div className="flex items-start gap-2.5 p-3.5 bg-red-950/60 border border-red-500/40 rounded-xl text-red-200 text-xs sm:text-sm animate-shake">
@@ -300,10 +304,10 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
           {/* 1. REGISTER VIEW */}
           {/* ============================================================ */}
           {mode === 'register' && (
-            <form onSubmit={handleRegisterSubmit} className="space-y-4">
+            <form onSubmit={handleRegisterSubmit} className="space-y-2.5 sm:space-y-3">
               {/* ১. আপনার নাম */}
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                   <User className="w-3.5 h-3.5 text-cyan-400" />
                   <span>১. আপনার নাম</span>
                   <span className="text-red-400">*</span>
@@ -314,13 +318,13 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="পূর্ণ নাম লিখুন (যেমন: মোঃ শামীম ইসলাম)"
                   required
-                  className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                 />
               </div>
 
               {/* ২. মোবাইল নম্বর অথবা Gmail */}
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center justify-between">
+                <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center justify-between">
                   <span className="flex items-center gap-1.5">
                     <Phone className="w-3.5 h-3.5 text-cyan-400" />
                     <span>২. মোবাইল নম্বর অথবা Gmail</span>
@@ -335,21 +339,21 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="01XXXXXXXXX অথবা example@gmail.com"
                     required
-                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                    className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                   />
-                  <div className="absolute right-3 top-2.5 text-slate-400 flex items-center gap-1 text-xs">
+                  <div className="absolute right-3 top-2 text-slate-400 flex items-center gap-1 text-xs">
                     <Mail className="w-3.5 h-3.5" />
                   </div>
                 </div>
-                <p className="text-[11px] text-slate-400 mt-1">
+                <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5">
                   💡 মোবাইল নম্বর **অথবা** Gmail — যেকোনো একটি দিয়ে Register করতে পারবেন।
                 </p>
               </div>
 
               {/* ৩. Password & ৪. Confirm Password */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                     <Lock className="w-3.5 h-3.5 text-cyan-400" />
                     <span>৩. Password</span>
                     <span className="text-red-400">*</span>
@@ -359,14 +363,14 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="পাসওয়ার্ড দিন (কমপক্ষে ৬ অক্ষর)"
+                      placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"
                       required
-                      className="w-full px-3.5 py-2.5 pr-10 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-2.5 top-2.5 p-1 text-slate-400 hover:text-slate-200"
+                      className="absolute right-2.5 top-1.5 sm:top-2 p-0.5 text-slate-400 hover:text-slate-200"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -374,7 +378,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                     <Lock className="w-3.5 h-3.5 text-cyan-400" />
                     <span>৪. Confirm Password</span>
                     <span className="text-red-400">*</span>
@@ -384,14 +388,14 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="আবার একই Password লিখুন"
+                      placeholder="একই Password আবার লিখুন"
                       required
-                      className="w-full px-3.5 py-2.5 pr-10 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-2.5 top-2.5 p-1 text-slate-400 hover:text-slate-200"
+                      className="absolute right-2.5 top-1.5 sm:top-2 p-0.5 text-slate-400 hover:text-slate-200"
                     >
                       {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -401,7 +405,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
 
               {/* ৫. ঠিকানা (Address) */}
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                   <span>৫. ঠিকানা (Address)</span>
                   <span className="text-red-400">*</span>
@@ -412,14 +416,14 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন (যেমন: বাড়ি/দোকান নং, রাস্তা, বাজার বা গ্রামের নাম)"
                   rows={2}
                   required
-                  className="w-full px-3.5 py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 resize-none"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 resize-none"
                 />
               </div>
 
               {/* ৬. জেলা & ৭. উপজেলা / থানা */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                     <Building className="w-3.5 h-3.5 text-cyan-400" />
                     <span>৬. জেলা</span>
                     <span className="text-red-400">*</span>
@@ -428,7 +432,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                    className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                   >
                     {BANGLADESH_DISTRICTS.map((dist) => (
                       <option key={dist} value={dist} className="bg-slate-900 text-white">
@@ -439,7 +443,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                     <MapPin className="w-3.5 h-3.5 text-cyan-400" />
                     <span>৭. উপজেলা / থানা</span>
                     <span className="text-red-400">*</span>
@@ -448,46 +452,55 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     type="text"
                     value={upazilaThana}
                     onChange={(e) => setUpazilaThana(e.target.value)}
-                    placeholder="উপজেলা বা থানা লিখুন (যেমন: হারাগাছ / কোতয়ালী)"
+                    placeholder="উপজেলা বা থানা (যেমন: হারাগাছ / কোতয়ালী)"
                     required
-                    className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                    className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                   />
                 </div>
               </div>
 
               {/* ☑️ Terms and conditions */}
-              <div className="pt-2">
-                <label className="flex items-start gap-2.5 cursor-pointer select-none">
+              <div className="pt-1">
+                <label className="flex items-start gap-2 cursor-pointer select-none">
                   <input
                     type="checkbox"
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
-                    className="w-4 h-4 mt-0.5 rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-cyan-400"
+                    className="w-3.5 h-3.5 mt-0.5 rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-cyan-400"
                   />
-                  <span className="text-xs text-slate-300">
-                    ☑️ <strong className="text-white">I agree to the Terms & Conditions</strong> (শামিম টেক সলিউশনের সেবামূলক নিয়মাবলীতে সম্মতি দিচ্ছি)
+                  <span className="text-[11px] sm:text-xs text-slate-300">
+                    ☑️ <strong className="text-white">I agree to the Terms & Conditions</strong> (সেবামূলক নিয়মাবলীতে সম্মতি দিচ্ছি)
                   </span>
                 </label>
               </div>
 
-              {/* Submit Button */}
-              <div className="pt-3">
+              {/* Submit & Cancel Buttons */}
+              <div className="pt-2 space-y-1.5">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-xl shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 text-sm transition disabled:opacity-50"
+                  className="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-xl shadow-md shadow-cyan-500/20 flex items-center justify-center gap-2 text-xs sm:text-sm transition disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       <span>Account তৈরি হচ্ছে...</span>
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="w-4 h-4" />
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>🔐 Registration সম্পন্ন করুন</span>
                     </>
                   )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-full py-2 px-4 bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold rounded-xl text-xs sm:text-sm border border-slate-700 transition flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5 text-slate-400" />
+                  <span>বাতিল / মূল ওয়েবসাইটে ফিরে যান (Cancel)</span>
                 </button>
               </div>
 
@@ -513,9 +526,9 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
           {/* 2. LOGIN VIEW */}
           {/* ============================================================ */}
           {mode === 'login' && (
-            <form onSubmit={handleLoginSubmit} className="space-y-4 pt-2">
+            <form onSubmit={handleLoginSubmit} className="space-y-3 pt-1">
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-cyan-400" />
                   <span>মোবাইল নম্বর অথবা Gmail</span>
                   <span className="text-red-400">*</span>
@@ -526,12 +539,12 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   onChange={(e) => setLoginIdentifier(e.target.value)}
                   placeholder="আপনার মোবাইল নম্বর অথবা Gmail লিখুন"
                   required
-                  className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                 />
               </div>
 
               <div>
-                <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center justify-between mb-1">
                   <label className="text-xs font-semibold text-slate-200 flex items-center gap-1.5">
                     <Lock className="w-3.5 h-3.5 text-cyan-400" />
                     <span>Password</span>
@@ -556,39 +569,48 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="আপনার পাসওয়ার্ড দিন"
                     required
-                    className="w-full px-3.5 py-2.5 pr-10 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
+                    className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-2.5 top-2.5 p-1 text-slate-400 hover:text-slate-200"
+                    className="absolute right-2.5 top-1.5 sm:top-2 p-0.5 text-slate-400 hover:text-slate-200"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
               </div>
 
-              <div className="pt-3">
+              <div className="pt-2 space-y-1.5">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-xl shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 text-sm transition disabled:opacity-50"
+                  className="w-full py-2.5 px-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold rounded-xl shadow-md shadow-cyan-500/20 flex items-center justify-center gap-2 text-xs sm:text-sm transition disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       <span>লগইন হচ্ছে...</span>
                     </>
                   ) : (
                     <>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-3.5 h-3.5" />
                       <span>🔐 Login করুন</span>
                     </>
                   )}
                 </button>
+
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-full py-2 px-4 bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold rounded-xl text-xs sm:text-sm border border-slate-700 transition flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5 text-slate-400" />
+                  <span>বাতিল / মূল ওয়েবসাইটে ফিরে যান (Cancel)</span>
+                </button>
               </div>
 
-              <div className="text-center pt-3 border-t border-slate-800">
+              <div className="text-center pt-2.5 border-t border-slate-800">
                 <p className="text-xs text-slate-400">
                   নতুন গ্রাহক? একাউন্ট নেই?{' '}
                   <button
@@ -610,13 +632,13 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
           {/* 3. FORGOT PASSWORD VIEW */}
           {/* ============================================================ */}
           {mode === 'forgot' && (
-            <form onSubmit={handleForgotSubmit} className="space-y-4 pt-2">
-              <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-200 text-xs leading-relaxed">
+            <form onSubmit={handleForgotSubmit} className="space-y-3 pt-1">
+              <div className="p-2.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-200 text-[11px] sm:text-xs leading-relaxed">
                 💡 <strong>Password ভুলে গেছেন?</strong> আপনার একাউন্টের রেজিস্টার্ড মোবাইল নম্বর অথবা Gmail ব্যবহার করে সরাসরি নতুন Password সেট করে নিতে পারবেন।
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                   <Phone className="w-3.5 h-3.5 text-amber-400" />
                   <span>রেজিস্টার্ড মোবাইল নম্বর অথবা Gmail</span>
                   <span className="text-red-400">*</span>
@@ -627,13 +649,13 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   onChange={(e) => setForgotIdentifier(e.target.value)}
                   placeholder="রেজিস্ট্রেশনের সময় ব্যবহৃত মোবাইল বা Gmail দিন"
                   required
-                  className="w-full px-3.5 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400"
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                     <Lock className="w-3.5 h-3.5 text-amber-400" />
                     <span>নতুন Password</span>
                     <span className="text-red-400">*</span>
@@ -645,12 +667,12 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       onChange={(e) => setNewPassword(e.target.value)}
                       placeholder="নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"
                       required
-                      className="w-full px-3.5 py-2.5 pr-10 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-amber-400"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-2.5 top-2.5 p-1 text-slate-400 hover:text-slate-200"
+                      className="absolute right-2.5 top-1.5 sm:top-2 p-0.5 text-slate-400 hover:text-slate-200"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -658,7 +680,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-200 mb-1.5 flex items-center gap-1.5">
+                  <label className="block text-xs font-semibold text-slate-200 mb-1 flex items-center gap-1.5">
                     <Lock className="w-3.5 h-3.5 text-amber-400" />
                     <span>Confirm Password</span>
                     <span className="text-red-400">*</span>
@@ -670,12 +692,12 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       onChange={(e) => setConfirmNewPassword(e.target.value)}
                       placeholder="আবার একই পাসওয়ার্ড লিখুন"
                       required
-                      className="w-full px-3.5 py-2.5 pr-10 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-amber-400"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-slate-950/80 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-amber-400"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-2.5 top-2.5 p-1 text-slate-400 hover:text-slate-200"
+                      className="absolute right-2.5 top-1.5 sm:top-2 p-0.5 text-slate-400 hover:text-slate-200"
                     >
                       {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -683,23 +705,32 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 </div>
               </div>
 
-              <div className="pt-3">
+              <div className="pt-2 space-y-1.5">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 px-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 text-sm transition disabled:opacity-50"
+                  className="w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold rounded-xl shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 text-xs sm:text-sm transition disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       <span>রিসেট হচ্ছে...</span>
                     </>
                   ) : (
                     <>
-                      <KeyRound className="w-4 h-4" />
+                      <KeyRound className="w-3.5 h-3.5" />
                       <span>🔑 Password Reset করুন ও লগইন করুন</span>
                     </>
                   )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-full py-2 px-4 bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white font-semibold rounded-xl text-xs sm:text-sm border border-slate-700 transition flex items-center justify-center gap-1.5 cursor-pointer"
+                >
+                  <X className="w-3.5 h-3.5 text-slate-400" />
+                  <span>বাতিল / মূল ওয়েবসাইটে ফিরে যান (Cancel)</span>
                 </button>
               </div>
 
