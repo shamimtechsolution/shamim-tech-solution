@@ -18,7 +18,12 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AdminLoginPage } from './components/AdminLoginPage';
 import { CustomerAuthModal } from './components/CustomerAuthModal';
 import { CustomerProfileModal } from './components/CustomerProfileModal';
+import { DistrictServiceAreaPage } from './components/DistrictServiceAreaPage';
+import { ServiceDetailPage } from './components/ServiceDetailPage';
+import { ProductDetailPage } from './components/ProductDetailPage';
 import { DISTRICT_SEO_DATA } from './data/districtSEOData';
+import { SERVICES_SEO_DATA } from './data/servicesSEOData';
+import { PRODUCTS_SEO_DATA } from './data/productsSEOData';
 import { 
   INITIAL_PRODUCTS as PRODUCTS_CATALOG, 
   SOFTWARE_DOWNLOADS, 
@@ -98,7 +103,39 @@ export default function App() {
     return null;
   };
 
+  // 54 Dedicated Services SEO Routing
+  const checkServiceRoute = (): string | null => {
+    if (typeof window === 'undefined') return null;
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    const match = path.match(/^\/services\/([a-z0-9\-]+)/);
+    if (match && match[1] && SERVICES_SEO_DATA[match[1]]) return match[1];
+    const hashMatch = hash.match(/^#services\/([a-z0-9\-]+)/);
+    if (hashMatch && hashMatch[1] && SERVICES_SEO_DATA[hashMatch[1]]) return hashMatch[1];
+    const urlParams = new URLSearchParams(window.location.search);
+    const s = urlParams.get('service');
+    if (s && SERVICES_SEO_DATA[s.toLowerCase()]) return s.toLowerCase();
+    return null;
+  };
+
+  // 56 Dedicated Products SEO Routing
+  const checkProductRoute = (): string | null => {
+    if (typeof window === 'undefined') return null;
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    const match = path.match(/^\/products\/([a-z0-9\-]+)/);
+    if (match && match[1] && PRODUCTS_SEO_DATA[match[1]]) return match[1];
+    const hashMatch = hash.match(/^#products\/([a-z0-9\-]+)/);
+    if (hashMatch && hashMatch[1] && PRODUCTS_SEO_DATA[hashMatch[1]]) return hashMatch[1];
+    const urlParams = new URLSearchParams(window.location.search);
+    const p = urlParams.get('product');
+    if (p && PRODUCTS_SEO_DATA[p.toLowerCase()]) return p.toLowerCase();
+    return null;
+  };
+
   const [activeDistrictSlug, setActiveDistrictSlug] = useState<string | null>(checkDistrictRoute);
+  const [activeServiceSlug, setActiveServiceSlug] = useState<string | null>(checkServiceRoute);
+  const [activeProductSlug, setActiveProductSlug] = useState<string | null>(checkProductRoute);
 
   // UI state
   const [activeSection, setActiveSection] = useState('home');
@@ -115,6 +152,7 @@ export default function App() {
   const [isCustomerAuthOpen, setIsCustomerAuthOpen] = useState(false);
   const [customerAuthMode, setCustomerAuthMode] = useState<'register' | 'login' | 'forgot'>('register');
   const [isCustomerProfileOpen, setIsCustomerProfileOpen] = useState(false);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Load public data from live Express backend with localStorage persistence
   const loadPublicData = useCallback(async () => {
@@ -281,11 +319,13 @@ export default function App() {
     loadPublicData();
   }, [loadPublicData]);
 
-  // Synchronize route between browser URL (/admin, #admin, /service-area/:district) and application state
+  // Synchronize route between browser URL (/admin, #admin, /service-area/:district, /services/:slug, /products/:slug) and application state
   useEffect(() => {
     const handleRouteSync = () => {
       setIsAdminRoute(checkIsAdminPath());
       setActiveDistrictSlug(checkDistrictRoute());
+      setActiveServiceSlug(checkServiceRoute());
+      setActiveProductSlug(checkProductRoute());
     };
     window.addEventListener('popstate', handleRouteSync);
     window.addEventListener('hashchange', handleRouteSync);
@@ -295,11 +335,49 @@ export default function App() {
     };
   }, []);
 
-  const navigateToDistrict = useCallback((_slug: string) => {
-    const el = document.getElementById('services');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+  const navigateToDistrict = useCallback((slug: string) => {
+    try {
+      if (window.location.pathname !== `/service-area/${slug}`) {
+        window.history.pushState(null, '', `/service-area/${slug}`);
+      }
+    } catch {
+      window.location.hash = `service-area/${slug}`;
     }
+    setActiveDistrictSlug(slug);
+    setActiveServiceSlug(null);
+    setActiveProductSlug(null);
+    setIsAdminRoute(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const navigateToService = useCallback((slug: string) => {
+    try {
+      if (window.location.pathname !== `/services/${slug}`) {
+        window.history.pushState(null, '', `/services/${slug}`);
+      }
+    } catch {
+      window.location.hash = `services/${slug}`;
+    }
+    setActiveServiceSlug(slug);
+    setActiveProductSlug(null);
+    setActiveDistrictSlug(null);
+    setIsAdminRoute(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  const navigateToProduct = useCallback((slug: string) => {
+    try {
+      if (window.location.pathname !== `/products/${slug}`) {
+        window.history.pushState(null, '', `/products/${slug}`);
+      }
+    } catch {
+      window.location.hash = `products/${slug}`;
+    }
+    setActiveProductSlug(slug);
+    setActiveServiceSlug(null);
+    setActiveDistrictSlug(null);
+    setIsAdminRoute(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
   const navigateToHome = useCallback(() => {
@@ -310,6 +388,8 @@ export default function App() {
     } catch {
       window.location.hash = '';
     }
+    setActiveServiceSlug(null);
+    setActiveProductSlug(null);
     setActiveDistrictSlug(null);
     setIsAdminRoute(false);
     setIsAdminDashboardOpen(false);
@@ -492,6 +572,8 @@ export default function App() {
 
   const scrollToProducts = () => {
     setActiveDistrictSlug(null);
+    setActiveServiceSlug(null);
+    setActiveProductSlug(null);
     const gridEl = document.getElementById('product-items-grid') || document.getElementById('products');
     if (gridEl) {
       const navOffset = 75;
@@ -506,6 +588,8 @@ export default function App() {
 
   const handleCategorySelect = (category: ProductCategory, searchTag?: string) => {
     setActiveDistrictSlug(null);
+    setActiveServiceSlug(null);
+    setActiveProductSlug(null);
     setSelectedCategory(category);
     if (searchTag) {
       setSearchTerm(searchTag);
@@ -522,7 +606,7 @@ export default function App() {
     if (serviceName) {
       setPreselectedService(serviceName);
     }
-    scrollToSection('contact');
+    setIsContactModalOpen(true);
   };
 
   const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
@@ -597,6 +681,7 @@ export default function App() {
         onViewProduct={(product) => setSelectedProduct(product)}
         onSelectDistrict={navigateToDistrict}
         onNavigateHome={navigateToHome}
+        onOpenContact={() => setIsContactModalOpen(true)}
       />
 
       {/* Floating Action Buttons (WhatsApp & Direct Call) */}
@@ -614,52 +699,102 @@ export default function App() {
         </div>
       )}
 
-      {/* Main Content Sections - Always Full Website Homepage */}
+      {/* Main Content Sections - Dynamic Routing for Services, Products, Districts, or Homepage */}
       <main className="flex-1 w-full max-w-full overflow-x-hidden">
-        {/* 1. Hero Section */}
-        <Hero
-          onViewProducts={scrollToProducts}
-          onRequestQuote={() => scrollToSection('contact')}
-          companyInfo={companyInfo}
-          siteContent={siteContent}
-          onSelectCategory={handleCategorySelect}
-        />
+        {activeServiceSlug && SERVICES_SEO_DATA[activeServiceSlug] ? (
+          <ServiceDetailPage
+            serviceSlug={activeServiceSlug}
+            products={products}
+            companyInfo={companyInfo}
+            onAddToCart={handleAddToCart}
+            onBuyNow={handleBuyNow}
+            onViewProduct={(product) => setSelectedProduct(product)}
+            onNavigateHome={navigateToHome}
+            onSelectService={navigateToService}
+            onSelectProduct={navigateToProduct}
+            onSelectDistrict={navigateToDistrict}
+            onRequestService={handleServiceSelect}
+          />
+        ) : activeProductSlug && PRODUCTS_SEO_DATA[activeProductSlug] ? (
+          <ProductDetailPage
+            productSlug={activeProductSlug}
+            products={products}
+            companyInfo={companyInfo}
+            onAddToCart={handleAddToCart}
+            onBuyNow={handleBuyNow}
+            onViewProduct={(product) => setSelectedProduct(product)}
+            onNavigateHome={navigateToHome}
+            onSelectProduct={navigateToProduct}
+            onSelectService={navigateToService}
+            onSelectDistrict={navigateToDistrict}
+            onRequestQuote={(productName) => {
+              setPreselectedService(`Inquiry: ${productName}`);
+              setIsContactModalOpen(true);
+            }}
+          />
+        ) : activeDistrictSlug && DISTRICT_SEO_DATA[activeDistrictSlug] ? (
+          <DistrictServiceAreaPage
+            districtSlug={activeDistrictSlug}
+            products={products}
+            companyInfo={companyInfo}
+            onAddToCart={handleAddToCart}
+            onBuyNow={handleBuyNow}
+            onViewProduct={(product) => setSelectedProduct(product)}
+            onNavigateHome={navigateToHome}
+            onSelectDistrict={navigateToDistrict}
+            onRequestService={handleServiceSelect}
+          />
+        ) : (
+          <>
+            {/* 1. Hero Section */}
+            <Hero
+              onViewProducts={scrollToProducts}
+              onRequestQuote={() => setIsContactModalOpen(true)}
+              companyInfo={companyInfo}
+              siteContent={siteContent}
+              onSelectCategory={handleCategorySelect}
+            />
 
-        {/* 2. Services Section (Quick services & 11 detailed services) */}
-        <ServicesSection
-          onRequestService={handleServiceSelect}
-          onSelectDistrict={navigateToDistrict}
-        />
+            {/* 2. Services Section (Quick services & 11 detailed services) */}
+            <ServicesSection
+              onRequestService={handleServiceSelect}
+              onSelectDistrict={navigateToDistrict}
+            />
 
-        {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
-        <ProductShop
-          products={products}
-          onAddToCart={handleAddToCart}
-          onBuyNow={handleBuyNow}
-          onViewDetails={(product) => setSelectedProduct(product)}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          selectedCategory={selectedCategory}
-          onSelectCategory={setSelectedCategory}
-        />
+            {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
+            <ProductShop
+              products={products}
+              onAddToCart={handleAddToCart}
+              onBuyNow={handleBuyNow}
+              onViewDetails={(product) => setSelectedProduct(product)}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
 
-        {/* 5. Work Gallery with Lightbox and Real Field Projects */}
-        <WorkGallery />
+            {/* 5. Work Gallery with Lightbox and Real Field Projects */}
+            <WorkGallery />
 
-        {/* 6. About Us & Why Choose Us */}
-        <AboutAndWhyUs
-          onContactClick={() => scrollToSection('contact')}
-          onRequestQuote={() => scrollToSection('contact')}
-        />
+            {/* 6. About Us & Why Choose Us */}
+            <AboutAndWhyUs
+              onContactClick={() => setIsContactModalOpen(true)}
+              onRequestQuote={() => setIsContactModalOpen(true)}
+            />
 
-        {/* 7. Customer Testimonials & Reviews */}
-        <CustomerReviews />
+            {/* 7. Customer Testimonials & Reviews */}
+            <CustomerReviews />
 
-        {/* 8. Contact Section with Working Form & Rangpur Division Map */}
-        <ContactSection
-          preselectedService={preselectedService}
-          companyInfo={companyInfo}
-        />
+            {/* 8. Contact Section with Working Form & Rangpur Division Map */}
+            <ContactSection
+              preselectedService={preselectedService}
+              companyInfo={companyInfo}
+              isContactModalOpen={isContactModalOpen}
+              onOpenContactModal={() => setIsContactModalOpen(true)}
+              onCloseContactModal={() => setIsContactModalOpen(false)}
+            />
+          </>
+        )}
       </main>
 
       {/* Footer with Admin Portal link */}

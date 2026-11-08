@@ -14,6 +14,8 @@ import {
   DEFAULT_SITE_CONTENT 
 } from './src/data/companyData';
 import { DISTRICT_SEO_DATA } from './src/data/districtSEOData';
+import { SERVICES_SEO_DATA } from './src/data/servicesSEOData';
+import { PRODUCTS_SEO_DATA } from './src/data/productsSEOData';
 import { Product, ProductCategory, DownloadItem, CompanyInfo, SiteContent, SavedOrder } from './src/types';
 
 dotenv.config();
@@ -1472,6 +1474,80 @@ async function startServer() {
     return modified;
   };
 
+  const renderServiceHtml = (templateHtml: string, serviceSlug: string): string => {
+    const service = SERVICES_SEO_DATA[serviceSlug.toLowerCase()];
+    if (!service) return templateHtml;
+
+    let modified = templateHtml;
+    modified = modified.replace(/<title>.*?<\/title>/is, `<title>${service.title}</title>`);
+    modified = modified.replace(
+      /<meta\s+name="description"\s+content=".*?"\s*\/?>/is,
+      `<meta name="description" content="${service.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/is,
+      `<link rel="canonical" href="https://www.shamimtechsolution.com/services/${service.slug}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:title" content="${service.title.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:description" content="${service.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:url" content="https://www.shamimtechsolution.com/services/${service.slug}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/is,
+      `<meta name="twitter:title" content="${service.title.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/is,
+      `<meta name="twitter:description" content="${service.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    return modified;
+  };
+
+  const renderProductHtml = (templateHtml: string, productSlug: string): string => {
+    const prod = PRODUCTS_SEO_DATA[productSlug.toLowerCase()];
+    if (!prod) return templateHtml;
+
+    let modified = templateHtml;
+    modified = modified.replace(/<title>.*?<\/title>/is, `<title>${prod.title}</title>`);
+    modified = modified.replace(
+      /<meta\s+name="description"\s+content=".*?"\s*\/?>/is,
+      `<meta name="description" content="${prod.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/is,
+      `<link rel="canonical" href="https://www.shamimtechsolution.com/products/${prod.slug}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:title" content="${prod.title.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:description"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:description" content="${prod.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/is,
+      `<meta property="og:url" content="https://www.shamimtechsolution.com/products/${prod.slug}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/is,
+      `<meta name="twitter:title" content="${prod.title.replace(/"/g, '&quot;')}" />`
+    );
+    modified = modified.replace(
+      /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/is,
+      `<meta name="twitter:description" content="${prod.metaDescription.replace(/"/g, '&quot;')}" />`
+    );
+    return modified;
+  };
+
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -1493,6 +1569,34 @@ async function startServer() {
       }
     });
 
+    // Server-side meta tag injection for 54 Services SEO pages
+    app.get('/services/:slug', async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const slug = (req.params.slug || '').toLowerCase().trim();
+        const indexPath = path.join(process.cwd(), 'index.html');
+        let template = fs.readFileSync(indexPath, 'utf-8');
+        template = await vite.transformIndexHtml(req.originalUrl, template);
+        const html = renderServiceHtml(template, slug);
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
+
+    // Server-side meta tag injection for 56 Products SEO pages
+    app.get('/products/:slug', async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const slug = (req.params.slug || '').toLowerCase().trim();
+        const indexPath = path.join(process.cwd(), 'index.html');
+        let template = fs.readFileSync(indexPath, 'utf-8');
+        template = await vite.transformIndexHtml(req.originalUrl, template);
+        const html = renderProductHtml(template, slug);
+        res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
+
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
@@ -1506,6 +1610,42 @@ async function startServer() {
         if (fs.existsSync(distIndexPath)) {
           const template = fs.readFileSync(distIndexPath, 'utf-8');
           const html = renderDistrictHtml(template, district.slug);
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+          return;
+        }
+        next();
+      } catch (e) {
+        next(e);
+      }
+    });
+
+    // Server-side meta tag injection for 54 Services in production
+    app.get('/services/:slug', (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const slug = (req.params.slug || '').toLowerCase().trim();
+        const distIndexPath = path.join(distPath, 'index.html');
+        if (fs.existsSync(distIndexPath)) {
+          const template = fs.readFileSync(distIndexPath, 'utf-8');
+          const html = renderServiceHtml(template, slug);
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+          res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+          return;
+        }
+        next();
+      } catch (e) {
+        next(e);
+      }
+    });
+
+    // Server-side meta tag injection for 56 Products in production
+    app.get('/products/:slug', (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const slug = (req.params.slug || '').toLowerCase().trim();
+        const distIndexPath = path.join(distPath, 'index.html');
+        if (fs.existsSync(distIndexPath)) {
+          const template = fs.readFileSync(distIndexPath, 'utf-8');
+          const html = renderProductHtml(template, slug);
           res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
           res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
           return;

@@ -26,14 +26,14 @@ export const STSLogo: React.FC<STSLogoProps> = ({
 
   return (
     <div className={`inline-flex items-center gap-2 sm:gap-3 min-w-0 ${className}`}>
-      {/* Official STS Circular Badge Logo */}
-      <div className={`relative shrink-0 ${selectedSize.box} flex items-center justify-center rounded-full overflow-hidden shadow-[0_0_15px_rgba(6,182,212,0.4)] border-2 border-cyan-500/60 bg-white`}>
+      {/* Official STS Circular Badge Logo (100% Transparent Background, Zero Square Box) */}
+      <div className={`relative shrink-0 ${selectedSize.box} flex items-center justify-center rounded-full overflow-hidden bg-transparent`}>
         <img
           src="/logo.png"
           alt="SHAMIM TECH SOLUTION (STS) Official Logo"
-          className="w-full h-full object-contain rounded-full hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-contain rounded-full bg-transparent"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = '/favicon.png';
+            (e.target as HTMLImageElement).src = '/logo.png';
           }}
         />
       </div>

@@ -42,6 +42,7 @@ interface NavbarProps {
   onViewProduct?: (product: Product) => void;
   onSelectDistrict?: (slug: string) => void;
   onNavigateHome?: () => void;
+  onOpenContact?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -65,6 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onViewProduct,
   onSelectDistrict,
   onNavigateHome,
+  onOpenContact,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -141,6 +143,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   ];
 
   const handleNavClick = (id: string) => {
+    if (id === 'contact' && onOpenContact) {
+      setMobileMenuOpen(false);
+      setMobileSearchOpen(false);
+      onOpenContact();
+      return;
+    }
     if (onNavigateHome) onNavigateHome();
     if (typeof setActiveSection === 'function') {
       try { setActiveSection(id); } catch (e) { console.warn('setActiveSection error', e); }

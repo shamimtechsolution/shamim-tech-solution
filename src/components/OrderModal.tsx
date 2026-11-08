@@ -172,65 +172,70 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm overflow-y-auto animate-fadeIn">
       <div 
-        className="relative w-full max-w-2xl my-6 rounded-2xl bg-gradient-to-b from-[#0a1226] to-[#040814] border border-cyan-500/40 p-5 sm:p-8 shadow-2xl text-slate-100 max-h-[92vh] overflow-y-auto"
+        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl my-auto rounded-2xl bg-white border-2 border-sky-300 p-4 sm:p-6 shadow-2xl text-slate-800 max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
+
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition-colors border border-slate-300 text-xs font-bold cursor-pointer shadow-xs z-10"
+          aria-label="Cancel"
+          title="বাতিল / Cancel"
         >
-          <X className="w-5 h-5" />
+          <X className="w-3.5 h-3.5 text-slate-600" />
+          <span>Cancel</span>
         </button>
 
         {confirmedOrder ? (
           /* Order Confirmation Screen */
-          <div className="text-center py-6 space-y-5">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-              <CheckCircle2 className="w-10 h-10" />
+          <div className="text-center py-4 space-y-4">
+            <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-300 flex items-center justify-center mx-auto shadow-md">
+              <CheckCircle2 className="w-8 h-8" />
             </div>
 
             <div>
-              <span className="text-xs uppercase tracking-widest font-tech font-bold text-cyan-400">
+              <span className="text-xs uppercase tracking-widest font-tech font-bold text-cyan-700">
                 Order Received Successfully!
               </span>
-              <h2 className="text-2xl font-black text-white font-tech mt-1">
+              <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-1">
                 Thank You, {confirmedOrder.customerName}!
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-md mx-auto">
-                Your order <span className="font-mono text-cyan-400 font-bold">#{confirmedOrder.orderId}</span> has been logged. Technician Shamim will contact your mobile to arrange delivery & installation.
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-md mx-auto">
+                Your order <span className="font-mono text-cyan-700 font-bold">#{confirmedOrder.orderId}</span> has been logged. Technician Shamim will contact your mobile to arrange delivery & installation.
               </p>
             </div>
 
             {/* Receipt Box */}
-            <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-left text-xs space-y-3">
-              <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Delivery Address:</span>
-                <span className="font-semibold text-right text-slate-200">{confirmedOrder.fullAddress}, {confirmedOrder.district}</span>
+            <div className="p-3.5 rounded-xl bg-sky-50/80 border border-sky-200 text-left text-xs space-y-2.5 text-slate-700">
+              <div className="flex justify-between border-b border-sky-100 pb-1.5">
+                <span className="text-slate-500">Delivery Address:</span>
+                <span className="font-semibold text-right text-slate-900">{confirmedOrder.fullAddress}, {confirmedOrder.district}</span>
               </div>
-              <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Contact Number:</span>
-                <span className="font-mono font-semibold text-cyan-400">{confirmedOrder.mobileNumber}</span>
+              <div className="flex justify-between border-b border-sky-100 pb-1.5">
+                <span className="text-slate-500">Contact Number:</span>
+                <span className="font-mono font-semibold text-cyan-700">{confirmedOrder.mobileNumber}</span>
               </div>
-              <div className="flex justify-between border-b border-slate-800 pb-2">
-                <span className="text-slate-400">Payment Option:</span>
-                <span className="font-semibold text-slate-200">{confirmedOrder.paymentMethod}</span>
+              <div className="flex justify-between border-b border-sky-100 pb-1.5">
+                <span className="text-slate-500">Payment Option:</span>
+                <span className="font-semibold text-slate-900">{confirmedOrder.paymentMethod}</span>
               </div>
-              <div className="flex justify-between font-bold text-sm text-white pt-1">
+              <div className="flex justify-between font-bold text-sm text-slate-900 pt-1">
                 <span>Total Payable:</span>
-                <span className="text-cyan-400 font-mono text-base">৳ {confirmedOrder.totalAmount.toLocaleString('en-US')}</span>
+                <span className="text-cyan-700 font-mono text-base">৳ {confirmedOrder.totalAmount.toLocaleString('en-US')}</span>
               </div>
             </div>
 
             {/* WhatsApp Resend or Direct Call */}
-            <div className="flex flex-col sm:flex-row gap-2.5 pt-2">
+            <div className="flex flex-col sm:flex-row gap-2 pt-2">
               <a
                 href={`https://wa.me/${activeCompany.whatsappInternational}?text=${buildWhatsAppOrderMessage(confirmedOrder.orderId)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs sm:text-sm shadow-md"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs sm:text-sm shadow-md"
               >
                 <MessageSquare className="w-4 h-4 fill-current" />
                 <span>Send to WhatsApp ({activeCompany.phoneFormatted || activeCompany.whatsapp || '01790-139333'})</span>
@@ -238,7 +243,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
               <a
                 href={`tel:${activeCompany.phone || '01790139333'}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs sm:text-sm shadow-md"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs sm:text-sm shadow-md"
               >
                 <Phone className="w-4 h-4 fill-current" />
                 <span>Call: {activeCompany.phone || '01790-139333'}</span>
@@ -246,57 +251,57 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
               <button
                 onClick={onClose}
-                className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs sm:text-sm cursor-pointer"
+                className="py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold text-xs sm:text-sm cursor-pointer shadow-xs"
               >
-                Close
+                Cancel / ব্যাকে যান
               </button>
             </div>
           </div>
         ) : (
           /* Order Placement Form */
           <div>
-            <div className="mb-6">
-              <div className="flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-wider font-tech">
+            <div className="mb-4">
+              <div className="flex items-center gap-2 text-cyan-700 text-xs font-bold uppercase tracking-wider font-tech">
                 <ShoppingBag className="w-4 h-4" />
                 <span>Checkout & Order Placement</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-white font-tech mt-1">
+              <h2 className="text-lg sm:text-xl font-black text-slate-900 font-tech mt-1">
                 Place Your Security Equipment Order
               </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-600 mt-0.5">
                 Quick dispatch across Rangpur Division. All orders include technician testing.
               </p>
             </div>
 
             {/* Customer Status Banner */}
             {customer ? (
-              <div className="mb-4 p-3 rounded-xl bg-cyan-950/60 border border-cyan-500/40 flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2 text-cyan-300">
-                  <User className="w-4 h-4 text-cyan-400" />
+              <div className="mb-3.5 p-2.5 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2 text-cyan-800">
+                  <User className="w-4 h-4 text-cyan-600" />
                   <span>
-                    লগইন একাউন্ট: <strong className="text-white">{customer.fullName}</strong> ({customer.phone || customer.email || customer.district})
+                    লগইন একাউন্ট: <strong className="text-slate-900">{customer.fullName}</strong> ({customer.phone || customer.email || customer.district})
                   </span>
                 </div>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold">
                   Auto-filled
                 </span>
               </div>
             ) : null}
 
             {/* Order Items Preview summary */}
-            <div className="mb-5 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs space-y-2">
-              <div className="font-bold text-slate-300 font-tech uppercase text-[11px] border-b border-slate-800 pb-1">
+            <div className="mb-4 p-3 rounded-xl bg-sky-50/70 border border-sky-200 text-xs space-y-2">
+              <div className="font-bold text-slate-700 font-tech uppercase text-[11px] border-b border-sky-200 pb-1">
                 Selected Products ({items.length} item{items.length > 1 ? 's' : ''}):
               </div>
-              <div className="max-h-28 overflow-y-auto space-y-1.5 pr-1">
+              <div className="max-h-24 overflow-y-auto space-y-1.5 pr-1">
                 {items.map(({ product, quantity }) => (
                   <div key={product.id} className="flex justify-between items-center text-[11px]">
-                    <span className="text-slate-300 truncate max-w-[220px]">
+                    <span className="text-slate-800 truncate max-w-[220px]">
                       {product.name} (x{quantity})
                     </span>
-                    <span className="font-mono text-cyan-400 font-bold">
+                    <span className="font-mono text-cyan-800 font-bold">
                       {(product.priceType === 'contact' || product.isContactForPrice) ? (
-                        <span className="text-amber-400">Contact Price</span>
+                        <span className="text-amber-700">Contact Price</span>
                       ) : (
                         `৳ ${(product.price * quantity).toLocaleString('en-US')}`
                       )}
@@ -304,18 +309,18 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   </div>
                 ))}
               </div>
-              <div className="pt-2 border-t border-slate-800 flex justify-between font-bold text-xs text-white">
+              <div className="pt-2 border-t border-sky-200 flex justify-between font-bold text-xs text-slate-900">
                 <span>Subtotal:</span>
-                <span className="text-cyan-400 font-mono">৳ {subtotal.toLocaleString('en-US')}</span>
+                <span className="text-cyan-800 font-mono">৳ {subtotal.toLocaleString('en-US')}</span>
               </div>
             </div>
 
             {/* Form Fields */}
-            <form onSubmit={handlePlaceOrder} className="space-y-4">
+            <form onSubmit={handlePlaceOrder} className="space-y-3">
               
               {/* Customer Name */}
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                   Customer Name *
                 </label>
                 <div className="relative">
@@ -325,17 +330,17 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     value={formData.customerName}
                     onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
                     placeholder="e.g. Md. Ashraful Islam"
-                    className="w-full bg-slate-900 text-sm text-white rounded-xl pl-9 pr-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
                   />
-                  <User className="w-4 h-4 text-cyan-400 absolute left-3 top-2.5" />
+                  <User className="w-4 h-4 text-cyan-600 absolute left-3 top-2 sm:top-2.5" />
                 </div>
-                {errors.customerName && <p className="text-red-400 text-[11px] mt-0.5">{errors.customerName}</p>}
+                {errors.customerName && <p className="text-red-500 text-[11px] mt-0.5">{errors.customerName}</p>}
               </div>
 
               {/* Mobile Number & WhatsApp Number */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     Mobile Number *
                   </label>
                   <div className="relative">
@@ -345,15 +350,15 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       value={formData.mobileNumber}
                       onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
                       placeholder="01XXXXXXXXX"
-                      className="w-full bg-slate-900 text-sm text-white rounded-xl pl-9 pr-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
                     />
-                    <Phone className="w-4 h-4 text-cyan-400 absolute left-3 top-2.5" />
+                    <Phone className="w-4 h-4 text-cyan-600 absolute left-3 top-2 sm:top-2.5" />
                   </div>
-                  {errors.mobileNumber && <p className="text-red-400 text-[11px] mt-0.5">{errors.mobileNumber}</p>}
+                  {errors.mobileNumber && <p className="text-red-500 text-[11px] mt-0.5">{errors.mobileNumber}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     WhatsApp Number
                   </label>
                   <div className="relative">
@@ -362,26 +367,26 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       value={formData.whatsappNumber}
                       onChange={(e) => setFormData({ ...formData, whatsappNumber: e.target.value })}
                       placeholder="Optional (if different from mobile)"
-                      className="w-full bg-slate-900 text-sm text-white rounded-xl pl-9 pr-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
                     />
-                    <MessageSquare className="w-4 h-4 text-emerald-400 absolute left-3 top-2.5" />
+                    <MessageSquare className="w-4 h-4 text-emerald-600 absolute left-3 top-2 sm:top-2.5" />
                   </div>
                 </div>
               </div>
 
               {/* District & Delivery Options */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     District *
                   </label>
                   <select
                     value={formData.district}
                     onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                    className="w-full bg-slate-900 text-sm text-white rounded-xl px-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none cursor-pointer"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl px-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none cursor-pointer shadow-xs"
                   >
                     {DISTRICTS_LIST.map((dist) => (
-                      <option key={dist} value={dist} className="bg-slate-900 text-white">
+                      <option key={dist} value={dist} className="bg-white text-slate-900">
                         {dist}
                       </option>
                     ))}
@@ -389,13 +394,13 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     Delivery Option *
                   </label>
                   <select
                     value={formData.deliveryOption}
                     onChange={(e) => setFormData({ ...formData, deliveryOption: e.target.value as any })}
-                    className="w-full bg-slate-900 text-sm text-white rounded-xl px-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none cursor-pointer"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl px-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none cursor-pointer shadow-xs"
                   >
                     <option value="Rangpur Division Delivery">Rangpur Division Delivery (৳50)</option>
                     <option value="Rangpur City Express">Rangpur City Express (৳100)</option>
@@ -406,7 +411,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
               {/* Full Address */}
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                   Full Address (Village/Area, Road, House / Landmark) *
                 </label>
                 <div className="relative">
@@ -416,16 +421,16 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     value={formData.fullAddress}
                     onChange={(e) => setFormData({ ...formData, fullAddress: e.target.value })}
                     placeholder="e.g. Hospital Road, Sadar, Rangpur / Dinajpur"
-                    className="w-full bg-slate-900 text-sm text-white rounded-xl pl-9 pr-3 py-2 border border-slate-700 focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
                   />
-                  <MapPin className="w-4 h-4 text-cyan-400 absolute left-3 top-2.5" />
+                  <MapPin className="w-4 h-4 text-cyan-600 absolute left-3 top-2.5" />
                 </div>
-                {errors.fullAddress && <p className="text-red-400 text-[11px] mt-0.5">{errors.fullAddress}</p>}
+                {errors.fullAddress && <p className="text-red-500 text-[11px] mt-0.5">{errors.fullAddress}</p>}
               </div>
 
               {/* Payment Method */}
               <div>
-                <label className="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                   Payment Method *
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
@@ -439,10 +444,10 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       type="button"
                       key={method}
                       onClick={() => setFormData({ ...formData, paymentMethod: method as any })}
-                      className={`p-2 rounded-xl text-center font-semibold border transition-all cursor-pointer ${
+                      className={`p-2 rounded-xl text-center font-bold border transition-all cursor-pointer ${
                         formData.paymentMethod === method
-                          ? 'bg-cyan-500/20 text-cyan-300 border-cyan-500 shadow-sm'
-                          : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                          ? 'bg-cyan-600 text-white border-cyan-600 shadow-sm'
+                          : 'bg-slate-50 text-slate-700 border-sky-200 hover:border-sky-300'
                       }`}
                     >
                       {method}
@@ -452,24 +457,24 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               </div>
 
               {/* Total Calculation Display */}
-              <div className="p-3 rounded-xl bg-cyan-950/40 border border-cyan-500/30 flex items-center justify-between text-xs sm:text-sm">
+              <div className="p-3 rounded-xl bg-sky-100/70 border border-sky-300 flex items-center justify-between text-xs sm:text-sm">
                 <div>
-                  <span className="text-slate-400 block text-[11px]">Subtotal: ৳{subtotal.toLocaleString('en-US')} + Delivery: ৳{deliveryFee}</span>
-                  <span className="text-white font-bold">Total Order Amount:</span>
+                  <span className="text-slate-600 block text-[11px]">Subtotal: ৳{subtotal.toLocaleString('en-US')} + Delivery: ৳{deliveryFee}</span>
+                  <span className="text-slate-900 font-bold">Total Order Amount:</span>
                 </div>
-                <div className="text-xl sm:text-2xl font-black text-cyan-400 font-tech">
+                <div className="text-lg sm:text-xl font-black text-cyan-800 font-tech">
                   ৳ {totalAmount.toLocaleString('en-US')}
                 </div>
               </div>
 
               {/* Required Action Buttons: "Place Order" AND "Order via WhatsApp" */}
-              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="pt-1 grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 
                 {/* Place Order Button */}
                 <button
                   type="submit"
                   id="place-order-submit-btn"
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-sm shadow-[0_0_20px_rgba(6,182,212,0.35)] transition-all cursor-pointer active:scale-98"
+                  className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-sm shadow-md transition-all cursor-pointer active:scale-98"
                 >
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Place Order</span>
@@ -480,16 +485,25 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   type="button"
                   onClick={handleOrderViaWhatsApp}
                   id="order-via-whatsapp-btn"
-                  className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-sm shadow-[0_0_20px_rgba(37,211,102,0.3)] transition-all cursor-pointer active:scale-98"
+                  className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-md transition-all cursor-pointer active:scale-98"
                 >
                   <MessageSquare className="w-4 h-4 fill-current" />
                   <span>Order via WhatsApp (01865321530)</span>
                 </button>
               </div>
 
-              <p className="text-[11px] text-slate-400 text-center pt-1">
-                Technician Shamim will personally inspect and test hardware before dispatch.
-              </p>
+              <div className="pt-1 flex flex-col sm:flex-row items-center justify-between gap-2">
+                <p className="text-[11px] text-slate-500 text-center sm:text-left">
+                  Technician Shamim will personally inspect and test hardware before dispatch.
+                </p>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-full sm:w-auto py-1.5 px-3 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs border border-slate-300 transition cursor-pointer"
+                >
+                  Cancel / বন্ধ করুন
+                </button>
+              </div>
             </form>
           </div>
         )}
