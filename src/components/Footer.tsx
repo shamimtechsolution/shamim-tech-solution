@@ -114,9 +114,6 @@ export const Footer: React.FC<FooterProps> = ({
                 <a href="#gallery" className="hover:text-cyan-700 transition-colors">Work Gallery</a>
               </li>
               <li>
-                <a href="#about" className="hover:text-cyan-700 transition-colors">About Us</a>
-              </li>
-              <li>
                 <a href="#contact" className="hover:text-cyan-700 transition-colors">Contact</a>
               </li>
             </ul>

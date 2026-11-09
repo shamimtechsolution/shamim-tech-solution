@@ -11,7 +11,6 @@ import {
   Wrench,
   Package,
   Home as HomeIcon,
-  Info,
   SlidersHorizontal,
   Lock,
   ChevronRight,
@@ -138,7 +137,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'services', label: 'Services', icon: Wrench },
     { id: 'service-areas', label: 'Service Areas', icon: MapPin },
     { id: 'gallery', label: 'Gallery', icon: GalleryIcon },
-    { id: 'about', label: 'About', icon: Info },
     { id: 'contact', label: 'Contact', icon: Phone },
   ];
 

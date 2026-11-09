@@ -8,7 +8,6 @@ import { CartDrawer } from './components/CartDrawer';
 import { OrderModal } from './components/OrderModal';
 
 import { WorkGallery } from './components/WorkGallery';
-import { AboutAndWhyUs } from './components/AboutAndWhyUs';
 import { CustomerReviews } from './components/CustomerReviews';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -817,13 +816,7 @@ export default function App() {
             {/* 5. Work Gallery with Lightbox and Real Field Projects */}
             <WorkGallery />
 
-            {/* 6. About Us & Why Choose Us */}
-            <AboutAndWhyUs
-              onContactClick={() => setIsContactModalOpen(true)}
-              onRequestQuote={() => setIsContactModalOpen(true)}
-            />
-
-            {/* 7. Customer Testimonials & Reviews */}
+            {/* 6. Customer Testimonials & Reviews */}
             <CustomerReviews />
 
             {/* 8. Contact Section with Working Form & Rangpur Division Map */}
