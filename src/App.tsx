@@ -18,7 +18,6 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AdminLoginPage } from './components/AdminLoginPage';
 import { CustomerAuthModal } from './components/CustomerAuthModal';
 import { CustomerProfileModal } from './components/CustomerProfileModal';
-import { DistrictServiceAreaPage } from './components/DistrictServiceAreaPage';
 import { ServiceDetailPage } from './components/ServiceDetailPage';
 import { ProductDetailPage } from './components/ProductDetailPage';
 import { DISTRICT_SEO_DATA } from './data/districtSEOData';
@@ -334,6 +333,60 @@ export default function App() {
       window.removeEventListener('hashchange', handleRouteSync);
     };
   }, []);
+
+  // Synchronize District SEO metadata (Title, Meta Description, Keywords, Canonical) while preserving original homepage design
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    if (activeDistrictSlug && DISTRICT_SEO_DATA[activeDistrictSlug]) {
+      const dist = DISTRICT_SEO_DATA[activeDistrictSlug];
+      document.title = dist.title;
+
+      let metaDesc = document.querySelector('meta[name="description"]');
+      if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.setAttribute('name', 'description');
+        document.head.appendChild(metaDesc);
+      }
+      metaDesc.setAttribute('content', dist.metaDescription);
+
+      let canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonical);
+      }
+      canonical.setAttribute('href', `https://www.shamimtechsolution.com/service-area/${dist.slug}`);
+
+      const districtKeywords = [...(dist.popularSearchesBn || []), ...(dist.popularSearchesEn || [])];
+      if (districtKeywords.length > 0) {
+        let metaKeywords = document.querySelector('meta[name="keywords"]');
+        if (!metaKeywords) {
+          metaKeywords = document.createElement('meta');
+          metaKeywords.setAttribute('name', 'keywords');
+          document.head.appendChild(metaKeywords);
+        }
+        metaKeywords.setAttribute('content', districtKeywords.join(', '));
+      }
+
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.setAttribute('content', dist.title);
+      let ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.setAttribute('content', dist.metaDescription);
+      let ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl) ogUrl.setAttribute('content', `https://www.shamimtechsolution.com/service-area/${dist.slug}`);
+    } else if (!activeServiceSlug && !activeProductSlug) {
+      document.title = 'Shamim Tech Solution - CCTV, PABX, Security & IT Services in Rangpur Division';
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', 'শামীম টেক সলিউশন – রংপুর বিভাগে সিসিটিভি ক্যামেরা বিক্রয় ও সার্ভিসিং, আইপি ক্যামেরা সেটআপ, অ্যাক্সেস কন্ট্রোল ও ইলেকট্রিক্যাল সলিউশন। হটলাইন: 01790139333।');
+      }
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) {
+        canonical.setAttribute('href', 'https://www.shamimtechsolution.com/');
+      }
+    }
+  }, [activeDistrictSlug, activeServiceSlug, activeProductSlug]);
 
   const navigateToDistrict = useCallback((slug: string) => {
     try {
@@ -731,18 +784,6 @@ export default function App() {
               setPreselectedService(`Inquiry: ${productName}`);
               setIsContactModalOpen(true);
             }}
-          />
-        ) : activeDistrictSlug && DISTRICT_SEO_DATA[activeDistrictSlug] ? (
-          <DistrictServiceAreaPage
-            districtSlug={activeDistrictSlug}
-            products={products}
-            companyInfo={companyInfo}
-            onAddToCart={handleAddToCart}
-            onBuyNow={handleBuyNow}
-            onViewProduct={(product) => setSelectedProduct(product)}
-            onNavigateHome={navigateToHome}
-            onSelectDistrict={navigateToDistrict}
-            onRequestService={handleServiceSelect}
           />
         ) : (
           <>

@@ -27,6 +27,7 @@ import {
   SlidersHorizontal,
   Layers,
   Sparkles,
+  MapPin,
   ChevronRight
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
@@ -199,7 +200,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-500 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-600"></span>
               </span>
-              <span>SHAMIM TECH SOLUTION • Sales and Service, Rangpur Division</span>
+              <span>SHAMIM TECH SOLUTION • Sales and Service , Technician and Electrician</span>
             </div>
 
             {/* Original Product Sales Slim Long Horizontal Button (Star Tech Style Direct Product Jump) */}
@@ -314,17 +315,31 @@ export const Hero: React.FC<HeroProps> = ({
                 </a>
               </div>
 
-              {/* Facebook Button (প্রোডাক্ট দেখুন বাটন বাদ দেওয়া হয়েছে) */}
-              <div>
+              {/* Line 2: Facebook Page (left) + Location: Jahaj Company Mor, Rangpur (right) */}
+              <div className="grid grid-cols-2 gap-2 sm:gap-3">
                 <a
                   href={activeCompany.facebook || "https://www.facebook.com/profile.php?id=100014153359472"}
                   target="_blank"
                   rel="noopener noreferrer"
                   id="hero-facebook-btn"
-                  className="w-full flex items-center justify-center gap-2 py-2 sm:py-2.5 px-3 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-blue-600/25 transition-all transform hover:-translate-y-0.5"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-blue-600/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
                 >
                   <Facebook className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" />
-                  <span className="truncate">ফেসবুক পেজ</span>
+                  <span className="truncate font-bangla">ফেসবুক পেজ</span>
+                </a>
+
+                <a
+                  href="https://maps.google.com/?q=Jahaj+Company+Mor,+Rangpur"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  id="hero-location-btn"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-white/95 hover:bg-sky-50 border border-sky-300 hover:border-cyan-400 text-slate-800 shadow-md shadow-sky-950/5 transition-all transform hover:-translate-y-0.5 group cursor-pointer"
+                  title="Jahaj Company Mor, Rangpur"
+                >
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600 group-hover:scale-110 shrink-0 transition-transform" />
+                  <span className="truncate font-bold text-[10.5px] sm:text-xs md:text-sm text-slate-800 group-hover:text-cyan-900">
+                    Jahaj Company Mor, Rangpur
+                  </span>
                 </a>
               </div>
             </div>
