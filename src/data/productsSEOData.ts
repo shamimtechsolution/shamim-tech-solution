@@ -1,3 +1,5 @@
+import { NEW_PRODUCTS_SEO_DATA } from './newProductsData';
+
 export interface ProductSEOInfo {
   slug: string;
   name: string;
@@ -1820,3 +1822,6 @@ export const PRODUCTS_SEO_DATA: Record<string, ProductSEOInfo> = {
     ]
   }
 };
+
+// Merge 117 proposed product SEO entries seamlessly
+Object.assign(PRODUCTS_SEO_DATA, NEW_PRODUCTS_SEO_DATA);

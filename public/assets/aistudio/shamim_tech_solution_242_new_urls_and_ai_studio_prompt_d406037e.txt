@@ -1,0 +1,512 @@
+SHAMIM TECH SOLUTION — PROPOSED NEW URL LIST (242 URLS)
+Website: https://www.shamimtechsolution.com/
+
+IMPORTANT: These are proposed additions only. They are NOT confirmed as active routes.
+Do not modify, rename, delete, redirect, or replace any existing URL.
+Before adding, compare every proposed slug against the complete current project source and remove/flag any collision.
+
+RULES FOR GOOGLE AI STUDIO
+1. Add only the exact new URLs listed below; do not invent extra URLs.
+2. Preserve all existing website design, layout, header, logo, navigation, homepage, product store, categories, search, product cards, images, admin panel, database, cart, checkout, contact details, footer, code behavior, SEO settings, and features.
+3. Do not change any existing page content, URL, title, metadata, canonical, schema, sitemap entry, redirect, or internal link except where strictly required to add the new pages.
+4. Existing 10 district URLs and all existing product/service URLs must remain unchanged.
+5. Do not create thin duplicate pages. Each new page must contain genuinely useful, accurate, distinct information about the relevant product/service and area. If unique content cannot be provided, do not publish that page; report it for review.
+6. Product pages belong under /products/ and service pages under /services/.
+7. Use accurate availability and service-area wording. Main business address remains Jahaj Company Mor, Rangpur. Haragachh is a service area, not the sole business address.
+8. Do not claim nationwide on-site service unless actually available. Bangladesh-wide product sales/delivery may be described only if true.
+9. Add correct page title, meta description, canonical URL, relevant structured data, internal links and sitemap entries for each page, without changing existing entries.
+10. First provide a report of planned file changes and URL collisions. Do not deploy, delete, or make unrelated changes without approval.
+
+NEW URLS AND TITLES
+
+1. URL: /products/rangpur-cctv-camera-sales-price
+   Title: Rangpur CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+2. URL: /products/rangpur-ip-wifi-camera-sales
+   Title: Rangpur IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+3. URL: /products/rangpur-dvr-nvr-system-sales
+   Title: Rangpur DVR & NVR Recorder Sales | Shamim Tech Solution
+4. URL: /products/rangpur-pbx-intercom-products
+   Title: Rangpur PBX Machine & Intercom Products Sales | Shamim Tech Solution
+5. URL: /products/rangpur-access-control-biometric-products
+   Title: Rangpur Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+6. URL: /services/rangpur-cctv-installation-fitting
+   Title: Rangpur CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+7. URL: /services/rangpur-cctv-repair-maintenance
+   Title: Rangpur CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+8. URL: /services/rangpur-pbx-intercom-installation
+   Title: Rangpur PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+9. URL: /services/rangpur-electrician-electrical-wiring
+   Title: Rangpur Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+10. URL: /services/rangpur-computer-lan-networking
+   Title: Rangpur Computer LAN Installation & Networking Service | Shamim Tech Solution
+11. URL: /products/dinajpur-cctv-camera-sales-price
+   Title: Dinajpur CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+12. URL: /products/dinajpur-ip-wifi-camera-sales
+   Title: Dinajpur IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+13. URL: /products/dinajpur-dvr-nvr-system-sales
+   Title: Dinajpur DVR & NVR Recorder Sales | Shamim Tech Solution
+14. URL: /products/dinajpur-pbx-intercom-products
+   Title: Dinajpur PBX Machine & Intercom Products Sales | Shamim Tech Solution
+15. URL: /products/dinajpur-access-control-biometric-products
+   Title: Dinajpur Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+16. URL: /services/dinajpur-cctv-installation-fitting
+   Title: Dinajpur CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+17. URL: /services/dinajpur-cctv-repair-maintenance
+   Title: Dinajpur CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+18. URL: /services/dinajpur-pbx-intercom-installation
+   Title: Dinajpur PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+19. URL: /services/dinajpur-electrician-electrical-wiring
+   Title: Dinajpur Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+20. URL: /services/dinajpur-computer-lan-networking
+   Title: Dinajpur Computer LAN Installation & Networking Service | Shamim Tech Solution
+21. URL: /products/gaibandha-cctv-camera-sales-price
+   Title: Gaibandha CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+22. URL: /products/gaibandha-ip-wifi-camera-sales
+   Title: Gaibandha IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+23. URL: /products/gaibandha-dvr-nvr-system-sales
+   Title: Gaibandha DVR & NVR Recorder Sales | Shamim Tech Solution
+24. URL: /products/gaibandha-pbx-intercom-products
+   Title: Gaibandha PBX Machine & Intercom Products Sales | Shamim Tech Solution
+25. URL: /products/gaibandha-access-control-biometric-products
+   Title: Gaibandha Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+26. URL: /services/gaibandha-cctv-installation-fitting
+   Title: Gaibandha CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+27. URL: /services/gaibandha-cctv-repair-maintenance
+   Title: Gaibandha CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+28. URL: /services/gaibandha-pbx-intercom-installation
+   Title: Gaibandha PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+29. URL: /services/gaibandha-electrician-electrical-wiring
+   Title: Gaibandha Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+30. URL: /services/gaibandha-computer-lan-networking
+   Title: Gaibandha Computer LAN Installation & Networking Service | Shamim Tech Solution
+31. URL: /products/kurigram-cctv-camera-sales-price
+   Title: Kurigram CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+32. URL: /products/kurigram-ip-wifi-camera-sales
+   Title: Kurigram IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+33. URL: /products/kurigram-dvr-nvr-system-sales
+   Title: Kurigram DVR & NVR Recorder Sales | Shamim Tech Solution
+34. URL: /products/kurigram-pbx-intercom-products
+   Title: Kurigram PBX Machine & Intercom Products Sales | Shamim Tech Solution
+35. URL: /products/kurigram-access-control-biometric-products
+   Title: Kurigram Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+36. URL: /services/kurigram-cctv-installation-fitting
+   Title: Kurigram CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+37. URL: /services/kurigram-cctv-repair-maintenance
+   Title: Kurigram CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+38. URL: /services/kurigram-pbx-intercom-installation
+   Title: Kurigram PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+39. URL: /services/kurigram-electrician-electrical-wiring
+   Title: Kurigram Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+40. URL: /services/kurigram-computer-lan-networking
+   Title: Kurigram Computer LAN Installation & Networking Service | Shamim Tech Solution
+41. URL: /products/nilphamari-cctv-camera-sales-price
+   Title: Nilphamari CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+42. URL: /products/nilphamari-ip-wifi-camera-sales
+   Title: Nilphamari IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+43. URL: /products/nilphamari-dvr-nvr-system-sales
+   Title: Nilphamari DVR & NVR Recorder Sales | Shamim Tech Solution
+44. URL: /products/nilphamari-pbx-intercom-products
+   Title: Nilphamari PBX Machine & Intercom Products Sales | Shamim Tech Solution
+45. URL: /products/nilphamari-access-control-biometric-products
+   Title: Nilphamari Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+46. URL: /services/nilphamari-cctv-installation-fitting
+   Title: Nilphamari CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+47. URL: /services/nilphamari-cctv-repair-maintenance
+   Title: Nilphamari CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+48. URL: /services/nilphamari-pbx-intercom-installation
+   Title: Nilphamari PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+49. URL: /services/nilphamari-electrician-electrical-wiring
+   Title: Nilphamari Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+50. URL: /services/nilphamari-computer-lan-networking
+   Title: Nilphamari Computer LAN Installation & Networking Service | Shamim Tech Solution
+51. URL: /products/lalmonirhat-cctv-camera-sales-price
+   Title: Lalmonirhat CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+52. URL: /products/lalmonirhat-ip-wifi-camera-sales
+   Title: Lalmonirhat IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+53. URL: /products/lalmonirhat-dvr-nvr-system-sales
+   Title: Lalmonirhat DVR & NVR Recorder Sales | Shamim Tech Solution
+54. URL: /products/lalmonirhat-pbx-intercom-products
+   Title: Lalmonirhat PBX Machine & Intercom Products Sales | Shamim Tech Solution
+55. URL: /products/lalmonirhat-access-control-biometric-products
+   Title: Lalmonirhat Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+56. URL: /services/lalmonirhat-cctv-installation-fitting
+   Title: Lalmonirhat CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+57. URL: /services/lalmonirhat-cctv-repair-maintenance
+   Title: Lalmonirhat CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+58. URL: /services/lalmonirhat-pbx-intercom-installation
+   Title: Lalmonirhat PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+59. URL: /services/lalmonirhat-electrician-electrical-wiring
+   Title: Lalmonirhat Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+60. URL: /services/lalmonirhat-computer-lan-networking
+   Title: Lalmonirhat Computer LAN Installation & Networking Service | Shamim Tech Solution
+61. URL: /products/panchagarh-cctv-camera-sales-price
+   Title: Panchagarh CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+62. URL: /products/panchagarh-ip-wifi-camera-sales
+   Title: Panchagarh IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+63. URL: /products/panchagarh-dvr-nvr-system-sales
+   Title: Panchagarh DVR & NVR Recorder Sales | Shamim Tech Solution
+64. URL: /products/panchagarh-pbx-intercom-products
+   Title: Panchagarh PBX Machine & Intercom Products Sales | Shamim Tech Solution
+65. URL: /products/panchagarh-access-control-biometric-products
+   Title: Panchagarh Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+66. URL: /services/panchagarh-cctv-installation-fitting
+   Title: Panchagarh CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+67. URL: /services/panchagarh-cctv-repair-maintenance
+   Title: Panchagarh CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+68. URL: /services/panchagarh-pbx-intercom-installation
+   Title: Panchagarh PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+69. URL: /services/panchagarh-electrician-electrical-wiring
+   Title: Panchagarh Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+70. URL: /services/panchagarh-computer-lan-networking
+   Title: Panchagarh Computer LAN Installation & Networking Service | Shamim Tech Solution
+71. URL: /products/thakurgaon-cctv-camera-sales-price
+   Title: Thakurgaon CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+72. URL: /products/thakurgaon-ip-wifi-camera-sales
+   Title: Thakurgaon IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+73. URL: /products/thakurgaon-dvr-nvr-system-sales
+   Title: Thakurgaon DVR & NVR Recorder Sales | Shamim Tech Solution
+74. URL: /products/thakurgaon-pbx-intercom-products
+   Title: Thakurgaon PBX Machine & Intercom Products Sales | Shamim Tech Solution
+75. URL: /products/thakurgaon-access-control-biometric-products
+   Title: Thakurgaon Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+76. URL: /services/thakurgaon-cctv-installation-fitting
+   Title: Thakurgaon CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+77. URL: /services/thakurgaon-cctv-repair-maintenance
+   Title: Thakurgaon CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+78. URL: /services/thakurgaon-pbx-intercom-installation
+   Title: Thakurgaon PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+79. URL: /services/thakurgaon-electrician-electrical-wiring
+   Title: Thakurgaon Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+80. URL: /services/thakurgaon-computer-lan-networking
+   Title: Thakurgaon Computer LAN Installation & Networking Service | Shamim Tech Solution
+81. URL: /products/bogura-cctv-camera-sales-price
+   Title: Bogura CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+82. URL: /products/bogura-ip-wifi-camera-sales
+   Title: Bogura IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+83. URL: /products/bogura-dvr-nvr-system-sales
+   Title: Bogura DVR & NVR Recorder Sales | Shamim Tech Solution
+84. URL: /products/bogura-pbx-intercom-products
+   Title: Bogura PBX Machine & Intercom Products Sales | Shamim Tech Solution
+85. URL: /products/bogura-access-control-biometric-products
+   Title: Bogura Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+86. URL: /services/bogura-cctv-installation-fitting
+   Title: Bogura CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+87. URL: /services/bogura-cctv-repair-maintenance
+   Title: Bogura CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+88. URL: /services/bogura-pbx-intercom-installation
+   Title: Bogura PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+89. URL: /services/bogura-electrician-electrical-wiring
+   Title: Bogura Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+90. URL: /services/bogura-computer-lan-networking
+   Title: Bogura Computer LAN Installation & Networking Service | Shamim Tech Solution
+91. URL: /products/dhaka-cctv-camera-sales-price
+   Title: Dhaka CCTV Camera Price, Sales & Genuine Products | Shamim Tech Solution
+92. URL: /products/dhaka-ip-wifi-camera-sales
+   Title: Dhaka IP Camera & WiFi Security Camera Sales | Shamim Tech Solution
+93. URL: /products/dhaka-dvr-nvr-system-sales
+   Title: Dhaka DVR & NVR Recorder Sales | Shamim Tech Solution
+94. URL: /products/dhaka-pbx-intercom-products
+   Title: Dhaka PBX Machine & Intercom Products Sales | Shamim Tech Solution
+95. URL: /products/dhaka-access-control-biometric-products
+   Title: Dhaka Access Control, Door Lock & Biometric Machine Sales | Shamim Tech Solution
+96. URL: /services/dhaka-cctv-installation-fitting
+   Title: Dhaka CCTV Camera Installation & Fitting Service | Shamim Tech Solution
+97. URL: /services/dhaka-cctv-repair-maintenance
+   Title: Dhaka CCTV Camera Repair & Maintenance Service | Shamim Tech Solution
+98. URL: /services/dhaka-pbx-intercom-installation
+   Title: Dhaka PBX & Intercom Installation and Technical Service | Shamim Tech Solution
+99. URL: /services/dhaka-electrician-electrical-wiring
+   Title: Dhaka Professional Electrician & Electrical Wiring Service | Shamim Tech Solution
+100. URL: /services/dhaka-computer-lan-networking
+   Title: Dhaka Computer LAN Installation & Networking Service | Shamim Tech Solution
+101. URL: /products/bangladesh-cctv-camera-price
+   Title: CCTV Camera Price in Bangladesh | Shamim Tech Solution
+102. URL: /products/bd-cctv-camera-price
+   Title: CCTV Camera Price in BD | Shamim Tech Solution
+103. URL: /products/cctv-products-bd
+   Title: CCTV Products in BD | Shamim Tech Solution
+104. URL: /products/security-camera-bangladesh
+   Title: Security Camera in Bangladesh | Shamim Tech Solution
+105. URL: /products/security-products-bd
+   Title: Security Products in BD | Shamim Tech Solution
+106. URL: /products/cctv-equipment-bangladesh
+   Title: CCTV Equipment in Bangladesh | Shamim Tech Solution
+107. URL: /products/cctv-camera-shop-bd
+   Title: CCTV Camera Shop in BD | Shamim Tech Solution
+108. URL: /products/original-cctv-camera-bd
+   Title: Original CCTV Camera in BD | Shamim Tech Solution
+109. URL: /products/hikvision-camera-bd
+   Title: Hikvision Camera in BD | Shamim Tech Solution
+110. URL: /products/dahua-camera-bd
+   Title: Dahua Camera in BD | Shamim Tech Solution
+111. URL: /products/cp-plus-camera-bd
+   Title: CP Plus Camera in BD | Shamim Tech Solution
+112. URL: /products/imou-camera-bd
+   Title: Imou Camera in BD | Shamim Tech Solution
+113. URL: /products/bullet-camera-bd
+   Title: Bullet Camera in BD | Shamim Tech Solution
+114. URL: /products/dome-camera-bd
+   Title: Dome Camera in BD | Shamim Tech Solution
+115. URL: /products/ptz-camera-bd-price
+   Title: PTZ Camera Price in BD | Shamim Tech Solution
+116. URL: /products/4g-security-camera-bd
+   Title: 4G Security Camera in BD | Shamim Tech Solution
+117. URL: /products/solar-security-camera-bd
+   Title: Solar Security Camera in BD | Shamim Tech Solution
+118. URL: /products/wireless-security-camera-bd
+   Title: Wireless Security Camera in BD | Shamim Tech Solution
+119. URL: /products/outdoor-security-camera-bd
+   Title: Outdoor Security Camera in BD | Shamim Tech Solution
+120. URL: /products/indoor-security-camera-bd
+   Title: Indoor Security Camera in BD | Shamim Tech Solution
+121. URL: /products/night-vision-camera-bd
+   Title: Night Vision Camera in BD | Shamim Tech Solution
+122. URL: /products/color-night-vision-camera-bd
+   Title: Color Night Vision Camera in BD | Shamim Tech Solution
+123. URL: /products/two-way-audio-camera-bd
+   Title: Two-Way Audio Camera in BD | Shamim Tech Solution
+124. URL: /products/smart-home-camera-bd
+   Title: Smart Home Camera in BD | Shamim Tech Solution
+125. URL: /products/mini-security-camera-bd
+   Title: Mini Security Camera in BD | Shamim Tech Solution
+126. URL: /products/cctv-dvr-price-bangladesh
+   Title: CCTV DVR Price in Bangladesh | Shamim Tech Solution
+127. URL: /products/dvr-recorder-price-bd
+   Title: DVR Recorder Price in BD | Shamim Tech Solution
+128. URL: /products/nvr-recorder-price-bd
+   Title: NVR Recorder Price in BD | Shamim Tech Solution
+129. URL: /products/poe-nvr-bd
+   Title: PoE NVR in BD | Shamim Tech Solution
+130. URL: /products/cctv-storage-hard-disk-bd
+   Title: CCTV Storage Hard Disk in BD | Shamim Tech Solution
+131. URL: /products/surveillance-hdd-price-bd
+   Title: Surveillance HDD Price in BD | Shamim Tech Solution
+132. URL: /products/cctv-monitor-bd
+   Title: CCTV Monitor in BD | Shamim Tech Solution
+133. URL: /products/cctv-power-adapter-bd
+   Title: CCTV Power Adapter in BD | Shamim Tech Solution
+134. URL: /products/cctv-cable-connector-bd
+   Title: CCTV Cable & Connector in BD | Shamim Tech Solution
+135. URL: /products/video-balun-bd
+   Title: Video Balun in BD | Shamim Tech Solution
+136. URL: /products/pbx-machine-price-bd
+   Title: PBX Machine Price in BD | Shamim Tech Solution
+137. URL: /products/office-intercom-products-bd
+   Title: Office Intercom Products in BD | Shamim Tech Solution
+138. URL: /products/access-control-device-bd
+   Title: Access Control Device in BD | Shamim Tech Solution
+139. URL: /products/biometric-attendance-price-bd
+   Title: Biometric Attendance Price in BD | Shamim Tech Solution
+140. URL: /products/fingerprint-attendance-machine-bd
+   Title: Fingerprint Attendance Machine in BD | Shamim Tech Solution
+141. URL: /services/cctv-technician-bd
+   Title: CCTV Technician in BD | Shamim Tech Solution
+142. URL: /services/cctv-technician-bangladesh
+   Title: CCTV Technician in Bangladesh | Shamim Tech Solution
+143. URL: /services/dvr-technician-bd
+   Title: DVR Technician in BD | Shamim Tech Solution
+144. URL: /services/dvr-technician-bangladesh
+   Title: DVR Technician in Bangladesh | Shamim Tech Solution
+145. URL: /services/nvr-technician-bd
+   Title: NVR Technician in BD | Shamim Tech Solution
+146. URL: /services/ip-camera-technician-bd
+   Title: IP Camera Technician in BD | Shamim Tech Solution
+147. URL: /services/wifi-camera-technician-bd
+   Title: WiFi Camera Technician in BD | Shamim Tech Solution
+148. URL: /services/security-camera-technician-bd
+   Title: Security Camera Technician in BD | Shamim Tech Solution
+149. URL: /services/cctv-repair-service-bd
+   Title: CCTV Repair Service in BD | Shamim Tech Solution
+150. URL: /services/cctv-maintenance-service-bangladesh
+   Title: CCTV Maintenance Service in Bangladesh | Shamim Tech Solution
+151. URL: /services/cctv-installation-service-bd
+   Title: CCTV Installation Service in BD | Shamim Tech Solution
+152. URL: /services/cctv-fitting-service-bangladesh
+   Title: CCTV Fitting Service in Bangladesh | Shamim Tech Solution
+153. URL: /services/cctv-online-view-setup-bd
+   Title: CCTV Online View Setup in BD | Shamim Tech Solution
+154. URL: /services/dvr-setup-service-bd
+   Title: DVR Setup Service in BD | Shamim Tech Solution
+155. URL: /services/nvr-configuration-service-bd
+   Title: NVR Configuration Service in BD | Shamim Tech Solution
+156. URL: /services/cctv-networking-support-bd
+   Title: CCTV Networking Support in BD | Shamim Tech Solution
+157. URL: /services/pbx-technician-bd
+   Title: PBX Technician in BD | Shamim Tech Solution
+158. URL: /services/pbx-technician-bangladesh
+   Title: PBX Technician in Bangladesh | Shamim Tech Solution
+159. URL: /services/intercom-technician-bd
+   Title: Intercom Technician in BD | Shamim Tech Solution
+160. URL: /services/intercom-repair-service-bd
+   Title: Intercom Repair Service in BD | Shamim Tech Solution
+161. URL: /services/office-intercom-installation-bd
+   Title: Office Intercom Installation in BD | Shamim Tech Solution
+162. URL: /services/video-door-phone-setup-bd
+   Title: Video Door Phone Setup in BD | Shamim Tech Solution
+163. URL: /services/access-control-technician-bd
+   Title: Access Control Technician in BD | Shamim Tech Solution
+164. URL: /services/door-access-system-service-bd
+   Title: Door Access System Service in BD | Shamim Tech Solution
+165. URL: /services/magnetic-door-lock-installation-bd
+   Title: Magnetic Door Lock Installation in BD | Shamim Tech Solution
+166. URL: /services/biometric-technician-bd
+   Title: Biometric Technician in BD | Shamim Tech Solution
+167. URL: /services/fingerprint-machine-service-bd
+   Title: Fingerprint Machine Service in BD | Shamim Tech Solution
+168. URL: /services/attendance-machine-repair-bd
+   Title: Attendance Machine Repair in BD | Shamim Tech Solution
+169. URL: /services/electrician-bangladesh
+   Title: Electrician Service in Bangladesh | Shamim Tech Solution
+170. URL: /services/electrician-bd
+   Title: Electrician Service in BD | Shamim Tech Solution
+171. URL: /services/electrical-technician-bd
+   Title: Electrical Technician in BD | Shamim Tech Solution
+172. URL: /services/house-wiring-service-bd
+   Title: House Wiring Service in BD | Shamim Tech Solution
+173. URL: /services/office-wiring-service-bd
+   Title: Office Wiring Service in BD | Shamim Tech Solution
+174. URL: /services/shop-electrical-service-bd
+   Title: Shop Electrical Service in BD | Shamim Tech Solution
+175. URL: /services/electrical-repair-service-bangladesh
+   Title: Electrical Repair Service in Bangladesh | Shamim Tech Solution
+176. URL: /services/switchboard-repair-bd
+   Title: Switchboard Repair in BD | Shamim Tech Solution
+177. URL: /services/lighting-installation-service-bd
+   Title: Lighting Installation Service in BD | Shamim Tech Solution
+178. URL: /services/lan-network-technician-bd
+   Title: LAN Network Technician in BD | Shamim Tech Solution
+179. URL: /services/computer-networking-service-bd
+   Title: Computer Networking Service in BD | Shamim Tech Solution
+180. URL: /services/office-network-setup-bd
+   Title: Office Network Setup in BD | Shamim Tech Solution
+181. URL: /products/jahaj-company-mor-cctv-camera-price
+   Title: CCTV Camera Price in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+182. URL: /products/jahaj-company-mor-ip-camera-sales
+   Title: IP Camera Sales in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+183. URL: /products/jahaj-company-mor-wifi-camera-sales
+   Title: WiFi Camera Sales in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+184. URL: /products/jahaj-company-mor-dvr-recorder-sales
+   Title: DVR Recorder Sales in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+185. URL: /products/jahaj-company-mor-nvr-recorder-sales
+   Title: NVR Recorder Sales in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+186. URL: /products/jahaj-company-mor-video-door-phone-sales
+   Title: Video Door Phone Sales in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+187. URL: /services/jahaj-company-mor-cctv-technician-service
+   Title: CCTV Technician Service in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+188. URL: /services/jahaj-company-mor-dvr-technician-service
+   Title: DVR Technician Service in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+189. URL: /services/jahaj-company-mor-intercom-technician-service
+   Title: Intercom Technician Service in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+190. URL: /services/jahaj-company-mor-access-control-installation-service
+   Title: Access Control Installation Service in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+191. URL: /services/jahaj-company-mor-electrician-service
+   Title: Electrician Service in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+192. URL: /services/jahaj-company-mor-lan-networking-service
+   Title: LAN Networking Service in Jahaj Company Mor, Rangpur | Shamim Tech Solution
+193. URL: /products/haragachh-cctv-camera
+   Title: CCTV Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+194. URL: /products/haragachh-cctv-camera-price
+   Title: CCTV Camera Price in Haragachh, Rangpur | Shamim Tech Solution
+195. URL: /products/haragachh-ip-camera
+   Title: IP Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+196. URL: /products/haragachh-wifi-camera
+   Title: WiFi Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+197. URL: /products/haragachh-4g-camera
+   Title: 4G CCTV Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+198. URL: /products/haragachh-ptz-camera
+   Title: PTZ Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+199. URL: /products/haragachh-solar-camera
+   Title: Solar CCTV Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+200. URL: /products/haragachh-hikvision-camera
+   Title: Hikvision Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+201. URL: /products/haragachh-dahua-camera
+   Title: Dahua Camera Sales in Haragachh, Rangpur | Shamim Tech Solution
+202. URL: /products/haragachh-dvr-recorder
+   Title: DVR Recorder Sales in Haragachh, Rangpur | Shamim Tech Solution
+203. URL: /products/haragachh-nvr-recorder
+   Title: NVR Recorder Sales in Haragachh, Rangpur | Shamim Tech Solution
+204. URL: /products/haragachh-cctv-hard-disk
+   Title: CCTV Hard Disk Sales in Haragachh, Rangpur | Shamim Tech Solution
+205. URL: /products/haragachh-cctv-monitor
+   Title: CCTV Monitor Sales in Haragachh, Rangpur | Shamim Tech Solution
+206. URL: /products/haragachh-video-door-phone
+   Title: Video Door Phone Sales in Haragachh, Rangpur | Shamim Tech Solution
+207. URL: /products/haragachh-pbx-machine
+   Title: PBX Machine Sales in Haragachh, Rangpur | Shamim Tech Solution
+208. URL: /products/haragachh-intercom-device
+   Title: Intercom Device Sales in Haragachh, Rangpur | Shamim Tech Solution
+209. URL: /products/haragachh-access-control-device
+   Title: Access Control Device Sales in Haragachh, Rangpur | Shamim Tech Solution
+210. URL: /products/haragachh-biometric-machine
+   Title: Biometric Machine Sales in Haragachh, Rangpur | Shamim Tech Solution
+211. URL: /products/haragachh-fingerprint-machine
+   Title: Fingerprint Machine Sales in Haragachh, Rangpur | Shamim Tech Solution
+212. URL: /products/haragachh-shamim-tech-solution
+   Title: Shamim Tech Solution – CCTV & Security Products in Haragachh, Rangpur | Shamim Tech Solution
+213. URL: /services/haragachh-cctv-technician
+   Title: CCTV Technician in Haragachh, Rangpur | Shamim Tech Solution
+214. URL: /services/haragachh-cctv-installation
+   Title: CCTV Installation Service in Haragachh, Rangpur | Shamim Tech Solution
+215. URL: /services/haragachh-cctv-repair
+   Title: CCTV Repair Service in Haragachh, Rangpur | Shamim Tech Solution
+216. URL: /services/haragachh-cctv-fitting
+   Title: CCTV Camera Fitting in Haragachh, Rangpur | Shamim Tech Solution
+217. URL: /services/haragachh-dvr-technician
+   Title: DVR Technician in Haragachh, Rangpur | Shamim Tech Solution
+218. URL: /services/haragachh-nvr-technician
+   Title: NVR Technician in Haragachh, Rangpur | Shamim Tech Solution
+219. URL: /services/haragachh-ip-camera-technician
+   Title: IP Camera Technician in Haragachh, Rangpur | Shamim Tech Solution
+220. URL: /services/haragachh-wifi-camera-setup
+   Title: WiFi Camera Setup in Haragachh, Rangpur | Shamim Tech Solution
+221. URL: /services/haragachh-cctv-online-view-setup
+   Title: CCTV Mobile Live View Setup in Haragachh, Rangpur | Shamim Tech Solution
+222. URL: /services/haragachh-cctv-maintenance
+   Title: CCTV Maintenance Service in Haragachh, Rangpur | Shamim Tech Solution
+223. URL: /services/haragachh-electrician
+   Title: Electrician Service in Haragachh, Rangpur | Shamim Tech Solution
+224. URL: /services/haragachh-electrical-technician
+   Title: Electrical Technician in Haragachh, Rangpur | Shamim Tech Solution
+225. URL: /services/haragachh-house-wiring
+   Title: House Wiring Service in Haragachh, Rangpur | Shamim Tech Solution
+226. URL: /services/haragachh-office-wiring
+   Title: Office Electrical Wiring in Haragachh, Rangpur | Shamim Tech Solution
+227. URL: /services/haragachh-electrical-repair
+   Title: Electrical Repair Service in Haragachh, Rangpur | Shamim Tech Solution
+228. URL: /services/haragachh-switchboard-installation
+   Title: Switchboard Installation in Haragachh, Rangpur | Shamim Tech Solution
+229. URL: /services/haragachh-pbx-technician
+   Title: PBX Technician in Haragachh, Rangpur | Shamim Tech Solution
+230. URL: /services/haragachh-intercom-technician
+   Title: Intercom Technician in Haragachh, Rangpur | Shamim Tech Solution
+231. URL: /services/haragachh-intercom-installation
+   Title: Intercom Installation in Haragachh, Rangpur | Shamim Tech Solution
+232. URL: /services/haragachh-access-control-technician
+   Title: Access Control Technician in Haragachh, Rangpur | Shamim Tech Solution
+233. URL: /services/haragachh-door-lock-installation
+   Title: Access Control Door Lock Installation in Haragachh, Rangpur | Shamim Tech Solution
+234. URL: /services/haragachh-biometric-machine-setup
+   Title: Biometric Attendance Setup in Haragachh, Rangpur | Shamim Tech Solution
+235. URL: /services/haragachh-attendance-machine-repair
+   Title: Attendance Machine Repair in Haragachh, Rangpur | Shamim Tech Solution
+236. URL: /services/haragachh-lan-network-technician
+   Title: LAN Network Technician in Haragachh, Rangpur | Shamim Tech Solution
+237. URL: /services/haragachh-computer-networking
+   Title: Computer Networking Service in Haragachh, Rangpur | Shamim Tech Solution
+238. URL: /services/haragachh-shamim-cctv-technician
+   Title: Haragachh Shamim CCTV Technician | Shamim Tech Solution
+239. URL: /services/haragachh-shamim-electrician
+   Title: Haragachh Shamim Electrician | Shamim Tech Solution
+240. URL: /services/haragachh-shamim-security-solution
+   Title: Haragachh Shamim Security Solution | Shamim Tech Solution
+241. URL: /services/haragachh-shamim-technician
+   Title: Haragachh Shamim Technician | Shamim Tech Solution
+242. URL: /products/haragachh-shamim-cctv
+   Title: Haragachh Shamim CCTV Camera Sales | Shamim Tech Solution
+
+FINAL VERIFICATION REQUIRED
+- Confirm exactly 242 proposed entries were reviewed.
+- Confirm zero existing URLs were changed or deleted.
+- List any proposed slug collisions and do not overwrite them.
+- Confirm the old website design, admin, database, product data, and all features remain intact.
+- Provide changed-file list and test results before deployment.

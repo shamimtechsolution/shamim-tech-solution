@@ -1,3 +1,5 @@
+import { NEW_SERVICES_SEO_DATA } from './newServicesData';
+
 export interface ServiceSEOInfo {
   slug: string;
   name: string;
@@ -1764,3 +1766,6 @@ export const SERVICES_SEO_DATA: Record<string, ServiceSEOInfo> = {
     ]
   }
 };
+
+// Merge 125 proposed service SEO entries seamlessly
+Object.assign(SERVICES_SEO_DATA, NEW_SERVICES_SEO_DATA);
