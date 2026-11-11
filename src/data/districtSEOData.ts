@@ -385,10 +385,11 @@ export const DISTRICT_SEO_DATA: Record<string, DistrictSEOInfo> = {
     h1: 'Rangpur CCTV Camera Sales, Installation & Technical Services (রংপুর সিসিটিভি ক্যামেরা ও টেকনিক্যাল সার্ভিস)',
     tagline: 'Premier CCTV Camera Shop & Certified Technical Service in Rangpur Division',
     bengaliTagline: 'রংপুর জেলা ও সিটি কর্পোরেশনে বিশ্বস্ত সিসিটিভি ক্যামেরা বিক্রয়, ফিটিং, মেরামত ও অন-সাইট টেকনিশিয়ান সেবা',
-    aboutDistrict: 'রংপুর বিভাগীয় সদর ও বাণিজ্যিক কেন্দ্র হিসেবে রংপুর সিটি কর্পোরেশন, জাহাজ কোম্পানি মোড়, স্টেশন রোড, ধাপ, মডার্ন মোড় সহ পুরো জেলায় আমরা সর্বোচ্চ মানের সিকিউরিটি ইকুইপমেন্ট ও কম্পিউটার হার্ডওয়্যার সেবা প্রদান করছি। আমাদের মূল টেকনিক্যাল টিম রংপুরের সেন্ট্রাল টেকনিক্যাল হাবে অবস্থিত হওয়ায় রংপুর জেলার যেকোনো প্রান্ত থেকে কল পেলে দ্রুততম সময়ে অন-সাইট টেকনিশিয়ান পৌঁছে যায়।',
+    aboutDistrict: 'রংপুর বিভাগীয় প্রধান শোরুম ও ব্যবসায়িক কেন্দ্র হিসেবে জাহাজ কোম্পানি মোড় (Jahaj Company Mor, Rangpur)-এ আমাদের মূল অবস্থান। পাশাপাশি হারাগাছ (Haragachh) আমাদের অন্যতম দ্রুততম বিশেষ সার্ভিস জোন। রংপুর সিটি কর্পোরেশন, জাহাজ কোম্পানি মোড়, হারাগাছ, স্টেশন রোড, ধাপ ও মডার্ন মোড় সহ পুরো জেলায় আমরা সর্বোচ্চ মানের সিকিউরিটি ইকুইপমেন্ট, সিসিটিভি ক্যামেরা ও পেশাদার টেকনিশিয়ান সেবা প্রদান করছি।',
     upazilas: [
+      'Jahaj Company Mor (প্রধান শোরুম ও অফিস)',
+      'Haragachh (হারাগাছ বিশেষ সার্ভিস জোন)',
       'Rangpur City Corporation (রংপুর সিটি কর্পোরেশন)',
-      'Jahaj Company Mor (জাহাজ কোম্পানি মোড়)',
       'Rangpur Sadar (রংপুর সদর)',
       'Mithapukur (মিঠাপুকুর)',
       'Pirgachha (পীরগাছা)',
@@ -399,7 +400,8 @@ export const DISTRICT_SEO_DATA: Record<string, DistrictSEOInfo> = {
       'Taraganj (তারাগঞ্জ)'
     ],
     keyLandmarks: [
-      'Jahaj Company Mor Market',
+      'Jahaj Company Mor Market (Main Showroom)',
+      'Haragachh Bazar & Municipal Area',
       'Lalbagh Commercial Area',
       'Dhap Medical College Mor',
       'Station Road Supermarket',

@@ -245,6 +245,13 @@ function requireAdminAuth(req: Request, res: Response, next: NextFunction) {
 async function startServer() {
   const app = express();
 
+  // Standard SEO & Security Headers
+  app.use((_req: Request, res: Response, next: NextFunction) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    next();
+  });
+
   // Serve static public assets (robots.txt, sitemap.xml, google verification files)
   app.use(express.static(path.join(process.cwd(), 'public')));
 
@@ -1471,6 +1478,41 @@ async function startServer() {
       /<meta\s+name="geo\.placename"\s+content=".*?"\s*\/?>/is,
       `<meta name="geo.placename" content="${regionName}" />`
     );
+
+    const districtSchema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": `https://www.shamimtechsolution.com/service-area/${district.slug}#business`,
+          "name": `SHAMIM TECH SOLUTION - ${district.enName} (${district.bnName})`,
+          "description": district.metaDescription,
+          "url": `https://www.shamimtechsolution.com/service-area/${district.slug}`,
+          "telephone": "+8801790139333",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Jahaj Company Mor",
+            "addressLocality": "Rangpur",
+            "addressRegion": "Rangpur Division",
+            "postalCode": "5400",
+            "addressCountry": "BD"
+          },
+          "areaServed": {
+            "@type": "AdministrativeArea",
+            "name": district.enName
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Service Areas", "item": "https://www.shamimtechsolution.com/#coverage" },
+            { "@type": "ListItem", "position": 3, "name": district.enName, "item": `https://www.shamimtechsolution.com/service-area/${district.slug}` }
+          ]
+        }
+      ]
+    };
+    modified = modified.replace('</head>', `<script type="application/ld+json">${JSON.stringify(districtSchema)}</script>\n</head>`);
     return modified;
   };
 
@@ -1508,6 +1550,47 @@ async function startServer() {
       /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/is,
       `<meta name="twitter:description" content="${service.metaDescription.replace(/"/g, '&quot;')}" />`
     );
+
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "@id": `https://www.shamimtechsolution.com/services/${service.slug}#service`,
+          "name": service.name,
+          "alternateName": service.bnName,
+          "serviceType": service.category,
+          "description": service.metaDescription,
+          "provider": {
+            "@type": "LocalBusiness",
+            "name": "SHAMIM TECH SOLUTION",
+            "telephone": "+8801790139333",
+            "url": "https://www.shamimtechsolution.com/",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Jahaj Company Mor",
+              "addressLocality": "Rangpur",
+              "addressRegion": "Rangpur Division",
+              "postalCode": "5400",
+              "addressCountry": "BD"
+            }
+          },
+          "areaServed": [
+            "Rangpur", "Haragachh", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
+          ],
+          "url": `https://www.shamimtechsolution.com/services/${service.slug}`
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.shamimtechsolution.com/#services" },
+            { "@type": "ListItem", "position": 3, "name": service.name, "item": `https://www.shamimtechsolution.com/services/${service.slug}` }
+          ]
+        }
+      ]
+    };
+    modified = modified.replace('</head>', `<script type="application/ld+json">${JSON.stringify(serviceSchema)}</script>\n</head>`);
     return modified;
   };
 
@@ -1545,6 +1628,46 @@ async function startServer() {
       /<meta\s+name="twitter:description"\s+content=".*?"\s*\/?>/is,
       `<meta name="twitter:description" content="${prod.metaDescription.replace(/"/g, '&quot;')}" />`
     );
+
+    const productSchema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Product",
+          "@id": `https://www.shamimtechsolution.com/products/${prod.slug}#product`,
+          "name": prod.name,
+          "alternateName": prod.bnName,
+          "description": prod.metaDescription,
+          "category": prod.category,
+          "brand": {
+            "@type": "Brand",
+            "name": "SHAMIM TECH SOLUTION"
+          },
+          "offers": {
+            "@type": "Offer",
+            "url": `https://www.shamimtechsolution.com/products/${prod.slug}`,
+            "priceCurrency": "BDT",
+            "price": "1750",
+            "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "Organization",
+              "name": "SHAMIM TECH SOLUTION",
+              "telephone": "+8801790139333"
+            }
+          },
+          "url": `https://www.shamimtechsolution.com/products/${prod.slug}`
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.shamimtechsolution.com/#products" },
+            { "@type": "ListItem", "position": 3, "name": prod.name, "item": `https://www.shamimtechsolution.com/products/${prod.slug}` }
+          ]
+        }
+      ]
+    };
+    modified = modified.replace('</head>', `<script type="application/ld+json">${JSON.stringify(productSchema)}</script>\n</head>`);
     return modified;
   };
 

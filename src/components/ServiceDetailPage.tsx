@@ -108,14 +108,14 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
             "url": "https://www.shamimtechsolution.com/",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": companyInfo.address || "Jahaj Company & Haragachh",
+              "streetAddress": "Jahaj Company Mor",
               "addressLocality": "Rangpur",
               "addressRegion": "Rangpur Division",
               "addressCountry": "BD"
             }
           },
           "areaServed": [
-            "Rangpur", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
+            "Rangpur", "Haragachh", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
           ]
         },
         {
