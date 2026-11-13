@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { STSLogo } from './STSLogo';
 import { COMPANY_INFO, SERVICES_LIST, DIVISION_DISTRICTS } from '../data/companyData';
+import { SERVICES_SEO_DATA } from '../data/servicesSEOData';
+import { matchesProductSearch, scoreServiceOrDistrictMatch } from '../utils/searchHelper';
 import { CompanyInfo, CustomerUser, Product } from '../types';
 
 interface NavbarProps {
@@ -40,6 +42,8 @@ interface NavbarProps {
   products?: Product[];
   onViewProduct?: (product: Product) => void;
   onSelectDistrict?: (slug: string) => void;
+  onSelectService?: (slug: string) => void;
+  onSelectProduct?: (slug: string) => void;
   onNavigateHome?: () => void;
   onOpenContact?: () => void;
 }
@@ -64,6 +68,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   products = [],
   onViewProduct,
   onSelectDistrict,
+  onSelectService,
   onNavigateHome,
   onOpenContact,
 }) => {
@@ -76,58 +81,70 @@ export const Navbar: React.FC<NavbarProps> = ({
     if (!searchTerm.trim()) {
       return { products: [], services: [], districts: [], totalMatches: 0 };
     }
-    const rawQuery = searchTerm.toLowerCase().trim();
-    const query = rawQuery
-      .replace(/\bpower\s+suply\b/g, 'power supply')
-      .replace(/\bsuply\b/g, 'supply');
-    const tokens = query.split(/\s+/).filter(Boolean);
-    const locationBrandTokens = new Set([
-      'rangpur', 'dinajpur', 'lalmonirhat', 'kurigram', 'nilphamari', 'gaibandha', 'thakurgaon', 'panchagarh',
-      'রংপুর', 'দিনাজপুর', 'লালমনিরহাট', 'কুড়িগ্রাম', 'নীলফামারী', 'গাইবান্ধা', 'ঠাকুরগাঁও', 'পঞ্চগড়',
-      'shamim', 'sts', 'bd', 'bangladesh', 'tech', 'solution', 'technology', 'শামীম',
-      'startech', 'star', 'ryans', 'datatech'
-    ]);
-    const stopWords = new Set(['and', 'in', 'of', 'for', 'the', 'to', 'ও', 'এবং']);
-    const productTokens = tokens.filter(t => !locationBrandTokens.has(t) && !stopWords.has(t));
-    const matchedProducts = (products || []).filter((item) => {
-      const text = `${item.name} ${item.specs || ''} ${item.brand || ''} ${item.category || ''} ${item.description || ''} ${item.modelNumber || ''}`.toLowerCase();
-      if (text.includes(query) || text.includes(rawQuery)) return true;
 
-      if (query.includes('video balun') || query.includes('balun')) {
-        if (text.includes('balun') || text.includes('transceiver') || item.category === 'Other Accessories') return true;
-      }
-      if (query.includes('box adapter') || query.includes('cctv box adapter')) {
-        if (text.includes('box adapter') || text.includes('fvl') || text.includes('adapter')) return true;
-      }
-      if (query.includes('adapter') || query.includes('cctv adapter') || query.includes('power supply') || query.includes('power suply')) {
-        if (text.includes('adapter') || item.category === 'Power Supply/Adapter' || text.includes('power supply') || text.includes('12v') || text.includes('fvl')) return true;
-      }
+    const matchedProducts = (products || [])
+      .filter((item) => matchesProductSearch(item, searchTerm))
+      .slice(0, 6);
 
-      if (productTokens.length === 0) return true;
-      return productTokens.every(t => text.includes(t));
-    }).slice(0, 6);
-    const matchedServices = SERVICES_LIST.filter((srv) => {
-      const srvKw = (srv.popularKeywords || []).map(k => k.toLowerCase()).join(' ');
-      const text = `${srv.name} ${srv.description} ${srv.serviceType} ${srvKw}`.toLowerCase();
-      if (text.includes(query)) return true;
-      return tokens.some(t => !stopWords.has(t) && text.includes(t));
-    }).slice(0, 4);
-    const matchedDistricts = DIVISION_DISTRICTS.filter((dist) => {
-      const distKw = dist.popularKeywords.map(k => k.toLowerCase()).join(' ');
-      const distSrv = dist.services.map(s => s.toLowerCase()).join(' ');
-      const text = `${dist.enName} ${dist.bnName} ${distKw} ${distSrv}`.toLowerCase();
-      if (text.includes(query)) return true;
-      return tokens.some(t => !stopWords.has(t) && (
-        dist.enName.toLowerCase().includes(t) ||
-        dist.bnName.toLowerCase().includes(t) ||
-        distKw.includes(t)
-      ));
-    }).slice(0, 4);
+    // Search canonical dedicated service & technician SEO pages plus core SERVICES_LIST
+    const seoServiceMatches = Object.values(SERVICES_SEO_DATA)
+      .filter((srv) => !srv.canonicalSlug)
+      .map((srv) => {
+        const kwText = (srv.popularSearchKeywords || []).join(' ');
+        const heading = `${srv.slug.replace(/-/g, ' ')} ${srv.name} ${srv.bnName} ${srv.title}`;
+        const target = `${heading} ${srv.category} ${srv.description} ${kwText}`;
+        const score = scoreServiceOrDistrictMatch(target, searchTerm, heading);
+        return {
+          id: `seo-${srv.slug}`,
+          slug: srv.slug,
+          name: srv.name,
+          serviceType: srv.category,
+          description: srv.bnName || srv.description,
+          score
+        };
+      })
+      .filter((m) => m.score > 0);
+
+    const listServiceMatches = SERVICES_LIST
+      .map((srv) => {
+        const srvKw = (srv.popularKeywords || []).join(' ');
+        const heading = `${srv.name} ${srv.bnName || ''} ${srv.serviceType}`;
+        const target = `${heading} ${srv.description} ${srvKw}`;
+        const score = scoreServiceOrDistrictMatch(target, searchTerm, heading);
+        return {
+          id: srv.id,
+          slug: undefined as string | undefined,
+          name: srv.name,
+          serviceType: srv.serviceType,
+          description: srv.description,
+          score
+        };
+      })
+      .filter((m) => m.score > 0);
+
+    const combinedServices = [...seoServiceMatches, ...listServiceMatches]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 5);
+
+    const matchedDistricts = DIVISION_DISTRICTS
+      .map((dist) => {
+        const distKw = dist.popularKeywords.join(' ');
+        const distSrv = dist.services.join(' ');
+        const heading = `${dist.enName} ${dist.bnName}`;
+        const target = `${heading} ${distKw} ${distSrv}`;
+        const score = scoreServiceOrDistrictMatch(target, searchTerm, heading);
+        return { dist, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 4)
+      .map((item) => item.dist);
+
     return {
       products: matchedProducts,
-      services: matchedServices,
+      services: combinedServices,
       districts: matchedDistricts,
-      totalMatches: matchedProducts.length + matchedServices.length + matchedDistricts.length
+      totalMatches: matchedProducts.length + combinedServices.length + matchedDistricts.length
     };
   }, [searchTerm, products]);
 
@@ -254,11 +271,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                             <button onClick={() => handleNavClick('services')} className="text-sky-300 hover:underline cursor-pointer">All Services →</button>
                           </div>
                           {searchResults.services.map((srv) => (
-                            <div key={srv.id} onClick={() => handleNavClick('services')}
+                            <div
+                              key={srv.id}
+                              onClick={() => {
+                                if (srv.slug && onSelectService) {
+                                  onSelectService(srv.slug);
+                                  setSearchTerm('');
+                                } else {
+                                  handleNavClick('services');
+                                }
+                              }}
                               className="p-2.5 hover:bg-cyan-950/50 cursor-pointer transition-colors border-b border-slate-800/60 last:border-0">
-                              <div className="flex items-center justify-between">
-                                <span className="text-xs font-bold text-cyan-300">{srv.name}</span>
-                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold">{srv.serviceType}</span>
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="text-xs font-bold text-cyan-300 truncate">{srv.name}</span>
+                                <span className="text-[10px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-semibold shrink-0">{srv.serviceType}</span>
                               </div>
                               <p className="text-[11px] text-slate-300 line-clamp-1 mt-0.5">{srv.description}</p>
                             </div>
@@ -268,7 +294,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                       {searchResults.districts.length > 0 && (
                         <div>
                           <div className="px-3 py-1.5 bg-cyan-950/90 flex items-center justify-between text-[11px] font-bold text-emerald-300">
-                            <span>8 Districts Service Coverage ({searchResults.districts.length})</span>
+                            <span>District Service Coverage ({searchResults.districts.length})</span>
                             <button onClick={() => handleNavClick('services')} className="text-emerald-400 hover:underline cursor-pointer">View Coverage →</button>
                           </div>
                           {searchResults.districts.map((dist) => {
@@ -408,7 +434,53 @@ export const Navbar: React.FC<NavbarProps> = ({
               onChange={(e) => { setSearchTerm(e.target.value); }}
               placeholder="Search cameras, Jovision, EZVIZ, DVR..."
               className="w-full bg-slate-900 text-xs sm:text-sm text-white placeholder-slate-400 rounded-lg pl-9 pr-8 py-2 border border-cyan-400/80 focus:border-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-400" />
+            {searchTerm && (
+              <button onClick={() => setSearchTerm('')} className="absolute right-2.5 text-xs text-slate-400 hover:text-white px-1">✕</button>
+            )}
           </div>
+          {searchTerm.trim().length > 0 && (searchResults.services.length > 0 || searchResults.districts.length > 0) && (
+            <div className="mt-2 max-h-60 overflow-y-auto rounded-lg border border-cyan-500/30 bg-slate-900/95 divide-y divide-slate-800">
+              {searchResults.services.slice(0, 3).map((srv) => (
+                <div
+                  key={srv.id}
+                  onClick={() => {
+                    setMobileSearchOpen(false);
+                    if (srv.slug && onSelectService) {
+                      onSelectService(srv.slug);
+                      setSearchTerm('');
+                    } else {
+                      handleNavClick('services');
+                    }
+                  }}
+                  className="px-3 py-2 flex items-center justify-between gap-2 text-xs text-cyan-300 hover:bg-cyan-950/60 cursor-pointer"
+                >
+                  <span className="font-bold truncate">{srv.name}</span>
+                  <span className="text-[10px] text-slate-400 shrink-0">{srv.serviceType}</span>
+                </div>
+              ))}
+              {searchResults.districts.slice(0, 3).map((dist) => (
+                <div
+                  key={dist.id}
+                  onClick={() => {
+                    setMobileSearchOpen(false);
+                    if (onSelectDistrict) {
+                      onSelectDistrict(dist.enName.toLowerCase());
+                      setSearchTerm('');
+                    } else {
+                      handleNavClick('services');
+                    }
+                  }}
+                  className="px-3 py-2 flex items-center justify-between text-xs text-emerald-300 hover:bg-emerald-950/40 cursor-pointer"
+                >
+                  <span className="font-bold flex items-center gap-1.5">
+                    <MapPin className="w-3 h-3 text-cyan-400" />
+                    <span>{dist.bnName} ({dist.enName})</span>
+                  </span>
+                  <span className="text-[10px]">Service Area →</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

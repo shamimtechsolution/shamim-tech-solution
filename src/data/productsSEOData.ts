@@ -1,7 +1,9 @@
 import { NEW_PRODUCTS_SEO_DATA } from './newProductsData';
+import { buildReversedProductsSEOData } from './reversedAndTechnicianSEOData';
 
 export interface ProductSEOInfo {
   slug: string;
+  canonicalSlug?: string;
   name: string;
   bnName: string;
   category: 'CCTV Cameras' | 'Recording Systems' | 'Storage & Power' | 'Cables & Connectors' | 'PABX & Intercom' | 'Access Control & Smart Locks' | 'Biometric Attendance' | 'LAN & Networking';
@@ -1825,3 +1827,6 @@ export const PRODUCTS_SEO_DATA: Record<string, ProductSEOInfo> = {
 
 // Merge 117 proposed product SEO entries seamlessly
 Object.assign(PRODUCTS_SEO_DATA, NEW_PRODUCTS_SEO_DATA);
+
+// Merge 50 reversed product SEO entries (Option A exact paired titles + canonicalSlug)
+Object.assign(PRODUCTS_SEO_DATA, buildReversedProductsSEOData(PRODUCTS_SEO_DATA));

@@ -732,6 +732,8 @@ export default function App() {
         products={products}
         onViewProduct={(product) => setSelectedProduct(product)}
         onSelectDistrict={navigateToDistrict}
+        onSelectService={navigateToService}
+        onSelectProduct={navigateToProduct}
         onNavigateHome={navigateToHome}
         onOpenContact={() => setIsContactModalOpen(true)}
       />

@@ -1,7 +1,9 @@
 import { NEW_SERVICES_SEO_DATA } from './newServicesData';
+import { buildReversedAndTechnicianServicesSEOData } from './reversedAndTechnicianSEOData';
 
 export interface ServiceSEOInfo {
   slug: string;
+  canonicalSlug?: string;
   name: string;
   bnName: string;
   category: 'CCTV & Surveillance' | 'Access Control' | 'PABX & Intercom' | 'Biometrics & Attendance' | 'Electrical Wiring' | 'Computer & LAN Networking';
@@ -1769,3 +1771,6 @@ export const SERVICES_SEO_DATA: Record<string, ServiceSEOInfo> = {
 
 // Merge 125 proposed service SEO entries seamlessly
 Object.assign(SERVICES_SEO_DATA, NEW_SERVICES_SEO_DATA);
+
+// Merge 50 reversed service entries (Option A) and 260 district technician entries
+Object.assign(SERVICES_SEO_DATA, buildReversedAndTechnicianServicesSEOData(SERVICES_SEO_DATA));

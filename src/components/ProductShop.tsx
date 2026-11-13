@@ -18,6 +18,7 @@ import {
 import { Product, ProductCategory } from '../types';
 import { COMPANY_INFO } from '../data/companyData';
 import { matchesProductCategory, getProductCategory } from '../utils/categoryHelper';
+import { matchesProductSearch } from '../utils/searchHelper';
 
 interface ProductShopProps {
   products: Product[];
@@ -68,68 +69,13 @@ export const ProductShop: React.FC<ProductShopProps> = ({
 
   const [sortBy] = useState<'featured' | 'price-asc' | 'price-desc'>('featured');
 
-  // Filter products by category and search keyword (intelligent multi-token search with requested keywords)
+  // Filter products by category and search keyword (word-order independent, Bangla synonyms, 10 districts)
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
       const matchesCategory = matchesProductCategory(item, selectedCategory);
-
       if (!matchesCategory) return false;
       if (!searchTerm.trim()) return true;
-
-      const rawQuery = searchTerm.toLowerCase().trim();
-      // Normalize common synonyms & misspellings (e.g. suply -> supply)
-      const query = rawQuery
-        .replace(/\bpower\s+suply\b/g, 'power supply')
-        .replace(/\bsuply\b/g, 'supply');
-
-      const productText = `${item.name} ${item.specs || ''} ${item.brand || ''} ${item.category || ''} ${item.description || ''} ${item.modelNumber || ''}`.toLowerCase();
-
-      // Direct full query substring match
-      if (productText.includes(query) || productText.includes(rawQuery)) return true;
-
-      // Special semantic matching for requested search options:
-      // 1. "cctv video balun", "video balun", "balun"
-      if (query.includes('video balun') || query.includes('balun')) {
-        if (productText.includes('balun') || productText.includes('transceiver') || item.category === 'Other Accessories') {
-          return true;
-        }
-      }
-
-      // 2. "cctv box adapter", "box adapter"
-      if (query.includes('box adapter') || query.includes('cctv box adapter')) {
-        if (productText.includes('box adapter') || productText.includes('fvl') || productText.includes('adapter')) {
-          return true;
-        }
-      }
-
-      // 3. "cctv adapter", "cctv power suply", "cctv power supply", "adapter"
-      if (query.includes('adapter') || query.includes('cctv adapter') || query.includes('power supply') || query.includes('power suply')) {
-        if (productText.includes('adapter') || item.category === 'Power Supply/Adapter' || productText.includes('power supply') || productText.includes('12v') || productText.includes('fvl')) {
-          return true;
-        }
-      }
-
-      // 4. IT store keywords ("startech", "star tech", "ryans", "datatech", "star tech rangpur", "cctv star tech")
-      // These shoppers are looking for top IT/CCTV hardware in Rangpur
-      const tokens = query.split(/\s+/).filter(Boolean);
-
-      const locationBrandTokens = new Set([
-        'rangpur', 'dinajpur', 'lalmonirhat', 'kurigram', 'nilphamari', 'gaibandha', 'thakurgaon', 'panchagarh',
-        'রংপুর', 'দিনাজপুর', 'লালমনিরহাট', 'কুড়িগ্রাম', 'নীলফামারী', 'গাইবান্ধা', 'ঠাকুরগাঁও', 'পঞ্চগড়',
-        'shamim', 'sts', 'bd', 'bangladesh', 'tech', 'solution', 'technology', 'শামীম',
-        'startech', 'star', 'ryans', 'datatech'
-      ]);
-
-      const stopWords = new Set(['and', 'in', 'of', 'for', 'the', 'to', 'with', 'on', 'ও', 'এবং']);
-
-      // Non-location / non-store tokens
-      const productTokens = tokens.filter(t => !locationBrandTokens.has(t) && !stopWords.has(t));
-
-      // If user typed only store/location keywords like "star tech", "startech", "ryans", "datatech", "star tech rangpur"
-      if (productTokens.length === 0) return true;
-
-      // Otherwise, all non-location tokens must match the product
-      return productTokens.every(t => productText.includes(t));
+      return matchesProductSearch(item, searchTerm);
     }).sort((a, b) => {
       const aIsContact = a.priceType === 'contact' || a.isContactForPrice;
       const bIsContact = b.priceType === 'contact' || b.isContactForPrice;

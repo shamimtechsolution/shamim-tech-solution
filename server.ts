@@ -1520,6 +1520,9 @@ async function startServer() {
     const service = SERVICES_SEO_DATA[serviceSlug.toLowerCase()];
     if (!service) return templateHtml;
 
+    const canonicalSlug = service.canonicalSlug || service.slug;
+    const canonicalUrl = `https://www.shamimtechsolution.com/services/${canonicalSlug}`;
+
     let modified = templateHtml;
     modified = modified.replace(/<title>.*?<\/title>/is, `<title>${service.title}</title>`);
     modified = modified.replace(
@@ -1528,7 +1531,7 @@ async function startServer() {
     );
     modified = modified.replace(
       /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/is,
-      `<link rel="canonical" href="https://www.shamimtechsolution.com/services/${service.slug}" />`
+      `<link rel="canonical" href="${canonicalUrl}" />`
     );
     modified = modified.replace(
       /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/is,
@@ -1540,7 +1543,7 @@ async function startServer() {
     );
     modified = modified.replace(
       /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/is,
-      `<meta property="og:url" content="https://www.shamimtechsolution.com/services/${service.slug}" />`
+      `<meta property="og:url" content="${canonicalUrl}" />`
     );
     modified = modified.replace(
       /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/is,
@@ -1556,7 +1559,7 @@ async function startServer() {
       "@graph": [
         {
           "@type": "Service",
-          "@id": `https://www.shamimtechsolution.com/services/${service.slug}#service`,
+          "@id": `${canonicalUrl}#service`,
           "name": service.name,
           "alternateName": service.bnName,
           "serviceType": service.category,
@@ -1578,14 +1581,14 @@ async function startServer() {
           "areaServed": [
             "Rangpur", "Haragachh", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
           ],
-          "url": `https://www.shamimtechsolution.com/services/${service.slug}`
+          "url": canonicalUrl
         },
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
             { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.shamimtechsolution.com/#services" },
-            { "@type": "ListItem", "position": 3, "name": service.name, "item": `https://www.shamimtechsolution.com/services/${service.slug}` }
+            { "@type": "ListItem", "position": 3, "name": service.name, "item": canonicalUrl }
           ]
         }
       ]
@@ -1598,6 +1601,9 @@ async function startServer() {
     const prod = PRODUCTS_SEO_DATA[productSlug.toLowerCase()];
     if (!prod) return templateHtml;
 
+    const canonicalSlug = prod.canonicalSlug || prod.slug;
+    const canonicalUrl = `https://www.shamimtechsolution.com/products/${canonicalSlug}`;
+
     let modified = templateHtml;
     modified = modified.replace(/<title>.*?<\/title>/is, `<title>${prod.title}</title>`);
     modified = modified.replace(
@@ -1606,7 +1612,7 @@ async function startServer() {
     );
     modified = modified.replace(
       /<link\s+rel="canonical"\s+href=".*?"\s*\/?>/is,
-      `<link rel="canonical" href="https://www.shamimtechsolution.com/products/${prod.slug}" />`
+      `<link rel="canonical" href="${canonicalUrl}" />`
     );
     modified = modified.replace(
       /<meta\s+property="og:title"\s+content=".*?"\s*\/?>/is,
@@ -1618,7 +1624,7 @@ async function startServer() {
     );
     modified = modified.replace(
       /<meta\s+property="og:url"\s+content=".*?"\s*\/?>/is,
-      `<meta property="og:url" content="https://www.shamimtechsolution.com/products/${prod.slug}" />`
+      `<meta property="og:url" content="${canonicalUrl}" />`
     );
     modified = modified.replace(
       /<meta\s+name="twitter:title"\s+content=".*?"\s*\/?>/is,
@@ -1634,7 +1640,7 @@ async function startServer() {
       "@graph": [
         {
           "@type": "Product",
-          "@id": `https://www.shamimtechsolution.com/products/${prod.slug}#product`,
+          "@id": `${canonicalUrl}#product`,
           "name": prod.name,
           "alternateName": prod.bnName,
           "description": prod.metaDescription,
@@ -1645,7 +1651,7 @@ async function startServer() {
           },
           "offers": {
             "@type": "Offer",
-            "url": `https://www.shamimtechsolution.com/products/${prod.slug}`,
+            "url": canonicalUrl,
             "priceCurrency": "BDT",
             "price": "1750",
             "availability": "https://schema.org/InStock",
@@ -1655,14 +1661,14 @@ async function startServer() {
               "telephone": "+8801790139333"
             }
           },
-          "url": `https://www.shamimtechsolution.com/products/${prod.slug}`
+          "url": canonicalUrl
         },
         {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
             { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.shamimtechsolution.com/#products" },
-            { "@type": "ListItem", "position": 3, "name": prod.name, "item": `https://www.shamimtechsolution.com/products/${prod.slug}` }
+            { "@type": "ListItem", "position": 3, "name": prod.name, "item": canonicalUrl }
           ]
         }
       ]

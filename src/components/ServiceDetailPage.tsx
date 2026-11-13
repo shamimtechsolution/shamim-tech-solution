@@ -73,13 +73,19 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
 
     // Canonical link
     let canonical = document.querySelector('link[rel="canonical"]');
-    const canonicalUrl = `https://www.shamimtechsolution.com/services/${serviceData.slug}`;
+    const canonicalSlug = serviceData.canonicalSlug || serviceData.slug;
+    const canonicalUrl = `https://www.shamimtechsolution.com/services/${canonicalSlug}`;
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', canonicalUrl);
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', canonicalUrl);
+    }
 
     // Dynamic JSON-LD Schema
     const scriptId = 'service-seo-jsonld';

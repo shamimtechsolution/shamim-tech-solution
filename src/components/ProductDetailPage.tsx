@@ -107,13 +107,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
     // Canonical link
     let canonical = document.querySelector('link[rel="canonical"]');
-    const canonicalUrl = `https://www.shamimtechsolution.com/products/${productData.slug}`;
+    const canonicalSlug = productData.canonicalSlug || productData.slug;
+    const canonicalUrl = `https://www.shamimtechsolution.com/products/${canonicalSlug}`;
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
     canonical.setAttribute('href', canonicalUrl);
+
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+    if (ogUrl) {
+      ogUrl.setAttribute('content', canonicalUrl);
+    }
 
     // Dynamic JSON-LD Schema
     const scriptId = 'product-seo-jsonld';
