@@ -375,7 +375,7 @@ export default function App() {
       let ogUrl = document.querySelector('meta[property="og:url"]');
       if (ogUrl) ogUrl.setAttribute('content', `https://www.shamimtechsolution.com/service-area/${dist.slug}`);
     } else if (!activeServiceSlug && !activeProductSlug) {
-      document.title = 'Shamim Tech Solution - CCTV, PABX, Security & IT Services in Rangpur Division';
+      document.title = 'Shamim Tech Solution • Security Sales & Service Bangladesh';
       const metaDesc = document.querySelector('meta[name="description"]');
       if (metaDesc) {
         metaDesc.setAttribute('content', 'শামীম টেক সলিউশন – রংপুর বিভাগে সিসিটিভি ক্যামেরা বিক্রয় ও সার্ভিসিং, আইপি ক্যামেরা সেটআপ, অ্যাক্সেস কন্ট্রোল ও ইলেকট্রিক্যাল সলিউশন। হটলাইন: 01790139333।');
