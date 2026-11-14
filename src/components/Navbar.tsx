@@ -198,9 +198,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full lg:bg-gradient-to-r lg:from-[#00234f] lg:via-[#0b3c78] lg:to-[#00234f] lg:border-b-2 lg:border-[#16a34a]/75 lg:shadow-xl lg:shadow-blue-950/40 lg:backdrop-blur-md overflow-visible">
+    <header className="sticky top-0 z-40 w-full lg:bg-gradient-to-r lg:from-[#00168c] lg:via-[#0024b0] lg:to-[#00168c] lg:border-b-2 lg:border-[#16a34a]/75 lg:shadow-xl lg:shadow-blue-950/40 lg:backdrop-blur-md overflow-visible">
 
-      <div className="w-full bg-gradient-to-r from-[#00234f] via-[#0b3c78] to-[#00234f] border-b-2 border-[#16a34a]/75 shadow-lg shadow-blue-950/35 lg:bg-none lg:border-b-0 lg:shadow-none">
+      <div className="w-full bg-gradient-to-r from-[#00168c] via-[#0024b0] to-[#00168c] border-b-2 border-[#16a34a]/75 shadow-lg shadow-blue-950/35 lg:bg-none lg:border-b-0 lg:shadow-none">
       <div className="max-w-[1536px] w-full mx-auto px-3 sm:px-4 lg:px-6 box-border">
         <div className="flex items-center justify-between h-[72px] sm:h-20 gap-2 w-full">
           
