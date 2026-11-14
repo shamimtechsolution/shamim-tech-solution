@@ -1,9 +1,13 @@
 import { NEW_PRODUCTS_SEO_DATA } from './newProductsData';
 import { buildReversedProductsSEOData } from './reversedAndTechnicianSEOData';
+import { DVR_NVR_SEO_DATA } from './dvrNvrSEOData';
+import { WIFI_CAMERA_SEO_DATA } from './wifiCameraSEOData';
 
 export interface ProductSEOInfo {
   slug: string;
   canonicalSlug?: string;
+  noindex?: boolean;
+  isInquiryOnly?: boolean;
   name: string;
   bnName: string;
   category: 'CCTV Cameras' | 'Recording Systems' | 'Storage & Power' | 'Cables & Connectors' | 'PABX & Intercom' | 'Access Control & Smart Locks' | 'Biometric Attendance' | 'LAN & Networking';
@@ -1830,3 +1834,9 @@ Object.assign(PRODUCTS_SEO_DATA, NEW_PRODUCTS_SEO_DATA);
 
 // Merge 50 reversed product SEO entries (Option A exact paired titles + canonicalSlug)
 Object.assign(PRODUCTS_SEO_DATA, buildReversedProductsSEOData(PRODUCTS_SEO_DATA));
+
+// Merge 1,920 DVR/NVR SEO entries (240 primary canonical URLs + 1,680 canonical/noindex variants)
+Object.assign(PRODUCTS_SEO_DATA, DVR_NVR_SEO_DATA);
+
+// Merge 320 WiFi Camera SEO entries (40 primary canonical URLs + 280 canonical/noindex variants)
+Object.assign(PRODUCTS_SEO_DATA, WIFI_CAMERA_SEO_DATA);

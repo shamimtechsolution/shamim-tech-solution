@@ -87,8 +87,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     return p.category === 'Cables & Connectors' || p.category === 'LAN & Networking';
   });
 
-  // Top representative catalog product for image
-  const primaryCatalogItem = matchingCatalogItems[0] || products[0];
+  // Top representative catalog product for image (never fall back to unrelated items on inquiry-only SEO pages)
+  const primaryCatalogItem = matchingCatalogItems[0] || (productData.isInquiryOnly ? null : products[0]);
 
   // Update document title, meta tags, and JSON-LD schema
   useEffect(() => {
@@ -121,6 +121,20 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       ogUrl.setAttribute('content', canonicalUrl);
     }
 
+    // Robots meta tag for non-canonical duplicate variants
+    let dynamicRobots = document.querySelector('meta[name="robots"][data-dynamic-robots="true"]');
+    if (productData.noindex) {
+      if (!dynamicRobots) {
+        dynamicRobots = document.createElement('meta');
+        dynamicRobots.setAttribute('name', 'robots');
+        dynamicRobots.setAttribute('data-dynamic-robots', 'true');
+        document.head.appendChild(dynamicRobots);
+      }
+      dynamicRobots.setAttribute('content', 'noindex, follow');
+    } else if (dynamicRobots) {
+      dynamicRobots.remove();
+    }
+
     // Dynamic JSON-LD Schema
     const scriptId = 'product-seo-jsonld';
     let script = document.getElementById(scriptId) as HTMLScriptElement | null;
@@ -146,11 +160,20 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             "@type": "Brand",
             "name": "Hikvision / Dahua / ZKTeco / Imou"
           },
-          "offers": {
+          "offers": primaryCatalogItem || !productData.isInquiryOnly ? {
             "@type": "Offer",
             "priceCurrency": "BDT",
             "price": primaryCatalogItem?.price || 1850,
             "availability": "https://schema.org/InStock",
+            "seller": {
+              "@type": "LocalBusiness",
+              "name": "Shamim Tech Solution",
+              "telephone": companyInfo.phone || "01790139333",
+              "url": "https://www.shamimtechsolution.com/"
+            }
+          } : {
+            "@type": "Offer",
+            "url": canonicalUrl,
             "seller": {
               "@type": "LocalBusiness",
               "name": "Shamim Tech Solution",
@@ -199,6 +222,13 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
     script.textContent = JSON.stringify(jsonLdData);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    return () => {
+      const staleRobots = document.querySelector('meta[name="robots"][data-dynamic-robots="true"]');
+      if (staleRobots) {
+        staleRobots.remove();
+      }
+    };
   }, [productData, primaryCatalogItem, companyInfo]);
 
   // WhatsApp click handler
@@ -260,11 +290,11 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   className="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-100 border border-cyan-300 text-[11px] font-bold text-cyan-800 shadow-xs">
-                  {primaryCatalogItem?.brand || 'Hikvision / Dahua'}
+                  {primaryCatalogItem?.brand || (productData.isInquiryOnly ? productData.name.split(' ')[0] : 'Hikvision / Dahua')}
                 </div>
                 <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-[11px] font-bold text-emerald-800 flex items-center gap-1 shadow-xs">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span>In Stock</span>
+                  <span>{productData.isInquiryOnly && !primaryCatalogItem ? 'মূল্য যাচাই করুন' : 'In Stock'}</span>
                 </div>
               </div>
 

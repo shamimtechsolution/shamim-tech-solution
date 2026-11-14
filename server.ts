@@ -1635,6 +1635,33 @@ async function startServer() {
       `<meta name="twitter:description" content="${prod.metaDescription.replace(/"/g, '&quot;')}" />`
     );
 
+    if (prod.noindex) {
+      modified = modified.replace('</head>', `<meta name="robots" content="noindex, follow" />\n</head>`);
+    }
+
+    const offerData = prod.isInquiryOnly
+      ? {
+          "@type": "Offer",
+          "url": canonicalUrl,
+          "seller": {
+            "@type": "Organization",
+            "name": "SHAMIM TECH SOLUTION",
+            "telephone": "+8801790139333"
+          }
+        }
+      : {
+          "@type": "Offer",
+          "url": canonicalUrl,
+          "priceCurrency": "BDT",
+          "price": "1750",
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@type": "Organization",
+            "name": "SHAMIM TECH SOLUTION",
+            "telephone": "+8801790139333"
+          }
+        };
+
     const productSchema = {
       "@context": "https://schema.org",
       "@graph": [
@@ -1647,20 +1674,9 @@ async function startServer() {
           "category": prod.category,
           "brand": {
             "@type": "Brand",
-            "name": "SHAMIM TECH SOLUTION"
+            "name": prod.isInquiryOnly ? prod.name.split(' ')[0] : "SHAMIM TECH SOLUTION"
           },
-          "offers": {
-            "@type": "Offer",
-            "url": canonicalUrl,
-            "priceCurrency": "BDT",
-            "price": "1750",
-            "availability": "https://schema.org/InStock",
-            "seller": {
-              "@type": "Organization",
-              "name": "SHAMIM TECH SOLUTION",
-              "telephone": "+8801790139333"
-            }
-          },
+          "offers": offerData,
           "url": canonicalUrl
         },
         {
@@ -1673,6 +1689,7 @@ async function startServer() {
         }
       ]
     };
+
     modified = modified.replace('</head>', `<script type="application/ld+json">${JSON.stringify(productSchema)}</script>\n</head>`);
     return modified;
   };
