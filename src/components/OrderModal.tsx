@@ -174,7 +174,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm overflow-y-auto animate-fadeIn">
       <div 
-        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl my-auto rounded-2xl bg-white border-2 border-sky-300 p-4 sm:p-6 shadow-2xl text-slate-800 max-h-[85vh] overflow-y-auto"
+        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl my-auto rounded-2xl bg-white border-2 border-[#05b802]/65 p-4 sm:p-6 shadow-2xl text-slate-800 max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
@@ -210,16 +210,16 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             </div>
 
             {/* Receipt Box */}
-            <div className="p-3.5 rounded-xl bg-sky-50/80 border border-sky-200 text-left text-xs space-y-2.5 text-slate-700">
-              <div className="flex justify-between border-b border-sky-100 pb-1.5">
+            <div className="p-3.5 rounded-xl bg-sky-50/80 border border-[#05b802]/45 text-left text-xs space-y-2.5 text-slate-700">
+              <div className="flex justify-between border-b border-[#05b802]/25 pb-1.5">
                 <span className="text-slate-500">Delivery Address:</span>
                 <span className="font-semibold text-right text-slate-900">{confirmedOrder.fullAddress}, {confirmedOrder.district}</span>
               </div>
-              <div className="flex justify-between border-b border-sky-100 pb-1.5">
+              <div className="flex justify-between border-b border-[#05b802]/25 pb-1.5">
                 <span className="text-slate-500">Contact Number:</span>
                 <span className="font-mono font-semibold text-cyan-700">{confirmedOrder.mobileNumber}</span>
               </div>
-              <div className="flex justify-between border-b border-sky-100 pb-1.5">
+              <div className="flex justify-between border-b border-[#05b802]/25 pb-1.5">
                 <span className="text-slate-500">Payment Option:</span>
                 <span className="font-semibold text-slate-900">{confirmedOrder.paymentMethod}</span>
               </div>
@@ -275,7 +275,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
 
             {/* Customer Status Banner */}
             {customer ? (
-              <div className="mb-3.5 p-2.5 rounded-xl bg-sky-50 border border-sky-200 flex items-center justify-between text-xs">
+              <div className="mb-3.5 p-2.5 rounded-xl bg-sky-50 border border-[#05b802]/45 flex items-center justify-between text-xs">
                 <div className="flex items-center gap-2 text-cyan-800">
                   <User className="w-4 h-4 text-cyan-600" />
                   <span>
@@ -289,8 +289,8 @@ export const OrderModal: React.FC<OrderModalProps> = ({
             ) : null}
 
             {/* Order Items Preview summary */}
-            <div className="mb-4 p-3 rounded-xl bg-sky-50/70 border border-sky-200 text-xs space-y-2">
-              <div className="font-bold text-slate-700 font-tech uppercase text-[11px] border-b border-sky-200 pb-1">
+            <div className="mb-4 p-3 rounded-xl bg-sky-50/70 border border-[#05b802]/45 text-xs space-y-2">
+              <div className="font-bold text-slate-700 font-tech uppercase text-[11px] border-b border-[#05b802]/25 pb-1">
                 Selected Products ({items.length} item{items.length > 1 ? 's' : ''}):
               </div>
               <div className="max-h-24 overflow-y-auto space-y-1.5 pr-1">
@@ -309,7 +309,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   </div>
                 ))}
               </div>
-              <div className="pt-2 border-t border-sky-200 flex justify-between font-bold text-xs text-slate-900">
+              <div className="pt-2 border-t border-[#05b802]/25 flex justify-between font-bold text-xs text-slate-900">
                 <span>Subtotal:</span>
                 <span className="text-cyan-800 font-mono">৳ {subtotal.toLocaleString('en-US')}</span>
               </div>
@@ -330,7 +330,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     value={formData.customerName}
                     onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
                     placeholder="e.g. Md. Ashraful Islam"
-                    className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-[#05b802]/50 focus:border-[#05b802] focus:outline-none shadow-xs"
                   />
                   <User className="w-4 h-4 text-cyan-600 absolute left-3 top-2 sm:top-2.5" />
                 </div>
@@ -350,7 +350,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       value={formData.mobileNumber}
                       onChange={(e) => setFormData({ ...formData, mobileNumber: e.target.value })}
                       placeholder="01XXXXXXXXX"
-                      className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-[#05b802]/50 focus:border-[#05b802] focus:outline-none shadow-xs"
                     />
                     <Phone className="w-4 h-4 text-cyan-600 absolute left-3 top-2 sm:top-2.5" />
                   </div>
@@ -367,7 +367,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       value={formData.whatsappNumber}
                       onChange={(e) => setFormData({ ...formData, whatsappNumber: e.target.value })}
                       placeholder="Optional (if different from mobile)"
-                      className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
+                      className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-[#05b802]/50 focus:border-[#05b802] focus:outline-none shadow-xs"
                     />
                     <MessageSquare className="w-4 h-4 text-emerald-600 absolute left-3 top-2 sm:top-2.5" />
                   </div>
@@ -383,7 +383,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   <select
                     value={formData.district}
                     onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                    className="w-full bg-white text-sm text-slate-900 rounded-xl px-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none cursor-pointer shadow-xs"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl px-3 py-1.5 sm:py-2 border border-[#05b802]/50 focus:border-[#05b802] focus:outline-none cursor-pointer shadow-xs"
                   >
                     {DISTRICTS_LIST.map((dist) => (
                       <option key={dist} value={dist} className="bg-white text-slate-900">
@@ -400,7 +400,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   <select
                     value={formData.deliveryOption}
                     onChange={(e) => setFormData({ ...formData, deliveryOption: e.target.value as any })}
-                    className="w-full bg-white text-sm text-slate-900 rounded-xl px-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none cursor-pointer shadow-xs"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl px-3 py-1.5 sm:py-2 border border-[#05b802]/50 focus:border-[#05b802] focus:outline-none cursor-pointer shadow-xs"
                   >
                     <option value="Rangpur Division Delivery">Rangpur Division Delivery (৳50)</option>
                     <option value="Rangpur City Express">Rangpur City Express (৳100)</option>
@@ -421,7 +421,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                     value={formData.fullAddress}
                     onChange={(e) => setFormData({ ...formData, fullAddress: e.target.value })}
                     placeholder="e.g. Hospital Road, Sadar, Rangpur / Dinajpur"
-                    className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-sky-300 focus:border-cyan-500 focus:outline-none shadow-xs"
+                    className="w-full bg-white text-sm text-slate-900 rounded-xl pl-9 pr-3 py-1.5 sm:py-2 border border-[#05b802]/50 focus:border-[#05b802] focus:outline-none shadow-xs"
                   />
                   <MapPin className="w-4 h-4 text-cyan-600 absolute left-3 top-2.5" />
                 </div>
@@ -446,8 +446,8 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                       onClick={() => setFormData({ ...formData, paymentMethod: method as any })}
                       className={`p-2 rounded-xl text-center font-bold border transition-all cursor-pointer ${
                         formData.paymentMethod === method
-                          ? 'bg-cyan-600 text-white border-cyan-600 shadow-sm'
-                          : 'bg-slate-50 text-slate-700 border-sky-200 hover:border-sky-300'
+                          ? 'bg-cyan-600 text-white border-[#05b802] shadow-sm'
+                          : 'bg-slate-50 text-slate-700 border-[#05b802]/40 hover:border-[#05b802]'
                       }`}
                     >
                       {method}
@@ -457,7 +457,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
               </div>
 
               {/* Total Calculation Display */}
-              <div className="p-3 rounded-xl bg-sky-100/70 border border-sky-300 flex items-center justify-between text-xs sm:text-sm">
+              <div className="p-3 rounded-xl bg-sky-100/70 border border-[#05b802]/50 flex items-center justify-between text-xs sm:text-sm">
                 <div>
                   <span className="text-slate-600 block text-[11px]">Subtotal: ৳{subtotal.toLocaleString('en-US')} + Delivery: ৳{deliveryFee}</span>
                   <span className="text-slate-900 font-bold">Total Order Amount:</span>

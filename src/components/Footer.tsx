@@ -58,13 +58,13 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-gradient-to-b from-sky-100 via-blue-100/60 to-sky-100 text-slate-700 border-t-2 border-sky-300 pt-16 pb-8 relative overflow-hidden">
+    <footer className="bg-gradient-to-b from-[#e4faed] via-white to-[#e8f5fe] text-slate-700 border-t-2 border-[#05b802]/65 pt-16 pb-8 relative overflow-hidden">
       {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
-      <div className="absolute -bottom-16 left-1/4 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-px bg-gradient-to-r from-transparent via-[#05b802]/55 to-transparent" />
+      <div className="absolute -bottom-16 left-1/4 w-80 h-80 bg-gradient-to-r from-emerald-300/25 to-sky-200/25 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-sky-200/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#05b802]/35">
           
           {/* Col 1: Branding & Slogan (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-4">
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({
                 : 'Certified CCTV technician & security system service provider across Rangpur Division (রংপুর বিভাগ). Expert camera installation, DVR/NVR configuration, IP setups, electrical and biometric security solutions.'}
             </p>
 
-            <div className="p-3.5 rounded-xl bg-white border-2 border-sky-200 text-xs text-slate-700 font-tech shadow-sm">
+            <div className="p-3.5 rounded-xl bg-white border-2 border-[#05b802]/50 text-xs text-slate-700 font-tech shadow-sm">
               <span className="block text-[11px] text-slate-500 uppercase font-mono font-bold">Company Motto:</span>
               <span className="text-sm font-bold text-slate-900">"{activeCompany.slogan}"</span>
               <span className="block text-[11px] text-cyan-700 font-bangla font-semibold mt-0.5">
@@ -97,7 +97,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 2: Quick Links (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-sky-200/80 pb-2">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-[#05b802]/35 pb-2">
               Navigation
             </h4>
             <ul className="space-y-2 text-xs font-medium">
@@ -121,7 +121,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 3: Core Services (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-sky-200/80 pb-2">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-[#05b802]/35 pb-2">
               Popular Services
             </h4>
             <ul className="space-y-2 text-xs text-slate-600 font-medium">
@@ -138,7 +138,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 4: Official Contact (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-sky-200/80 pb-2">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-[#05b802]/35 pb-2">
               Official Contact
             </h4>
             <div className="space-y-3 text-xs">
@@ -146,7 +146,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <span className="text-[11px] text-slate-500 block uppercase font-tech font-bold mb-1">Helpline & Direct Phone:</span>
                 <div className="flex flex-col gap-1">
                   <a href={`tel:${activeCompany.phone || '01790139333'}`} className="font-mono text-cyan-700 font-bold hover:underline flex items-center gap-1.5">
-                    <span className="text-[9px] bg-cyan-100 text-cyan-800 font-bold px-1 rounded border border-cyan-300">Main</span>
+                    <span className="text-[9px] bg-cyan-100 text-cyan-800 font-bold px-1 rounded border border-[#05b802]/50">Main</span>
                     <span>{activeCompany.phone || '01790139333'}</span>
                   </a>
                   <a href={`tel:${activeCompany.secondaryPhone || '01865321530'}`} className="font-mono text-blue-700 font-bold hover:underline flex items-center gap-1.5">
@@ -196,7 +196,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* 8 Districts Service Area Band */}
-        <div className="py-6 border-b border-sky-200/80">
+        <div className="py-6 border-b border-[#05b802]/35">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
               <span className="text-xs font-bold text-slate-900 font-tech uppercase tracking-wider block">
@@ -228,7 +228,7 @@ export const Footer: React.FC<FooterProps> = ({
                       onSelectDistrict(dist.slug);
                     }
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-cyan-50 border border-sky-200 hover:border-cyan-400 text-xs text-slate-700 hover:text-cyan-800 font-medium transition-all shadow-sm flex items-center gap-1 cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-cyan-50 border border-[#05b802]/45 hover:border-[#05b802] text-xs text-slate-700 hover:text-cyan-800 font-medium transition-all shadow-sm flex items-center gap-1 cursor-pointer"
                   title={`CCTV Camera Price & Service in ${dist.en}`}
                 >
                   <span className="font-bangla font-semibold text-cyan-800">{dist.bn}</span>
@@ -257,7 +257,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
-            <span className="text-[11px] text-cyan-800 bg-sky-100 px-3 py-1 rounded-full border border-sky-300 font-bold flex items-center gap-1 shadow-sm">
+            <span className="text-[11px] text-cyan-800 bg-sky-100 px-3 py-1 rounded-full border border-[#05b802]/60 font-bold flex items-center gap-1 shadow-sm">
               <Shield className="w-3.5 h-3.5 text-cyan-600" />
               <span>Certified Security & CCTV Technician</span>
             </span>
@@ -277,7 +277,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-white hover:bg-sky-50 text-slate-600 hover:text-cyan-700 border-2 border-sky-200 transition-colors cursor-pointer shadow-sm"
+              className="p-2 rounded-lg bg-white hover:bg-sky-50 text-slate-600 hover:text-cyan-700 border-2 border-[#05b802]/50 transition-colors cursor-pointer shadow-sm"
               title="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />

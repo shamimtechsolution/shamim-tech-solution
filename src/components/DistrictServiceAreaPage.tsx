@@ -224,7 +224,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
   return (
     <div className="bg-slate-50 text-slate-800 min-h-screen">
       {/* Top Breadcrumb Navigation Bar */}
-      <div className="bg-white border-b border-sky-200 sticky top-16 z-30 shadow-xs">
+      <div className="bg-white border-b border-[#05b802]/35 sticky top-16 z-30 shadow-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between flex-wrap gap-2 text-xs">
           <nav className="flex items-center gap-1.5 text-slate-500 font-medium">
             <button 
@@ -237,7 +237,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
             <ChevronRight className="w-3 h-3 text-slate-300" />
             <span className="text-slate-400">সার্ভিস এরিয়া</span>
             <ChevronRight className="w-3 h-3 text-slate-300" />
-            <span className="text-cyan-700 font-bold bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
+            <span className="text-cyan-700 font-bold bg-cyan-50 px-2 py-0.5 rounded border border-[#05b802]/45">
               {districtData.enName} ({districtData.bnName})
             </span>
           </nav>
@@ -260,7 +260,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(6,182,212,0.15),transparent_70%)] pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-[#06D002]/60 text-cyan-300 text-xs font-semibold uppercase tracking-wider mb-4">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             <span>Rangpur Division Local Service & Product Hub • {districtData.enName}</span>
           </div>
@@ -326,7 +326,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
       </section>
 
       {/* 8 Districts Navigation Pills */}
-      <section className="bg-white border-b border-sky-200 py-4 shadow-2xs">
+      <section className="bg-white border-b border-[#05b802]/35 py-4 shadow-2xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
             <span className="text-xs font-bold text-slate-700 shrink-0 uppercase tracking-wider font-tech flex items-center gap-1">
@@ -402,7 +402,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         {(activeTab === 'all' || activeTab === 'products') && (
           <section id="district-product-sales" className="space-y-6">
             <div className="text-center max-w-3xl mx-auto">
-              <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
+              <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-[#05b802]/45">
                 Product Sales • {districtData.enName}
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-2">
@@ -417,12 +417,12 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
               {(districtData.productSalesItems || []).map((prod) => (
                 <div 
                   key={prod.id}
-                  className="bg-white rounded-2xl p-5 border border-sky-200 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                  className="bg-white rounded-2xl p-5 border border-[#05b802]/45 hover:border-[#05b802] shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
                 >
                   <div>
                     {/* Search Query Pill */}
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-cyan-200">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded border border-[#05b802]/40">
                         <Tag className="w-2.5 h-2.5" />
                         <span>Google Search: "{prod.searchQuery}"</span>
                       </span>
@@ -454,7 +454,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
                     <button
                       onClick={() => handleFilterProductCategory(prod.categoryFilter)}
-                      className="flex-1 py-1.5 px-2 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-cyan-800 text-xs font-bold text-center border border-cyan-200 transition-colors cursor-pointer"
+                      className="flex-1 py-1.5 px-2 rounded-lg bg-cyan-50 hover:bg-cyan-100 text-cyan-800 text-xs font-bold text-center border border-[#05b802]/45 transition-colors cursor-pointer"
                     >
                       <span>লাইভ স্টক দেখুন →</span>
                     </button>
@@ -474,10 +474,10 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         )}
 
         {/* 2. REAL PRODUCT CATALOG WITH LIVE PRICING IN BDT */}
-        <section id="district-live-products" className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm space-y-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-sky-100 pb-5">
+        <section id="district-live-products" className="bg-white rounded-2xl p-6 sm:p-8 border border-[#05b802]/45 shadow-sm space-y-6">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-[#05b802]/25 pb-5">
             <div>
-              <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-2.5 py-0.5 rounded border border-cyan-200">
+              <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-2.5 py-0.5 rounded border border-[#05b802]/45">
                 Genuine Products • Live Database
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-1">
@@ -521,7 +521,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
             {filteredProducts.slice(0, 12).map((item) => (
               <div 
                 key={item.id}
-                className="bg-white rounded-xl border-2 border-slate-200 hover:border-cyan-400 p-4 transition-all hover:shadow-md flex flex-col justify-between group"
+                className="bg-white rounded-xl border-2 border-slate-200 hover:border-[#05b802] p-4 transition-all hover:shadow-md flex flex-col justify-between group"
               >
                 <div>
                   {/* Image Container */}
@@ -591,7 +591,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                   <div className="grid grid-cols-2 gap-1.5">
                     <button
                       onClick={() => onAddToCart(item)}
-                      className="py-1.5 px-2 rounded-lg bg-slate-100 hover:bg-cyan-50 text-slate-800 hover:text-cyan-800 text-[11px] font-bold border border-slate-200 hover:border-cyan-300 transition-all flex items-center justify-center gap-1 cursor-pointer"
+                      className="py-1.5 px-2 rounded-lg bg-slate-100 hover:bg-cyan-50 text-slate-800 hover:text-cyan-800 text-[11px] font-bold border border-slate-200 hover:border-[#05b802] transition-all flex items-center justify-center gap-1 cursor-pointer"
                     >
                       <ShoppingCart className="w-3 h-3 text-cyan-600" />
                       <span>কার্টে যোগ</span>
@@ -624,7 +624,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         {(activeTab === 'all' || activeTab === 'services') && (
           <section id="district-technician-services" className="space-y-6">
             <div className="text-center max-w-3xl mx-auto">
-              <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-cyan-200">
+              <span className="text-xs font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-3 py-1 rounded-full border border-[#05b802]/45">
                 Technician & Field Services • {districtData.enName}
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-2">
@@ -639,7 +639,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
               {(districtData.technicianServiceItems || []).map((tech) => (
                 <div 
                   key={tech.id}
-                  className="bg-white rounded-2xl p-6 border border-sky-200 hover:border-cyan-400 shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
+                  className="bg-white rounded-2xl p-6 border border-[#05b802]/45 hover:border-[#05b802] shadow-xs hover:shadow-md transition-all flex flex-col justify-between"
                 >
                   <div>
                     {/* Search Query Pill */}
@@ -650,7 +650,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                       </span>
                     </div>
 
-                    <div className="w-10 h-10 rounded-xl bg-cyan-50 border border-cyan-200 text-cyan-700 flex items-center justify-center font-bold text-base mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-cyan-50 border border-[#05b802]/45 text-cyan-700 flex items-center justify-center font-bold text-base mb-3">
                       <Wrench className="w-5 h-5" />
                     </div>
 
@@ -700,8 +700,8 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         )}
 
         {/* 4. LOCAL COVERAGE & UPAZILAS */}
-        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm">
-          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-sky-100 pb-4 mb-6">
+        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-[#05b802]/45 shadow-sm">
+          <div className="flex items-center justify-between flex-wrap gap-2 border-b border-[#05b802]/25 pb-4 mb-6">
             <div>
               <h2 className="text-lg sm:text-xl font-black text-slate-900 font-tech">
                 Service Area Coverage in {districtData.enName} District (সেবা অঞ্চল ও উপজেলা)
@@ -710,7 +710,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
                 {districtData.enName} জেলার নিচের সকল উপজেলা এবং সংলগ্ন বাণিজ্যিক অঞ্চলে আমাদের অন-সাইট টেকনিশিয়ান সার্ভিস চালু রয়েছে:
               </p>
             </div>
-            <span className="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-full border border-cyan-200">
+            <span className="text-[11px] font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-full border border-[#05b802]/45">
               {districtData.upazilas.length}টি প্রধান এলাকা / উপজেলা
             </span>
           </div>
@@ -719,7 +719,7 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
             {districtData.upazilas.map((upazila, idx) => (
               <div 
                 key={idx}
-                className="p-3 rounded-xl bg-slate-50 hover:bg-cyan-50 border border-slate-200/80 hover:border-cyan-300 text-xs font-semibold text-slate-700 hover:text-cyan-900 transition-all flex items-center gap-2 shadow-2xs"
+                className="p-3 rounded-xl bg-slate-50 hover:bg-cyan-50 border border-slate-200/80 hover:border-[#05b802] text-xs font-semibold text-slate-700 hover:text-cyan-900 transition-all flex items-center gap-2 shadow-2xs"
               >
                 <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
                 <span className="truncate">{upazila}</span>
@@ -790,10 +790,10 @@ export const DistrictServiceAreaPage: React.FC<DistrictServiceAreaPageProps> = (
         </section>
 
         {/* 6. FREQUENTLY ASKED QUESTIONS (Accordion) */}
-        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-sky-200 shadow-sm">
+        <section className="bg-white rounded-2xl p-6 sm:p-8 border border-[#05b802]/45 shadow-sm">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-6">
-              <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-2.5 py-0.5 rounded border border-cyan-200">
+              <span className="text-[11px] font-bold text-cyan-700 uppercase tracking-widest font-tech bg-cyan-50 px-2.5 py-0.5 rounded border border-[#05b802]/45">
                 FAQs • {districtData.enName}
               </span>
               <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-tech mt-1">

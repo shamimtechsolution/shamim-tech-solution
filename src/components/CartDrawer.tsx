@@ -48,16 +48,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
       <div className="fixed inset-y-0 right-0 w-full max-w-full flex justify-end">
         
-<div className="w-full max-w-sm h-full min-w-0 bg-gradient-to-b from-[#091124] to-[#040814] border-l border-cyan-500/30 text-slate-100 flex flex-col shadow-2xl">
+<div className="w-full max-w-sm h-full min-w-0 bg-gradient-to-b from-[#091124] to-[#040814] border-l border-[#06D002]/50 text-slate-100 flex flex-col shadow-2xl">
           
           {/* Header */}
-          <div className="p-4 sm:p-6 border-b border-cyan-950/80 flex items-center justify-between bg-slate-900/60">
+          <div className="p-4 sm:p-6 border-b border-[#06D002]/35 flex items-center justify-between bg-slate-900/60">
             <div className="flex items-center gap-2">
               <ShoppingBag className="w-5 h-5 text-cyan-400" />
               <h2 className="text-lg font-bold font-tech text-white">
                 Your Shopping Cart
               </h2>
-              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-cyan-950 text-cyan-300 border border-[#06D002]/50">
                 {items.reduce((sum, item) => sum + item.quantity, 0)} items
               </span>
             </div>
@@ -89,7 +89,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               items.map(({ product, quantity }) => (
                 <div
                   key={product.id}
-                  className="flex gap-3 p-3 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-cyan-900/60 transition-all"
+                  className="flex gap-3 p-3 rounded-xl bg-slate-900/80 border border-[#06D002]/35 hover:border-[#06D002]/80 transition-all"
                 >
                   {/* Thumbnail */}
                   <div className="w-20 h-20 rounded-lg overflow-hidden bg-slate-950 shrink-0 border border-slate-800">
@@ -162,7 +162,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Footer & Checkout button */}
           {items.length > 0 && (
-            <div className="p-4 sm:p-6 border-t border-cyan-950/80 bg-slate-900/90 space-y-4">
+            <div className="p-4 sm:p-6 border-t border-[#06D002]/35 bg-slate-900/90 space-y-4">
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between text-slate-300">
                   <span>Subtotal</span>

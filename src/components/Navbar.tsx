@@ -198,8 +198,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-gradient-to-r from-[#00234f] via-[#0b3c78] to-[#00234f] border-b-2 border-cyan-400/60 shadow-xl shadow-blue-950/40 backdrop-blur-md overflow-visible">
+    <header className="sticky top-0 z-40 w-full lg:bg-gradient-to-r lg:from-[#00234f] lg:via-[#0b3c78] lg:to-[#00234f] lg:border-b-2 lg:border-[#16a34a]/75 lg:shadow-xl lg:shadow-blue-950/40 lg:backdrop-blur-md overflow-visible">
 
+      <div className="w-full bg-gradient-to-r from-[#00234f] via-[#0b3c78] to-[#00234f] border-b-2 border-[#16a34a]/75 shadow-lg shadow-blue-950/35 lg:bg-none lg:border-b-0 lg:shadow-none">
       <div className="max-w-[1536px] w-full mx-auto px-3 sm:px-4 lg:px-6 box-border">
         <div className="flex items-center justify-between h-[72px] sm:h-20 gap-2 w-full">
           
@@ -208,7 +209,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               if (onNavigateHome) onNavigateHome();
               handleNavClick('home');
             }}
-            className="flex items-center text-left focus:outline-none group cursor-pointer shrink-0 min-w-0 max-w-[150px] sm:max-w-none"
+            className="flex items-center text-left focus:outline-none group cursor-pointer min-w-0 flex-1 sm:flex-initial sm:shrink-0"
             title={activeCompany.name}
           >
             <STSLogo size="md" theme="dark" />
@@ -220,10 +221,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               const isActive = activeSection === item.id;
               return (
                 <button key={item.id} onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center gap-1 px-2.5 py-2 rounded-lg text-[11px] 2xl:text-xs font-semibold transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                    isActive ? 'bg-cyan-500 text-slate-950 font-bold shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'text-sky-100 hover:text-white hover:bg-white/15'
+                  className={`flex items-center gap-1 px-2.5 py-2 bg-transparent border-0 focus:outline-none text-xs 2xl:text-[13px] font-tech font-extrabold tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap ${
+                    isActive ? 'text-[#4ade80]' : 'text-[#22c55e] hover:text-[#4ade80]'
                   }`}>
-                  <Icon className={`w-3.5 h-3.5 hidden 2xl:inline-block ${isActive ? 'text-slate-950' : 'text-cyan-300'}`} />
+                  <Icon className={`w-3.5 h-3.5 hidden 2xl:inline-block ${isActive ? 'text-[#4ade80]' : 'text-[#22c55e]'}`} />
                   <span>{item.label}</span>
                 </button>
               );
@@ -236,11 +237,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               <input type="text" value={searchTerm}
                 onChange={(e) => { setSearchTerm(e.target.value); if (e.target.value && activeSection !== 'products') handleNavClick('products'); }}
                 placeholder="Search camera, DVR..."
-                className="w-full bg-slate-900/90 text-xs sm:text-sm text-white placeholder-slate-400 rounded-full pl-8 pr-7 py-1.5 border border-cyan-800/60 focus:border-cyan-400 focus:bg-slate-950 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all shadow-inner" />
+                className="w-full bg-slate-900/90 text-xs sm:text-sm text-white placeholder-slate-400 rounded-full pl-8 pr-7 py-1.5 border border-[#05b802]/50 focus:border-[#06D002] focus:bg-slate-950 focus:outline-none focus:ring-1 focus:ring-[#06D002] transition-all shadow-inner" />
               <Search className="w-3.5 h-3.5 text-cyan-400 absolute left-2.5 top-2.5 pointer-events-none" />
               {searchTerm && <button onClick={() => setSearchTerm('')} className="absolute right-2.5 top-2 text-xs text-slate-400 hover:text-white px-1">✕</button>}
               {searchTerm.trim().length > 0 && (
-                <div className="absolute top-full right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-cyan-500/50 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn w-[320px] sm:w-[380px] max-w-[90vw] max-h-[460px] overflow-y-auto">
+                <div className="absolute top-full right-0 mt-2 bg-slate-950/98 backdrop-blur-md border border-[#06D002]/60 rounded-xl shadow-2xl overflow-hidden z-50 divide-y divide-slate-800 animate-fadeIn w-[320px] sm:w-[380px] max-w-[90vw] max-h-[460px] overflow-y-auto">
                   {searchResults.totalMatches > 0 ? (
                     <>
                       {searchResults.products.length > 0 && (
@@ -328,14 +329,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                   ) : (
                     <div className="p-3 text-center text-xs text-slate-300 space-y-2">
                       <p>"{searchTerm}" এর সাথে প্রোডাক্ট বা সার্ভিস খুঁজছেন?</p>
-                      <button onClick={() => handleNavClick('services')} className="w-full py-1.5 px-2 rounded-lg bg-cyan-600/30 text-cyan-300 font-bold text-[11px] border border-cyan-500/30">রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →</button>
+                      <button onClick={() => handleNavClick('services')} className="w-full py-1.5 px-2 rounded-lg bg-cyan-600/30 text-cyan-300 font-bold text-[11px] border border-[#06D002]/50">রংপুর বিভাগের ৮টি জেলার সার্ভিসসমূহ দেখুন →</button>
                     </div>
                   )}
                 </div>
               )}
             </div>
 
-            <button onClick={handleSearchToggle} className={`lg:hidden p-1.5 sm:p-2 rounded-lg border text-slate-200 cursor-pointer shrink-0 transition-colors ${mobileSearchOpen ? 'bg-cyan-500 text-slate-950 border-cyan-400 font-bold' : 'bg-slate-900/80 border-cyan-800/60 hover:text-cyan-300'}`}>
+            <button onClick={handleSearchToggle} className={`lg:hidden p-1.5 sm:p-2 rounded-lg border cursor-pointer shrink-0 transition-colors ${mobileSearchOpen ? 'bg-[#038502] text-white border-[#22c55e] font-bold' : 'bg-slate-900/75 border-[#16a34a]/50 text-slate-100 hover:border-[#22c55e] hover:text-[#4ade80]'}`}>
               <Search className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
@@ -346,47 +347,46 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
 
             {customer ? (
-              <button id="header-customer-account-btn" onClick={() => handleAuthClick()} className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-lg bg-blue-950/80 border border-cyan-500/40 text-cyan-200 hover:bg-blue-900 text-xs font-semibold cursor-pointer shadow-sm shrink-0 whitespace-nowrap">
-                <div className="w-5 h-5 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-[10px] shrink-0">{customer.fullName.charAt(0).toUpperCase()}</div>
+              <button id="header-customer-account-btn" onClick={() => handleAuthClick()} className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-3 py-1.5 rounded-lg bg-blue-950/80 border border-[#16a34a]/65 text-emerald-200 hover:bg-blue-900 text-xs font-semibold cursor-pointer shadow-sm shrink-0 whitespace-nowrap">
+                <div className="w-5 h-5 rounded-full bg-[#038502] text-white flex items-center justify-center font-bold text-[10px] shrink-0">{customer.fullName.charAt(0).toUpperCase()}</div>
                 <span className="max-w-[50px] xs:max-w-[75px] sm:max-w-[110px] truncate text-white">{customer.fullName}</span>
               </button>
             ) : (
               <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <button id="header-register-btn" onClick={() => handleAuthClick('register')} className="hidden sm:flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 hover:bg-cyan-500/30 text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm">
-                  <User className="w-3.5 h-3.5 text-cyan-400 shrink-0" /><span>Create Account</span>
+                <button id="header-register-btn" onClick={() => handleAuthClick('register')} className="hidden sm:flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-[#038502]/80 border border-[#22c55e]/75 text-white hover:bg-[#059604] text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm transition-colors">
+                  <User className="w-3.5 h-3.5 text-[#86efac] shrink-0" /><span>Create Account</span>
                 </button>
-                <button id="header-login-btn" onClick={() => handleAuthClick('login')} className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-slate-900/80 border border-slate-700 text-slate-200 hover:text-white hover:border-cyan-400 text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm">
-                  <User className="w-3.5 h-3.5 text-cyan-400 sm:hidden" /><span className="hidden xs:inline">Login</span>
+                <button id="header-login-btn" onClick={() => handleAuthClick('login')} className="flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg bg-slate-900/75 border border-[#16a34a]/50 text-slate-100 hover:text-white hover:border-[#22c55e] text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm transition-colors">
+                  <User className="w-4 h-4 text-[#4ade80] sm:hidden" /><span className="hidden xs:inline">Login</span>
                 </button>
               </div>
             )}
 
-            <button id="header-cart-btn" onClick={handleCartClick} className="relative flex items-center mr-1 sm:mr-0 gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all cursor-pointer shadow-md shadow-cyan-600/30 shrink-0 whitespace-nowrap">
+            <button id="header-cart-btn" onClick={handleCartClick} className="relative flex items-center mr-1 sm:mr-0 gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-gradient-to-r from-[#027302] via-[#049c04] to-[#027d02] hover:from-[#038502] hover:via-[#06b305] hover:to-[#038f03] border border-[#4ade80]/60 text-white transition-all cursor-pointer shadow-md shadow-[#027302]/35 shrink-0 whitespace-nowrap">
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               <span className="hidden md:inline text-xs font-bold uppercase tracking-wider">Cart</span>
-              <span className="flex items-center justify-center min-w-[17px] sm:min-w-[20px] h-4 sm:h-5 px-1 sm:px-1.5 text-[10px] sm:text-xs font-black bg-white text-cyan-700 rounded-full shadow">{displayCartCount}</span>
+              <span className="flex items-center justify-center min-w-[17px] sm:min-w-[20px] h-4 sm:h-5 px-1 sm:px-1.5 text-[10px] sm:text-xs font-black bg-white text-[#027302] rounded-full shadow">{displayCartCount}</span>
             </button>
 
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="xl:hidden p-1.5 sm:p-2 rounded-lg bg-slate-900/80 border border-cyan-800/60 text-slate-200 hover:text-cyan-300 cursor-pointer shrink-0">
-              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />}
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="xl:hidden p-1.5 sm:p-2 rounded-lg bg-slate-900/75 border border-[#16a34a]/50 text-slate-100 hover:border-[#22c55e] hover:text-[#4ade80] cursor-pointer shrink-0 transition-colors">
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-[#4ade80]" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />}
             </button>
           </div>
         </div>
       </div>
+      </div>
 
-      {/* Mobile Quick Action Sub-bar (লাল দাগের অংশ - এক লাইনে: প্রোডাক্ট, এক্সেসরিজ, সার্ভিস, কন্টাক্ট) */}
-      <div className="lg:hidden w-full bg-gradient-to-r from-[#001736] via-[#092e5c] to-[#001736] border-t border-cyan-400/35 px-2 py-1.5 shadow-md">
-        <div className="grid grid-cols-4 gap-1.5 max-w-lg mx-auto">
+      {/* Mobile Quick Action Sub-bar (মূল ব্যাকগ্রাউন্ডের সাথে মিশানো + লেখা অনুযায়ী সবুজ ঘর ও সাদা লেখা) */}
+      <div className="lg:hidden w-full bg-[#e2f9eb] px-2 pt-2 pb-1">
+        <div className="flex items-center justify-center gap-1.5 flex-nowrap max-w-lg mx-auto">
           <button
             onClick={() => handleNavClick('products')}
-            className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-lg border text-[11px] font-bold active:scale-95 transition-all cursor-pointer shadow-xs ${
-              activeSection === 'products'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-300 font-extrabold shadow-cyan-500/30'
-                : 'bg-cyan-500/15 hover:bg-cyan-500/25 border-cyan-400/40 text-cyan-100 hover:text-white'
+            className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#025e02]/40 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
+              activeSection === 'products' ? 'bg-[#026002]' : 'bg-[#037a03] hover:bg-[#026602]'
             }`}
           >
-            <Package className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">প্রোডাক্ট</span>
+            <Package className="w-3 h-3 shrink-0 text-white" />
+            <span>প্রোডাক্ট</span>
           </button>
 
           <button
@@ -394,52 +394,48 @@ export const Navbar: React.FC<NavbarProps> = ({
               setSearchTerm('Accessories');
               handleNavClick('products');
             }}
-            className="flex items-center justify-center gap-1 py-1.5 px-1 rounded-lg bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/40 text-cyan-100 hover:text-white text-[11px] font-bold active:scale-95 transition-all cursor-pointer shadow-xs"
+            className="flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#025e02]/40 bg-[#037a03] hover:bg-[#026602] text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap"
           >
-            <SlidersHorizontal className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">এক্সেসরিজ</span>
+            <SlidersHorizontal className="w-3 h-3 shrink-0 text-white" />
+            <span>এক্সেসরিজ</span>
           </button>
 
           <button
             onClick={() => handleNavClick('services')}
-            className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-lg border text-[11px] font-bold active:scale-95 transition-all cursor-pointer shadow-xs ${
-              activeSection === 'services'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-300 font-extrabold shadow-cyan-500/30'
-                : 'bg-cyan-500/15 hover:bg-cyan-500/25 border-cyan-400/40 text-cyan-100 hover:text-white'
+            className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#025e02]/40 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
+              activeSection === 'services' ? 'bg-[#026002]' : 'bg-[#037a03] hover:bg-[#026602]'
             }`}
           >
-            <Wrench className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">সার্ভিস</span>
+            <Wrench className="w-3 h-3 shrink-0 text-white" />
+            <span>সার্ভিস</span>
           </button>
 
           <button
             onClick={() => handleNavClick('contact')}
-            className={`flex items-center justify-center gap-1 py-1.5 px-1 rounded-lg border text-[11px] font-bold active:scale-95 transition-all cursor-pointer shadow-xs ${
-              activeSection === 'contact'
-                ? 'bg-cyan-500 text-slate-950 border-cyan-300 font-extrabold shadow-cyan-500/30'
-                : 'bg-cyan-500/15 hover:bg-cyan-500/25 border-cyan-400/40 text-cyan-100 hover:text-white'
+            className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#025e02]/40 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
+              activeSection === 'contact' ? 'bg-[#026002]' : 'bg-[#037a03] hover:bg-[#026602]'
             }`}
           >
-            <Phone className="w-3.5 h-3.5 shrink-0" />
-            <span className="truncate">কন্টাক্ট</span>
+            <Phone className="w-3 h-3 shrink-0 text-white" />
+            <span>কন্টাক্ট</span>
           </button>
         </div>
       </div>
 
       {mobileSearchOpen && (
-        <div className="lg:hidden bg-slate-950/98 border-t border-cyan-500/40 px-3 py-2.5 shadow-2xl animate-fadeIn">
+        <div className="lg:hidden bg-slate-950/98 border-t border-[#06D002]/50 px-3 py-2.5 shadow-2xl animate-fadeIn">
           <div className="relative flex items-center">
             <Search className="w-4 h-4 text-cyan-400 absolute left-3 pointer-events-none" />
             <input type="text" autoFocus value={searchTerm}
               onChange={(e) => { setSearchTerm(e.target.value); }}
               placeholder="Search cameras, Jovision, EZVIZ, DVR..."
-              className="w-full bg-slate-900 text-xs sm:text-sm text-white placeholder-slate-400 rounded-lg pl-9 pr-8 py-2 border border-cyan-400/80 focus:border-cyan-300 focus:outline-none focus:ring-1 focus:ring-cyan-400" />
+              className="w-full bg-slate-900 text-xs sm:text-sm text-white placeholder-slate-400 rounded-lg pl-9 pr-8 py-2 border border-[#12dc0e]/80 focus:border-[#06D002] focus:outline-none focus:ring-1 focus:ring-[#06D002]" />
             {searchTerm && (
               <button onClick={() => setSearchTerm('')} className="absolute right-2.5 text-xs text-slate-400 hover:text-white px-1">✕</button>
             )}
           </div>
           {searchTerm.trim().length > 0 && (searchResults.services.length > 0 || searchResults.districts.length > 0) && (
-            <div className="mt-2 max-h-60 overflow-y-auto rounded-lg border border-cyan-500/30 bg-slate-900/95 divide-y divide-slate-800">
+            <div className="mt-2 max-h-60 overflow-y-auto rounded-lg border border-[#06D002]/40 bg-slate-900/95 divide-y divide-slate-800">
               {searchResults.services.slice(0, 3).map((srv) => (
                 <div
                   key={srv.id}
@@ -485,14 +481,14 @@ export const Navbar: React.FC<NavbarProps> = ({
       )}
 
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-slate-950/98 backdrop-blur-md border-b border-cyan-500/30 px-4 pt-3 pb-5 space-y-2 shadow-2xl">
+        <div className="xl:hidden bg-slate-950/98 backdrop-blur-md border-b border-[#06D002]/50 px-4 pt-3 pb-5 space-y-2 shadow-2xl">
           <div className="grid grid-cols-1 gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
               return (
                 <button key={item.id} onClick={() => handleNavClick(item.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-left cursor-pointer ${isActive ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-400/50' : 'text-slate-200 hover:bg-white/10 hover:text-white'}`}>
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-left cursor-pointer ${isActive ? 'bg-cyan-500/25 text-cyan-300 border border-[#12dc0e]/60' : 'text-slate-200 hover:bg-white/10 hover:text-white'}`}>
                   <Icon className={`w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`} />{item.label}
                 </button>
               );
@@ -507,7 +503,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             )}
             {customer ? (
               <button onClick={() => { setMobileMenuOpen(false); if (onOpenCustomerProfile) onOpenCustomerProfile(); }}
-                className="flex items-center justify-between w-full p-3 rounded-xl bg-slate-900 border border-cyan-500/40 text-cyan-200 text-sm font-semibold cursor-pointer">
+                className="flex items-center justify-between w-full p-3 rounded-xl bg-slate-900 border border-[#12dc0e]/50 text-cyan-200 text-sm font-semibold cursor-pointer">
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-xs">{customer.fullName.charAt(0).toUpperCase()}</div>
                   <div className="text-left"><div className="text-white text-xs font-bold leading-tight">{customer.fullName}</div><div className="text-[10px] text-cyan-400">My Account & Orders</div></div>
@@ -517,7 +513,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <div className="grid grid-cols-2 gap-2">
                 <button onClick={() => { setMobileMenuOpen(false); if (onOpenCustomerAuth) onOpenCustomerAuth('register'); }}
-                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-cyan-500/20 border border-cyan-400/50 text-xs font-semibold text-cyan-300">Create Account</button>
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#038e03]/55 hover:bg-[#05b802]/75 border border-[#12dc0e]/85 text-xs font-semibold text-white">Create Account</button>
                 <button onClick={() => { setMobileMenuOpen(false); if (onOpenCustomerAuth) onOpenCustomerAuth('login'); }}
                   className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs font-semibold text-slate-200">Login</button>
               </div>

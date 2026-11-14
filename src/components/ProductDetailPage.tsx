@@ -244,7 +244,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       
       {/* Top Breadcrumb & Back Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 p-2.5 sm:p-3 bg-white/90 backdrop-blur-md rounded-xl border border-sky-200 shadow-xs text-xs">
+        <div className="flex flex-wrap items-center justify-between gap-2 p-2.5 sm:p-3 bg-white/90 backdrop-blur-md rounded-xl border border-[#05b802]/45 shadow-xs text-xs">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-slate-600 flex-wrap">
             <button 
               onClick={onNavigateHome}
@@ -267,7 +267,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
           <button
             onClick={onNavigateHome}
-            className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-cyan-800 border border-sky-300 font-bold transition cursor-pointer text-xs shrink-0"
+            className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-cyan-800 border border-[#05b802]/60 font-bold transition cursor-pointer text-xs shrink-0"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>মূল শপে ফিরুন</span>
@@ -277,19 +277,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
       {/* Hero Product Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sky-50 via-white to-blue-50 border-2 border-sky-300 p-5 sm:p-8 lg:p-10 shadow-lg">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-sky-50 via-white to-blue-50 border-2 border-[#05b802]/65 p-5 sm:p-8 lg:p-10 shadow-lg">
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             {/* Left: Product Image & Badges */}
             <div className="lg:col-span-5 space-y-3">
-              <div className="relative h-64 sm:h-80 rounded-2xl bg-white border-2 border-sky-200 p-4 flex items-center justify-center overflow-hidden shadow-sm">
+              <div className="relative h-64 sm:h-80 rounded-2xl bg-white border-2 border-[#05b802]/45 p-4 flex items-center justify-center overflow-hidden shadow-sm">
                 <img
                   src={primaryCatalogItem?.image || '/placeholder-cctv.png'}
                   alt={productData.name}
                   className="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-100 border border-cyan-300 text-[11px] font-bold text-cyan-800 shadow-xs">
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-cyan-100 border border-[#05b802]/55 text-[11px] font-bold text-cyan-800 shadow-xs">
                   {primaryCatalogItem?.brand || (productData.isInquiryOnly ? productData.name.split(' ')[0] : 'Hikvision / Dahua')}
                 </div>
                 <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-[11px] font-bold text-emerald-800 flex items-center gap-1 shadow-xs">
@@ -300,7 +300,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
               {/* Trust Badges */}
               <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="p-2.5 rounded-xl bg-white border border-sky-200 flex items-center gap-2 shadow-2xs">
+                <div className="p-2.5 rounded-xl bg-white border border-[#05b802]/45 flex items-center gap-2 shadow-2xs">
                   <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
                   <div>
                     <span className="font-bold text-slate-900 block">১-২ বছর ওয়ারেন্টি</span>
@@ -308,7 +308,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-xl bg-white border border-sky-200 flex items-center gap-2 shadow-2xs">
+                <div className="p-2.5 rounded-xl bg-white border border-[#05b802]/45 flex items-center gap-2 shadow-2xs">
                   <Truck className="w-4 h-4 text-cyan-600 shrink-0" />
                   <div>
                     <span className="font-bold text-slate-900 block">সারা দেশে ডেলিভারি</span>
@@ -320,7 +320,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
             {/* Right: Product Details & Order Actions */}
             <div className="lg:col-span-7 space-y-3">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 border border-[#05b802]/60 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
                 <span>{productData.category} • Original Hardware</span>
               </div>
@@ -334,7 +334,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </p>
 
               {/* Price Banner */}
-              <div className="p-3.5 rounded-xl bg-sky-100/80 border-2 border-sky-300 flex items-center justify-between flex-wrap gap-2">
+              <div className="p-3.5 rounded-xl bg-sky-100/80 border-2 border-[#05b802]/60 flex items-center justify-between flex-wrap gap-2">
                 <div>
                   <span className="text-[11px] text-slate-600 block uppercase font-bold tracking-wider">
                     সেরা বিক্রয় মূল্য (Special Rate)
@@ -368,7 +368,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     <button
                       type="button"
                       onClick={() => onAddToCart(primaryCatalogItem)}
-                      className="px-4 py-2.5 rounded-xl bg-white hover:bg-sky-50 text-slate-800 border-2 border-sky-300 font-bold text-xs sm:text-sm shadow-xs flex items-center gap-2 transition cursor-pointer"
+                      className="px-4 py-2.5 rounded-xl bg-white hover:bg-sky-50 text-slate-800 border-2 border-[#05b802]/60 font-bold text-xs sm:text-sm shadow-xs flex items-center gap-2 transition cursor-pointer"
                     >
                       <span>কার্টে যোগ করুন</span>
                     </button>
@@ -401,14 +401,14 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Tech Specs */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-sky-300 shadow-md space-y-3">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-[#05b802]/60 shadow-md space-y-3">
             <div className="flex items-center gap-2 text-cyan-700">
               <Layers className="w-5 h-5 text-cyan-600" />
               <h2 className="text-base sm:text-lg font-bold text-slate-900 font-tech">
                 প্রযুক্তিগত স্পেসিফিকেশন (Technical Specs)
               </h2>
             </div>
-            <div className="divide-y divide-sky-100 text-xs sm:text-sm">
+            <div className="divide-y divide-[#05b802]/20 text-xs sm:text-sm">
               {productData.specifications.map((spec, idx) => (
                 <div key={idx} className="py-2.5 flex justify-between items-center gap-4">
                   <span className="font-bold text-slate-600">{spec.label}</span>
@@ -419,7 +419,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </div>
 
           {/* Key Features & Buying Guide */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-sky-300 shadow-md space-y-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-[#05b802]/60 shadow-md space-y-4">
             <div>
               <div className="flex items-center gap-2 text-cyan-700 mb-2.5">
                 <ShieldCheck className="w-5 h-5 text-cyan-600" />
@@ -437,7 +437,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </ul>
             </div>
 
-            <div className="pt-3 border-t border-sky-100">
+            <div className="pt-3 border-t border-[#05b802]/25">
               <h4 className="text-xs font-bold text-slate-800 font-tech uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
                 <Tag className="w-3.5 h-3.5 text-cyan-600" />
                 <span>ক্রয় নির্দেশিকা (Buying Advice)</span>
@@ -458,7 +458,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       {/* Available Models in Stock */}
       {matchingCatalogItems.length > 0 && (
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-          <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-sky-300 shadow-md space-y-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-[#05b802]/60 shadow-md space-y-4">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <div>
                 <span className="text-xs font-bold text-cyan-700 font-tech uppercase tracking-wider block">
@@ -475,9 +475,9 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {matchingCatalogItems.map((p) => (
-                <div key={p.id} className="p-3.5 rounded-xl bg-sky-50/70 border border-sky-200 hover:border-sky-300 transition flex flex-col justify-between">
+                <div key={p.id} className="p-3.5 rounded-xl bg-sky-50/70 border border-[#05b802]/45 hover:border-[#05b802] transition flex flex-col justify-between">
                   <div>
-                    <div className="h-36 rounded-lg bg-white border border-sky-100 flex items-center justify-center p-2 overflow-hidden mb-2.5 shadow-2xs">
+                    <div className="h-36 rounded-lg bg-white border border-[#05b802]/25 flex items-center justify-center p-2 overflow-hidden mb-2.5 shadow-2xs">
                       <img src={p.image} alt={p.name} className="w-full h-full object-contain" />
                     </div>
                     <span className="text-[10px] px-2 py-0.5 rounded bg-sky-100 font-bold text-cyan-800">
@@ -491,7 +491,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </p>
                   </div>
 
-                  <div className="pt-2.5 border-t border-sky-200 mt-2.5 flex items-center justify-between gap-1">
+                  <div className="pt-2.5 border-t border-[#05b802]/30 mt-2.5 flex items-center justify-between gap-1">
                     <span className="font-mono text-sm font-black text-cyan-900">
                       {(p.priceType === 'contact' || p.isContactForPrice) ? 'Contact' : `৳ ${p.price.toLocaleString()}`}
                     </span>
@@ -522,7 +522,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
       {/* Related Products & Related Services (Internal Linking) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-sky-300 shadow-md space-y-4">
+        <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-[#05b802]/60 shadow-md space-y-4">
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-cyan-700">
               <Package className="w-4 h-4 text-cyan-600" />
@@ -539,7 +539,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     key={pSlug}
                     type="button"
                     onClick={() => handleProductNav(pSlug)}
-                    className="px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 text-xs font-semibold text-cyan-900 hover:text-cyan-700 transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                    className="px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 border border-[#05b802]/45 text-xs font-semibold text-cyan-900 hover:text-cyan-700 transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
                   >
                     <Tag className="w-3 h-3 text-cyan-600" />
                     <span>{prod.name}</span>
@@ -550,7 +550,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </div>
 
           {/* Related Services Links */}
-          <div className="pt-3 border-t border-sky-100 space-y-2">
+          <div className="pt-3 border-t border-[#05b802]/25 space-y-2">
             <div className="flex items-center gap-2 text-slate-700">
               <Wrench className="w-4 h-4 text-cyan-600" />
               <span className="text-xs font-bold uppercase tracking-wider font-tech">
@@ -566,7 +566,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     key={sSlug}
                     type="button"
                     onClick={() => handleServiceNav(sSlug)}
-                    className="px-3 py-1.5 rounded-xl bg-white hover:bg-sky-50 border border-sky-200 text-xs font-medium text-slate-800 hover:text-cyan-800 transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                    className="px-3 py-1.5 rounded-xl bg-white hover:bg-sky-50 border border-[#05b802]/45 text-xs font-medium text-slate-800 hover:text-cyan-800 transition flex items-center gap-1.5 cursor-pointer shadow-2xs"
                   >
                     <Wrench className="w-3 h-3 text-cyan-600" />
                     <span>{srv.name}</span>
@@ -580,7 +580,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
       {/* District Service Coverage Area (10 Districts Internal Linking) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-sky-300 shadow-md space-y-3">
+        <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-[#05b802]/60 shadow-md space-y-3">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-2">
               <MapPin className="w-4 h-4 text-rose-500" />
@@ -603,7 +603,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 key={dist.slug}
                 type="button"
                 onClick={() => onSelectDistrict(dist.slug)}
-                className="p-2 rounded-xl bg-sky-50/70 hover:bg-sky-100 border border-sky-200 text-xs font-bold text-cyan-900 text-center transition cursor-pointer"
+                className="p-2 rounded-xl bg-sky-50/70 hover:bg-sky-100 border border-[#05b802]/45 text-xs font-bold text-cyan-900 text-center transition cursor-pointer"
               >
                 <span>{dist.bnName} ({dist.enName})</span>
               </button>
@@ -614,7 +614,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
       {/* Frequently Asked Questions */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-sky-300 shadow-md space-y-4">
+        <div className="p-5 sm:p-6 rounded-2xl bg-white border-2 border-[#05b802]/60 shadow-md space-y-4">
           <div className="flex items-center gap-2 text-cyan-700">
             <HelpCircle className="w-5 h-5 text-cyan-600" />
             <h2 className="text-base sm:text-lg font-bold text-slate-900 font-tech">
@@ -626,7 +626,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
             {productData.faqs.map((faq, idx) => (
               <div
                 key={idx}
-                className="rounded-xl border border-sky-200 bg-sky-50/50 overflow-hidden transition"
+                className="rounded-xl border border-[#05b802]/45 bg-sky-50/50 overflow-hidden transition"
               >
                 <button
                   type="button"
@@ -641,7 +641,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                   />
                 </button>
                 {openFaqIndex === idx && (
-                  <div className="p-3.5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-sky-100 bg-white/70">
+                  <div className="p-3.5 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-[#05b802]/25 bg-white/70">
                     {faq.answer}
                   </div>
                 )}
@@ -652,7 +652,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
       </section>
 
       {/* Bottom Sticky Action Banner on Mobile */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 p-2.5 bg-white/95 backdrop-blur-md border-t border-sky-200 shadow-lg sm:hidden flex items-center justify-between gap-2">
+      <div className="fixed bottom-0 left-0 right-0 z-30 p-2.5 bg-white/95 backdrop-blur-md border-t border-[#05b802]/45 shadow-lg sm:hidden flex items-center justify-between gap-2">
         {primaryCatalogItem ? (
           <button
             type="button"

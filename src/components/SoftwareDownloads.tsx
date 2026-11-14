@@ -100,14 +100,14 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
   };
 
   return (
-    <section id="downloads" className="relative py-6 sm:py-8 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-50/80 border-b border-sky-300/80 overflow-hidden">
+    <section id="downloads" className="relative py-6 sm:py-8 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-50/80 border-b border-[#05b802]/45 overflow-hidden">
       {/* Decorative ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-r from-sky-400/25 to-blue-500/20 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-5 sm:mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-200 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-[#05b802]/45 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
             <Download className="w-3.5 h-3.5 text-cyan-600" />
             <span>টুলস, সফটওয়্যার ও ডকুমেন্টস</span>
           </div>
@@ -123,9 +123,9 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           {/* Column 1: Software Downloads List (lg:col-span-5) */}
-          <div className="lg:col-span-5 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-sky-200/90 p-4 sm:p-6 shadow-md space-y-4 relative overflow-hidden">
+          <div className="lg:col-span-5 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-[#05b802]/55 p-4 sm:p-6 shadow-md space-y-4 relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
-            <div className="flex items-center justify-between border-b border-sky-200/80 pb-3">
+            <div className="flex items-center justify-between border-b border-[#05b802]/30 pb-3">
               <div>
                 <h3 className="text-base sm:text-lg font-bold text-slate-900 font-tech flex items-center gap-2">
                   <Download className="w-5 h-5 text-cyan-600" />
@@ -145,7 +145,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
               {activeDownloads.map((soft) => (
                 <div
                   key={soft.id}
-                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl bg-white border-2 border-sky-200/80 hover:border-cyan-500 transition-all shadow-sm hover:shadow-md hover:shadow-cyan-500/10 group"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 sm:p-3.5 rounded-xl bg-white border-2 border-[#05b802]/45 hover:border-[#05b802] transition-all shadow-sm hover:shadow-md hover:shadow-[#05b802]/10 group"
                 >
                   <div className="flex items-start sm:items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-sm mt-0.5 sm:mt-0">
@@ -160,7 +160,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
                         {soft.title}
                       </h4>
                       <div className="text-[11px] text-slate-500 flex items-center gap-2 flex-wrap mt-1">
-                        <span className="font-mono text-cyan-700 font-bold bg-cyan-50 px-1.5 py-0.5 rounded border border-cyan-200">{soft.version || 'v1.0'}</span>
+                        <span className="font-mono text-cyan-700 font-bold bg-cyan-50 px-1.5 py-0.5 rounded border border-[#05b802]/45">{soft.version || 'v1.0'}</span>
                         <span>•</span>
                         <span className="font-medium text-slate-600">{soft.fileSize || 'Software'}</span>
                         {soft.category && (
@@ -186,7 +186,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
             </div>
 
             {/* Need Help Center Card */}
-            <div className="p-3.5 sm:p-4 rounded-xl bg-white border-2 border-sky-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+            <div className="p-3.5 sm:p-4 rounded-xl bg-white border-2 border-[#05b802]/45 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
               <div>
                 <div className="text-xs font-bold text-slate-900 font-tech">সফটওয়্যার সেটআপে সাহায্য চান?</div>
                 <div className="text-[11px] text-slate-500 mt-0.5">
@@ -205,7 +205,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
           </div>
 
           {/* Column 2: Profile Download Card (lg:col-span-4) */}
-          <div className="lg:col-span-4 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-sky-200/90 p-5 sm:p-6 shadow-md flex flex-col justify-between text-center relative overflow-hidden">
+          <div className="lg:col-span-4 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-[#05b802]/55 p-5 sm:p-6 shadow-md flex flex-col justify-between text-center relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
             <div className="absolute -top-12 -right-12 w-40 h-40 bg-cyan-400/10 rounded-full blur-2xl pointer-events-none" />
 
@@ -223,9 +223,9 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
 
               {/* Centered Large Emblem Logo */}
               <div className="my-6 sm:my-8 flex justify-center">
-                <div className="relative p-3 rounded-full bg-sky-50 border-2 border-sky-200 shadow-md group hover:scale-105 transition-transform">
+                <div className="relative p-3 rounded-full bg-sky-50 border-2 border-[#05b802]/55 shadow-md group hover:scale-105 transition-transform">
                   <STSLogo size="xl" showText={false} />
-                  <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-pulse pointer-events-none" />
+                  <div className="absolute inset-0 rounded-full border border-[#06D002]/45 animate-pulse pointer-events-none" />
                 </div>
               </div>
 
@@ -255,7 +255,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
           </div>
 
           {/* Column 3: How to Order (lg:col-span-3) */}
-          <div className="lg:col-span-3 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-sky-200/90 p-5 sm:p-6 shadow-md flex flex-col justify-between relative overflow-hidden">
+          <div className="lg:col-span-3 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/30 border-2 border-[#05b802]/55 p-5 sm:p-6 shadow-md flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
             <div>
               <div className="flex items-center gap-2 text-cyan-700 text-xs font-bold font-tech uppercase tracking-wider mb-2">
@@ -310,7 +310,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
             <div className="pt-5">
               <button
                 onClick={onOrderNow}
-                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-sky-50 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 text-cyan-900 hover:text-white border border-sky-200 hover:border-transparent font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-sm"
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-sky-50 hover:bg-gradient-to-r hover:from-cyan-600 hover:to-blue-600 text-cyan-900 hover:text-white border border-[#05b802]/45 hover:border-transparent font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-sm"
               >
                 <span>অর্ডার করতে প্রোডাক্ট দেখুন</span>
                 <ArrowRight className="w-4 h-4" />
@@ -324,7 +324,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
         {downloadModalItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
             <div 
-              className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-slate-900 to-[#050b18] border border-cyan-500/40 p-5 sm:p-6 shadow-2xl text-slate-100"
+              className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-slate-900 to-[#050b18] border border-[#06D002]/60 p-5 sm:p-6 shadow-2xl text-slate-100"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -334,7 +334,7 @@ export const SoftwareDownloads: React.FC<SoftwareDownloadsProps> = ({
                 ✕
               </button>
 
-              <div className="w-12 h-12 rounded-xl bg-cyan-950 border border-cyan-500/40 text-cyan-400 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-cyan-950 border border-[#06D002]/60 text-cyan-400 flex items-center justify-center mb-4">
                 <Download className="w-6 h-6" />
               </div>
 

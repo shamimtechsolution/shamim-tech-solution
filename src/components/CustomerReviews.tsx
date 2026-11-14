@@ -54,15 +54,15 @@ export const CustomerReviews: React.FC = () => {
   const current = reviews[currentIndex] || reviews[0];
 
   return (
-    <section className="relative py-16 bg-gradient-to-b from-sky-50/90 via-blue-100/60 to-sky-100/70 border-b border-sky-300/80 overflow-hidden">
+    <section className="relative py-16 bg-gradient-to-b from-[#e8f5fe]/85 via-white to-[#e3faec]/85 border-b border-[#05b802]/45 overflow-hidden">
       {/* Decorative ambient lighting */}
-      <div className="absolute top-1/2 left-1/3 w-[500px] h-[300px] bg-gradient-to-r from-cyan-400/20 via-sky-400/20 to-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 w-[500px] h-[300px] bg-gradient-to-r from-emerald-300/25 via-white/20 to-sky-200/25 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header with Title and Add Review button */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 border border-[#05b802]/60 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
               <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               <span>Customer Satisfaction</span>
             </div>
@@ -87,14 +87,14 @@ export const CustomerReviews: React.FC = () => {
             <div className="flex items-center gap-1.5">
               <button
                 onClick={prevReview}
-                className="p-2.5 rounded-xl bg-white border-2 border-sky-200 text-slate-700 hover:text-cyan-700 hover:border-cyan-500 transition-colors cursor-pointer shadow-sm"
+                className="p-2.5 rounded-xl bg-white border-2 border-[#05b802]/45 text-slate-700 hover:text-cyan-700 hover:border-[#05b802] transition-colors cursor-pointer shadow-sm"
                 aria-label="Previous Review"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={nextReview}
-                className="p-2.5 rounded-xl bg-white border-2 border-sky-200 text-slate-700 hover:text-cyan-700 hover:border-cyan-500 transition-colors cursor-pointer shadow-sm"
+                className="p-2.5 rounded-xl bg-white border-2 border-[#05b802]/45 text-slate-700 hover:text-cyan-700 hover:border-[#05b802] transition-colors cursor-pointer shadow-sm"
                 aria-label="Next Review"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -105,7 +105,7 @@ export const CustomerReviews: React.FC = () => {
 
         {/* Featured Testimonial Card */}
         {current && (
-          <div className="relative rounded-2xl bg-gradient-to-br from-[#0c1a30] via-[#09152b] to-[#040c1a] border-2 border-cyan-400/50 p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto overflow-hidden">
+          <div className="relative rounded-2xl bg-gradient-to-br from-[#0c1a30] via-[#09152b] to-[#040c1a] border-2 border-[#06D002]/70 p-6 sm:p-8 shadow-2xl max-w-4xl mx-auto overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500" />
             <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
               
@@ -135,13 +135,13 @@ export const CustomerReviews: React.FC = () => {
                   "{current.comment}"
                 </blockquote>
 
-                <div className="pt-3 border-t border-cyan-950/80 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-1">
+                <div className="pt-3 border-t border-[#06D002]/30 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-1">
                   <div>
                     <strong className="text-white font-tech text-sm">{current.name}</strong>
                     <span className="mx-2">•</span>
                     <span>{current.role}</span>
                   </div>
-                  <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-cyan-400">
+                  <div className="inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-[#06D002]/50 text-cyan-400">
                     <CheckCircle2 className="w-3.5 h-3.5" />
                     <span>Verified Installation Client ({current.date})</span>
                   </div>
@@ -172,7 +172,7 @@ export const CustomerReviews: React.FC = () => {
         {isModalOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
             <div 
-              className="relative w-full max-w-md rounded-2xl bg-[#081226] border border-cyan-500/40 p-6 shadow-2xl text-slate-200"
+              className="relative w-full max-w-md rounded-2xl bg-[#081226] border border-[#06D002]/60 p-6 shadow-2xl text-slate-200"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -198,7 +198,7 @@ export const CustomerReviews: React.FC = () => {
                     value={newReview.name}
                     onChange={(e) => setNewReview({ ...newReview, name: e.target.value })}
                     placeholder="e.g. Md. Shahidul Islam"
-                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-[#05b802]/50 text-white focus:border-[#06D002] focus:outline-none"
                   />
                 </div>
 
@@ -209,7 +209,7 @@ export const CustomerReviews: React.FC = () => {
                     value={newReview.role}
                     onChange={(e) => setNewReview({ ...newReview, role: e.target.value })}
                     placeholder="e.g. Shop Owner, Rangpur"
-                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-[#05b802]/50 text-white focus:border-[#06D002] focus:outline-none"
                   />
                 </div>
 
@@ -218,7 +218,7 @@ export const CustomerReviews: React.FC = () => {
                   <select
                     value={newReview.rating}
                     onChange={(e) => setNewReview({ ...newReview, rating: Number(e.target.value) })}
-                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none cursor-pointer"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-[#05b802]/50 text-white focus:border-[#06D002] focus:outline-none cursor-pointer"
                   >
                     <option value={5}>⭐⭐⭐⭐⭐ (5 - Outstanding)</option>
                     <option value={4}>⭐⭐⭐⭐ (4 - Very Good)</option>
@@ -234,7 +234,7 @@ export const CustomerReviews: React.FC = () => {
                     value={newReview.comment}
                     onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
                     placeholder="Describe how the installation went, video clarity, remote view, cable fitting..."
-                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-cyan-500/30 text-white focus:border-cyan-400 focus:outline-none"
+                    className="w-full bg-[#040815] rounded-xl px-3 py-2 border border-[#05b802]/50 text-white focus:border-[#06D002] focus:outline-none"
                   />
                 </div>
 

@@ -200,16 +200,16 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm overflow-y-auto animate-fadeIn">
       <div 
-        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-md max-h-[85vh] bg-white border-2 border-sky-300 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all text-slate-800 flex flex-col"
+        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-md max-h-[85vh] bg-white border-2 border-[#05b802]/65 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all text-slate-800 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
 
         {/* Top Header Banner (White & Light Sky theme like Contact box) */}
-        <div className="relative bg-sky-50/80 p-3 sm:p-4 border-b border-sky-100">
+        <div className="relative bg-sky-50/80 p-3 sm:p-4 border-b border-[#05b802]/25">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2 min-w-0">
-              <div className="w-8 h-8 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-cyan-700 shrink-0 shadow-xs">
+              <div className="w-8 h-8 rounded-xl bg-sky-100 border border-[#05b802]/45 flex items-center justify-center text-cyan-700 shrink-0 shadow-xs">
                 <ShieldCheck className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </div>
               <div className="min-w-0">
@@ -236,7 +236,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
           </div>
 
           {/* Tab Switcher */}
-          <div className="flex items-center gap-1.5 mt-3 p-1 bg-sky-100/70 rounded-xl border border-sky-200 text-xs">
+          <div className="flex items-center gap-1.5 mt-3 p-1 bg-sky-100/70 rounded-xl border border-[#05b802]/40 text-xs">
             <button
               type="button"
               onClick={() => {
@@ -320,7 +320,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="পূর্ণ নাম লিখুন (যেমন: মোঃ শামীম ইসলাম)"
                   required
-                  className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-sky-300 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                 />
               </div>
 
@@ -341,7 +341,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     onChange={(e) => setIdentifier(e.target.value)}
                     placeholder="01XXXXXXXXX অথবা example@gmail.com"
                     required
-                    className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-sky-300 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                    className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                   />
                   <div className="absolute right-3 top-2 text-slate-400 flex items-center gap-1 text-xs">
                     <Mail className="w-3.5 h-3.5" />
@@ -367,7 +367,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"
                       required
-                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white text-slate-900 border border-sky-300 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                     />
                     <button
                       type="button"
@@ -392,7 +392,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="একই Password আবার লিখুন"
                       required
-                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white text-slate-900 border border-sky-300 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                     />
                     <button
                       type="button"
@@ -418,7 +418,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   placeholder="আপনার সম্পূর্ণ ঠিকানা লিখুন (যেমন: বাড়ি/দোকান নং, রাস্তা, বাজার বা গ্রামের নাম)"
                   rows={2}
                   required
-                  className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-sky-300 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 resize-none shadow-xs"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] resize-none shadow-xs"
                 />
               </div>
 
@@ -434,7 +434,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     value={district}
                     onChange={(e) => setDistrict(e.target.value)}
                     required
-                    className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-sky-300 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                    className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                   >
                     {BANGLADESH_DISTRICTS.map((dist) => (
                       <option key={dist} value={dist} className="bg-white text-slate-900">
@@ -456,7 +456,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     onChange={(e) => setUpazilaThana(e.target.value)}
                     placeholder="উপজেলা বা থানা (যেমন: হারাগাছ / কোতয়ালী)"
                     required
-                    className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-sky-300 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                    className="w-full px-3 py-1.5 sm:py-2 bg-white text-slate-900 border border-[#05b802]/50 rounded-lg placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                   />
                 </div>
               </div>
@@ -468,7 +468,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     type="checkbox"
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
-                    className="w-3.5 h-3.5 mt-0.5 rounded border-sky-300 text-cyan-600 focus:ring-cyan-500"
+                    className="w-3.5 h-3.5 mt-0.5 rounded border-[#05b802]/60 text-cyan-600 focus:ring-[#05b802]"
                   />
                   <span className="text-[11px] text-slate-600">
                     ☑️ <strong className="text-slate-800">I agree to the Terms & Conditions</strong> (সেবামূলক নিয়মাবলীতে সম্মতি দিচ্ছি)
@@ -541,7 +541,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   onChange={(e) => setLoginIdentifier(e.target.value)}
                   placeholder="আপনার মোবাইল নম্বর অথবা Gmail লিখুন"
                   required
-                  className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                 />
               </div>
 
@@ -571,7 +571,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                     onChange={(e) => setLoginPassword(e.target.value)}
                     placeholder="আপনার পাসওয়ার্ড দিন"
                     required
-                    className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white border border-sky-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 shadow-xs"
+                    className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] shadow-xs"
                   />
                   <button
                     type="button"
@@ -612,7 +612,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 </button>
               </div>
 
-              <div className="text-center pt-2.5 border-t border-sky-100">
+              <div className="text-center pt-2.5 border-t border-[#05b802]/25">
                 <p className="text-xs text-slate-600">
                   নতুন গ্রাহক? একাউন্ট নেই?{' '}
                   <button
@@ -651,7 +651,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                   onChange={(e) => setForgotIdentifier(e.target.value)}
                   placeholder="রেজিস্ট্রেশনের সময় ব্যবহৃত মোবাইল বা Gmail দিন"
                   required
-                  className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 shadow-xs"
+                  className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 shadow-xs"
                 />
               </div>
 
@@ -669,7 +669,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       onChange={(e) => setNewPassword(e.target.value)}
                       placeholder="নতুন পাসওয়ার্ড (কমপক্ষে ৬ অক্ষর)"
                       required
-                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white border border-sky-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-amber-500 shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-amber-500 shadow-xs"
                     />
                     <button
                       type="button"
@@ -694,7 +694,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                       onChange={(e) => setConfirmNewPassword(e.target.value)}
                       placeholder="আবার একই পাসওয়ার্ড লিখুন"
                       required
-                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white border border-sky-300 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-amber-500 shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 pr-9 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:border-amber-500 shadow-xs"
                     />
                     <button
                       type="button"

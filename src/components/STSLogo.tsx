@@ -25,7 +25,7 @@ export const STSLogo: React.FC<STSLogoProps> = ({
   const isDark = theme === 'dark';
 
   return (
-    <div className={`inline-flex items-center gap-2 sm:gap-3 min-w-0 ${className}`}>
+    <div className={`inline-flex items-center gap-1.5 sm:gap-3 min-w-0 ${className}`}>
       {/* Official STS Circular Badge Logo (100% Transparent Background, Zero Square Box) */}
       <div className={`relative shrink-0 ${selectedSize.box} flex items-center justify-center rounded-full overflow-hidden bg-transparent`}>
         <img
@@ -42,19 +42,12 @@ export const STSLogo: React.FC<STSLogoProps> = ({
       {showText && (
         <div className="flex flex-col text-left min-w-0">
           <div className="flex items-center gap-1 sm:gap-1.5 min-w-0">
-            <span className={`font-extrabold tracking-wide ${isDark ? 'text-white' : 'text-slate-900'} text-xs xs:text-sm sm:text-base md:text-lg font-tech leading-none truncate max-w-[125px] sm:max-w-none`}>
-              SHAMIM <span className={isDark ? "text-cyan-300" : "text-cyan-600"}>TECH</span> SOLUTION
-            </span>
-            <span className={`text-[8px] sm:text-[10px] uppercase font-bold tracking-widest px-1 py-0.5 rounded shrink-0 ${
-              isDark 
-                ? 'bg-cyan-500/20 border border-cyan-400/60 text-cyan-200' 
-                : 'bg-sky-100 border border-sky-300 text-cyan-800'
-            } font-tech`}>
-              STS
+            <span className={`font-extrabold tracking-normal sm:tracking-wide ${isDark ? 'text-white' : 'text-slate-900'} text-[11px] xs:text-xs sm:text-base md:text-lg font-tech leading-none truncate max-w-full sm:max-w-none`}>
+              SHAMIM <span className={isDark ? "text-[#22c55e]" : "text-[#038502]"}>TECH</span> SOLUTION
             </span>
           </div>
-          <span className={`text-[10px] sm:text-[11px] tracking-wider ${isDark ? 'text-cyan-300' : 'text-cyan-700'} font-semibold font-tech mt-0.5 hidden md:flex items-center gap-1 truncate`}>
-            <span>CCTV SALES & SERVICE, Technician & Electrician</span>
+          <span className={`text-[10px] sm:text-[11px] tracking-wider ${isDark ? 'text-[#4ade80]' : 'text-[#038502]'} font-semibold font-tech mt-0.5 hidden md:flex items-center gap-1 truncate`}>
+            <span>SECURITY SALES & SERVICE</span>
           </span>
         </div>
       )}

@@ -116,13 +116,13 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm overflow-y-auto animate-fadeIn">
       <div 
-        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] bg-white border-2 border-sky-300 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all text-slate-800 flex flex-col"
+        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] bg-white border-2 border-[#05b802]/65 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all text-slate-800 flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
 
         {/* Header */}
-        <div className="relative bg-sky-50/80 p-3.5 sm:p-4 border-b border-sky-100">
+        <div className="relative bg-sky-50/80 p-3.5 sm:p-4 border-b border-[#05b802]/25">
           <button
             onClick={onClose}
             className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition text-xs font-bold border border-slate-300 shadow-xs cursor-pointer z-10"
@@ -134,7 +134,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
           </button>
 
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-sky-100 border border-sky-300 flex items-center justify-center text-cyan-700 font-bold text-lg shadow-xs shrink-0">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-sky-100 border border-[#05b802]/45 flex items-center justify-center text-cyan-700 font-bold text-lg shadow-xs shrink-0">
               {customer.fullName.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0 pr-16 sm:pr-0">
@@ -142,7 +142,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                 <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-wide truncate">
                   {customer.fullName}
                 </h2>
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-cyan-100 border border-cyan-300 text-cyan-800 shrink-0">
+                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-cyan-100 border border-[#05b802]/45 text-cyan-800 shrink-0">
                   Customer
                 </span>
               </div>
@@ -155,7 +155,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex items-center justify-between gap-1.5 mt-3 p-1 bg-sky-100/70 rounded-xl border border-sky-200 text-xs">
+          <div className="flex items-center justify-between gap-1.5 mt-3 p-1 bg-sky-100/70 rounded-xl border border-[#05b802]/40 text-xs">
             <div className="flex items-center gap-1.5 flex-1">
               <button
                 type="button"
@@ -213,7 +213,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
               {!isEditing ? (
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <div className="p-3 bg-sky-50/70 border border-sky-200 rounded-xl">
+                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
                       <span className="text-[11px] text-slate-500 block mb-0.5">পূর্ণ নাম</span>
                       <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                         <User className="w-3.5 h-3.5 text-cyan-600" />
@@ -221,7 +221,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       </span>
                     </div>
 
-                    <div className="p-3 bg-sky-50/70 border border-sky-200 rounded-xl">
+                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
                       <span className="text-[11px] text-slate-500 block mb-0.5">লগইন আইডি / মোবাইল / Gmail</span>
                       <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                         <Phone className="w-3.5 h-3.5 text-cyan-600" />
@@ -229,7 +229,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       </span>
                     </div>
 
-                    <div className="p-3 bg-sky-50/70 border border-sky-200 rounded-xl">
+                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
                       <span className="text-[11px] text-slate-500 block mb-0.5">জেলা</span>
                       <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                         <Building className="w-3.5 h-3.5 text-cyan-600" />
@@ -237,7 +237,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       </span>
                     </div>
 
-                    <div className="p-3 bg-sky-50/70 border border-sky-200 rounded-xl">
+                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
                       <span className="text-[11px] text-slate-500 block mb-0.5">উপজেলা / থানা</span>
                       <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                         <MapPin className="w-3.5 h-3.5 text-cyan-600" />
@@ -246,7 +246,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                     </div>
                   </div>
 
-                  <div className="p-3 bg-sky-50/70 border border-sky-200 rounded-xl">
+                  <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
                     <span className="text-[11px] text-slate-500 block mb-0.5">সম্পূর্ণ ঠিকানা</span>
                     <span className="text-xs sm:text-sm font-medium text-slate-800">
                       {customer.address}
@@ -257,7 +257,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
-                      className="py-2 px-3.5 bg-sky-100 hover:bg-sky-200 text-cyan-800 border border-sky-300 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+                      className="py-2 px-3.5 bg-sky-100 hover:bg-sky-200 text-cyan-800 border border-[#05b802]/50 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                     >
                       <Edit2 className="w-3.5 h-3.5 text-cyan-700" />
                       <span>প্রোফাইল তথ্য বা পাসওয়ার্ড এডিট করুন</span>
@@ -273,7 +273,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       required
-                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-cyan-500 shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
                     />
                   </div>
 
@@ -285,7 +285,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="01XXXXXXXXX"
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-cyan-500 shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
                       />
                     </div>
                     <div>
@@ -295,7 +295,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="example@gmail.com"
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-cyan-500 shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
                       />
                     </div>
                   </div>
@@ -306,7 +306,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       <select
                         value={district}
                         onChange={(e) => setDistrict(e.target.value)}
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-cyan-500 shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
                       >
                         {BANGLADESH_DISTRICTS.map((dist) => (
                           <option key={dist} value={dist}>
@@ -322,7 +322,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                         type="text"
                         value={upazilaThana}
                         onChange={(e) => setUpazilaThana(e.target.value)}
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-cyan-500 shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
                       />
                     </div>
                   </div>
@@ -333,7 +333,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       rows={2}
-                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-sky-300 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-cyan-500 resize-none shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] resize-none shadow-xs"
                     />
                   </div>
 
@@ -407,9 +407,9 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                   {orders.map((ord) => (
                     <div
                       key={ord.orderId}
-                      className="p-3.5 bg-sky-50/70 border border-sky-200 hover:border-sky-300 rounded-xl transition"
+                      className="p-3.5 bg-sky-50/70 border border-[#05b802]/45 hover:border-[#05b802] rounded-xl transition"
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-sky-200/80 pb-2 mb-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#05b802]/25 pb-2 mb-2">
                         <div>
                           <span className="font-mono text-xs font-bold text-cyan-700">{ord.orderId}</span>
                           <span className="text-xs text-slate-500 ml-2">
@@ -446,7 +446,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       </div>
 
                       {/* Total and address */}
-                      <div className="flex flex-wrap justify-between items-center text-xs pt-1.5 border-t border-sky-200/80">
+                      <div className="flex flex-wrap justify-between items-center text-xs pt-1.5 border-t border-[#05b802]/25">
                         <span className="text-slate-500">
                           ডেলিভারি: <span className="text-slate-800 font-medium">{ord.deliveryOption}</span>
                         </span>

@@ -31,7 +31,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm overflow-y-auto animate-fadeIn">
       <div 
-        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] overflow-y-auto rounded-2xl bg-white border-2 border-sky-300 p-3.5 sm:p-5 shadow-2xl text-slate-800 my-auto transition-all"
+        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] overflow-y-auto rounded-2xl bg-white border-2 border-[#05b802]/65 p-3.5 sm:p-5 shadow-2xl text-slate-800 my-auto transition-all"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
@@ -51,18 +51,18 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           
           {/* Image & Badges */}
           <div className="space-y-2">
-            <div className="relative h-40 sm:h-48 rounded-xl overflow-hidden bg-sky-50/50 border border-sky-200 flex items-center justify-center">
+            <div className="relative h-40 sm:h-48 rounded-xl overflow-hidden bg-sky-50/50 border border-[#05b802]/45 flex items-center justify-center">
               <img
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-contain p-2"
               />
-              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-sky-100 border border-sky-300 text-[10px] font-bold text-cyan-800">
+              <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-sky-100 border border-[#05b802]/55 text-[10px] font-bold text-cyan-800">
                 {product.brand}
               </div>
             </div>
 
-            <div className="p-2 sm:p-2.5 rounded-xl bg-sky-50/70 border border-sky-200 text-[11px] space-y-1 text-slate-700">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-sky-50/70 border border-[#05b802]/45 text-[11px] space-y-1 text-slate-700">
               {product.warranty && product.warranty.trim() && (
                 <div className="flex items-center gap-1.5 text-cyan-800 font-semibold">
                   <ShieldCheck className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
@@ -92,7 +92,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
 
             {/* Price Box (Light sky theme like Contact box) */}
-            <div className="p-2.5 rounded-xl bg-sky-100/70 border border-sky-300 flex items-baseline justify-between">
+            <div className="p-2.5 rounded-xl bg-sky-100/70 border border-[#05b802]/55 flex items-baseline justify-between">
               <div>
                 <span className="text-[10px] text-slate-600 font-semibold block">Unit Price (BDT)</span>
                 <div className="flex items-baseline gap-2">
@@ -160,7 +160,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
 
                   <a
                     href={`tel:${COMPANY_INFO.phone}`}
-                    className="flex items-center justify-center gap-2 w-full py-1.5 px-3 rounded-xl bg-sky-100 hover:bg-sky-200 text-cyan-900 font-bold text-xs transition-all border border-sky-300"
+                    className="flex items-center justify-center gap-2 w-full py-1.5 px-3 rounded-xl bg-sky-100 hover:bg-sky-200 text-cyan-900 font-bold text-xs transition-all border border-[#05b802]/60"
                   >
                     <Phone className="w-3.5 h-3.5" />
                     <span>সরাসরি কল করে দাম জানুন: {COMPANY_INFO.phoneFormatted}</span>

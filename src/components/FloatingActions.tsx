@@ -23,7 +23,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
       {cartCount > 0 && (
         <button
           onClick={onOpenCart}
-          className="relative flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-slate-900 border border-cyan-400 text-cyan-300 font-tech font-bold text-xs shadow-2xl hover:bg-slate-800 transition-all cursor-pointer group animate-bounce"
+          className="relative flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-slate-900 border border-[#06D002]/80 text-cyan-300 font-tech font-bold text-xs shadow-2xl hover:bg-slate-800 transition-all cursor-pointer group animate-bounce"
           title="Open Shopping Cart"
         >
           <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400" />
@@ -40,7 +40,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
       >
         <Phone className="w-4.5 h-4.5 sm:w-5 sm:h-5 fill-current" />
         {/* Tooltip on hover (desktop only) */}
-        <span className="hidden sm:block absolute right-14 bg-slate-950 text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">
+        <span className="hidden sm:block absolute right-14 bg-slate-950 text-white text-xs font-bold py-1.5 px-3 rounded-lg border border-[#06D002]/60 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-lg">
           Call: {activeCompany.phone || '01790139333'} / {activeCompany.secondaryPhone || '01865321530'}
         </span>
       </a>

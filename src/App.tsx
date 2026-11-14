@@ -17,8 +17,6 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AdminLoginPage } from './components/AdminLoginPage';
 import { CustomerAuthModal } from './components/CustomerAuthModal';
 import { CustomerProfileModal } from './components/CustomerProfileModal';
-import { ServiceDetailPage } from './components/ServiceDetailPage';
-import { ProductDetailPage } from './components/ProductDetailPage';
 import { DISTRICT_SEO_DATA } from './data/districtSEOData';
 import { SERVICES_SEO_DATA } from './data/servicesSEOData';
 import { PRODUCTS_SEO_DATA } from './data/productsSEOData';
@@ -333,59 +331,229 @@ export default function App() {
     };
   }, []);
 
-  // Synchronize District SEO metadata (Title, Meta Description, Keywords, Canonical) while preserving original homepage design
+  // Synchronize SEO metadata (District, Service, Product) while ALWAYS preserving original main website design
   useEffect(() => {
     if (typeof document === 'undefined') return;
 
-    if (activeDistrictSlug && DISTRICT_SEO_DATA[activeDistrictSlug]) {
-      const dist = DISTRICT_SEO_DATA[activeDistrictSlug];
-      document.title = dist.title;
-
-      let metaDesc = document.querySelector('meta[name="description"]');
-      if (!metaDesc) {
-        metaDesc = document.createElement('meta');
-        metaDesc.setAttribute('name', 'description');
-        document.head.appendChild(metaDesc);
+    const setMetaTag = (selector: string, attrName: string, attrValue: string, content: string) => {
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attrName, attrValue);
+        document.head.appendChild(el);
       }
-      metaDesc.setAttribute('content', dist.metaDescription);
+      el.setAttribute('content', content);
+    };
 
+    const setCanonical = (href: string) => {
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) {
         canonical = document.createElement('link');
         canonical.setAttribute('rel', 'canonical');
         document.head.appendChild(canonical);
       }
-      canonical.setAttribute('href', `https://www.shamimtechsolution.com/service-area/${dist.slug}`);
+      canonical.setAttribute('href', href);
+    };
+
+    const updateDynamicRobots = (noindex?: boolean) => {
+      let dynamicRobots = document.querySelector('meta[name="robots"][data-dynamic-robots="true"]');
+      if (noindex) {
+        if (!dynamicRobots) {
+          dynamicRobots = document.createElement('meta');
+          dynamicRobots.setAttribute('name', 'robots');
+          dynamicRobots.setAttribute('data-dynamic-robots', 'true');
+          document.head.appendChild(dynamicRobots);
+        }
+        dynamicRobots.setAttribute('content', 'noindex, follow');
+      } else if (dynamicRobots) {
+        dynamicRobots.remove();
+      }
+    };
+
+    const setRouteJsonLd = (data: object | null) => {
+      const scriptId = 'route-seo-jsonld';
+      let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+      if (!data) {
+        if (script) script.remove();
+        return;
+      }
+      if (!script) {
+        script = document.createElement('script');
+        script.id = scriptId;
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = JSON.stringify(data);
+    };
+
+    if (activeServiceSlug && SERVICES_SEO_DATA[activeServiceSlug]) {
+      const srv = SERVICES_SEO_DATA[activeServiceSlug];
+      const canonicalSlug = srv.canonicalSlug || srv.slug;
+      const canonicalUrl = `https://www.shamimtechsolution.com/services/${canonicalSlug}`;
+
+      document.title = srv.title;
+      setMetaTag('meta[name="description"]', 'name', 'description', srv.metaDescription);
+      setCanonical(canonicalUrl);
+      updateDynamicRobots(false);
+
+      setMetaTag('meta[property="og:title"]', 'property', 'og:title', srv.title);
+      setMetaTag('meta[property="og:description"]', 'property', 'og:description', srv.metaDescription);
+      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+      setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', srv.title);
+      setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', srv.metaDescription);
+
+      if (srv.popularSearchKeywords && srv.popularSearchKeywords.length > 0) {
+        setMetaTag('meta[name="keywords"]', 'name', 'keywords', srv.popularSearchKeywords.join(', '));
+      }
+
+      setRouteJsonLd({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Service",
+            "@id": `${canonicalUrl}#service`,
+            "name": srv.name,
+            "alternateName": srv.bnName,
+            "serviceType": srv.category,
+            "description": srv.metaDescription,
+            "provider": {
+              "@type": "LocalBusiness",
+              "name": "Shamim Tech Solution",
+              "telephone": companyInfo.phone || "01790139333",
+              "url": "https://www.shamimtechsolution.com/",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Jahaj Company Mor",
+                "addressLocality": "Rangpur",
+                "addressRegion": "Rangpur Division",
+                "addressCountry": "BD"
+              }
+            },
+            "areaServed": [
+              "Rangpur", "Haragachh", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.shamimtechsolution.com/#services" },
+              { "@type": "ListItem", "position": 3, "name": srv.name, "item": canonicalUrl }
+            ]
+          },
+          ...(srv.faqs && srv.faqs.length > 0 ? [{
+            "@type": "FAQPage",
+            "mainEntity": srv.faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+            }))
+          }] : [])
+        ]
+      });
+    } else if (activeProductSlug && PRODUCTS_SEO_DATA[activeProductSlug]) {
+      const prod = PRODUCTS_SEO_DATA[activeProductSlug];
+      const canonicalSlug = prod.canonicalSlug || prod.slug;
+      const canonicalUrl = `https://www.shamimtechsolution.com/products/${canonicalSlug}`;
+
+      document.title = prod.title;
+      setMetaTag('meta[name="description"]', 'name', 'description', prod.metaDescription);
+      setCanonical(canonicalUrl);
+      updateDynamicRobots(prod.noindex);
+
+      setMetaTag('meta[property="og:title"]', 'property', 'og:title', prod.title);
+      setMetaTag('meta[property="og:description"]', 'property', 'og:description', prod.metaDescription);
+      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+      setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', prod.title);
+      setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', prod.metaDescription);
+
+      setRouteJsonLd({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Product",
+            "@id": `${canonicalUrl}#product`,
+            "name": prod.name,
+            "alternateName": prod.bnName,
+            "description": prod.metaDescription,
+            "category": prod.category,
+            "brand": {
+              "@type": "Brand",
+              "name": prod.isInquiryOnly ? prod.name.split(' ')[0] : "Hikvision / Dahua / ZKTeco / Imou"
+            },
+            "offers": prod.isInquiryOnly ? {
+              "@type": "Offer",
+              "url": canonicalUrl,
+              "seller": {
+                "@type": "LocalBusiness",
+                "name": "Shamim Tech Solution",
+                "telephone": companyInfo.phone || "01790139333",
+                "url": "https://www.shamimtechsolution.com/"
+              }
+            } : {
+              "@type": "Offer",
+              "priceCurrency": "BDT",
+              "price": "1850",
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "LocalBusiness",
+                "name": "Shamim Tech Solution",
+                "telephone": companyInfo.phone || "01790139333",
+                "url": "https://www.shamimtechsolution.com/"
+              }
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+              { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.shamimtechsolution.com/#products" },
+              { "@type": "ListItem", "position": 3, "name": prod.name, "item": canonicalUrl }
+            ]
+          },
+          ...(prod.faqs && prod.faqs.length > 0 ? [{
+            "@type": "FAQPage",
+            "mainEntity": prod.faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+            }))
+          }] : [])
+        ]
+      });
+    } else if (activeDistrictSlug && DISTRICT_SEO_DATA[activeDistrictSlug]) {
+      const dist = DISTRICT_SEO_DATA[activeDistrictSlug];
+      const canonicalUrl = `https://www.shamimtechsolution.com/service-area/${dist.slug}`;
+
+      document.title = dist.title;
+      setMetaTag('meta[name="description"]', 'name', 'description', dist.metaDescription);
+      setCanonical(canonicalUrl);
+      updateDynamicRobots(false);
 
       const districtKeywords = [...(dist.popularSearchesBn || []), ...(dist.popularSearchesEn || [])];
       if (districtKeywords.length > 0) {
-        let metaKeywords = document.querySelector('meta[name="keywords"]');
-        if (!metaKeywords) {
-          metaKeywords = document.createElement('meta');
-          metaKeywords.setAttribute('name', 'keywords');
-          document.head.appendChild(metaKeywords);
-        }
-        metaKeywords.setAttribute('content', districtKeywords.join(', '));
+        setMetaTag('meta[name="keywords"]', 'name', 'keywords', districtKeywords.join(', '));
       }
 
-      let ogTitle = document.querySelector('meta[property="og:title"]');
-      if (ogTitle) ogTitle.setAttribute('content', dist.title);
-      let ogDesc = document.querySelector('meta[property="og:description"]');
-      if (ogDesc) ogDesc.setAttribute('content', dist.metaDescription);
-      let ogUrl = document.querySelector('meta[property="og:url"]');
-      if (ogUrl) ogUrl.setAttribute('content', `https://www.shamimtechsolution.com/service-area/${dist.slug}`);
-    } else if (!activeServiceSlug && !activeProductSlug) {
+      setMetaTag('meta[property="og:title"]', 'property', 'og:title', dist.title);
+      setMetaTag('meta[property="og:description"]', 'property', 'og:description', dist.metaDescription);
+      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+      setRouteJsonLd(null);
+    } else {
       document.title = 'Shamim Tech Solution • Security Sales & Service Bangladesh';
-      const metaDesc = document.querySelector('meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content', 'শামীম টেক সলিউশন – রংপুর বিভাগে সিসিটিভি ক্যামেরা বিক্রয় ও সার্ভিসিং, আইপি ক্যামেরা সেটআপ, অ্যাক্সেস কন্ট্রোল ও ইলেকট্রিক্যাল সলিউশন। হটলাইন: 01790139333।');
-      }
-      const canonical = document.querySelector('link[rel="canonical"]');
-      if (canonical) {
-        canonical.setAttribute('href', 'https://www.shamimtechsolution.com/');
-      }
+      setMetaTag(
+        'meta[name="description"]',
+        'name',
+        'description',
+        'শামীম টেক সলিউশন – রংপুর বিভাগে সিসিটিভি ক্যামেরা বিক্রয় ও সার্ভিসিং, আইপি ক্যামেরা সেটআপ, অ্যাক্সেস কন্ট্রোল ও ইলেকট্রিক্যাল সলিউশন। হটলাইন: 01790139333।'
+      );
+      setCanonical('https://www.shamimtechsolution.com/');
+      updateDynamicRobots(false);
+      setMetaTag('meta[property="og:title"]', 'property', 'og:title', 'Shamim Tech Solution • Security Sales & Service Bangladesh');
+      setMetaTag('meta[property="og:url"]', 'property', 'og:url', 'https://www.shamimtechsolution.com/');
+      setRouteJsonLd(null);
     }
-  }, [activeDistrictSlug, activeServiceSlug, activeProductSlug]);
+  }, [activeDistrictSlug, activeServiceSlug, activeProductSlug, companyInfo.phone]);
 
   const navigateToDistrict = useCallback((slug: string) => {
     try {
@@ -699,7 +867,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-gradient-to-b from-sky-100/90 via-blue-50/70 to-sky-100/80 text-slate-800 flex flex-col selection:bg-cyan-500 selection:text-white font-sans antialiased">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-gradient-to-b from-[#e2f9eb] via-white to-[#e8f5fe] text-slate-800 flex flex-col selection:bg-cyan-500 selection:text-white font-sans antialiased">
       
       {/* Sticky Navigation Bar */}
       <Navbar
@@ -747,90 +915,57 @@ export default function App() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-4 z-50 bg-cyan-950/95 border border-cyan-400 text-cyan-200 px-4 py-3 rounded-xl shadow-[0_0_20px_rgba(6,182,212,0.4)] text-xs sm:text-sm font-semibold flex items-center gap-2 animate-fadeIn backdrop-blur-md">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+        <div className="fixed top-20 right-4 z-50 bg-cyan-950/95 border border-[#06D002]/80 text-cyan-200 px-4 py-3 rounded-xl shadow-[0_0_20px_rgba(5,184,2,0.35)] text-xs sm:text-sm font-semibold flex items-center gap-2 animate-fadeIn backdrop-blur-md">
+          <span className="w-2 h-2 rounded-full bg-[#06D002] animate-ping" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      {/* Main Content Sections - Dynamic Routing for Services, Products, Districts, or Homepage */}
+      {/* Main Content Sections - ALWAYS render the original main website across all SEO & search routes */}
       <main className="flex-1 w-full max-w-full overflow-x-hidden">
-        {activeServiceSlug && SERVICES_SEO_DATA[activeServiceSlug] ? (
-          <ServiceDetailPage
-            serviceSlug={activeServiceSlug}
-            products={products}
+        <>
+          {/* 1. Hero Section */}
+          <Hero
+            onViewProducts={scrollToProducts}
+            onRequestQuote={() => setIsContactModalOpen(true)}
             companyInfo={companyInfo}
-            onAddToCart={handleAddToCart}
-            onBuyNow={handleBuyNow}
-            onViewProduct={(product) => setSelectedProduct(product)}
-            onNavigateHome={navigateToHome}
-            onSelectService={navigateToService}
-            onSelectProduct={navigateToProduct}
-            onSelectDistrict={navigateToDistrict}
+            siteContent={siteContent}
+            onSelectCategory={handleCategorySelect}
+          />
+
+          {/* 2. Services Section (Quick services & 11 detailed services) */}
+          <ServicesSection
             onRequestService={handleServiceSelect}
+            onSelectDistrict={navigateToDistrict}
           />
-        ) : activeProductSlug && PRODUCTS_SEO_DATA[activeProductSlug] ? (
-          <ProductDetailPage
-            productSlug={activeProductSlug}
+
+          {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
+          <ProductShop
             products={products}
-            companyInfo={companyInfo}
             onAddToCart={handleAddToCart}
             onBuyNow={handleBuyNow}
-            onViewProduct={(product) => setSelectedProduct(product)}
-            onNavigateHome={navigateToHome}
-            onSelectProduct={navigateToProduct}
-            onSelectService={navigateToService}
-            onSelectDistrict={navigateToDistrict}
-            onRequestQuote={(productName) => {
-              setPreselectedService(`Inquiry: ${productName}`);
-              setIsContactModalOpen(true);
-            }}
+            onViewDetails={(product) => setSelectedProduct(product)}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
           />
-        ) : (
-          <>
-            {/* 1. Hero Section */}
-            <Hero
-              onViewProducts={scrollToProducts}
-              onRequestQuote={() => setIsContactModalOpen(true)}
-              companyInfo={companyInfo}
-              siteContent={siteContent}
-              onSelectCategory={handleCategorySelect}
-            />
 
-            {/* 2. Services Section (Quick services & 11 detailed services) */}
-            <ServicesSection
-              onRequestService={handleServiceSelect}
-              onSelectDistrict={navigateToDistrict}
-            />
+          {/* 5. Work Gallery with Lightbox and Real Field Projects */}
+          <WorkGallery />
 
-            {/* 3. Product Shop with Categories, Search, Cart & BDT pricing */}
-            <ProductShop
-              products={products}
-              onAddToCart={handleAddToCart}
-              onBuyNow={handleBuyNow}
-              onViewDetails={(product) => setSelectedProduct(product)}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              selectedCategory={selectedCategory}
-              onSelectCategory={setSelectedCategory}
-            />
+          {/* 6. Customer Testimonials & Reviews */}
+          <CustomerReviews />
 
-            {/* 5. Work Gallery with Lightbox and Real Field Projects */}
-            <WorkGallery />
-
-            {/* 6. Customer Testimonials & Reviews */}
-            <CustomerReviews />
-
-            {/* 8. Contact Section with Working Form & Rangpur Division Map */}
-            <ContactSection
-              preselectedService={preselectedService}
-              companyInfo={companyInfo}
-              isContactModalOpen={isContactModalOpen}
-              onOpenContactModal={() => setIsContactModalOpen(true)}
-              onCloseContactModal={() => setIsContactModalOpen(false)}
-            />
-          </>
-        )}
+          {/* 8. Contact Section with Working Form & Rangpur Division Map */}
+          <ContactSection
+            preselectedService={preselectedService}
+            companyInfo={companyInfo}
+            isContactModalOpen={isContactModalOpen}
+            onOpenContactModal={() => setIsContactModalOpen(true)}
+            onCloseContactModal={() => setIsContactModalOpen(false)}
+          />
+        </>
       </main>
 
       {/* Footer with Admin Portal link */}

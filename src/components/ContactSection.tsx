@@ -83,14 +83,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   };
 
   return (
-    <section id="contact" className="relative py-8 sm:py-10 bg-gradient-to-b from-sky-100/70 via-blue-100/50 to-sky-100/80 border-b border-sky-300/80 overflow-hidden">
+    <section id="contact" className="relative py-8 sm:py-10 bg-gradient-to-b from-white via-[#e8f5fe]/75 to-[#e2f9eb]/85 border-b border-[#05b802]/45 overflow-hidden">
       {/* Decorative ambient lighting */}
-      <div className="absolute top-1/4 right-0 w-[550px] h-[350px] bg-gradient-to-l from-cyan-400/25 to-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[550px] h-[350px] bg-gradient-to-l from-sky-200/30 to-emerald-300/25 rounded-full blur-3xl pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 border border-sky-300 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-100 border border-[#05b802]/60 text-cyan-800 text-xs font-bold font-tech uppercase tracking-wider mb-2">
             <Phone className="w-3.5 h-3.5" />
             <span>Rangpur Division Service Headquarters</span>
           </div>
@@ -106,8 +106,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           
           {/* Left: Embedded Google Map for Rangpur Division (lg:col-span-6) */}
           <div className="lg:col-span-6 space-y-4">
-            <div className="rounded-2xl overflow-hidden border-2 border-sky-200/90 shadow-xl bg-white">
-              <div className="p-3 bg-sky-50 border-b border-sky-200 flex items-center justify-between text-xs text-slate-600">
+            <div className="rounded-2xl overflow-hidden border-2 border-[#05b802]/55 shadow-xl bg-white">
+              <div className="p-3 bg-sky-50 border-b border-[#05b802]/35 flex items-center justify-between text-xs text-slate-600">
                 <div className="flex items-center gap-1.5 text-cyan-800 font-bold font-tech">
                   <MapPin className="w-3.5 h-3.5 text-cyan-600" />
                   <span>Rangpur Division Service Area Map</span>
@@ -130,7 +130,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
           {/* Right: Contact & Service Booking Card (lg:col-span-6) */}
           <div className="lg:col-span-6">
-            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-sky-200/90 shadow-xl relative overflow-hidden">
+            <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-b from-white via-sky-50/40 to-blue-50/20 border-2 border-[#05b802]/55 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
               
               <div className="mb-6">
@@ -184,7 +184,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </button>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-sky-200/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
+              <div className="mt-6 pt-4 border-t border-[#05b802]/30 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500">
                 <span className="flex items-center gap-1">
                   🔒 <span>গোপনীয়তা সুরক্ষিত • কোনো স্প্যাম নেই</span>
                 </span>
@@ -205,13 +205,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             onClick={() => setFormModalState(false)}
           >
             <div 
-              className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] bg-white border-2 border-sky-300 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all flex flex-col"
+              className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] bg-white border-2 border-[#05b802]/65 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
               
               {/* Header with Back Button */}
-              <div className="p-3.5 sm:p-4 pb-2.5 border-b border-sky-100 flex items-center justify-between bg-sky-50/70">
+              <div className="p-3.5 sm:p-4 pb-2.5 border-b border-[#05b802]/30 flex items-center justify-between bg-sky-50/70">
                 <div className="min-w-0">
                   <h3 className="text-base sm:text-lg font-bold text-slate-900 font-tech leading-tight truncate">
                     Direct Contact Information
@@ -236,8 +236,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <div className="p-3.5 sm:p-5 max-h-[82vh] overflow-y-auto space-y-3.5">
                 
                 {/* 1. Direct Contact Details Card */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-b from-sky-50/60 to-blue-50/40 border border-sky-200 space-y-3">
-                  <div className="flex items-center justify-between border-b border-sky-200/80 pb-2">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-gradient-to-b from-sky-50/60 to-blue-50/40 border border-[#05b802]/45 space-y-3">
+                  <div className="flex items-center justify-between border-b border-[#05b802]/30 pb-2">
                     <span className="text-xs font-bold text-slate-800 font-tech uppercase tracking-wider flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-cyan-600" />
                       <span>Direct Contact Helpline</span>
@@ -250,7 +250,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   {/* 3 Hotlines Grid (Compact) */}
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     {/* Primary Hotline */}
-                    <div className="p-2.5 rounded-lg bg-white border border-sky-200 shadow-xs flex flex-col justify-between">
+                    <div className="p-2.5 rounded-lg bg-white border border-[#05b802]/45 shadow-xs flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] font-bold text-slate-500 uppercase">Helpline</span>
@@ -270,7 +270,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     </div>
 
                     {/* Secondary Hotline */}
-                    <div className="p-2.5 rounded-lg bg-white border border-sky-200 shadow-xs flex flex-col justify-between">
+                    <div className="p-2.5 rounded-lg bg-white border border-[#05b802]/45 shadow-xs flex flex-col justify-between">
                       <div>
                         <div className="flex items-center justify-between">
                           <span className="text-[10px] font-bold text-slate-500 uppercase">Technician</span>
@@ -313,7 +313,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   </div>
 
                   {/* Compact Address & Details */}
-                  <div className="text-xs text-slate-700 space-y-1.5 pt-1 border-t border-sky-100">
+                  <div className="text-xs text-slate-700 space-y-1.5 pt-1 border-t border-[#05b802]/25">
                     <div className="flex items-start gap-1.5">
                       <MapPin className="w-3.5 h-3.5 text-cyan-600 shrink-0 mt-0.5" />
                       <div>
@@ -342,7 +342,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
 
                 {/* 2. Quotation / Service Form */}
-                <div className="border-t border-sky-100 pt-2">
+                <div className="border-t border-[#05b802]/25 pt-2">
                   <div className="flex items-center gap-1.5 mb-2.5">
                     <Send className="w-3.5 h-3.5 text-cyan-600" />
                     <h4 className="text-xs sm:text-sm font-bold text-slate-900 font-tech uppercase tracking-wide">
@@ -390,7 +390,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Md. Shamim Hossain"
-                          className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-sky-300 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none placeholder-slate-400 shadow-xs"
+                          className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-[#05b802]/60 focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] focus:outline-none placeholder-slate-400 shadow-xs"
                         />
                       </div>
 
@@ -406,7 +406,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             placeholder="018XXXXXXXX"
-                            className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-sky-300 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none placeholder-slate-400 shadow-xs"
+                            className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-[#05b802]/60 focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] focus:outline-none placeholder-slate-400 shadow-xs"
                           />
                         </div>
 
@@ -420,7 +420,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                             value={formData.location}
                             onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                             placeholder="e.g. Rangpur / Dinajpur / Lalmonirhat"
-                            className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-sky-300 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 focus:outline-none placeholder-slate-400 shadow-xs"
+                            className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-[#05b802]/60 focus:border-[#05b802] focus:ring-1 focus:ring-[#05b802] focus:outline-none placeholder-slate-400 shadow-xs"
                           />
                         </div>
                       </div>
@@ -433,7 +433,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         <select
                           value={formData.service}
                           onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                          className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-sky-300 focus:border-cyan-500 focus:outline-none cursor-pointer shadow-xs"
+                          className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-[#05b802]/60 focus:border-[#05b802] focus:outline-none cursor-pointer shadow-xs"
                         >
                           {SERVICES_LIST.map((serv) => (
                             <option key={serv.id} value={serv.name}>
@@ -456,7 +456,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           value={formData.message}
                           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                           placeholder="e.g. How many cameras do I need? Total cost estimate?"
-                          className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-sky-300 focus:border-cyan-500 focus:outline-none placeholder-slate-400 shadow-xs resize-none"
+                          className="w-full bg-white text-xs sm:text-sm text-slate-900 rounded-lg px-3 py-1.5 border border-[#05b802]/60 focus:border-[#05b802] focus:outline-none placeholder-slate-400 shadow-xs resize-none"
                         />
                       </div>
 
