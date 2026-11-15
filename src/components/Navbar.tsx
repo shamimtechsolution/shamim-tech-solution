@@ -6,8 +6,7 @@ import {
   User, 
   Menu, 
   X, 
-  MapPin, 
-  Image as GalleryIcon,
+  MapPin,
   Wrench,
   Package,
   Home as HomeIcon,
@@ -153,7 +152,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'products', label: 'Products', icon: Package },
     { id: 'services', label: 'Services', icon: Wrench },
     { id: 'service-areas', label: 'Service Areas', icon: MapPin },
-    { id: 'gallery', label: 'Gallery', icon: GalleryIcon },
+    { id: 'technician', label: 'Technician', icon: User },
     { id: 'contact', label: 'Contact', icon: Phone },
   ];
 
@@ -171,7 +170,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     setMobileMenuOpen(false);
     setMobileSearchOpen(false);
     setTimeout(() => {
-      const targetId = id === 'service-areas' ? 'district-coverage' : id;
+      const targetId = id === 'service-areas' ? 'district-coverage' : id === 'technician' ? 'services' : id;
       const element = document.getElementById(targetId) || document.getElementById(id);
       if (element) element.scrollIntoView({ behavior: 'smooth' });
     }, 60);
@@ -215,16 +214,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             <STSLogo size="md" theme="dark" />
           </button>
 
-          <nav className="hidden xl:flex items-center gap-1 2xl:gap-1.5 flex-1 min-w-0 justify-center overflow-hidden mx-2">
+          <nav className="hidden xl:flex items-center gap-1 2xl:gap-2 flex-1 min-w-0 justify-center overflow-hidden mx-2">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
               return (
                 <button key={item.id} onClick={() => handleNavClick(item.id)}
-                  className={`flex items-center gap-1 px-2.5 py-2 bg-transparent border-0 focus:outline-none text-xs 2xl:text-[13px] font-tech font-extrabold tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap ${
+                  className={`flex items-center gap-1 px-1.5 xl:px-2 2xl:px-2.5 py-2 bg-transparent border-0 focus:outline-none text-sm 2xl:text-[15px] font-tech font-black tracking-wide transition-colors duration-200 cursor-pointer whitespace-nowrap ${
                     isActive ? 'text-[#4ade80]' : 'text-[#22c55e] hover:text-[#4ade80]'
                   }`}>
-                  <Icon className={`w-3.5 h-3.5 hidden 2xl:inline-block ${isActive ? 'text-[#4ade80]' : 'text-[#22c55e]'}`} />
+                  <Icon className={`w-4 h-4 hidden 2xl:inline-block ${isActive ? 'text-[#4ade80]' : 'text-[#22c55e]'}`} />
                   <span>{item.label}</span>
                 </button>
               );
@@ -390,14 +389,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
-            onClick={() => {
-              setSearchTerm('Accessories');
-              handleNavClick('products');
-            }}
-            className="flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#025e02]/40 bg-[#037a03] hover:bg-[#026602] text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap"
+            onClick={() => handleNavClick('technician')}
+            className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#025e02]/40 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
+              activeSection === 'technician' ? 'bg-[#026002]' : 'bg-[#037a03] hover:bg-[#026602]'
+            }`}
           >
-            <SlidersHorizontal className="w-3 h-3 shrink-0 text-white" />
-            <span>এক্সেসরিজ</span>
+            <User className="w-3 h-3 shrink-0 text-white" />
+            <span>টেকনিশিয়ান</span>
           </button>
 
           <button

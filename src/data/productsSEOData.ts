@@ -1,5 +1,5 @@
 import { NEW_PRODUCTS_SEO_DATA } from './newProductsData';
-import { buildReversedProductsSEOData } from './reversedAndTechnicianSEOData';
+import { buildReversedProductsSEOData, buildHaragacheProductsSEOData } from './reversedAndTechnicianSEOData';
 import { DVR_NVR_SEO_DATA } from './dvrNvrSEOData';
 import { WIFI_CAMERA_SEO_DATA } from './wifiCameraSEOData';
 
@@ -1840,3 +1840,7 @@ Object.assign(PRODUCTS_SEO_DATA, DVR_NVR_SEO_DATA);
 
 // Merge 320 WiFi Camera SEO entries (40 primary canonical URLs + 280 canonical/noindex variants)
 Object.assign(PRODUCTS_SEO_DATA, WIFI_CAMERA_SEO_DATA);
+
+// Merge 21 Haragache spelling product URLs alongside existing Haragachh URLs (preserving identical titles)
+Object.assign(PRODUCTS_SEO_DATA, buildHaragacheProductsSEOData(PRODUCTS_SEO_DATA));
+

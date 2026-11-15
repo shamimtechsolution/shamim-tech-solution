@@ -1,5 +1,5 @@
 import { NEW_SERVICES_SEO_DATA } from './newServicesData';
-import { buildReversedAndTechnicianServicesSEOData } from './reversedAndTechnicianSEOData';
+import { buildReversedAndTechnicianServicesSEOData, buildHaragacheServicesSEOData } from './reversedAndTechnicianSEOData';
 
 export interface ServiceSEOInfo {
   slug: string;
@@ -1774,3 +1774,7 @@ Object.assign(SERVICES_SEO_DATA, NEW_SERVICES_SEO_DATA);
 
 // Merge 50 reversed service entries (Option A) and 260 district technician entries
 Object.assign(SERVICES_SEO_DATA, buildReversedAndTechnicianServicesSEOData(SERVICES_SEO_DATA));
+
+// Merge 29 Haragache spelling service URLs alongside existing Haragachh URLs (preserving identical titles)
+Object.assign(SERVICES_SEO_DATA, buildHaragacheServicesSEOData(SERVICES_SEO_DATA));
+

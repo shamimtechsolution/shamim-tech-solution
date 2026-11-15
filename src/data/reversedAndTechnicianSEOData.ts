@@ -450,3 +450,49 @@ export function buildReversedAndTechnicianServicesSEOData(
 
   return result;
 }
+
+/**
+ * Creates `haragache-...` product URLs alongside all existing `haragachh-...` product URLs
+ * while keeping titles and all existing product entries completely unchanged.
+ */
+export function buildHaragacheProductsSEOData(
+  baseProducts: Record<string, ProductSEOInfo>
+): Record<string, ProductSEOInfo> {
+  const result: Record<string, ProductSEOInfo> = {};
+  for (const [slug, prod] of Object.entries(baseProducts)) {
+    if (!slug.startsWith('haragachh-')) continue;
+    const aliasSlug = slug.replace(/^haragachh-/, 'haragache-');
+    if (baseProducts[aliasSlug]) continue;
+    result[aliasSlug] = {
+      ...prod,
+      slug: aliasSlug
+    };
+  }
+  return result;
+}
+
+/**
+ * Creates `haragache-...` service URLs alongside all existing `haragachh-...` service URLs
+ * while keeping titles and all existing service entries completely unchanged.
+ */
+export function buildHaragacheServicesSEOData(
+  baseServices: Record<string, ServiceSEOInfo>
+): Record<string, ServiceSEOInfo> {
+  const result: Record<string, ServiceSEOInfo> = {};
+  for (const [slug, srv] of Object.entries(baseServices)) {
+    if (!slug.startsWith('haragachh-')) continue;
+    const aliasSlug = slug.replace(/^haragachh-/, 'haragache-');
+    if (baseServices[aliasSlug]) continue;
+    result[aliasSlug] = {
+      ...srv,
+      slug: aliasSlug,
+      popularSearchKeywords: Array.from(new Set([
+        ...(srv.popularSearchKeywords || []),
+        aliasSlug.replace(/-/g, ' '),
+        ...(srv.popularSearchKeywords || []).map((k) => k.replace(/haragachh/gi, 'haragache'))
+      ]))
+    };
+  }
+  return result;
+}
+

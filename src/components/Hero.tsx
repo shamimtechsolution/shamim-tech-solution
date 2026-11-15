@@ -200,7 +200,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#038502]"></span>
               </span>
-              <span>SHAMIM TECH SOLUTION • Sales and Service , Technician and Electrician</span>
+              <span>SHAMIM TECH SOLUTION • Sales and Service , Technician and Electrician, Rangpur</span>
             </div>
 
             {/* Original Product Sales Slim Long Horizontal Button (Star Tech Style Direct Product Jump) */}
