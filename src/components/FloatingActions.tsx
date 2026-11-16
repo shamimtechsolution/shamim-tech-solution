@@ -50,7 +50,7 @@ export const FloatingActions: React.FC<FloatingActionsProps> = ({
         href={`https://wa.me/${activeCompany.whatsappInternational}?text=${encodeURIComponent('Hello Shamim Tech Solution, I want to consult about CCTV camera installation.')}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#147A43] hover:bg-[#106637] text-white shadow-md shadow-[#147A43]/25 border border-white/25 transition-all transform hover:scale-110 active:scale-95"
+        className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white shadow-md shadow-[#12733D]/25 border border-white/25 transition-all transform hover:scale-110 active:scale-95"
         title="Chat on WhatsApp"
       >
         <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6 fill-current" />

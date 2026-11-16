@@ -165,7 +165,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
                     href={`https://wa.me/8801790139333?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি "${service.bnName} (${service.name})" সার্ভিস সম্পর্কে জানতে আগ্রহী।`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-1.5 sm:py-2 px-1.5 sm:px-2 rounded-md sm:rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-extrabold text-[10.5px] sm:text-xs flex items-center justify-center gap-1 sm:gap-1.5 shadow-xs transition-all text-center cursor-pointer active:scale-95"
+                    className="w-full py-1.5 sm:py-2 px-1.5 sm:px-2 rounded-md sm:rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-extrabold text-[10.5px] sm:text-xs flex items-center justify-center gap-1 sm:gap-1.5 shadow-xs transition-all text-center cursor-pointer active:scale-95"
                     title="WhatsApp: 01790139333"
                   >
                     <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" viewBox="0 0 24 24">
@@ -245,7 +245,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
                         href="https://wa.me/8801790139333"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-1 sm:p-1.5 rounded-md bg-[#147A43] hover:bg-[#106637] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform hover:scale-105 active:scale-95"
+                        className="p-1 sm:p-1.5 rounded-md bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform hover:scale-105 active:scale-95"
                         title="WhatsApp: 01790139333"
                       >
                         <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24">

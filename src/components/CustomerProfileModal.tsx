@@ -375,7 +375,7 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                     <button
                       type="submit"
                       disabled={saving}
-                      className="px-4 py-1.5 bg-[#147A43] hover:bg-[#106637] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+                      className="px-4 py-1.5 bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                     >
                       {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                       <span>পরিবর্তন সংরক্ষণ করুন</span>

@@ -380,7 +380,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                             href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${encodeURIComponent(`Hello Shamim Tech Solution, I want to know the price for: ${product.name} (Category: ${product.category}).`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-[#147A43] hover:bg-[#106637] text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer text-center"
+                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer text-center"
                             title="Contact for Price on WhatsApp"
                           >
                             <MessageSquare className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />
@@ -404,7 +404,7 @@ export const ProductShop: React.FC<ProductShopProps> = ({
                           <button
                             onClick={() => onBuyNow(product)}
                             id={`buy-now-${product.id}`}
-                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-[#147A43] hover:bg-[#106637] text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
+                            className="flex items-center justify-center gap-0.5 sm:gap-1 py-1 sm:py-2 px-1 rounded-md sm:rounded-lg bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white text-[9px] sm:text-xs font-bold transition-all shadow-xs active:scale-95 cursor-pointer"
                             title="Buy Now"
                           >
                             <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current shrink-0" />

@@ -335,7 +335,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               )}
             </div>
 
-            <button onClick={handleSearchToggle} className={`lg:hidden p-1.5 sm:p-2 rounded-lg border cursor-pointer shrink-0 transition-colors ${mobileSearchOpen ? 'bg-[#147A43] text-white border-[#147A43] font-bold' : 'bg-[#1A4B8C]/75 border-white/25 text-white hover:border-white/50 hover:text-[#BBF7D0]'}`}>
+            <button onClick={handleSearchToggle} className={`lg:hidden p-1.5 sm:p-2 rounded-lg border cursor-pointer shrink-0 transition-colors ${mobileSearchOpen ? 'bg-[#12733D] text-white border-[#12733D] font-bold hover:bg-[#106637] active:bg-[#106637]' : 'bg-[#1A4B8C]/75 border-white/25 text-white hover:border-white/50 hover:text-[#BBF7D0]'}`}>
               <Search className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
@@ -352,7 +352,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
             ) : (
               <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                <button id="header-register-btn" onClick={() => handleAuthClick('register')} className="hidden sm:flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-[#147A43] border border-white/25 text-white hover:bg-[#106637] text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm transition-colors">
+                <button id="header-register-btn" onClick={() => handleAuthClick('register')} className="hidden sm:flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg bg-[#12733D] border border-white/25 text-white hover:bg-[#106637] active:bg-[#106637] text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm transition-colors">
                   <User className="w-3.5 h-3.5 text-[#DCFCE7] shrink-0" /><span>Create Account</span>
                 </button>
                 <button id="header-login-btn" onClick={() => handleAuthClick('login')} className="flex items-center gap-1 p-1.5 sm:px-2.5 sm:py-1.5 rounded-lg bg-[#1A4B8C]/75 border border-white/25 text-white hover:bg-[#1A4B8C] hover:border-white/45 text-xs font-semibold cursor-pointer whitespace-nowrap shrink-0 shadow-sm transition-colors">
@@ -361,7 +361,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
             )}
 
-            <button id="header-cart-btn" onClick={handleCartClick} className="relative flex items-center mr-1 sm:mr-0 gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[#147A43] hover:bg-[#106637] border border-white/25 text-white transition-all cursor-pointer shadow-sm shrink-0 whitespace-nowrap">
+            <button id="header-cart-btn" onClick={handleCartClick} className="relative flex items-center mr-1 sm:mr-0 gap-1 sm:gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] border border-white/25 text-white transition-all cursor-pointer shadow-sm shrink-0 whitespace-nowrap">
               <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               <span className="hidden md:inline text-xs font-bold uppercase tracking-wider">Cart</span>
               <span className="flex items-center justify-center min-w-[17px] sm:min-w-[20px] h-4 sm:h-5 px-1 sm:px-1.5 text-[10px] sm:text-xs font-black bg-white text-[#147A43] rounded-full shadow-xs">{displayCartCount}</span>
@@ -381,7 +381,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => handleNavClick('products')}
             className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#106637]/25 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
-              activeSection === 'products' ? 'bg-[#106637]' : 'bg-[#147A43] hover:bg-[#106637]'
+              activeSection === 'products' ? 'bg-[#106637]' : 'bg-[#12733D] hover:bg-[#106637] active:bg-[#106637]'
             }`}
           >
             <Package className="w-3 h-3 shrink-0 text-white" />
@@ -391,7 +391,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => handleNavClick('technician')}
             className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#106637]/25 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
-              activeSection === 'technician' ? 'bg-[#106637]' : 'bg-[#147A43] hover:bg-[#106637]'
+              activeSection === 'technician' ? 'bg-[#106637]' : 'bg-[#12733D] hover:bg-[#106637] active:bg-[#106637]'
             }`}
           >
             <User className="w-3 h-3 shrink-0 text-white" />
@@ -401,7 +401,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => handleNavClick('services')}
             className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#106637]/25 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
-              activeSection === 'services' ? 'bg-[#106637]' : 'bg-[#147A43] hover:bg-[#106637]'
+              activeSection === 'services' ? 'bg-[#106637]' : 'bg-[#12733D] hover:bg-[#106637] active:bg-[#106637]'
             }`}
           >
             <Wrench className="w-3 h-3 shrink-0 text-white" />
@@ -411,7 +411,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <button
             onClick={() => handleNavClick('contact')}
             className={`flex items-center justify-center gap-1 py-1 px-2 xs:px-2.5 rounded-lg border border-[#106637]/25 text-[11px] xs:text-xs font-semibold text-white active:scale-95 transition-colors cursor-pointer whitespace-nowrap ${
-              activeSection === 'contact' ? 'bg-[#106637]' : 'bg-[#147A43] hover:bg-[#106637]'
+              activeSection === 'contact' ? 'bg-[#106637]' : 'bg-[#12733D] hover:bg-[#106637] active:bg-[#106637]'
             }`}
           >
             <Phone className="w-3 h-3 shrink-0 text-white" />
@@ -511,7 +511,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             ) : (
               <div className="grid grid-cols-2 gap-2">
                 <button onClick={() => { setMobileMenuOpen(false); if (onOpenCustomerAuth) onOpenCustomerAuth('register'); }}
-                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#147A43] hover:bg-[#106637] border border-[#147A43] text-xs font-semibold text-white">Create Account</button>
+                  className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] border border-[#12733D] text-xs font-semibold text-white">Create Account</button>
                 <button onClick={() => { setMobileMenuOpen(false); if (onOpenCustomerAuth) onOpenCustomerAuth('login'); }}
                   className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-[#F7FAFC] hover:bg-[#EFF5FB] border border-[#DCE7F2] text-xs font-semibold text-[#1F2937]">Login</button>
               </div>

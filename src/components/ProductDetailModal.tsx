@@ -152,7 +152,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     href={`https://wa.me/${COMPANY_INFO.whatsappInternational}?text=${encodeURIComponent(`Hello Shamim Tech Solution, I am inquiring about price and details for: ${product.name} (Category: ${product.category}).`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-bold text-xs transition-all shadow-xs"
+                    className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold text-xs transition-all shadow-xs"
                   >
                     <MessageSquare className="w-3.5 h-3.5 fill-current" />
                     <span>WhatsApp-এ দাম ও বিস্তারিত জানুন ({COMPANY_INFO.phoneFormatted})</span>
@@ -185,7 +185,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                         onBuyNow(product);
                         onClose();
                       }}
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-bold text-xs transition-all cursor-pointer shadow-xs"
+                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold text-xs transition-all cursor-pointer shadow-xs"
                     >
                       <Zap className="w-3.5 h-3.5" />
                       <span>Buy Now</span>

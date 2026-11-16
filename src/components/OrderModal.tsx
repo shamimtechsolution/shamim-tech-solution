@@ -235,7 +235,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                 href={`https://wa.me/${activeCompany.whatsappInternational}?text=${buildWhatsAppOrderMessage(confirmedOrder.orderId)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-bold text-xs sm:text-sm shadow-xs"
+                className="flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold text-xs sm:text-sm shadow-xs"
               >
                 <MessageSquare className="w-4 h-4 fill-current" />
                 <span>Send to WhatsApp ({activeCompany.phoneFormatted || activeCompany.whatsapp || '01790-139333'})</span>
@@ -485,7 +485,7 @@ export const OrderModal: React.FC<OrderModalProps> = ({
                   type="button"
                   onClick={handleOrderViaWhatsApp}
                   id="order-via-whatsapp-btn"
-                  className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-bold text-sm shadow-xs transition-all cursor-pointer active:scale-98"
+                  className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold text-sm shadow-xs transition-all cursor-pointer active:scale-98"
                 >
                   <MessageSquare className="w-4 h-4 fill-current" />
                   <span>Order via WhatsApp (01865321530)</span>

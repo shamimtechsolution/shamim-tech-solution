@@ -164,7 +164,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       </span>
                     </div>
                   </div>
-                  <span className="text-xs font-bold text-white bg-[#147A43] group-hover:bg-[#106637] px-3 py-1.5 rounded-lg font-tech uppercase tracking-wide transition-all shrink-0">
+                  <span className="text-xs font-bold text-white bg-[#12733D] group-hover:bg-[#106637] group-active:bg-[#106637] px-3 py-1.5 rounded-lg font-tech uppercase tracking-wide transition-all shrink-0">
                     Chat Now
                   </span>
                 </a>
@@ -463,7 +463,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         <button
                           type="submit"
                           id="contact-form-submit-btn"
-                          className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-bold text-xs sm:text-sm tracking-wide shadow-xs transition-all cursor-pointer transform hover:-translate-y-0.5"
+                          className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold text-xs sm:text-sm tracking-wide shadow-xs transition-all cursor-pointer transform hover:-translate-y-0.5"
                         >
                           <Send className="w-3.5 h-3.5" />
                           <span>Send Inquiry to Technician Shamim (via WhatsApp)</span>

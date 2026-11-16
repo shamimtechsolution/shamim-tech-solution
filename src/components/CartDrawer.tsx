@@ -188,7 +188,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     onClose();
                     onProceedToOrder();
                   }}
-                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-bold text-sm transition-all shadow-sm cursor-pointer"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold text-sm transition-all shadow-sm cursor-pointer"
                 >
                   <span>Proceed to Order</span>
                   <ArrowRight className="w-4 h-4" />

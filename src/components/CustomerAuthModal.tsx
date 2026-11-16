@@ -481,7 +481,7 @@ export const CustomerAuthModal: React.FC<CustomerAuthModalProps> = ({
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-2.5 px-4 bg-[#147A43] hover:bg-[#106637] text-white font-bold rounded-xl shadow-xs flex items-center justify-center gap-2 text-xs sm:text-sm transition disabled:opacity-50 cursor-pointer"
+                  className="w-full py-2.5 px-4 bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white font-bold rounded-xl shadow-xs flex items-center justify-center gap-2 text-xs sm:text-sm transition disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? (
                     <>

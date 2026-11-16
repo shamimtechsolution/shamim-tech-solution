@@ -202,7 +202,7 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Original Product Sales Slim Long Horizontal Button (Star Tech Style Direct Product Jump) */}
             <button
               onClick={() => handleCategoryClick('All Products')}
-              className="w-full bg-[#147A43] hover:bg-[#106637] text-white rounded-xl py-1.5 sm:py-2 px-3 shadow-xs border border-[#147A43] flex items-center justify-center gap-2 cursor-pointer transition-all transform hover:-translate-y-0.5 active:scale-[0.99] group"
+              className="w-full bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white rounded-xl py-1.5 sm:py-2 px-3 shadow-xs border border-[#12733D] flex items-center justify-center gap-2 cursor-pointer transition-all transform hover:-translate-y-0.5 active:scale-[0.99] group"
               title="Click to view original products directly"
             >
               <ShieldCheck className="w-4 h-4 text-[#DCFCE7] shrink-0 group-hover:scale-110 transition-transform" />
@@ -299,7 +299,7 @@ export const Hero: React.FC<HeroProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   id="hero-whatsapp-btn"
-                  className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white shadow-sm transition-all transform hover:-translate-y-0.5"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl bg-[#12733D] hover:bg-[#106637] active:bg-[#106637] text-white shadow-sm transition-all transform hover:-translate-y-0.5"
                 >
                   <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0 text-[#DCFCE7]" />
                   <div className="text-left flex flex-col justify-center leading-tight">
