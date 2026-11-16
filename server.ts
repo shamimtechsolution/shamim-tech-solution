@@ -246,9 +246,12 @@ async function startServer() {
   const app = express();
 
   // Standard SEO & Security Headers
-  app.use((_req: Request, res: Response, next: NextFunction) => {
+  app.use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    if (req.path === '/sitemap.xml' || req.path === '/sitemap_index.xml') {
+      res.setHeader('X-Robots-Tag', 'noindex, follow');
+    }
     next();
   });
 
