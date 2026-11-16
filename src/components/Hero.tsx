@@ -184,21 +184,17 @@ export const Hero: React.FC<HeroProps> = ({
   ];
 
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-b from-[#e2f9eb] via-white/95 to-[#e8f5fe] pt-2 pb-5 sm:pt-4 sm:pb-8 lg:pt-5 lg:pb-10 font-bangla">
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-r from-emerald-300/25 via-white/30 to-sky-300/25 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -top-12 right-0 w-80 h-80 bg-gradient-to-br from-sky-200/30 to-emerald-200/25 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-emerald-300/25 rounded-full blur-3xl pointer-events-none" />
-
+    <section id="home" className="relative overflow-hidden bg-[#F7FAFC] pt-2 pb-5 sm:pt-4 sm:pb-8 lg:pt-5 lg:pb-10 font-bangla">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start">
           
           {/* Left Hero Content */}
           <div className="lg:col-span-7 space-y-2 sm:space-y-2.5 text-left">
             
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/95 border border-[#16a34a]/55 text-slate-800 text-xs sm:text-sm font-bold tracking-wide shadow-sm">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#DCE7F2] text-[#1F2937] text-xs sm:text-sm font-bold tracking-wide shadow-2xs">
               <span className="relative flex h-2.5 w-2.5 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#038502]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#147A43] opacity-60"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#147A43]"></span>
               </span>
               <span>SHAMIM TECH SOLUTION • Sales and Service , Technician and Electrician, Rangpur</span>
             </div>
@@ -206,30 +202,30 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Original Product Sales Slim Long Horizontal Button (Star Tech Style Direct Product Jump) */}
             <button
               onClick={() => handleCategoryClick('All Products')}
-              className="w-full bg-gradient-to-r from-[#027302] via-[#049c04] to-[#027d02] hover:from-[#038502] hover:via-[#06b305] hover:to-[#038f03] text-white rounded-xl py-1.5 sm:py-2 px-3 shadow-sm border border-[#4ade80]/60 flex items-center justify-center gap-2 cursor-pointer transition-all transform hover:-translate-y-0.5 active:scale-[0.99] group"
+              className="w-full bg-[#147A43] hover:bg-[#106637] text-white rounded-xl py-1.5 sm:py-2 px-3 shadow-xs border border-[#147A43] flex items-center justify-center gap-2 cursor-pointer transition-all transform hover:-translate-y-0.5 active:scale-[0.99] group"
               title="Click to view original products directly"
             >
-              <ShieldCheck className="w-4 h-4 text-[#dcfce7] shrink-0 group-hover:scale-110 transition-transform" />
+              <ShieldCheck className="w-4 h-4 text-[#DCFCE7] shrink-0 group-hover:scale-110 transition-transform" />
               <h2 className="text-xs sm:text-sm font-extrabold text-white font-tech tracking-wide text-center uppercase">
                 Original Product Sales
               </h2>
-              <ChevronRight className="w-3.5 h-3.5 text-[#dcfce7] opacity-85 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+              <ChevronRight className="w-3.5 h-3.5 text-[#DCFCE7] opacity-85 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
             </button>
 
             {/* Star Tech Style Featured Categories Grid (মোবাইলে পারফেক্ট সাইজ ও অল ক্যাটাগরি সামনে) */}
-            <div className="bg-white/95 border-2 border-[#16a34a]/55 hover:border-[#16a34a] rounded-2xl p-2.5 sm:p-3.5 shadow-lg shadow-sky-950/5 backdrop-blur-sm transition-all space-y-2">
+            <div className="bg-white border border-[#DCE7F2] hover:border-[#123A70]/40 rounded-2xl p-2.5 sm:p-3.5 shadow-sm transition-all space-y-2">
               
               {/* Category Box Header */}
-              <div className="flex items-center justify-between border-b border-[#16a34a]/25 pb-1.5">
+              <div className="flex items-center justify-between border-b border-[#DCE7F2] pb-1.5">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#038502] animate-pulse" />
-                  <h2 className="text-[11px] sm:text-xs font-black text-slate-900 font-tech uppercase tracking-wide">
+                  <span className="w-2 h-2 rounded-full bg-[#147A43]" />
+                  <h2 className="text-[11px] sm:text-xs font-black text-[#1F2937] font-tech uppercase tracking-wide">
                     Featured Product Categories
                   </h2>
                 </div>
                 <button
                   onClick={() => handleCategoryClick('All Products')}
-                  className="text-[10.5px] font-bold text-[#038502] hover:text-[#026601] flex items-center gap-0.5 cursor-pointer font-tech uppercase tracking-wider"
+                  className="text-[10.5px] font-bold text-[#123A70] hover:text-[#1A4B8C] flex items-center gap-0.5 cursor-pointer font-tech uppercase tracking-wider"
                 >
                   <span>View All</span>
                   <ChevronRight className="w-3 h-3" />
@@ -244,22 +240,22 @@ export const Hero: React.FC<HeroProps> = ({
                     <button
                       key={item.id}
                       onClick={() => handleCategoryClick(item.category, item.searchQuery)}
-                      className="group relative flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-slate-50 hover:bg-emerald-50/70 border border-slate-200/90 hover:border-[#16a34a]/75 hover:shadow-xs transition-all duration-200 cursor-pointer text-center"
+                      className="group relative flex flex-col items-center justify-center p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-[#F7FAFC] hover:bg-[#EFF5FB] border border-[#DCE7F2] hover:border-[#123A70]/45 hover:shadow-2xs transition-all duration-200 cursor-pointer text-center"
                       title={item.name}
                     >
                       {item.badge && (
-                        <span className="absolute -top-1 right-1 bg-gradient-to-r from-[#027302] to-[#059c05] text-white text-[7.5px] sm:text-[8px] font-bold px-1.5 py-0.2 rounded-full shadow-2xs">
+                        <span className="absolute -top-1 right-1 bg-[#147A43] text-white text-[7.5px] sm:text-[8px] font-bold px-1.5 py-0.2 rounded-full shadow-2xs">
                           {item.badge}
                         </span>
                       )}
 
                       {/* Graphic Icon like Star Tech - Compact size */}
-                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-white group-hover:bg-emerald-100/70 border border-slate-200/70 group-hover:border-[#16a34a]/65 flex items-center justify-center text-slate-700 group-hover:text-[#038502] group-hover:scale-105 transition-all shadow-2xs mb-1">
+                      <div className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl bg-white group-hover:bg-[#EAF6EF] border border-[#DCE7F2] group-hover:border-[#147A43]/40 flex items-center justify-center text-[#123A70] group-hover:text-[#147A43] group-hover:scale-105 transition-all shadow-2xs mb-1">
                         <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[1.8]" />
                       </div>
 
                       {/* Category English Name (Only English - Star Tech Style) */}
-                      <span className="text-[10px] sm:text-[11px] font-bold text-slate-800 group-hover:text-[#038502] leading-tight transition-colors line-clamp-1 font-tech">
+                      <span className="text-[10px] sm:text-[11px] font-bold text-[#1F2937] group-hover:text-[#123A70] leading-tight transition-colors line-clamp-1 font-tech">
                         {item.name}
                       </span>
                     </button>
@@ -273,15 +269,15 @@ export const Hero: React.FC<HeroProps> = ({
             <div className="space-y-2 sm:space-y-2.5 pt-2 max-w-xl">
               {/* Line 1: Call and WhatsApp in One Line */}
               <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                <div className="flex items-stretch rounded-xl bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 p-0.5 shadow-md shadow-cyan-600/20 transition-all transform hover:-translate-y-0.5">
+                <div className="flex items-stretch rounded-xl bg-[#123A70] p-0.5 shadow-sm transition-all transform hover:-translate-y-0.5">
                   <a
                     href={`tel:${activeCompany.phone || '01790139333'}`}
                     id="hero-call-now-btn"
                     className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-2 sm:py-2.5 rounded-l-lg sm:rounded-l-xl text-white hover:bg-white/10 transition-colors"
                   >
-                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current animate-pulse text-cyan-200 shrink-0" />
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current text-blue-100 shrink-0" />
                     <div className="text-left flex flex-col justify-center leading-tight">
-                      <span className="text-[9px] sm:text-[10px] text-cyan-100 font-bold uppercase tracking-wider">কল করুন</span>
+                      <span className="text-[9px] sm:text-[10px] text-blue-100 font-bold uppercase tracking-wider">কল করুন</span>
                       <span className="font-extrabold text-sm sm:text-base md:text-lg font-mono tracking-tight text-white">
                         {activeCompany.phoneFormatted || activeCompany.phone || '01790-139333'}
                       </span>
@@ -290,7 +286,7 @@ export const Hero: React.FC<HeroProps> = ({
                   {activeCompany.secondaryPhone && (
                     <a
                       href={`tel:${activeCompany.secondaryPhone}`}
-                      className="px-2 py-2 sm:py-2.5 bg-blue-700/60 hover:bg-blue-600 text-[10px] sm:text-xs font-mono font-bold text-cyan-100 hover:text-white transition-colors border-l border-[#06D002]/45 flex items-center justify-center rounded-r-lg sm:rounded-r-xl"
+                      className="px-2 py-2 sm:py-2.5 bg-[#1A4B8C] hover:bg-[#123A70] text-[10px] sm:text-xs font-mono font-bold text-blue-100 hover:text-white transition-colors border-l border-white/25 flex items-center justify-center rounded-r-lg sm:rounded-r-xl"
                       title={`Secondary: ${activeCompany.secondaryPhone}`}
                     >
                       <span>২য়</span>
@@ -303,11 +299,11 @@ export const Hero: React.FC<HeroProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   id="hero-whatsapp-btn"
-                  className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-md shadow-emerald-500/20 transition-all transform hover:-translate-y-0.5"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-2 sm:py-2.5 rounded-xl bg-[#147A43] hover:bg-[#106637] text-white shadow-sm transition-all transform hover:-translate-y-0.5"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0 text-emerald-100" />
+                  <MessageSquare className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0 text-[#DCFCE7]" />
                   <div className="text-left flex flex-col justify-center leading-tight">
-                    <span className="text-[9px] sm:text-[10px] text-emerald-100 font-bold uppercase tracking-wider">WhatsApp</span>
+                    <span className="text-[9px] sm:text-[10px] text-[#DCFCE7] font-bold uppercase tracking-wider">WhatsApp</span>
                     <span className="font-extrabold text-sm sm:text-base md:text-lg font-mono tracking-tight text-white">
                       {activeCompany.phoneFormatted || activeCompany.phone || '01790-139333'}
                     </span>
@@ -322,7 +318,7 @@ export const Hero: React.FC<HeroProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   id="hero-facebook-btn"
-                  className="shrink-0 flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-[#1877F2] hover:bg-[#166fe5] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-blue-600/25 transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                  className="shrink-0 flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2.5 sm:px-3 rounded-xl bg-[#123A70] hover:bg-[#1A4B8C] text-white font-bold text-xs sm:text-sm tracking-wide shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer"
                   title="Facebook Page"
                 >
                   <Facebook className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" />
@@ -334,11 +330,11 @@ export const Hero: React.FC<HeroProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   id="hero-location-btn"
-                  className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-white/95 hover:bg-sky-50 border border-[#16a34a]/55 hover:border-[#16a34a] text-slate-800 shadow-md shadow-sky-950/5 transition-all transform hover:-translate-y-0.5 group cursor-pointer"
+                  className="flex-1 min-w-0 flex items-center justify-center gap-1.5 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl bg-white hover:bg-[#EFF5FB] border border-[#DCE7F2] hover:border-[#123A70]/45 text-[#1F2937] shadow-xs transition-all transform hover:-translate-y-0.5 group cursor-pointer"
                   title="Jahaj Company Mor, Rangpur"
                 >
-                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#038502] group-hover:scale-110 shrink-0 transition-transform" />
-                  <span className="whitespace-nowrap font-bold text-[11px] sm:text-xs md:text-sm text-slate-800 group-hover:text-[#026601]">
+                  <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#147A43] group-hover:scale-110 shrink-0 transition-transform" />
+                  <span className="whitespace-nowrap font-bold text-[11px] sm:text-xs md:text-sm text-[#1F2937] group-hover:text-[#123A70]">
                     Jahaj Company Mor, Rangpur
                   </span>
                 </a>
@@ -347,16 +343,16 @@ export const Hero: React.FC<HeroProps> = ({
 
             {/* Trust Badges - Single Slim Horizontal Box (একক ঘর, পাতালি, ছোট ও চিকন) */}
             <div className="pt-2">
-              <div className="bg-white/95 border border-[#16a34a]/55 rounded-xl py-1 sm:py-1.5 px-2 sm:px-3 shadow-xs backdrop-blur-sm">
+              <div className="bg-white border border-[#DCE7F2] rounded-xl py-1 sm:py-1.5 px-2 sm:px-3 shadow-2xs">
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 sm:gap-2 items-center">
                   {trustBadges.map((badge, idx) => {
                     const Icon = badge.icon;
                     return (
                       <div 
                         key={idx} 
-                        className="flex items-center justify-center gap-1.5 py-0.5 px-1 text-slate-800 text-center"
+                        className="flex items-center justify-center gap-1.5 py-0.5 px-1 text-[#1F2937] text-center"
                       >
-                        <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#038502] shrink-0" />
+                        <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#147A43] shrink-0" />
                         <span className="font-bold text-[9.5px] sm:text-[11px] leading-tight truncate">
                           {badge.label}
                         </span>
@@ -372,40 +368,40 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-5 relative space-y-2 sm:space-y-2.5 lg:pt-[86px]">
             
             {/* Top Header Box - Ultra-slim Long Horizontal Bar (লম্বা, পাতালি ও চিকন) */}
-            <div className="bg-white/95 border border-[#16a34a]/60 rounded-xl py-1 sm:py-1.5 px-2.5 sm:px-3 shadow-xs backdrop-blur-md flex items-center justify-between gap-2 font-bangla">
+            <div className="bg-white border border-[#DCE7F2] rounded-xl py-1 sm:py-1.5 px-2.5 sm:px-3 shadow-2xs flex items-center justify-between gap-2 font-bangla">
               <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
-                <div className="p-1 rounded-lg bg-emerald-50 text-[#038502] shrink-0 border border-[#16a34a]/40">
-                  <Shield className="w-3.5 h-3.5 text-[#038502]" />
+                <div className="p-1 rounded-lg bg-[#EAF6EF] text-[#147A43] shrink-0 border border-[#DCE7F2]">
+                  <Shield className="w-3.5 h-3.5 text-[#147A43]" />
                 </div>
                 <div className="min-w-0 flex flex-col sm:flex-row sm:items-center sm:gap-1.5 leading-tight">
-                  <h3 className="text-slate-900 font-black text-xs sm:text-[13px] font-bangla leading-tight truncate">
+                  <h3 className="text-[#1F2937] font-black text-xs sm:text-[13px] font-bangla leading-tight truncate">
                     সার্ভিস টেকনিশিয়ান ও ইলেকট্রিশিয়ান
                   </h3>
-                  <span className="text-[9px] sm:text-[10px] text-[#038502] font-bold font-tech leading-none">
+                  <span className="text-[9px] sm:text-[10px] text-[#123A70] font-bold font-tech leading-none">
                     <span className="hidden sm:inline">• </span>Service Technician & Electrician
                   </span>
                 </div>
               </div>
-              <div className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-50 text-[#027302] text-[9px] sm:text-[10px] font-bold shrink-0 border border-[#16a34a]/35">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#038502] animate-pulse" />
+              <div className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-[#EAF6EF] text-[#147A43] text-[9px] sm:text-[10px] font-bold shrink-0 border border-[#DCE7F2]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#147A43]" />
                 <span className="whitespace-nowrap">ভেরিফাইড সার্ভিস</span>
               </div>
             </div>
 
             {/* Main Unified Services Box (পাতালি/হরাইজন্টাল ২-কলাম গ্রিড, কোনো ছবি নেই, বাড়তি লেখা নেই) */}
-            <div className="bg-white/95 border-2 border-[#16a34a]/55 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 shadow-lg shadow-sky-950/10 backdrop-blur-md font-bangla">
+            <div className="bg-white border border-[#DCE7F2] rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 shadow-sm font-bangla">
               
               {/* 8 Services Checklist - 2 Columns Grid on both Mobile and Desktop (পাতালি/হরাইজন্টাল) */}
               <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                 {highlightPoints.map((point, index) => (
                   <div 
                     key={index} 
-                    className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-sky-50/90 hover:bg-sky-100/90 border border-[#16a34a]/35 hover:border-[#16a34a] transition-all shadow-2xs group"
+                    className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-lg sm:rounded-xl bg-[#F7FAFC] hover:bg-[#EFF5FB] border border-[#DCE7F2] hover:border-[#123A70]/45 transition-all shadow-2xs group"
                   >
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-white text-[#038502] flex items-center justify-center shrink-0 border border-[#16a34a]/40 group-hover:bg-[#038502] group-hover:text-white transition-colors">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-white text-[#147A43] flex items-center justify-center shrink-0 border border-[#DCE7F2] group-hover:bg-[#147A43] group-hover:text-white transition-colors">
                       <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                     </div>
-                    <span className="text-[10px] sm:text-xs font-bold text-slate-800 group-hover:text-[#026601] leading-tight">
+                    <span className="text-[10px] sm:text-xs font-bold text-[#1F2937] group-hover:text-[#123A70] leading-tight">
                       {point}
                     </span>
                   </div>

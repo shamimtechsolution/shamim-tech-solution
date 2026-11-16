@@ -42,11 +42,11 @@ export const STSLogo: React.FC<STSLogoProps> = ({
       {showText && (
         <div className="flex flex-col text-left min-w-0">
           <div className="flex items-center gap-1 sm:gap-1.5 min-w-0">
-            <span className={`font-extrabold tracking-normal sm:tracking-wide ${isDark ? 'text-white' : 'text-slate-900'} text-[11px] xs:text-xs sm:text-base md:text-lg font-tech leading-none truncate max-w-full sm:max-w-none`}>
-              SHAMIM <span className={isDark ? "text-[#22c55e]" : "text-[#038502]"}>TECH</span> SOLUTION
+            <span className={`font-extrabold tracking-normal sm:tracking-wide ${isDark ? 'text-white' : 'text-[#1F2937]'} text-[11px] xs:text-xs sm:text-base md:text-lg font-tech leading-none truncate max-w-full sm:max-w-none`}>
+              SHAMIM <span className={isDark ? "text-[#04DC01]" : "text-[#147A43]"}>TECH</span> SOLUTION
             </span>
           </div>
-          <span className={`text-[10px] sm:text-[11px] tracking-wider ${isDark ? 'text-[#4ade80]' : 'text-[#038502]'} font-semibold font-tech mt-0.5 hidden md:flex items-center gap-1 truncate`}>
+          <span className={`text-[10px] sm:text-[11px] tracking-wider ${isDark ? 'text-white' : 'text-[#147A43]'} font-semibold font-tech mt-0.5 hidden md:flex items-center gap-1 truncate`}>
             <span>SECURITY SALES & SERVICE</span>
           </span>
         </div>

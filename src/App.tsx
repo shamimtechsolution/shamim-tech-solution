@@ -867,7 +867,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-gradient-to-b from-[#e2f9eb] via-white to-[#e8f5fe] text-slate-800 flex flex-col selection:bg-cyan-500 selection:text-white font-sans antialiased">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#F7FAFC] text-[#1F2937] flex flex-col selection:bg-[#123A70] selection:text-white font-sans antialiased">
       
       {/* Sticky Navigation Bar */}
       <Navbar
@@ -915,8 +915,8 @@ export default function App() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-4 z-50 bg-cyan-950/95 border border-[#06D002]/80 text-cyan-200 px-4 py-3 rounded-xl shadow-[0_0_20px_rgba(5,184,2,0.35)] text-xs sm:text-sm font-semibold flex items-center gap-2 animate-fadeIn backdrop-blur-md">
-          <span className="w-2 h-2 rounded-full bg-[#06D002] animate-ping" />
+        <div className="fixed top-20 right-4 z-50 bg-[#123A70] border border-[#DCE7F2]/40 text-white px-4 py-3 rounded-xl shadow-md text-xs sm:text-sm font-semibold flex items-center gap-2 animate-fadeIn backdrop-blur-md">
+          <span className="w-2 h-2 rounded-full bg-[#86EFAC] animate-ping" />
           <span>{toastMessage}</span>
         </div>
       )}

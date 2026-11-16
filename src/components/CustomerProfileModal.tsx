@@ -114,39 +114,39 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-sm overflow-y-auto animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#1F2937]/65 backdrop-blur-sm overflow-y-auto animate-fadeIn">
       <div 
-        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] bg-white border-2 border-[#05b802]/65 rounded-2xl shadow-2xl overflow-hidden my-auto transition-all text-slate-800 flex flex-col"
+        className="relative w-[calc(100%-1.75rem)] sm:w-full max-w-xl max-h-[85vh] bg-white border border-[#DCE7F2] rounded-2xl shadow-xl overflow-hidden my-auto transition-all text-[#1F2937] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
+        <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#123A70]" />
 
         {/* Header */}
-        <div className="relative bg-sky-50/80 p-3.5 sm:p-4 border-b border-[#05b802]/25">
+        <div className="relative bg-[#F7FAFC] p-3.5 sm:p-4 border-b border-[#DCE7F2]">
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:text-slate-900 hover:bg-slate-200 transition text-xs font-bold border border-slate-300 shadow-xs cursor-pointer z-10"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white text-[#1F2937] hover:bg-[#EFF5FB] transition text-xs font-bold border border-[#DCE7F2] shadow-xs cursor-pointer z-10"
             aria-label="Close"
             title="বাতিল / Cancel"
           >
-            <X className="w-3.5 h-3.5 text-slate-600" />
+            <X className="w-3.5 h-3.5 text-[#4B5563]" />
             <span>Cancel</span>
           </button>
 
           <div className="flex items-center gap-3">
-            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-sky-100 border border-[#05b802]/45 flex items-center justify-center text-cyan-700 font-bold text-lg shadow-xs shrink-0">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-[#EFF5FB] border border-[#DCE7F2] flex items-center justify-center text-[#123A70] font-bold text-lg shadow-xs shrink-0">
               {customer.fullName.charAt(0).toUpperCase()}
             </div>
             <div className="min-w-0 pr-16 sm:pr-0">
               <div className="flex items-center gap-2">
-                <h2 className="text-base sm:text-lg font-bold text-slate-900 tracking-wide truncate">
+                <h2 className="text-base sm:text-lg font-bold text-[#1F2937] tracking-wide truncate">
                   {customer.fullName}
                 </h2>
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-cyan-100 border border-[#05b802]/45 text-cyan-800 shrink-0">
+                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-[#EFF5FB] border border-[#DCE7F2] text-[#123A70] shrink-0">
                   Customer
                 </span>
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-600 mt-0.5 flex items-center gap-1.5 truncate">
+              <p className="text-[11px] sm:text-xs text-[#4B5563] mt-0.5 flex items-center gap-1.5 truncate">
                 <span>{customer.phone || customer.email || customer.loginIdentifier}</span>
                 <span>•</span>
                 <span>{customer.district}</span>
@@ -155,15 +155,15 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
           </div>
 
           {/* Navigation Tabs */}
-          <div className="flex items-center justify-between gap-1.5 mt-3 p-1 bg-sky-100/70 rounded-xl border border-[#05b802]/40 text-xs">
+          <div className="flex items-center justify-between gap-1.5 mt-3 p-1 bg-[#EFF5FB] rounded-xl border border-[#DCE7F2] text-xs">
             <div className="flex items-center gap-1.5 flex-1">
               <button
                 type="button"
                 onClick={() => setActiveTab('profile')}
                 className={`py-1.5 px-3 rounded-lg font-bold transition text-xs flex items-center gap-1.5 ${
                   activeTab === 'profile'
-                    ? 'bg-cyan-600 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#123A70] text-white shadow-xs'
+                    : 'text-[#4B5563] hover:text-[#1F2937]'
                 }`}
               >
                 <User className="w-3.5 h-3.5" />
@@ -174,8 +174,8 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                 onClick={() => setActiveTab('orders')}
                 className={`py-1.5 px-3 rounded-lg font-bold transition text-xs flex items-center gap-1.5 ${
                   activeTab === 'orders'
-                    ? 'bg-cyan-600 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-[#123A70] text-white shadow-xs'
+                    : 'text-[#4B5563] hover:text-[#1F2937]'
                 }`}
               >
                 <Package className="w-3.5 h-3.5" />
@@ -199,10 +199,10 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
           {message && (
             <div className={`p-3 mb-3.5 rounded-xl text-xs flex items-center gap-2 ${
               message.type === 'success' 
-                ? 'bg-emerald-50 border border-emerald-300 text-emerald-800 font-medium' 
+                ? 'bg-[#EAF6EF] border border-[#DCE7F2] text-[#147A43] font-medium' 
                 : 'bg-rose-50 border border-rose-300 text-rose-800 font-medium'
             }`}>
-              {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> : <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />}
+              {message.type === 'success' ? <CheckCircle2 className="w-4 h-4 text-[#147A43] shrink-0" /> : <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />}
               <span>{message.text}</span>
             </div>
           )}
@@ -213,42 +213,42 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
               {!isEditing ? (
                 <div className="space-y-3">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
-                      <span className="text-[11px] text-slate-500 block mb-0.5">পূর্ণ নাম</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <User className="w-3.5 h-3.5 text-cyan-600" />
+                    <div className="p-3 bg-[#F7FAFC] border border-[#DCE7F2] rounded-xl">
+                      <span className="text-[11px] text-[#64748B] block mb-0.5">পূর্ণ নাম</span>
+                      <span className="text-xs sm:text-sm font-bold text-[#1F2937] flex items-center gap-1.5">
+                        <User className="w-3.5 h-3.5 text-[#123A70]" />
                         {customer.fullName}
                       </span>
                     </div>
 
-                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
-                      <span className="text-[11px] text-slate-500 block mb-0.5">লগইন আইডি / মোবাইল / Gmail</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <Phone className="w-3.5 h-3.5 text-cyan-600" />
+                    <div className="p-3 bg-[#F7FAFC] border border-[#DCE7F2] rounded-xl">
+                      <span className="text-[11px] text-[#64748B] block mb-0.5">লগইন আইডি / মোবাইল / Gmail</span>
+                      <span className="text-xs sm:text-sm font-bold text-[#1F2937] flex items-center gap-1.5">
+                        <Phone className="w-3.5 h-3.5 text-[#123A70]" />
                         {customer.phone || customer.email || customer.loginIdentifier}
                       </span>
                     </div>
 
-                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
-                      <span className="text-[11px] text-slate-500 block mb-0.5">জেলা</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <Building className="w-3.5 h-3.5 text-cyan-600" />
+                    <div className="p-3 bg-[#F7FAFC] border border-[#DCE7F2] rounded-xl">
+                      <span className="text-[11px] text-[#64748B] block mb-0.5">জেলা</span>
+                      <span className="text-xs sm:text-sm font-bold text-[#1F2937] flex items-center gap-1.5">
+                        <Building className="w-3.5 h-3.5 text-[#123A70]" />
                         {customer.district}
                       </span>
                     </div>
 
-                    <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
-                      <span className="text-[11px] text-slate-500 block mb-0.5">উপজেলা / থানা</span>
-                      <span className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-cyan-600" />
+                    <div className="p-3 bg-[#F7FAFC] border border-[#DCE7F2] rounded-xl">
+                      <span className="text-[11px] text-[#64748B] block mb-0.5">উপজেলা / থানা</span>
+                      <span className="text-xs sm:text-sm font-bold text-[#1F2937] flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5 text-[#123A70]" />
                         {customer.upazilaThana}
                       </span>
                     </div>
                   </div>
 
-                  <div className="p-3 bg-sky-50/70 border border-[#05b802]/40 rounded-xl">
-                    <span className="text-[11px] text-slate-500 block mb-0.5">সম্পূর্ণ ঠিকানা</span>
-                    <span className="text-xs sm:text-sm font-medium text-slate-800">
+                  <div className="p-3 bg-[#F7FAFC] border border-[#DCE7F2] rounded-xl">
+                    <span className="text-[11px] text-[#64748B] block mb-0.5">সম্পূর্ণ ঠিকানা</span>
+                    <span className="text-xs sm:text-sm font-medium text-[#1F2937]">
                       {customer.address}
                     </span>
                   </div>
@@ -257,9 +257,9 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
-                      className="py-2 px-3.5 bg-sky-100 hover:bg-sky-200 text-cyan-800 border border-[#05b802]/50 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+                      className="py-2 px-3.5 bg-[#EFF5FB] hover:bg-white text-[#123A70] border border-[#DCE7F2] rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                     >
-                      <Edit2 className="w-3.5 h-3.5 text-cyan-700" />
+                      <Edit2 className="w-3.5 h-3.5 text-[#123A70]" />
                       <span>প্রোফাইল তথ্য বা পাসওয়ার্ড এডিট করুন</span>
                     </button>
                   </div>
@@ -267,46 +267,46 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
               ) : (
                 <form onSubmit={handleSaveProfile} className="space-y-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">পূর্ণ নাম</label>
+                    <label className="block text-xs font-semibold text-[#1F2937] mb-1">পূর্ণ নাম</label>
                     <input
                       type="text"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       required
-                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#DCE7F2] rounded-xl text-[#1F2937] text-xs sm:text-sm focus:border-[#123A70] focus:outline-none shadow-xs"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">মোবাইল নম্বর</label>
+                      <label className="block text-xs font-semibold text-[#1F2937] mb-1">মোবাইল নম্বর</label>
                       <input
                         type="text"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="01XXXXXXXXX"
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#DCE7F2] rounded-xl text-[#1F2937] text-xs sm:text-sm focus:border-[#123A70] focus:outline-none shadow-xs"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">Gmail / ইমেইল</label>
+                      <label className="block text-xs font-semibold text-[#1F2937] mb-1">Gmail / ইমেইল</label>
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="example@gmail.com"
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#DCE7F2] rounded-xl text-[#1F2937] text-xs sm:text-sm focus:border-[#123A70] focus:outline-none shadow-xs"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">জেলা</label>
+                      <label className="block text-xs font-semibold text-[#1F2937] mb-1">জেলা</label>
                       <select
                         value={district}
                         onChange={(e) => setDistrict(e.target.value)}
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#DCE7F2] rounded-xl text-[#1F2937] text-xs sm:text-sm focus:border-[#123A70] focus:outline-none shadow-xs"
                       >
                         {BANGLADESH_DISTRICTS.map((dist) => (
                           <option key={dist} value={dist}>
@@ -317,48 +317,48 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-slate-700 mb-1">উপজেলা / থানা</label>
+                      <label className="block text-xs font-semibold text-[#1F2937] mb-1">উপজেলা / থানা</label>
                       <input
                         type="text"
                         value={upazilaThana}
                         onChange={(e) => setUpazilaThana(e.target.value)}
-                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] shadow-xs"
+                        className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#DCE7F2] rounded-xl text-[#1F2937] text-xs sm:text-sm focus:border-[#123A70] focus:outline-none shadow-xs"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">সম্পূর্ণ ঠিকানা</label>
+                    <label className="block text-xs font-semibold text-[#1F2937] mb-1">সম্পূর্ণ ঠিকানা</label>
                     <textarea
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       rows={2}
-                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#05b802]/50 rounded-xl text-slate-900 text-xs sm:text-sm focus:border-[#05b802] resize-none shadow-xs"
+                      className="w-full px-3 py-1.5 sm:py-2 bg-white border border-[#DCE7F2] rounded-xl text-[#1F2937] text-xs sm:text-sm focus:border-[#123A70] focus:outline-none resize-none shadow-xs"
                     />
                   </div>
 
                   {/* Password Change Box (Optional) */}
-                  <div className="p-3 bg-amber-50/70 border border-amber-200 rounded-xl space-y-2.5">
-                    <span className="text-xs font-bold text-amber-800 block">পাসওয়ার্ড পরিবর্তন করতে চাইলে (ঐচ্ছিক):</span>
+                  <div className="p-3 bg-[#F7FAFC] border border-[#DCE7F2] rounded-xl space-y-2.5">
+                    <span className="text-xs font-bold text-[#123A70] block">পাসওয়ার্ড পরিবর্তন করতে চাইলে (ঐচ্ছিক):</span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                       <div>
-                        <label className="block text-[11px] text-slate-600 mb-1">বর্তমান পাসওয়ার্ড</label>
+                        <label className="block text-[11px] text-[#4B5563] mb-1">বর্তমান পাসওয়ার্ড</label>
                         <input
                           type="password"
                           value={currentPassword}
                           onChange={(e) => setCurrentPassword(e.target.value)}
                           placeholder="বর্তমান পাসওয়ার্ড লিখুন"
-                          className="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-slate-900 text-xs shadow-xs"
+                          className="w-full px-3 py-1.5 bg-white border border-[#DCE7F2] rounded-lg text-[#1F2937] text-xs shadow-xs focus:border-[#123A70] focus:outline-none"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] text-slate-600 mb-1">নতুন পাসওয়ার্ড</label>
+                        <label className="block text-[11px] text-[#4B5563] mb-1">নতুন পাসওয়ার্ড</label>
                         <input
                           type="password"
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
                           placeholder="কমপক্ষে ৬ অক্ষর"
-                          className="w-full px-3 py-1.5 bg-white border border-amber-300 rounded-lg text-slate-900 text-xs shadow-xs"
+                          className="w-full px-3 py-1.5 bg-white border border-[#DCE7F2] rounded-lg text-[#1F2937] text-xs shadow-xs focus:border-[#123A70] focus:outline-none"
                         />
                       </div>
                     </div>
@@ -368,14 +368,14 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                     <button
                       type="button"
                       onClick={() => setIsEditing(false)}
-                      className="px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-xl text-xs font-bold cursor-pointer"
+                      className="px-3.5 py-1.5 bg-[#F7FAFC] hover:bg-[#EFF5FB] text-[#1F2937] border border-[#DCE7F2] rounded-xl text-xs font-bold cursor-pointer"
                     >
                       বাতিল
                     </button>
                     <button
                       type="submit"
                       disabled={saving}
-                      className="px-4 py-1.5 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
+                      className="px-4 py-1.5 bg-[#147A43] hover:bg-[#106637] text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition cursor-pointer shadow-xs"
                     >
                       {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                       <span>পরিবর্তন সংরক্ষণ করুন</span>
@@ -390,15 +390,15 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
           {activeTab === 'orders' && (
             <div className="space-y-3">
               {loadingOrders ? (
-                <div className="py-10 flex flex-col items-center justify-center text-slate-500 gap-2">
-                  <Loader2 className="w-6 h-6 animate-spin text-cyan-600" />
+                <div className="py-10 flex flex-col items-center justify-center text-[#64748B] gap-2">
+                  <Loader2 className="w-6 h-6 animate-spin text-[#123A70]" />
                   <span className="text-xs">অর্ডার হিস্টোরি লোড হচ্ছে...</span>
                 </div>
               ) : orders.length === 0 ? (
-                <div className="py-10 text-center text-slate-500 space-y-2">
-                  <Package className="w-10 h-10 mx-auto text-slate-400" />
-                  <p className="text-xs sm:text-sm font-bold text-slate-800">আপনার এখনও কোনো অর্ডার নেই</p>
-                  <p className="text-xs text-slate-500">
+                <div className="py-10 text-center text-[#64748B] space-y-2">
+                  <Package className="w-10 h-10 mx-auto text-[#DCE7F2]" />
+                  <p className="text-xs sm:text-sm font-bold text-[#1F2937]">আপনার এখনও কোনো অর্ডার নেই</p>
+                  <p className="text-xs text-[#64748B]">
                     আমাদের শপ থেকে সিসিটিভি ক্যামেরা বা প্রয়োজনীয় যন্ত্রপাতি অর্ডার করতে পারেন!
                   </p>
                 </div>
@@ -407,12 +407,12 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                   {orders.map((ord) => (
                     <div
                       key={ord.orderId}
-                      className="p-3.5 bg-sky-50/70 border border-[#05b802]/45 hover:border-[#05b802] rounded-xl transition"
+                      className="p-3.5 bg-[#F7FAFC] border border-[#DCE7F2] hover:border-[#123A70]/45 rounded-xl transition"
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#05b802]/25 pb-2 mb-2">
+                      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#DCE7F2] pb-2 mb-2">
                         <div>
-                          <span className="font-mono text-xs font-bold text-cyan-700">{ord.orderId}</span>
-                          <span className="text-xs text-slate-500 ml-2">
+                          <span className="font-mono text-xs font-bold text-[#123A70]">{ord.orderId}</span>
+                          <span className="text-xs text-[#64748B] ml-2">
                             {new Date(ord.orderDate).toLocaleDateString('bn-BD', {
                               year: 'numeric',
                               month: 'short',
@@ -422,10 +422,10 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                         </div>
                         <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase ${
                           ord.status === 'Completed'
-                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                            ? 'bg-[#EAF6EF] text-[#147A43] border border-[#DCE7F2]'
                             : ord.status === 'Confirmed'
-                            ? 'bg-blue-100 text-blue-800 border border-blue-300'
-                            : 'bg-amber-100 text-amber-800 border border-amber-300'
+                            ? 'bg-[#EFF5FB] text-[#123A70] border border-[#DCE7F2]'
+                            : 'bg-amber-50 text-amber-800 border border-amber-200'
                         }`}>
                           {ord.status}
                         </span>
@@ -435,10 +435,10 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       <div className="space-y-1 mb-2">
                         {ord.items.map((item, idx) => (
                           <div key={idx} className="flex justify-between items-center text-xs">
-                            <span className="text-slate-700">
-                              {item.product.name} × <strong className="text-slate-900">{item.quantity}</strong>
+                            <span className="text-[#4B5563]">
+                              {item.product.name} × <strong className="text-[#1F2937]">{item.quantity}</strong>
                             </span>
-                            <span className="text-slate-600 font-mono">
+                            <span className="text-[#4B5563] font-mono">
                               ৳ {(item.product.price * item.quantity).toLocaleString()}
                             </span>
                           </div>
@@ -446,13 +446,13 @@ export const CustomerProfileModal: React.FC<CustomerProfileModalProps> = ({
                       </div>
 
                       {/* Total and address */}
-                      <div className="flex flex-wrap justify-between items-center text-xs pt-1.5 border-t border-[#05b802]/25">
-                        <span className="text-slate-500">
-                          ডেলিভারি: <span className="text-slate-800 font-medium">{ord.deliveryOption}</span>
+                      <div className="flex flex-wrap justify-between items-center text-xs pt-1.5 border-t border-[#DCE7F2]">
+                        <span className="text-[#64748B]">
+                          ডেলিভারি: <span className="text-[#1F2937] font-medium">{ord.deliveryOption}</span>
                         </span>
                         <div className="text-right">
-                          <span className="text-slate-500 mr-1.5">সর্বমোট:</span>
-                          <span className="text-xs sm:text-sm font-bold text-cyan-800 font-mono">
+                          <span className="text-[#64748B] mr-1.5">সর্বমোট:</span>
+                          <span className="text-xs sm:text-sm font-bold text-[#123A70] font-mono">
                             ৳ {ord.totalAmount.toLocaleString()}
                           </span>
                         </div>

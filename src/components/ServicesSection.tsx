@@ -56,7 +56,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
       });
 
   return (
-    <section id="services" className="relative pt-4 pb-10 sm:pt-6 sm:pb-14 bg-gradient-to-b from-white via-[#e3faec]/80 to-[#e8f5fe]/85 border-b border-[#05b802]/45">
+    <section id="services" className="relative pt-4 pb-10 sm:pt-6 sm:pb-14 bg-[#F7FAFC] border-b border-[#DCE7F2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* 1. Category Filter Pills */}
@@ -68,10 +68,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
                 <button
                   key={c.value}
                   onClick={() => setSelectedFilter(c.value)}
-                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer shadow-sm ${
+                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all cursor-pointer shadow-xs ${
                     isSelected
-                      ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-cyan-600/25'
-                      : 'bg-white hover:bg-sky-50 text-slate-700 border border-[#05b802]/45 hover:border-[#05b802]'
+                      ? 'bg-[#123A70] text-white'
+                      : 'bg-white hover:bg-[#EFF5FB] text-[#1F2937] border border-[#DCE7F2] hover:border-[#123A70]/40'
                   }`}
                 >
                   {c.label}
@@ -84,25 +84,25 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
         {/* 2. Main Services Grid Header & Responsive View Controls */}
         <div className="flex items-center justify-between mb-3 px-0.5">
           <div className="flex items-center gap-2">
-            <h3 className="text-xs sm:text-base font-bold text-slate-900">
+            <h3 className="text-xs sm:text-base font-bold text-[#1F2937]">
               মূল সার্ভিসসমূহ ({filteredServices.length}টি)
             </h3>
-            <span className="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full font-bold hidden sm:inline-block">
+            <span className="text-[10px] text-[#147A43] bg-[#EAF6EF] border border-[#DCE7F2] px-2 py-0.5 rounded-full font-bold hidden sm:inline-block">
               ✓ ডেক্সটপ / বড় স্ক্রিন ভিউ
             </span>
-            <span className="text-[10px] text-cyan-700 bg-cyan-50 border border-[#05b802]/45 px-2 py-0.5 rounded-full font-bold sm:hidden">
+            <span className="text-[10px] text-[#123A70] bg-[#EFF5FB] border border-[#DCE7F2] px-2 py-0.5 rounded-full font-bold sm:hidden">
               {mobileCols === 3 ? '৩ কলাম ভিউ' : '২ কলাম ভিউ'}
             </span>
           </div>
 
           {/* Quick Toggle for Mobile Phones: 3 Columns or 2 Columns */}
-          <div className="flex items-center bg-sky-100 p-0.5 rounded-lg border border-[#05b802]/45 text-[10px] sm:hidden">
+          <div className="flex items-center bg-[#EFF5FB] p-0.5 rounded-lg border border-[#DCE7F2] text-[10px] sm:hidden">
             <button
               onClick={() => setMobileCols(3)}
               className={`px-2 py-1 rounded-md font-bold transition-all cursor-pointer ${
                 mobileCols === 3
-                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#123A70] text-white shadow-xs'
+                  : 'text-[#4B5563] hover:text-[#1F2937]'
               }`}
             >
               ৩ কলাম
@@ -111,8 +111,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
               onClick={() => setMobileCols(2)}
               className={`px-2 py-1 rounded-md font-bold transition-all cursor-pointer ${
                 mobileCols === 2
-                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#123A70] text-white shadow-xs'
+                  : 'text-[#4B5563] hover:text-[#1F2937]'
               }`}
             >
               ২ কলাম
@@ -130,11 +130,11 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
             return (
               <div
                 key={service.id}
-                className="bg-white border-2 border-[#05b802]/45 hover:border-[#05b802] rounded-xl sm:rounded-2xl p-2 sm:p-3 flex flex-col justify-between transition-all shadow-xs sm:shadow-sm hover:shadow-lg hover:shadow-[#05b802]/10 group"
+                className="bg-white border border-[#DCE7F2] hover:border-[#123A70]/45 rounded-xl sm:rounded-2xl p-2 sm:p-3 flex flex-col justify-between transition-all shadow-xs hover:shadow-md group"
               >
                 <div>
                   {/* Real Hardware Photo - Enlarged to fit card nicely */}
-                  <div className={`w-full ${mobileCols === 3 ? 'h-24 sm:h-32 md:h-36' : 'h-32 sm:h-40'} rounded-lg sm:rounded-xl bg-white border border-[#05b802]/30 p-0.5 sm:p-1 flex items-center justify-center mb-2 overflow-hidden shadow-xs group-hover:border-[#05b802] transition-all`}>
+                  <div className={`w-full ${mobileCols === 3 ? 'h-24 sm:h-32 md:h-36' : 'h-32 sm:h-40'} rounded-lg sm:rounded-xl bg-[#F7FAFC] border border-[#DCE7F2] p-0.5 sm:p-1 flex items-center justify-center mb-2 overflow-hidden group-hover:border-[#123A70]/35 transition-all`}>
                     <img
                       src={service.image || '/assets/aistudio/image_4e9a7e85.png'}
                       alt={service.name}
@@ -145,27 +145,27 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
 
                   {/* Full Bengali Name - e.g. অ্যাক্সেস কন্ট্রোল ডোর লক */}
                   <div className="min-h-[2.8rem] sm:min-h-[3.2rem] flex flex-col justify-start">
-                    <h3 className="font-extrabold text-slate-900 group-hover:text-cyan-700 text-[11px] sm:text-xs md:text-sm leading-tight">
+                    <h3 className="font-extrabold text-[#1F2937] group-hover:text-[#123A70] text-[11px] sm:text-xs md:text-sm leading-tight">
                       {service.bnName}
                     </h3>
-                    <span className="text-[9px] sm:text-[10px] text-cyan-700 font-semibold truncate block mt-0.5">
+                    <span className="text-[9px] sm:text-[10px] text-[#123A70] font-semibold truncate block mt-0.5">
                       {service.name}
                     </span>
                   </div>
 
                   {service.description && (
-                    <p className="text-[11px] sm:text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed hidden md:block">
+                    <p className="text-[11px] sm:text-xs text-[#4B5563] mt-1 line-clamp-2 leading-relaxed hidden md:block">
                       {service.description}
                     </p>
                   )}
                 </div>
 
-                <div className="mt-2 pt-1.5 border-t border-[#05b802]/25">
+                <div className="mt-2 pt-1.5 border-t border-[#DCE7F2]">
                   <a
                     href={`https://wa.me/8801790139333?text=${encodeURIComponent(`আসসালামু আলাইকুম, আমি "${service.bnName} (${service.name})" সার্ভিস সম্পর্কে জানতে আগ্রহী।`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-1.5 sm:py-2 px-1.5 sm:px-2 rounded-md sm:rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold text-[10.5px] sm:text-xs flex items-center justify-center gap-1 sm:gap-1.5 shadow-xs transition-all text-center cursor-pointer active:scale-95"
+                    className="w-full py-1.5 sm:py-2 px-1.5 sm:px-2 rounded-md sm:rounded-xl bg-[#147A43] hover:bg-[#106637] text-white font-extrabold text-[10.5px] sm:text-xs flex items-center justify-center gap-1 sm:gap-1.5 shadow-xs transition-all text-center cursor-pointer active:scale-95"
                     title="WhatsApp: 01790139333"
                   >
                     <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current shrink-0" viewBox="0 0 24 24">
@@ -182,38 +182,38 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
         </div>
 
         {/* 4. Coverage Areas: Rangpur Division 8 Districts + Bogura + Dhaka (Image 1 এর মতো লম্বা পাতালি ঘর ও ২-কলাম গ্রিড) */}
-        <div id="district-coverage" className="mt-5 sm:mt-8 pt-3 sm:pt-4 border-t border-[#05b802]/40">
+        <div id="district-coverage" className="mt-5 sm:mt-8 pt-3 sm:pt-4 border-t border-[#DCE7F2]">
           {/* Coverage Area Long Horizontal Box (লম্বা পাতালি ঘর - লেখা ঘরের ভেতরে) */}
-          <div className="bg-white/95 border-2 border-[#05b802]/65 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 mb-3 sm:mb-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div className="bg-white border border-[#DCE7F2] rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 mb-3 sm:mb-4 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="min-w-0">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-800 text-[10.5px] sm:text-xs font-bold mb-1">
-                <MapPin className="w-3.5 h-3.5 text-cyan-600" />
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EFF5FB] text-[#123A70] text-[10.5px] sm:text-xs font-bold mb-1">
+                <MapPin className="w-3.5 h-3.5 text-[#123A70]" />
                 <span>সার্ভিস এলাকা (Coverage Area)</span>
               </div>
-              <h3 className="text-sm sm:text-lg font-black text-slate-900 font-tech leading-snug">
+              <h3 className="text-sm sm:text-lg font-black text-[#1F2937] font-tech leading-snug">
                 অন-সাইট সার্ভিস এলাকা (রংপুর বিভাগ, বগুড়া ও ঢাকা)
               </h3>
-              <p className="text-[11px] sm:text-xs text-slate-600 mt-0.5 leading-relaxed font-bangla">
+              <p className="text-[11px] sm:text-xs text-[#4B5563] mt-0.5 leading-relaxed font-bangla">
                 রংপুর বিভাগের ৮টি জেলা, বগুড়া ও ঢাকাসহ যেকোনো প্রান্তে আমাদের দক্ষ টেকনিশিয়ান অন-সাইটে গিয়ে সিসিটিভি ইনস্টলেশন ও ইলেকট্রিক্যাল সার্ভিস প্রদান করে।
               </p>
             </div>
             <div className="shrink-0 flex items-center">
-              <span className="text-[10px] sm:text-xs font-bold text-cyan-800 bg-sky-50 border border-[#05b802]/45 px-2.5 py-1 rounded-full flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-bold text-[#123A70] bg-[#EFF5FB] border border-[#DCE7F2] px-2.5 py-1 rounded-full flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#147A43] animate-pulse" />
                 <span>১০ জেলা কাভারেজ</span>
               </span>
             </div>
           </div>
 
           {/* Unified District Coverage Container Card (Image 1 এর মতো ২-কলাম ও লম্বা পাতালি অনুভূমিক ঘর) */}
-          <div className="bg-white/95 border-2 border-[#05b802]/75 rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 shadow-lg shadow-sky-950/5 backdrop-blur-md font-bangla">
+          <div className="bg-white border border-[#DCE7F2] rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 shadow-sm font-bangla">
             <div className="grid grid-cols-2 gap-1.5 sm:gap-2.5 md:grid-cols-2 lg:grid-cols-5">
               {DIVISION_DISTRICTS.map((district: any) => {
                 const slug = district.enName.toLowerCase();
                 return (
                   <div
                     key={district.id}
-                    className="flex items-center justify-between gap-1.5 sm:gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 rounded-lg sm:rounded-xl bg-sky-50/90 hover:bg-sky-100/90 border border-[#05b802]/40 hover:border-[#05b802] transition-all shadow-2xs group"
+                    className="flex items-center justify-between gap-1.5 sm:gap-2 px-2.5 py-2 sm:px-3 sm:py-2.5 rounded-lg sm:rounded-xl bg-[#F7FAFC] hover:bg-[#EFF5FB] border border-[#DCE7F2] hover:border-[#123A70]/40 transition-all shadow-2xs group"
                   >
                     <a
                       href={`/service-area/${slug}`}
@@ -226,14 +226,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
                       className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1 cursor-pointer"
                       title={`${district.bnName} (${district.enName})`}
                     >
-                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-white text-cyan-600 flex items-center justify-center shrink-0 border border-[#05b802]/40 group-hover:bg-cyan-600 group-hover:text-white transition-colors shadow-2xs">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-md bg-white text-[#123A70] flex items-center justify-center shrink-0 border border-[#DCE7F2] group-hover:bg-[#123A70] group-hover:text-white transition-colors shadow-2xs">
                         <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       </div>
                       <div className="min-w-0 flex-1 flex flex-col justify-center">
-                        <span className="font-extrabold text-slate-900 group-hover:text-cyan-900 text-[11px] sm:text-xs md:text-sm leading-tight truncate">
+                        <span className="font-extrabold text-[#1F2937] group-hover:text-[#123A70] text-[11px] sm:text-xs md:text-sm leading-tight truncate">
                           {district.bnName}
                         </span>
-                        <span className="text-[9px] sm:text-[10px] text-cyan-700 font-semibold truncate leading-none mt-0.5">
+                        <span className="text-[9px] sm:text-[10px] text-[#123A70] font-semibold truncate leading-none mt-0.5">
                           {district.enName}
                         </span>
                       </div>
@@ -245,7 +245,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onRequestServi
                         href="https://wa.me/8801790139333"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-1 sm:p-1.5 rounded-md bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform hover:scale-105 active:scale-95"
+                        className="p-1 sm:p-1.5 rounded-md bg-[#147A43] hover:bg-[#106637] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform hover:scale-105 active:scale-95"
                         title="WhatsApp: 01790139333"
                       >
                         <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24">

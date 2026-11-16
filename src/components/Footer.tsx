@@ -58,38 +58,35 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-gradient-to-b from-[#e4faed] via-white to-[#e8f5fe] text-slate-700 border-t-2 border-[#05b802]/65 pt-16 pb-8 relative overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-px bg-gradient-to-r from-transparent via-[#05b802]/55 to-transparent" />
-      <div className="absolute -bottom-16 left-1/4 w-80 h-80 bg-gradient-to-r from-emerald-300/25 to-sky-200/25 rounded-full blur-3xl pointer-events-none" />
+    <footer className="bg-[#F7FAFC] text-[#1F2937] border-t border-[#DCE7F2] pt-16 pb-8 relative overflow-hidden">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#05b802]/35">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#DCE7F2]">
           
           {/* Col 1: Branding & Slogan (lg:col-span-4) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
               <STSLogo size="md" showText={false} theme="light" />
               <div>
-                <h3 className="text-lg font-black text-slate-900 font-tech leading-tight">
+                <h3 className="text-lg font-black text-[#1F2937] font-tech leading-tight">
                   {activeCompany.name}
                 </h3>
-                <p className="text-xs text-cyan-700 font-bold font-tech tracking-wider">
+                <p className="text-xs text-[#123A70] font-bold font-tech tracking-wider">
                   {activeCompany.tagline}
                 </p>
               </div>
             </div>
 
-            <p className="text-xs text-slate-600 leading-relaxed max-w-sm">
+            <p className="text-xs text-[#4B5563] leading-relaxed max-w-sm">
               {currentDistrict
                 ? `Certified CCTV technician & security system service provider in ${currentDistrict.enName} (${currentDistrict.bnName}) & Rangpur Division. Expert camera installation, DVR/NVR configuration, IP setups, electrical and biometric security solutions.`
                 : 'Certified CCTV technician & security system service provider across Rangpur Division (রংপুর বিভাগ). Expert camera installation, DVR/NVR configuration, IP setups, electrical and biometric security solutions.'}
             </p>
 
-            <div className="p-3.5 rounded-xl bg-white border-2 border-[#05b802]/50 text-xs text-slate-700 font-tech shadow-sm">
-              <span className="block text-[11px] text-slate-500 uppercase font-mono font-bold">Company Motto:</span>
-              <span className="text-sm font-bold text-slate-900">"{activeCompany.slogan}"</span>
-              <span className="block text-[11px] text-cyan-700 font-bangla font-semibold mt-0.5">
+            <div className="p-3.5 rounded-xl bg-white border border-[#DCE7F2] text-xs text-[#1F2937] font-tech shadow-xs">
+              <span className="block text-[11px] text-[#64748B] uppercase font-mono font-bold">Company Motto:</span>
+              <span className="text-sm font-bold text-[#1F2937]">"{activeCompany.slogan}"</span>
+              <span className="block text-[11px] text-[#147A43] font-bangla font-semibold mt-0.5">
                 {activeCompany.bengaliSlogan}
               </span>
             </div>
@@ -97,94 +94,94 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* Col 2: Quick Links (lg:col-span-2) */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-[#05b802]/35 pb-2">
+            <h4 className="text-xs font-bold text-[#1F2937] uppercase tracking-widest font-tech border-b border-[#DCE7F2] pb-2">
               Navigation
             </h4>
-            <ul className="space-y-2 text-xs font-medium">
+            <ul className="space-y-2 text-xs font-medium text-[#4B5563]">
               <li>
-                <a href="#home" className="hover:text-cyan-700 transition-colors">Home</a>
+                <a href="#home" className="hover:text-[#123A70] transition-colors">Home</a>
               </li>
               <li>
-                <a href="#services" className="hover:text-cyan-700 transition-colors">Services</a>
+                <a href="#services" className="hover:text-[#123A70] transition-colors">Services</a>
               </li>
               <li>
-                <a href="#products" className="hover:text-cyan-700 transition-colors">Product Shop</a>
+                <a href="#products" className="hover:text-[#123A70] transition-colors">Product Shop</a>
               </li>
               <li>
-                <a href="#gallery" className="hover:text-cyan-700 transition-colors">Work Gallery</a>
+                <a href="#gallery" className="hover:text-[#123A70] transition-colors">Work Gallery</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-cyan-700 transition-colors">Contact</a>
+                <a href="#contact" className="hover:text-[#123A70] transition-colors">Contact</a>
               </li>
             </ul>
           </div>
 
           {/* Col 3: Core Services (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-[#05b802]/35 pb-2">
+            <h4 className="text-xs font-bold text-[#1F2937] uppercase tracking-widest font-tech border-b border-[#DCE7F2] pb-2">
               Popular Services
             </h4>
-            <ul className="space-y-2 text-xs text-slate-600 font-medium">
-              <li className="hover:text-cyan-700 transition-colors">CCTV Camera Sales & Service</li>
-              <li className="hover:text-cyan-700 transition-colors">DVR, NVR & XVR Hard Drive Setup</li>
-              <li className="hover:text-cyan-700 transition-colors">IP Camera & Wi-Fi PTZ Setup</li>
-              <li className="hover:text-cyan-700 transition-colors">PABX & Office Intercom System</li>
-              <li className="hover:text-cyan-700 transition-colors">Access Control & Biometric Attendance</li>
-              <li className="hover:text-cyan-700 transition-colors">House & Office Electrical Wiring</li>
-              <li className="hover:text-cyan-700 transition-colors">IT Support & LAN Network Setup</li>
-              <li className="hover:text-cyan-700 transition-colors">CCTV Cable, Connectors & Power Supply</li>
+            <ul className="space-y-2 text-xs text-[#4B5563] font-medium">
+              <li className="hover:text-[#123A70] transition-colors">CCTV Camera Sales & Service</li>
+              <li className="hover:text-[#123A70] transition-colors">DVR, NVR & XVR Hard Drive Setup</li>
+              <li className="hover:text-[#123A70] transition-colors">IP Camera & Wi-Fi PTZ Setup</li>
+              <li className="hover:text-[#123A70] transition-colors">PABX & Office Intercom System</li>
+              <li className="hover:text-[#123A70] transition-colors">Access Control & Biometric Attendance</li>
+              <li className="hover:text-[#123A70] transition-colors">House & Office Electrical Wiring</li>
+              <li className="hover:text-[#123A70] transition-colors">IT Support & LAN Network Setup</li>
+              <li className="hover:text-[#123A70] transition-colors">CCTV Cable, Connectors & Power Supply</li>
             </ul>
           </div>
 
           {/* Col 4: Official Contact (lg:col-span-3) */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-tech border-b border-[#05b802]/35 pb-2">
+            <h4 className="text-xs font-bold text-[#1F2937] uppercase tracking-widest font-tech border-b border-[#DCE7F2] pb-2">
               Official Contact
             </h4>
             <div className="space-y-3 text-xs">
               <div>
-                <span className="text-[11px] text-slate-500 block uppercase font-tech font-bold mb-1">Helpline & Direct Phone:</span>
+                <span className="text-[11px] text-[#64748B] block uppercase font-tech font-bold mb-1">Helpline & Direct Phone:</span>
                 <div className="flex flex-col gap-1">
-                  <a href={`tel:${activeCompany.phone || '01790139333'}`} className="font-mono text-cyan-700 font-bold hover:underline flex items-center gap-1.5">
-                    <span className="text-[9px] bg-cyan-100 text-cyan-800 font-bold px-1 rounded border border-[#05b802]/50">Main</span>
+                  <a href={`tel:${activeCompany.phone || '01790139333'}`} className="font-mono text-[#123A70] font-bold hover:underline flex items-center gap-1.5">
+                    <span className="text-[9px] bg-[#EFF5FB] text-[#123A70] font-bold px-1 rounded border border-[#DCE7F2]">Main</span>
                     <span>{activeCompany.phone || '01790139333'}</span>
                   </a>
-                  <a href={`tel:${activeCompany.secondaryPhone || '01865321530'}`} className="font-mono text-blue-700 font-bold hover:underline flex items-center gap-1.5">
-                    <span className="text-[9px] bg-blue-100 text-blue-800 font-bold px-1 rounded border border-blue-300">Direct</span>
+                  <a href={`tel:${activeCompany.secondaryPhone || '01865321530'}`} className="font-mono text-[#123A70] font-bold hover:underline flex items-center gap-1.5">
+                    <span className="text-[9px] bg-[#EFF5FB] text-[#123A70] font-bold px-1 rounded border border-[#DCE7F2]">Direct</span>
                     <span>{activeCompany.secondaryPhone || '01865321530'}</span>
                   </a>
                 </div>
               </div>
 
               <div>
-                <span className="text-[11px] text-slate-500 block uppercase font-tech font-bold">WhatsApp:</span>
+                <span className="text-[11px] text-[#64748B] block uppercase font-tech font-bold">WhatsApp:</span>
                 <a 
                   href={`https://wa.me/${activeCompany.whatsappInternational}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-emerald-600 font-bold hover:underline"
+                  className="font-mono text-[#147A43] font-bold hover:underline"
                 >
                   +{activeCompany.whatsappInternational}
                 </a>
               </div>
 
               <div>
-                <span className="text-[11px] text-slate-500 block uppercase font-tech font-bold">Base Address:</span>
-                <p className="text-slate-800 font-medium">
+                <span className="text-[11px] text-[#64748B] block uppercase font-tech font-bold">Base Address:</span>
+                <p className="text-[#1F2937] font-medium">
                   {currentDistrict ? `${currentDistrict.enName} District, Rangpur Division, Bangladesh` : (activeCompany.location || 'Rangpur Division, Bangladesh')}
                 </p>
-                <p className="text-[11px] text-cyan-700 font-semibold">
+                <p className="text-[11px] text-[#123A70] font-semibold">
                   Area: {currentDistrict ? `${currentDistrict.enName} (${currentDistrict.bnName}) & Rangpur Division` : 'All 8 Districts of Rangpur Division'}
                 </p>
               </div>
 
               <div>
-                <span className="text-[11px] text-slate-500 block uppercase font-tech font-bold mb-1">Official Social:</span>
+                <span className="text-[11px] text-[#64748B] block uppercase font-tech font-bold mb-1">Official Social:</span>
                 <a
                   href={activeCompany.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 border border-blue-300 text-blue-700 text-xs font-semibold shadow-sm transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#EFF5FB] hover:bg-white border border-[#DCE7F2] text-[#123A70] text-xs font-semibold shadow-xs transition-all"
                 >
                   <Facebook className="w-3.5 h-3.5 fill-current" />
                   <span>Facebook Profile</span>
@@ -196,13 +193,13 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* 8 Districts Service Area Band */}
-        <div className="py-6 border-b border-[#05b802]/35">
+        <div className="py-6 border-b border-[#DCE7F2]">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
-              <span className="text-xs font-bold text-slate-900 font-tech uppercase tracking-wider block">
+              <span className="text-xs font-bold text-[#1F2937] font-tech uppercase tracking-wider block">
                 রংপুর বিভাগের ৮টি জেলায় অন-সাইট সার্ভিস এরিয়া (Service Coverage)
               </span>
-              <p className="text-[11px] text-slate-500 mt-0.5">
+              <p className="text-[11px] text-[#4B5563] mt-0.5">
                 CCTV Camera, Electrician, PABX Intercom, Access Control & IT Services available in all major districts & Dhaka:
               </p>
             </div>
@@ -228,11 +225,11 @@ export const Footer: React.FC<FooterProps> = ({
                       onSelectDistrict(dist.slug);
                     }
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-cyan-50 border border-[#05b802]/45 hover:border-[#05b802] text-xs text-slate-700 hover:text-cyan-800 font-medium transition-all shadow-sm flex items-center gap-1 cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EFF5FB] border border-[#DCE7F2] hover:border-[#123A70]/45 text-xs text-[#1F2937] hover:text-[#123A70] font-medium transition-all shadow-xs flex items-center gap-1 cursor-pointer"
                   title={`CCTV Camera Price & Service in ${dist.en}`}
                 >
-                  <span className="font-bangla font-semibold text-cyan-800">{dist.bn}</span>
-                  <span className="text-[10px] text-slate-400">({dist.en})</span>
+                  <span className="font-bangla font-semibold text-[#123A70]">{dist.bn}</span>
+                  <span className="text-[10px] text-[#64748B]">({dist.en})</span>
                 </a>
               ))}
             </div>
@@ -240,16 +237,16 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom copyright and back-to-top */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-600 gap-4">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[#4B5563] gap-4">
           <div 
             onClick={handleSecretFooterClick}
             className="cursor-default select-none"
             title=""
           >
             <p>
-              © {currentYear} <strong className="text-slate-900">{activeCompany.name}</strong>. All rights reserved.
+              © {currentYear} <strong className="text-[#1F2937]">{activeCompany.name}</strong>. All rights reserved.
             </p>
-            <p className="text-[11px] text-slate-500 mt-0.5">
+            <p className="text-[11px] text-[#64748B] mt-0.5">
               {currentDistrict
                 ? `Dedicated on-site service across ${currentDistrict.enName} (${currentDistrict.bnName}) & all 8 districts of Rangpur Division, Bangladesh.`
                 : 'Service coverage: All 8 Districts across Rangpur Division (রংপুর বিভাগ), Bangladesh.'}
@@ -257,8 +254,8 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center gap-4">
-            <span className="text-[11px] text-cyan-800 bg-sky-100 px-3 py-1 rounded-full border border-[#05b802]/60 font-bold flex items-center gap-1 shadow-sm">
-              <Shield className="w-3.5 h-3.5 text-cyan-600" />
+            <span className="text-[11px] text-[#123A70] bg-white px-3 py-1 rounded-full border border-[#DCE7F2] font-bold flex items-center gap-1 shadow-xs">
+              <Shield className="w-3.5 h-3.5 text-[#123A70]" />
               <span>Certified Security & CCTV Technician</span>
             </span>
 
@@ -266,18 +263,18 @@ export const Footer: React.FC<FooterProps> = ({
               <button
                 id="footer-admin-btn"
                 onClick={onOpenAdmin}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium cursor-pointer transition-all bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 text-emerald-800 shadow-sm"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium cursor-pointer transition-all bg-[#EAF6EF] hover:bg-white border border-[#DCE7F2] text-[#147A43] shadow-xs"
                 title="Open Dedicated Admin Portal (/admin)"
               >
-                <Lock className="w-3.5 h-3.5 text-emerald-600" />
+                <Lock className="w-3.5 h-3.5 text-[#147A43]" />
                 <span>Admin Panel (Online)</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#147A43] animate-pulse" />
               </button>
             )}
 
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-lg bg-white hover:bg-sky-50 text-slate-600 hover:text-cyan-700 border-2 border-[#05b802]/50 transition-colors cursor-pointer shadow-sm"
+              className="p-2 rounded-lg bg-white hover:bg-[#EFF5FB] text-[#1F2937] hover:text-[#123A70] border border-[#DCE7F2] transition-colors cursor-pointer shadow-xs"
               title="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />
