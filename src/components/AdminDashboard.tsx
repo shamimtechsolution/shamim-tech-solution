@@ -2619,22 +2619,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       {/* PRODUCT ADD / EDIT MODAL */}
       {/* ======================================================== */}
       {isProductModalOpen && (
-        <div id="product-modal-scroll" className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm overflow-y-auto">
-          <div className="relative w-full max-w-2xl rounded-2xl bg-gradient-to-b from-[#0b152d] to-[#050b18] border border-cyan-500/40 p-6 shadow-2xl my-8">
-            <button
-              onClick={() => setIsProductModalOpen(false)}
-              className="absolute top-4 right-4 p-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-700 cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-sm">
+          <div className="relative w-full max-w-xl max-h-[86vh] flex flex-col rounded-2xl bg-gradient-to-b from-[#0b152d] to-[#050b18] border border-cyan-500/40 shadow-2xl overflow-hidden">
+            <div className="shrink-0 flex items-center justify-between gap-3 px-4 sm:px-5 py-3.5 border-b border-slate-800/80">
+              <h3 className="text-base sm:text-lg font-black text-white font-tech flex items-center gap-2 min-w-0">
+                <Package className="w-5 h-5 text-cyan-400 shrink-0" />
+                <span className="truncate">{editingProduct ? 'Edit Product (পণ্য এডিট করুন)' : 'Add New Product (নতুন পণ্য যোগ করুন)'}</span>
+              </h3>
 
-            <h3 className="text-lg font-black text-white font-tech mb-4 flex items-center gap-2">
-              <Package className="w-5 h-5 text-cyan-400" />
-              {editingProduct ? 'Edit Product (পণ্য এডিট করুন)' : 'Add New Product (নতুন পণ্য যোগ করুন)'}
-            </h3>
+              <button
+                type="button"
+                onClick={() => setIsProductModalOpen(false)}
+                className="shrink-0 p-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-white border border-slate-700 cursor-pointer"
+              >
+                <X className="w-4 h-4 sm:w-5 sm:h-5" />
+              </button>
+            </div>
 
-            <form onSubmit={handleSaveProduct} noValidate className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSaveProduct} noValidate className="flex-1 flex flex-col min-h-0 overflow-hidden">
+              <div id="product-modal-scroll" className="flex-1 overflow-y-auto px-4 sm:px-5 py-3.5 space-y-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div className="sm:col-span-2">
                   <div className="flex items-center justify-between mb-1">
                     <label className="text-xs font-bold text-slate-300">Product Name * (পণ্যের নাম)</label>
@@ -2659,8 +2663,8 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 {/* Prominent Visual Category Selector with Bengali Subtitles */}
-                <div className="sm:col-span-2 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2.5">
-                  <div className="flex items-center justify-between">
+                <div className="sm:col-span-2 p-3 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2">
+                  <div className="flex items-center justify-between gap-2">
                     <div>
                       <label className="block text-xs font-bold text-slate-200">
                         পণ্য ক্যাটাগরি নির্বাচন করুন (Select Product Category) *
@@ -2683,7 +2687,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                           key={item.category}
                           type="button"
                           onClick={() => setProductForm(prev => ({ ...prev, category: item.category }))}
-                          className={`flex flex-col items-start p-2.5 rounded-xl border text-left transition-all cursor-pointer ${
+                          className={`flex flex-col items-start p-2 rounded-xl border text-left transition-all cursor-pointer ${
                             isSelected
                               ? 'bg-gradient-to-r from-cyan-950 to-blue-950 border-cyan-400 text-cyan-300 shadow-[0_0_15px_rgba(6,182,212,0.25)] ring-1 ring-cyan-400'
                               : 'bg-slate-900/90 border-slate-700/80 text-slate-300 hover:border-slate-500 hover:bg-slate-850'
@@ -2714,7 +2718,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </div>
 
                 {/* Price Mode Selector (Fixed Price vs Contact for Price) */}
-                <div className="sm:col-span-2 p-3.5 rounded-xl bg-slate-950/90 border border-cyan-500/30 space-y-2.5">
+                <div className="sm:col-span-2 p-3 rounded-xl bg-slate-950/90 border border-cyan-500/30 space-y-2">
                   <div className="flex items-center justify-between">
                     <label className="block text-xs font-bold text-cyan-300">
                       মূল্য নির্ধারণ ব্যবস্থা (Price Option) *
@@ -2728,7 +2732,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <button
                       type="button"
                       onClick={() => setProductForm(prev => ({ ...prev, priceType: 'fixed', isContactForPrice: false }))}
-                      className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                         (productForm.priceType !== 'contact' && !productForm.isContactForPrice)
                           ? 'bg-gradient-to-r from-cyan-950 to-blue-950 text-cyan-300 border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.2)]'
                           : 'bg-slate-900/80 text-slate-400 border-slate-700 hover:text-white hover:bg-slate-850'
@@ -2747,7 +2751,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     <button
                       type="button"
                       onClick={() => setProductForm(prev => ({ ...prev, priceType: 'contact', isContactForPrice: true }))}
-                      className={`flex items-center justify-center gap-2 p-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                      className={`flex items-center justify-center gap-2 p-2.5 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                         (productForm.priceType === 'contact' || productForm.isContactForPrice)
                           ? 'bg-gradient-to-r from-amber-950 to-orange-950 text-amber-300 border-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]'
                           : 'bg-slate-900/80 text-slate-400 border-slate-700 hover:text-white hover:bg-slate-850'
@@ -2767,7 +2771,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                 {/* Conditional Price Inputs based on selected Price Mode */}
                 {(productForm.priceType === 'contact' || productForm.isContactForPrice) ? (
-                  <div className="sm:col-span-2 p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-center gap-3 text-amber-300 text-xs">
+                  <div className="sm:col-span-2 p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-center gap-3 text-amber-300 text-xs">
                     <span className="text-base shrink-0">💬</span>
                     <div>
                       <div className="font-bold text-amber-200">"Contact for Price" মোড সক্রিয়</div>
@@ -2786,7 +2790,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         placeholder="2500"
                         value={productForm.price || ''}
                         onChange={(e) => setProductForm({ ...productForm, price: Number(e.target.value) })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-cyan-300 font-mono font-bold focus:border-cyan-500 outline-none"
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-cyan-300 font-mono font-bold focus:border-cyan-500 outline-none"
                       />
                     </div>
 
@@ -2797,21 +2801,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                         placeholder="2900"
                         value={productForm.originalPrice || ''}
                         onChange={(e) => setProductForm({ ...productForm, originalPrice: e.target.value ? Number(e.target.value) : undefined })}
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-slate-300 font-mono focus:border-cyan-500 outline-none"
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-sm text-slate-300 font-mono focus:border-cyan-500 outline-none"
                       />
                     </div>
                   </>
                 )}
 
                 {/* Product Image File Upload & Preview */}
-                <div className="sm:col-span-2 p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
+                <div className="sm:col-span-2 p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 space-y-2.5">
                   <label className="block text-xs font-bold text-cyan-300">
                     Product Image (ছবি আপলোড বা URL)
                   </label>
 
-                  <div className="flex flex-col sm:flex-row items-center gap-4">
+                  <div className="flex flex-col sm:flex-row items-center gap-3.5">
                     {/* Preview Box */}
-                    <div className="w-20 h-20 rounded-xl bg-slate-900 border border-cyan-500/40 overflow-hidden flex items-center justify-center shrink-0">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-slate-900 border border-cyan-500/40 overflow-hidden flex items-center justify-center shrink-0">
                       {imagePreview ? (
                         <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                       ) : (
@@ -2891,7 +2895,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   />
                 </div>
 
-                <div className="flex items-center gap-6 sm:col-span-2 pt-2">
+                <div className="flex flex-wrap items-center gap-6 sm:col-span-2 pt-1">
                   <label className="flex items-center gap-2 text-xs font-bold text-slate-300 cursor-pointer">
                     <input
                       type="checkbox"
@@ -2913,8 +2917,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   </label>
                 </div>
               </div>
+              </div>
 
-              <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-800">
+              <div className="shrink-0 px-4 sm:px-5 py-3 border-t border-slate-800 bg-[#050b18]/95 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-2.5">
                 {editingProduct ? (
                   <button
                     type="button"
