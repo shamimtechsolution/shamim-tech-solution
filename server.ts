@@ -995,13 +995,17 @@ async function startServer() {
 
   // --- PRODUCTS CRUD ---
 
-  // Helper to persist base64 uploaded product images as permanent files on disk
+  // Helper to persist base64 uploaded product images as permanent files on disk (or keep portable compressed data URLs)
   const persistProductImage = (imageStr: string | undefined, identifier: string): string => {
     if (!imageStr || !imageStr.trim()) {
       return 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=600&q=80';
     }
     const trimmed = imageStr.trim();
     if (trimmed.startsWith('data:image/')) {
+      // Keep portable compressed data URLs so both Preview and Live Vercel can load the image directly from Firestore
+      if (trimmed.length <= 500000) {
+        return trimmed;
+      }
       try {
         const match = trimmed.match(/^data:image\/([a-zA-Z0-9+]+);base64,(.+)$/);
         if (match) {

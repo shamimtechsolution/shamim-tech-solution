@@ -173,7 +173,19 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const handleSyncProductsToFirebase = async () => {
     setIsFirebaseSyncing(true);
     try {
-      showNotification('success', 'Firebase Firestore-এ প্রোডাক্ট সিঙ্ক শুরু হচ্ছে...');
+      showNotification('success', 'Firebase Firestore-এর সাথে প্রোডাক্ট সিঙ্ক হচ্ছে...');
+      const existingFirestore = await getProductsFromFirestore();
+
+      if (existingFirestore.length > 0) {
+        setProducts(existingFirestore);
+        try {
+          localStorage.setItem('sts_custom_products', JSON.stringify(existingFirestore));
+          window.dispatchEvent(new Event('sts_products_updated'));
+        } catch {}
+        showNotification('success', `Firebase Firestore থেকে লাইভ ${existingFirestore.length} টি প্রোডাক্ট সফলভাবে সিঙ্ক হয়েছে!`);
+        return;
+      }
+
       let successCount = 0;
       let lastErrorMessage = '';
 
@@ -247,6 +259,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
       if (res.ok && contentType.includes('application/json')) {
         const data = await res.json();
+        let firestoreProducts: Product[] = [];
+        try {
+          firestoreProducts = await getProductsFromFirestore();
+        } catch (fsErr) {
+          console.warn('Firestore admin fetch fallback:', fsErr);
+        }
+
+        if (firestoreProducts.length > 0) {
+          setProducts(firestoreProducts);
+          try {
+            localStorage.setItem('sts_custom_products', JSON.stringify(firestoreProducts));
+          } catch {}
+          setDownloads(data.downloads && data.downloads.length > 0 ? data.downloads : SOFTWARE_DOWNLOADS);
+          setCompanyInfo(data.companyInfo || COMPANY_INFO);
+          setSiteContent(data.siteContent || DEFAULT_SITE_CONTENT);
+          setOrders(data.orders || []);
+          return;
+        }
+
         if (data.products && Array.isArray(data.products) && data.products.length > 0) {
           const stored = localStorage.getItem('sts_custom_products');
           let loadedProducts = data.products;
@@ -566,7 +597,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         });
 
         showNotification('success', `পণ্য "${deleteDialog.title}" সফলভাবে মুছে ফেলা হয়েছে!`);
-        try { await fetchAdminData(); } catch {}
         onDataUpdated();
       } else if (deleteDialog.type === 'download') {
         const res = await fetch(`/api/admin/downloads/${deleteDialog.id}`, {

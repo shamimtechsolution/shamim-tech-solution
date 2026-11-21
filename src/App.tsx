@@ -151,7 +151,7 @@ export default function App() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   // Load public data from live Express backend with localStorage persistence
-  const loadPublicData = useCallback(async () => {
+  const loadPublicData = useCallback(async (skipProductsOverwrite = false) => {
     try {
       let res = await fetch('/api/public/data');
       let contentType = res.headers.get('content-type') || '';
@@ -163,7 +163,7 @@ export default function App() {
 
       if (res.ok && contentType.includes('application/json')) {
         const data = await res.json();
-        if (data.products && Array.isArray(data.products) && data.products.length > 0) {
+        if (!skipProductsOverwrite && data.products && Array.isArray(data.products) && data.products.length > 0) {
           setProducts(data.products);
           try {
             localStorage.setItem('sts_custom_products', JSON.stringify(data.products));
@@ -178,7 +178,7 @@ export default function App() {
         if (data.siteContent) {
           setSiteContent(data.siteContent);
         }
-      } else {
+      } else if (!skipProductsOverwrite) {
         const stored = localStorage.getItem('sts_custom_products');
         if (stored) {
           const parsed = JSON.parse(stored);
@@ -187,12 +187,14 @@ export default function App() {
       }
     } catch (err) {
       console.warn('Backend public data fetch note: using local fallback defaults.', err);
-      const stored = localStorage.getItem('sts_custom_products');
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length > 0) setProducts(parsed);
-        } catch {}
+      if (!skipProductsOverwrite) {
+        const stored = localStorage.getItem('sts_custom_products');
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) setProducts(parsed);
+          } catch {}
+        }
       }
     }
   }, []);
@@ -207,13 +209,14 @@ export default function App() {
           try {
             localStorage.setItem('sts_custom_products', JSON.stringify(items));
           } catch {}
+          loadPublicData(true);
         } else {
-          loadPublicData();
+          loadPublicData(false);
         }
       })
       .catch(err => {
         console.warn('Firestore initial fetch fallback:', err);
-        loadPublicData();
+        loadPublicData(false);
       });
 
     // 2. Real-time subscription to Firestore collection 'products'
@@ -248,12 +251,22 @@ export default function App() {
         const stored = localStorage.getItem('sts_custom_products');
         if (stored) {
           const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length > 0) {
+          if (Array.isArray(parsed)) {
             setProducts(parsed);
           }
         }
       } catch {}
-      loadPublicData();
+      getProductsFromFirestore()
+        .then(items => {
+          if (items && items.length > 0) {
+            setProducts(items);
+            try {
+              localStorage.setItem('sts_custom_products', JSON.stringify(items));
+            } catch {}
+          }
+        })
+        .catch(() => {});
+      loadPublicData(true);
     };
     window.addEventListener('sts_products_updated', handleProductsUpdated);
     return () => {
