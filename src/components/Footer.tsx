@@ -12,7 +12,7 @@ import {
   Lock
 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
-import { DISTRICT_SEO_DATA } from '../data/districtSEOData';
+import { DISTRICT_SUMMARY_DATA } from '../seo/districtSummary';
 import { STSLogo } from './STSLogo';
 import { CompanyInfo } from '../types';
 
@@ -32,7 +32,7 @@ export const Footer: React.FC<FooterProps> = ({
   activeDistrictSlug
 }) => {
   const activeCompany = passedCompany || COMPANY_INFO;
-  const currentDistrict = activeDistrictSlug ? DISTRICT_SEO_DATA[activeDistrictSlug.toLowerCase()] : null;
+  const currentDistrict = activeDistrictSlug ? DISTRICT_SUMMARY_DATA[activeDistrictSlug.toLowerCase()] : null;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -17,9 +17,12 @@ import { AdminDashboard } from './components/AdminDashboard';
 import { AdminLoginPage } from './components/AdminLoginPage';
 import { CustomerAuthModal } from './components/CustomerAuthModal';
 import { CustomerProfileModal } from './components/CustomerProfileModal';
-import { DISTRICT_SEO_DATA } from './data/districtSEOData';
-import { SERVICES_SEO_DATA } from './data/servicesSEOData';
-import { PRODUCTS_SEO_DATA } from './data/productsSEOData';
+import { DISTRICT_SLUG_SET } from './seo/districtSummary';
+import {
+  loadDistrictSEOBySlug,
+  loadProductSEOBySlug,
+  loadServiceSEOBySlug
+} from './seo/seoLoader';
 import { 
   INITIAL_PRODUCTS as PRODUCTS_CATALOG, 
   SOFTWARE_DOWNLOADS, 
@@ -90,42 +93,42 @@ export default function App() {
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
     const match = path.match(/^\/service-area\/([a-z0-9\-]+)/);
-    if (match && match[1] && DISTRICT_SEO_DATA[match[1]]) return match[1];
+    if (match && match[1] && DISTRICT_SLUG_SET.has(match[1])) return match[1];
     const hashMatch = hash.match(/^#service-area\/([a-z0-9\-]+)/);
-    if (hashMatch && hashMatch[1] && DISTRICT_SEO_DATA[hashMatch[1]]) return hashMatch[1];
+    if (hashMatch && hashMatch[1] && DISTRICT_SLUG_SET.has(hashMatch[1])) return hashMatch[1];
     const urlParams = new URLSearchParams(window.location.search);
     const dist = urlParams.get('district');
-    if (dist && DISTRICT_SEO_DATA[dist.toLowerCase()]) return dist.toLowerCase();
+    if (dist && DISTRICT_SLUG_SET.has(dist.toLowerCase())) return dist.toLowerCase();
     return null;
   };
 
-  // 54 Dedicated Services SEO Routing
+  // Dedicated Services SEO Routing
   const checkServiceRoute = (): string | null => {
     if (typeof window === 'undefined') return null;
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
     const match = path.match(/^\/services\/([a-z0-9\-]+)/);
-    if (match && match[1] && SERVICES_SEO_DATA[match[1]]) return match[1];
+    if (match && match[1]) return match[1];
     const hashMatch = hash.match(/^#services\/([a-z0-9\-]+)/);
-    if (hashMatch && hashMatch[1] && SERVICES_SEO_DATA[hashMatch[1]]) return hashMatch[1];
+    if (hashMatch && hashMatch[1]) return hashMatch[1];
     const urlParams = new URLSearchParams(window.location.search);
     const s = urlParams.get('service');
-    if (s && SERVICES_SEO_DATA[s.toLowerCase()]) return s.toLowerCase();
+    if (s) return s.toLowerCase();
     return null;
   };
 
-  // 56 Dedicated Products SEO Routing
+  // Dedicated Products SEO Routing
   const checkProductRoute = (): string | null => {
     if (typeof window === 'undefined') return null;
     const path = window.location.pathname.toLowerCase();
     const hash = window.location.hash.toLowerCase();
     const match = path.match(/^\/products\/([a-z0-9\-]+)/);
-    if (match && match[1] && PRODUCTS_SEO_DATA[match[1]]) return match[1];
+    if (match && match[1]) return match[1];
     const hashMatch = hash.match(/^#products\/([a-z0-9\-]+)/);
-    if (hashMatch && hashMatch[1] && PRODUCTS_SEO_DATA[hashMatch[1]]) return hashMatch[1];
+    if (hashMatch && hashMatch[1]) return hashMatch[1];
     const urlParams = new URLSearchParams(window.location.search);
     const p = urlParams.get('product');
-    if (p && PRODUCTS_SEO_DATA[p.toLowerCase()]) return p.toLowerCase();
+    if (p) return p.toLowerCase();
     return null;
   };
 
@@ -399,160 +402,7 @@ export default function App() {
       script.textContent = JSON.stringify(data);
     };
 
-    if (activeServiceSlug && SERVICES_SEO_DATA[activeServiceSlug]) {
-      const srv = SERVICES_SEO_DATA[activeServiceSlug];
-      const canonicalSlug = srv.canonicalSlug || srv.slug;
-      const canonicalUrl = `https://www.shamimtechsolution.com/services/${canonicalSlug}`;
-
-      document.title = srv.title;
-      setMetaTag('meta[name="description"]', 'name', 'description', srv.metaDescription);
-      setCanonical(canonicalUrl);
-      updateDynamicRobots(false);
-
-      setMetaTag('meta[property="og:title"]', 'property', 'og:title', srv.title);
-      setMetaTag('meta[property="og:description"]', 'property', 'og:description', srv.metaDescription);
-      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
-      setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', srv.title);
-      setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', srv.metaDescription);
-
-      if (srv.popularSearchKeywords && srv.popularSearchKeywords.length > 0) {
-        setMetaTag('meta[name="keywords"]', 'name', 'keywords', srv.popularSearchKeywords.join(', '));
-      }
-
-      setRouteJsonLd({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Service",
-            "@id": `${canonicalUrl}#service`,
-            "name": srv.name,
-            "alternateName": srv.bnName,
-            "serviceType": srv.category,
-            "description": srv.metaDescription,
-            "provider": {
-              "@type": "LocalBusiness",
-              "name": "Shamim Tech Solution",
-              "telephone": companyInfo.phone || "01790139333",
-              "url": "https://www.shamimtechsolution.com/",
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Jahaj Company Mor",
-                "addressLocality": "Rangpur",
-                "addressRegion": "Rangpur Division",
-                "addressCountry": "BD"
-              }
-            },
-            "areaServed": [
-              "Rangpur", "Haragachh", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
-            ]
-          },
-          {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
-              { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.shamimtechsolution.com/#services" },
-              { "@type": "ListItem", "position": 3, "name": srv.name, "item": canonicalUrl }
-            ]
-          },
-          ...(srv.faqs && srv.faqs.length > 0 ? [{
-            "@type": "FAQPage",
-            "mainEntity": srv.faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
-            }))
-          }] : [])
-        ]
-      });
-    } else if (activeProductSlug && PRODUCTS_SEO_DATA[activeProductSlug]) {
-      const prod = PRODUCTS_SEO_DATA[activeProductSlug];
-      const canonicalSlug = prod.canonicalSlug || prod.slug;
-      const canonicalUrl = `https://www.shamimtechsolution.com/products/${canonicalSlug}`;
-
-      document.title = prod.title;
-      setMetaTag('meta[name="description"]', 'name', 'description', prod.metaDescription);
-      setCanonical(canonicalUrl);
-      updateDynamicRobots(prod.noindex);
-
-      setMetaTag('meta[property="og:title"]', 'property', 'og:title', prod.title);
-      setMetaTag('meta[property="og:description"]', 'property', 'og:description', prod.metaDescription);
-      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
-      setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', prod.title);
-      setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', prod.metaDescription);
-
-      setRouteJsonLd({
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Product",
-            "@id": `${canonicalUrl}#product`,
-            "name": prod.name,
-            "alternateName": prod.bnName,
-            "description": prod.metaDescription,
-            "category": prod.category,
-            "brand": {
-              "@type": "Brand",
-              "name": prod.isInquiryOnly ? prod.name.split(' ')[0] : "Hikvision / Dahua / ZKTeco / Imou"
-            },
-            "offers": prod.isInquiryOnly ? {
-              "@type": "Offer",
-              "url": canonicalUrl,
-              "seller": {
-                "@type": "LocalBusiness",
-                "name": "Shamim Tech Solution",
-                "telephone": companyInfo.phone || "01790139333",
-                "url": "https://www.shamimtechsolution.com/"
-              }
-            } : {
-              "@type": "Offer",
-              "priceCurrency": "BDT",
-              "price": "1850",
-              "availability": "https://schema.org/InStock",
-              "seller": {
-                "@type": "LocalBusiness",
-                "name": "Shamim Tech Solution",
-                "telephone": companyInfo.phone || "01790139333",
-                "url": "https://www.shamimtechsolution.com/"
-              }
-            }
-          },
-          {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
-              { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.shamimtechsolution.com/#products" },
-              { "@type": "ListItem", "position": 3, "name": prod.name, "item": canonicalUrl }
-            ]
-          },
-          ...(prod.faqs && prod.faqs.length > 0 ? [{
-            "@type": "FAQPage",
-            "mainEntity": prod.faqs.map(faq => ({
-              "@type": "Question",
-              "name": faq.question,
-              "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
-            }))
-          }] : [])
-        ]
-      });
-    } else if (activeDistrictSlug && DISTRICT_SEO_DATA[activeDistrictSlug]) {
-      const dist = DISTRICT_SEO_DATA[activeDistrictSlug];
-      const canonicalUrl = `https://www.shamimtechsolution.com/service-area/${dist.slug}`;
-
-      document.title = dist.title;
-      setMetaTag('meta[name="description"]', 'name', 'description', dist.metaDescription);
-      setCanonical(canonicalUrl);
-      updateDynamicRobots(false);
-
-      const districtKeywords = [...(dist.popularSearchesBn || []), ...(dist.popularSearchesEn || [])];
-      if (districtKeywords.length > 0) {
-        setMetaTag('meta[name="keywords"]', 'name', 'keywords', districtKeywords.join(', '));
-      }
-
-      setMetaTag('meta[property="og:title"]', 'property', 'og:title', dist.title);
-      setMetaTag('meta[property="og:description"]', 'property', 'og:description', dist.metaDescription);
-      setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
-      setRouteJsonLd(null);
-    } else {
+    const setDefaultMeta = () => {
       document.title = 'Shamim Tech Solution • Security Sales & Service Bangladesh';
       setMetaTag(
         'meta[name="description"]',
@@ -565,7 +415,188 @@ export default function App() {
       setMetaTag('meta[property="og:title"]', 'property', 'og:title', 'Shamim Tech Solution • Security Sales & Service Bangladesh');
       setMetaTag('meta[property="og:url"]', 'property', 'og:url', 'https://www.shamimtechsolution.com/');
       setRouteJsonLd(null);
-    }
+    };
+
+    let cancelled = false;
+
+    const applyRouteSEO = async () => {
+      if (activeServiceSlug) {
+        const srv = await loadServiceSEOBySlug(activeServiceSlug);
+        if (cancelled) return;
+        if (srv) {
+          const canonicalSlug = srv.canonicalSlug || srv.slug;
+          const canonicalUrl = `https://www.shamimtechsolution.com/services/${canonicalSlug}`;
+
+          document.title = srv.title;
+          setMetaTag('meta[name="description"]', 'name', 'description', srv.metaDescription);
+          setCanonical(canonicalUrl);
+          updateDynamicRobots(false);
+
+          setMetaTag('meta[property="og:title"]', 'property', 'og:title', srv.title);
+          setMetaTag('meta[property="og:description"]', 'property', 'og:description', srv.metaDescription);
+          setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+          setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', srv.title);
+          setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', srv.metaDescription);
+
+          if (srv.popularSearchKeywords && srv.popularSearchKeywords.length > 0) {
+            setMetaTag('meta[name="keywords"]', 'name', 'keywords', srv.popularSearchKeywords.join(', '));
+          }
+
+          setRouteJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Service",
+                "@id": `${canonicalUrl}#service`,
+                "name": srv.name,
+                "alternateName": srv.bnName,
+                "serviceType": srv.category,
+                "description": srv.metaDescription,
+                "provider": {
+                  "@type": "LocalBusiness",
+                  "name": "Shamim Tech Solution",
+                  "telephone": companyInfo.phone || "01790139333",
+                  "url": "https://www.shamimtechsolution.com/",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "streetAddress": "Jahaj Company Mor",
+                    "addressLocality": "Rangpur",
+                    "addressRegion": "Rangpur Division",
+                    "addressCountry": "BD"
+                  }
+                },
+                "areaServed": [
+                  "Rangpur", "Haragachh", "Dinajpur", "Bogura", "Dhaka", "Gaibandha", "Kurigram", "Nilphamari", "Lalmonirhat", "Panchagarh", "Thakurgaon"
+                ]
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.shamimtechsolution.com/#services" },
+                  { "@type": "ListItem", "position": 3, "name": srv.name, "item": canonicalUrl }
+                ]
+              },
+              ...(srv.faqs && srv.faqs.length > 0 ? [{
+                "@type": "FAQPage",
+                "mainEntity": srv.faqs.map(faq => ({
+                  "@type": "Question",
+                  "name": faq.question,
+                  "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+                }))
+              }] : [])
+            ]
+          });
+          return;
+        }
+      } else if (activeProductSlug) {
+        const prod = await loadProductSEOBySlug(activeProductSlug);
+        if (cancelled) return;
+        if (prod) {
+          const canonicalSlug = prod.canonicalSlug || prod.slug;
+          const canonicalUrl = `https://www.shamimtechsolution.com/products/${canonicalSlug}`;
+
+          document.title = prod.title;
+          setMetaTag('meta[name="description"]', 'name', 'description', prod.metaDescription);
+          setCanonical(canonicalUrl);
+          updateDynamicRobots(prod.noindex);
+
+          setMetaTag('meta[property="og:title"]', 'property', 'og:title', prod.title);
+          setMetaTag('meta[property="og:description"]', 'property', 'og:description', prod.metaDescription);
+          setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+          setMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', prod.title);
+          setMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', prod.metaDescription);
+
+          setRouteJsonLd({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Product",
+                "@id": `${canonicalUrl}#product`,
+                "name": prod.name,
+                "alternateName": prod.bnName,
+                "description": prod.metaDescription,
+                "category": prod.category,
+                "brand": {
+                  "@type": "Brand",
+                  "name": prod.isInquiryOnly ? prod.name.split(' ')[0] : "Hikvision / Dahua / ZKTeco / Imou"
+                },
+                "offers": prod.isInquiryOnly ? {
+                  "@type": "Offer",
+                  "url": canonicalUrl,
+                  "seller": {
+                    "@type": "LocalBusiness",
+                    "name": "Shamim Tech Solution",
+                    "telephone": companyInfo.phone || "01790139333",
+                    "url": "https://www.shamimtechsolution.com/"
+                  }
+                } : {
+                  "@type": "Offer",
+                  "priceCurrency": "BDT",
+                  "price": "1850",
+                  "availability": "https://schema.org/InStock",
+                  "seller": {
+                    "@type": "LocalBusiness",
+                    "name": "Shamim Tech Solution",
+                    "telephone": companyInfo.phone || "01790139333",
+                    "url": "https://www.shamimtechsolution.com/"
+                  }
+                }
+              },
+              {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.shamimtechsolution.com/" },
+                  { "@type": "ListItem", "position": 2, "name": "Products", "item": "https://www.shamimtechsolution.com/#products" },
+                  { "@type": "ListItem", "position": 3, "name": prod.name, "item": canonicalUrl }
+                ]
+              },
+              ...(prod.faqs && prod.faqs.length > 0 ? [{
+                "@type": "FAQPage",
+                "mainEntity": prod.faqs.map(faq => ({
+                  "@type": "Question",
+                  "name": faq.question,
+                  "acceptedAnswer": { "@type": "Answer", "text": faq.answer }
+                }))
+              }] : [])
+            ]
+          });
+          return;
+        }
+      } else if (activeDistrictSlug) {
+        const dist = await loadDistrictSEOBySlug(activeDistrictSlug);
+        if (cancelled) return;
+        if (dist) {
+          const canonicalUrl = `https://www.shamimtechsolution.com/service-area/${dist.slug}`;
+
+          document.title = dist.title;
+          setMetaTag('meta[name="description"]', 'name', 'description', dist.metaDescription);
+          setCanonical(canonicalUrl);
+          updateDynamicRobots(false);
+
+          const districtKeywords = [...(dist.popularSearchesBn || []), ...(dist.popularSearchesEn || [])];
+          if (districtKeywords.length > 0) {
+            setMetaTag('meta[name="keywords"]', 'name', 'keywords', districtKeywords.join(', '));
+          }
+
+          setMetaTag('meta[property="og:title"]', 'property', 'og:title', dist.title);
+          setMetaTag('meta[property="og:description"]', 'property', 'og:description', dist.metaDescription);
+          setMetaTag('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+          setRouteJsonLd(null);
+          return;
+        }
+      }
+
+      if (!cancelled) setDefaultMeta();
+    };
+
+    applyRouteSEO().catch(() => {
+      if (!cancelled) setDefaultMeta();
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [activeDistrictSlug, activeServiceSlug, activeProductSlug, companyInfo.phone]);
 
   const navigateToDistrict = useCallback((slug: string) => {

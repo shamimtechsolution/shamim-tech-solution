@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { 
   Phone, 
   ShoppingCart, 
@@ -17,7 +17,8 @@ import {
 } from 'lucide-react';
 import { STSLogo } from './STSLogo';
 import { COMPANY_INFO, SERVICES_LIST, DIVISION_DISTRICTS } from '../data/companyData';
-import { SERVICES_SEO_DATA } from '../data/servicesSEOData';
+import { loadAllServicesSEO } from '../seo/seoLoader';
+import type { ServiceSEOInfo } from '../seo/servicesSEOData';
 import { matchesProductSearch, scoreServiceOrDistrictMatch } from '../utils/searchHelper';
 import { CompanyInfo, CustomerUser, Product } from '../types';
 
@@ -73,8 +74,22 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [seoServicesMap, setSeoServicesMap] = useState<Record<string, ServiceSEOInfo> | null>(null);
   const activeCompany = passedCompany || COMPANY_INFO;
   const displayCartCount = cartCount ?? cartItemCount ?? 0;
+
+  useEffect(() => {
+    if (!searchTerm.trim() || seoServicesMap !== null) return;
+    let cancelled = false;
+    loadAllServicesSEO()
+      .then((data) => {
+        if (!cancelled) setSeoServicesMap(data);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [searchTerm, seoServicesMap]);
 
   const searchResults = useMemo(() => {
     if (!searchTerm.trim()) {
@@ -86,7 +101,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       .slice(0, 6);
 
     // Search canonical dedicated service & technician SEO pages plus core SERVICES_LIST
-    const seoServiceMatches = Object.values(SERVICES_SEO_DATA)
+    const seoServiceMatches = (seoServicesMap ? (Object.values(seoServicesMap) as ServiceSEOInfo[]) : ([] as ServiceSEOInfo[]))
       .filter((srv) => !srv.canonicalSlug)
       .map((srv) => {
         const kwText = (srv.popularSearchKeywords || []).join(' ');
@@ -145,7 +160,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       districts: matchedDistricts,
       totalMatches: matchedProducts.length + combinedServices.length + matchedDistricts.length
     };
-  }, [searchTerm, products]);
+  }, [searchTerm, products, seoServicesMap]);
 
   const navItems = [
     { id: 'home', label: 'Home', icon: HomeIcon },
